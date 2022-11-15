@@ -1,9 +1,16 @@
+.loginMainDiv {
+    background-color: #3d1152;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
 .loginDiv {
     width: 40%;
     height: 95vh;
     background-color: white;
     margin: 0 auto;
-    padding: 10px 20px 10px 20px;
+    padding: 1px 20px 10px 20px;
     border-radius: 8px;
 }
 
@@ -16,12 +23,12 @@
 }
 
 .loginDiv>form {
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
 .loginDiv>form>div {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .loginDiv>form>label {
@@ -42,7 +49,7 @@
 
 .loginDiv input:focus {
     background-color: white;
-    border: 1px solid #306584;
+    border: 1px solid #3d1152;
 }
 
 .loginDiv button {
@@ -51,7 +58,7 @@
     height: 50px;
     border: none;
     outline: none;
-    background: #39789C;
+    background: #3d1152;
     font-size: 24px;
     font-weight: 600;
     font-family: 'Switzer';

@@ -355,7 +355,7 @@ const Wordle = () => {
 
 
     return (
-        <div>
+        <div className="wordleMain">
             <div className="myTimer">
                 <p id="sec">0</p>
                 <p>s</p>
