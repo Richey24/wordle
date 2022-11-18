@@ -10,7 +10,7 @@
     height: 95vh;
     background-color: white;
     margin: 0 auto;
-    padding: 1px 20px 10px 20px;
+    padding: 0.5px 20px 10px 20px;
     border-radius: 8px;
 }
 
@@ -20,6 +20,7 @@
     text-align: center;
     font-family: 'Switzer';
     font-style: normal;
+    color: #374151;
 }
 
 .loginDiv>form {
@@ -28,12 +29,17 @@
 
 .loginDiv>form>div {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .loginDiv>form>label {
     font-family: 'Switzer';
     font-style: normal;
+}
+
+.loginDiv h6 {
+    color: red;
+    text-align: center;
 }
 
 .loginDiv input {
@@ -45,6 +51,7 @@
     font-style: normal;
     border: none;
     outline: none;
+    margin-top: 5px;
 }
 
 .loginDiv input:focus {
@@ -53,7 +60,7 @@
 }
 
 .loginDiv button {
-    margin-top: 40px;
+    margin-top: 20px;
     width: 100%;
     height: 50px;
     border: none;
@@ -70,14 +77,24 @@
 
 .loginDiv p {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
     font-family: 'Switzer';
     font-style: normal;
+    color: #6B7280;
 }
 
-.loginDiv p>span {
-    color: #14384e;
+.loginDiv p>span,
+.forgotPass {
+    color: #2E7DD7;
     cursor: pointer;
+}
+
+.lockImage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 @media screen and (max-width: 800px) {
