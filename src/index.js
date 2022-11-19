@@ -6,13 +6,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
+import Select from './components/Select';
+import Reset from './components/Reset';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/home' element={<App />} />
-      <Route path='/' element={<Login />} />
+      <Route path='/' element={<Select />} />
+      <Route path='/wordle' element={<App />} />
+      <Route path='/login' element={<Login />} />
+      <Route path='/reset/:id' element={<Reset />} />
     </Routes>
   </BrowserRouter>
 );

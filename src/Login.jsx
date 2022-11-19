@@ -4,13 +4,22 @@ import lock from "./img/Lock.svg"
 import mail from "./img/Artwork.svg"
 import axios from "axios"
 import url from "./url"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 const Login = () => {
     const [reg, setReg] = useState("login")
     const [showErr, setShowErr] = useState(false)
     const [err, setErr] = useState("")
     const navigate = useNavigate()
+    const loc = useLocation()
+    const regi = loc.state?.reg
+
+    useEffect(() => {
+        if (regi) {
+            setReg("register")
+        }
+    }, [regi])
 
     const submitForm = async (e) => {
         e.preventDefault()
@@ -51,7 +60,7 @@ const Login = () => {
                     break;
                 case 200:
                     const rep = await res.data
-                    console.log(rep);
+                    localStorage.setItem('id', rep._id)
                     navigate('/home')
                     break;
                 default:
@@ -80,7 +89,7 @@ const Login = () => {
                     break;
                 case 200:
                     const rep = await res.data
-                    console.log(rep);
+                    localStorage.setItem('id', rep._id)
                     navigate('/home')
                     break;
                 default:
