@@ -61,7 +61,7 @@ const Login = () => {
                 case 200:
                     const rep = await res.data
                     localStorage.setItem('id', rep._id)
-                    navigate('/home')
+                    navigate('/')
                     break;
                 default:
                     break;
@@ -90,7 +90,7 @@ const Login = () => {
                 case 200:
                     const rep = await res.data
                     localStorage.setItem('id', rep._id)
-                    navigate('/home')
+                    navigate('/')
                     break;
                 default:
                     break;

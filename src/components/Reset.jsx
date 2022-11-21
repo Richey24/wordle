@@ -29,7 +29,7 @@ const Reset = () => {
             setShowErr(true)
             return
         }
-        const res = await axios.post(`${url}/reset/password/${id}`, userPass)
+        const res = await axios.post(`${url}/user/reset/password/${id}`, userPass)
         switch (res.status) {
             case 400:
                 setErr("Fill all required filled and try again")
