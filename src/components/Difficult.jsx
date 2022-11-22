@@ -1,15 +1,12 @@
 import "./Select.css"
-import word from "../img/wordd.avif"
-import bible from "../img/bible.jpg"
-import biblequest from "../img/biblequest.jpg"
-import hang from "../img/hangman.jpg"
+import "./Difficult.css"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
 import url from "../url"
 
-const Select = () => {
+const Difficult = () => {
     const navigate = useNavigate()
     const id = localStorage.getItem("id")
     const [user, setUser] = useState({})
@@ -38,28 +35,24 @@ const Select = () => {
                 }
             </div>
             <div className="innerMain">
-                <div onClick={() => navigate("/select")}>
-                    <img src={word} alt="" />
-                    <p>Word quest</p>
-                </div>
+                <button className="normal" onClick={() => navigate("/wordle")}>
+                    Normal
+                </button>
 
-                <div onClick={() => navigate("/select")}>
-                    <img src={biblequest} alt="" />
-                    <p>Bible quest</p>
-                </div>
+                <button className="hard" onClick={() => navigate("/wordle")}>
+                    Hard
+                </button>
 
-                <div>
-                    <img src={bible} alt="" />
-                    <p>Bible trivial</p>
-                </div>
+                <button className="veryHard" onClick={() => navigate("/wordle")}>
+                    Very hard
+                </button>
 
-                <div>
-                    <img src={hang} alt="" />
-                    <p>Hangman</p>
-                </div>
+                <button className="impossible" onClick={() => navigate("/wordle")}>
+                    Impossible
+                </button>
             </div>
         </div>
     )
 }
 
-export default Select
+export default Difficult

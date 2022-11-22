@@ -18,11 +18,12 @@
 .innerMain {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 10%;
+    column-gap: 200px;
+    row-gap: 40px;
+    margin-top: 3%;
 }
 
 .innerMain>div {
@@ -39,7 +40,7 @@
 }
 
 .innerMain>div:hover {
-    transform: translateY(-20px);
+    transform: translateY(-10px);
 }
 
 .innerMain>div>p {

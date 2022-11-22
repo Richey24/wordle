@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import Select from './components/Select';
 import Reset from './components/Reset';
+import Difficult from './components/Difficult';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
       <Route path='/' element={<Select />} />
       <Route path='/wordle' element={<App />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/select' element={<Difficult />} />
       <Route path='/reset/:id' element={<Reset />} />
     </Routes>
   </BrowserRouter>

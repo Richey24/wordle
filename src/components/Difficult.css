@@ -1,0 +1,51 @@
+.normal,
+.hard,
+.veryHard,
+.impossible {
+    transition: ease-out 0.3s;
+    background-color: white;
+    width: 380px;
+    height: 300px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    font-size: 40px;
+    font-weight: 600;
+    font-family: 'Switzer';
+    font-style: normal;
+}
+
+.normal {
+    box-shadow: inset 0 0 0 0 green;
+}
+
+.normal:hover {
+    box-shadow: inset 380px 0 0 0 green;
+    color: white;
+}
+
+.hard {
+    box-shadow: inset 0 0 0 0 yellow;
+}
+
+.hard:hover {
+    box-shadow: inset 380px 0 0 0 yellow;
+}
+
+.veryHard {
+    box-shadow: inset 0 0 0 0 red;
+}
+
+.veryHard:hover {
+    box-shadow: inset 380px 0 0 0 red;
+    color: white;
+}
+
+.impossible {
+    box-shadow: inset 0 0 0 0 black;
+}
+
+.impossible:hover {
+    box-shadow: inset 380px 0 0 0 black;
+    color: white;
+}
