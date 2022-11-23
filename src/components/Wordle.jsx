@@ -47,6 +47,11 @@ const Wordle = () => {
     }
 
     useEffect(() => {
+
+        if (num > 15) {
+            setNum(5)
+        }
+
         let dictionary = [...fiveDict, ...fiveLetters].map((letter) => letter.toLowerCase().trim())
         const FLIP_ANIMATION_DURATION = 500
         const DANCE_ANIMATION_DURATION = 500
@@ -74,7 +79,7 @@ const Wordle = () => {
 
         // const noOfWord = document.getElementById("noOfWord")
         let WORD_LENGTH = Number(num)
-        let targetWord = fiveLetters[Math.floor(100 + Math.random() * fiveLetters.length)];
+        let targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)];
         const myGuessGrid = document.getElementById("guessGrid")
         const value = num
         myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
@@ -87,68 +92,67 @@ const Wordle = () => {
         WORD_LENGTH = Number(num)
         switch (WORD_LENGTH) {
             case 5:
-                targetWord = fiveLetters[Math.floor(100 + Math.random() * fiveLetters.length)]
+                targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)]
                 dictionary = [...fiveDict, ...fiveLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 6:
-                targetWord = sixLetters[Math.floor(100 + Math.random() * sixLetters.length)].toLowerCase().trim()
+                targetWord = sixLetters[Math.floor(Math.random() * sixLetters.length)].toLowerCase().trim()
                 dictionary = [...sixDict, ...sixLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 7:
-                console.log(Math.floor(100 + Math.random() * sevenLetters.length));
-                targetWord = sevenLetters[Math.floor(100 + Math.random() * sevenLetters.length)].toLowerCase().trim()
+                targetWord = sevenLetters[Math.floor(Math.random() * sevenLetters.length)].toLowerCase().trim()
                 dictionary = [...sevenDict, ...sevenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 8:
-                targetWord = eightLetters[Math.floor(100 + Math.random() * eightLetters.length)].toLowerCase().trim()
+                targetWord = eightLetters[Math.floor(Math.random() * eightLetters.length)].toLowerCase().trim()
                 dictionary = [...eightDict, ...eightLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 9:
-                targetWord = nineLetters[Math.floor(100 + Math.random() * nineLetters.length)].toLowerCase().trim()
+                targetWord = nineLetters[Math.floor(Math.random() * nineLetters.length)].toLowerCase().trim()
                 dictionary = [...nineDict, ...nineLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 10:
-                targetWord = tenLetters[Math.floor(100 + Math.random() * tenLetters.length)].toLowerCase().trim()
+                targetWord = tenLetters[Math.floor(Math.random() * tenLetters.length)].toLowerCase().trim()
                 dictionary = [...tenDict, ...tenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 11:
-                targetWord = elevenLetters[Math.floor(100 + Math.random() * elevenLetters.length)].toLowerCase().trim()
+                targetWord = elevenLetters[Math.floor(Math.random() * elevenLetters.length)].toLowerCase().trim()
                 dictionary = [...elevenDict, ...elevenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 12:
-                targetWord = twelveLetters[Math.floor(100 + Math.random() * twelveLetters.length)].toLowerCase().trim()
+                targetWord = twelveLetters[Math.floor(Math.random() * twelveLetters.length)].toLowerCase().trim()
                 dictionary = [...twelveDict, ...twelveLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 13:
-                targetWord = thirteenLetters[Math.floor(100 + Math.random() * thirteenLetters.length)].toLowerCase().trim()
+                targetWord = thirteenLetters[Math.floor(Math.random() * thirteenLetters.length)].toLowerCase().trim()
                 dictionary = [...thirteenDict, ...thirteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 14:
-                targetWord = fourteenLetters[Math.floor(100 + Math.random() * fourteenLetters.length)].toLowerCase().trim()
+                targetWord = fourteenLetters[Math.floor(Math.random() * fourteenLetters.length)].toLowerCase().trim()
                 dictionary = [...fourDict, ...fourteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 15:
-                targetWord = fifteenLetters[Math.floor(100 + Math.random() * fifteenLetters.length)]?.toLowerCase().trim()
+                targetWord = fifteenLetters[Math.floor(Math.random() * fifteenLetters.length)]?.toLowerCase().trim()
                 dictionary = [...fifteenDict, ...fifteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
