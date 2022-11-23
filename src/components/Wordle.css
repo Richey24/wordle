@@ -6,7 +6,7 @@
 }
 
 .wordleMain {
-    background-color: hsl(240, 3%, 7%);
+    background-color: #3d1152;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -94,7 +94,7 @@
 .tile {
     font-size: 2em;
     color: white;
-    border: .05em solid hsl(240, 2%, 23%);
+    border: .05em solid wheat;
     text-transform: uppercase;
     font-weight: bold;
     display: flex;

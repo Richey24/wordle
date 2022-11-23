@@ -357,8 +357,6 @@ const sixLetters = [
     "jacket",
     "racing",
     "payday",
-    "graham",
-    "Nelson",
     "kitten",
     "flight",
     "groove",
