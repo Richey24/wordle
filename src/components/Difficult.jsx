@@ -35,19 +35,19 @@ const Difficult = () => {
                 }
             </div>
             <div className="innerMain">
-                <button className="normal" onClick={() => navigate("/wordle")}>
+                <button className="normal" onClick={() => navigate("/word")}>
                     Normal
                 </button>
 
-                <button className="hard" onClick={() => navigate("/wordle")}>
+                <button className="hard" onClick={() => navigate("/word")}>
                     Hard
                 </button>
 
-                <button className="veryHard" onClick={() => navigate("/wordle")}>
+                <button className="veryHard" onClick={() => navigate("/word")}>
                     Very hard
                 </button>
 
-                <button className="impossible" onClick={() => navigate("/wordle")}>
+                <button className="impossible" onClick={() => navigate("/word")}>
                     Impossible
                 </button>
             </div>

@@ -53,7 +53,7 @@ const Select = () => {
                     <p>Bible trivial</p>
                 </div>
 
-                <div>
+                <div onClick={() => navigate("/hangman")}>
                     <img src={hang} alt="" />
                     <p>Hangman</p>
                 </div>

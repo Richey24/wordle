@@ -9,15 +9,17 @@ import Login from './Login';
 import Select from './components/Select';
 import Reset from './components/Reset';
 import Difficult from './components/Difficult';
+import Hangman from './hangman/Hangman';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<Select />} />
-      <Route path='/wordle' element={<App />} />
+      <Route path='/word' element={<App />} />
       <Route path='/login' element={<Login />} />
       <Route path='/select' element={<Difficult />} />
+      <Route path='/hangman' element={<Hangman />} />
       <Route path='/reset/:id' element={<Reset />} />
     </Routes>
   </BrowserRouter>
