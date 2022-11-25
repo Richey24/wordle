@@ -31,6 +31,7 @@ const Wordle = () => {
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)
     const [num, setNum] = useState(5)
+    const [hint, setHint] = useState([])
 
     const startInt = () => {
         timer = setInterval(() => {
@@ -162,6 +163,7 @@ const Wordle = () => {
                 targetWord = [...fiveDict, ...fiveLetters].map((letter) => letter.toLowerCase().trim())
                 break;
         }
+        setHint([targetWord[0], targetWord[targetWord.length - 1]])
         console.log(targetWord);
 
         function startInteraction() {
@@ -356,14 +358,18 @@ const Wordle = () => {
 
     }, [num])
 
-
+    const showHint = () => {
+        document.getElementById("hint").style.display = "block"
+    }
 
     return (
         <div className="wordleMain">
+            <p onClick={showHint} className="hint">Hint</p>
             <div className="myTimer">
                 <p id="sec">0</p>
                 <p>s</p>
             </div>
+            <p id="hint" className="theHint">starts with {hint[0]} and end with {hint[1]}</p>
             {/* <label class="wordLabel" htmlFor="noOfWord">Select Difficulty</label>
             <select name="noOfWord" id="noOfWord" class="noOfWord">
                 <option value="5">5</option>

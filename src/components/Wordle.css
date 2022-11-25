@@ -28,6 +28,7 @@
     grid-auto-rows: 3em;
     gap: .25em;
     justify-content: flex-end;
+    margin-top: 100px;
 }
 
 .key {
@@ -227,6 +228,25 @@
     height: 30px;
 }
 
+.hint {
+    position: absolute;
+    right: 150px;
+    background-color: white;
+    width: 80px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 25px;
+    border-radius: 12px;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+    color: #3d1152;
+    cursor: pointer;
+    box-shadow: 0 0 4px 4px white;
+}
+
 .myTimer {
     position: absolute;
     display: flex;
@@ -236,6 +256,15 @@
 .myTimer p {
     color: white;
     font-size: 2vw;
+}
+
+.theHint {
+    position: absolute;
+    left: 42.5%;
+    height: 25px;
+    color: white;
+    display: none;
+    text-transform: capitalize;
 }
 
 .startBtn {

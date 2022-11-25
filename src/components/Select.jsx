@@ -31,7 +31,7 @@ const Select = () => {
                         <p>Welcome back {user.username}</p>
                     ) : (
                         <>
-                            <p onClick={() => navigate("/login", { state: { reg: true } })}>Register</p>
+                            <p onClick={() => navigate("/register")}>Register</p>
                             <p onClick={() => navigate("/login")}>Login</p>
                         </>
                     )

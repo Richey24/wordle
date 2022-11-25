@@ -4,15 +4,18 @@ import lock from "../img/Lock.svg"
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import url from "../url"
+import { Alert, Spinner } from "react-bootstrap"
 
 const Reset = () => {
     const [success, setSuccess] = useState(false)
     const [showErr, setShowErr] = useState(false)
+    const [spin, setSpin] = useState(false)
     const [err, setErr] = useState("")
     const { id } = useParams()
     const navigate = useNavigate()
 
     const resetPass = async (e) => {
+        setSpin(true)
         e.preventDefault()
         setShowErr(false)
         const userPass = {
@@ -22,11 +25,13 @@ const Reset = () => {
         if (userPass.password.length < 8) {
             setErr('Password must be at least 8 characters')
             setShowErr(true)
+            setSpin(false)
             return
         }
         if (userPass.password !== userPass.confirmPass) {
             setErr("Confirm password must the same as password")
             setShowErr(true)
+            setSpin(false)
             return
         }
         const res = await axios.post(`${url}/user/reset/password/${id}`, userPass)
@@ -49,6 +54,7 @@ const Reset = () => {
             default:
                 break;
         }
+        setSpin(false)
     }
 
     if (success) {
@@ -71,7 +77,7 @@ const Reset = () => {
             <div className="loginDiv">
                 <h1>Create new password</h1>
                 <p>Your new password must be different from previous used passwords</p>
-                {showErr && <h6>{err}</h6>}
+                {showErr && <Alert variant="danger">{err}</Alert>}
                 <form onSubmit={resetPass}>
                     <div>
                         <label htmlFor="password">Password</label>
@@ -81,7 +87,14 @@ const Reset = () => {
                         <br />
                         <input required type="password" id="confirmPass" placeholder="********" name="confirmPass" />
                     </div>
-                    <button type="submit">Reset Password</button>
+                    {
+                        spin ? (
+                            <button><Spinner animation="border" color="white" /></button>
+                        ) :
+                            (
+                                <button type="submit">Reset Password</button>
+                            )
+                    }
                 </form>
             </div>
         </div>

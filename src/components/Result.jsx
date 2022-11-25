@@ -9,6 +9,7 @@ const Result = ({ noOfTry, time, num, setNum }) => {
         document.getElementById("resultDiv").style.display = "none"
     }
     const nextRound = () => {
+        document.getElementById("hint").style.display = "none"
         hideModal()
         setNum(num + 1)
         document.getElementById("startGame").style.display = "block"

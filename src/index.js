@@ -10,6 +10,7 @@ import Select from './components/Select';
 import Reset from './components/Reset';
 import Difficult from './components/Difficult';
 import Hangman from './hangman/Hangman';
+import Register from './Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +19,7 @@ root.render(
       <Route path='/' element={<Select />} />
       <Route path='/word' element={<App />} />
       <Route path='/login' element={<Login />} />
+      <Route path='/register' element={<Register />} />
       <Route path='/select' element={<Difficult />} />
       <Route path='/hangman' element={<Hangman />} />
       <Route path='/reset/:id' element={<Reset />} />
