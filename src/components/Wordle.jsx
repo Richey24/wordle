@@ -31,7 +31,10 @@ const Wordle = () => {
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)
     const [num, setNum] = useState(5)
-    const [hint, setHint] = useState([])
+    const [firstLet, setFirstLet] = useState("")
+    const [hint, setHint] = useState("")
+    const [count, setCount] = useState(0)
+    const [word, setWord] = useState([])
 
     const startInt = () => {
         timer = setInterval(() => {
@@ -86,74 +89,84 @@ const Wordle = () => {
         myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
         myGuessGrid.style.gridTemplateRows = `repeat(${Number(value) + 1}, 2.7em)`
         guessGrid.innerHTML = ""
-        console.log(value * Number(value) + Number(value));
         for (let index = 0; index < value * Number(value) + Number(value); index++) {
             myGuessGrid.innerHTML += `<div class="tile"></div>`
         }
         WORD_LENGTH = Number(num)
         switch (WORD_LENGTH) {
             case 5:
-                targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)]
+                targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)].toLowerCase().trim()
+                setWord(fiveLetters)
                 dictionary = [...fiveDict, ...fiveLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 6:
                 targetWord = sixLetters[Math.floor(Math.random() * sixLetters.length)].toLowerCase().trim()
+                setWord(sixLetters)
                 dictionary = [...sixDict, ...sixLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 7:
                 targetWord = sevenLetters[Math.floor(Math.random() * sevenLetters.length)].toLowerCase().trim()
+                setWord(sevenLetters)
                 dictionary = [...sevenDict, ...sevenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 8:
                 targetWord = eightLetters[Math.floor(Math.random() * eightLetters.length)].toLowerCase().trim()
+                setWord(eightLetters)
                 dictionary = [...eightDict, ...eightLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 9:
                 targetWord = nineLetters[Math.floor(Math.random() * nineLetters.length)].toLowerCase().trim()
+                setWord(nineLetters)
                 dictionary = [...nineDict, ...nineLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 10:
                 targetWord = tenLetters[Math.floor(Math.random() * tenLetters.length)].toLowerCase().trim()
+                setWord(tenLetters)
                 dictionary = [...tenDict, ...tenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 11:
                 targetWord = elevenLetters[Math.floor(Math.random() * elevenLetters.length)].toLowerCase().trim()
+                setWord(elevenLetters)
                 dictionary = [...elevenDict, ...elevenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 12:
                 targetWord = twelveLetters[Math.floor(Math.random() * twelveLetters.length)].toLowerCase().trim()
+                setWord(twelveLetters)
                 dictionary = [...twelveDict, ...twelveLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 13:
                 targetWord = thirteenLetters[Math.floor(Math.random() * thirteenLetters.length)].toLowerCase().trim()
+                setWord(thirteenLetters)
                 dictionary = [...thirteenDict, ...thirteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 14:
                 targetWord = fourteenLetters[Math.floor(Math.random() * fourteenLetters.length)].toLowerCase().trim()
+                setWord(fourteenLetters)
                 dictionary = [...fourDict, ...fourteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
                 break;
             case 15:
                 targetWord = fifteenLetters[Math.floor(Math.random() * fifteenLetters.length)]?.toLowerCase().trim()
+                setWord(fifteenLetters)
                 dictionary = [...fifteenDict, ...fifteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
@@ -163,8 +176,9 @@ const Wordle = () => {
                 targetWord = [...fiveDict, ...fiveLetters].map((letter) => letter.toLowerCase().trim())
                 break;
         }
-        setHint([targetWord[0], targetWord[targetWord.length - 1]])
         console.log(targetWord);
+        setFirstLet(targetWord[0])
+        setCount(0)
 
         function startInteraction() {
             document.addEventListener("click", handleMouseClick)
@@ -249,6 +263,7 @@ const Wordle = () => {
             }
 
             stopInteraction()
+            setCount(count + 1)
             activeTiles.forEach((...params) => flipTile(...params, guess))
         }
 
@@ -359,6 +374,12 @@ const Wordle = () => {
     }, [num])
 
     const showHint = () => {
+        if (count < 1) {
+            const filterWord = word.filter((theWord) => theWord.startsWith(firstLet))
+            setHint(`Don't know where to start? try ${filterWord[Math.floor(Math.random() * filterWord.length)]}`)
+        } else {
+            setHint(`Still can't get the word? try ${word[Math.floor(Math.random() * word.length)]}`)
+        }
         document.getElementById("hint").style.display = "block"
     }
 
@@ -369,7 +390,7 @@ const Wordle = () => {
                 <p id="sec">0</p>
                 <p>s</p>
             </div>
-            <p id="hint" className="theHint">starts with {hint[0]} and end with {hint[1]}</p>
+            <p id="hint" className="theHint">{hint}</p>
             {/* <label class="wordLabel" htmlFor="noOfWord">Select Difficulty</label>
             <select name="noOfWord" id="noOfWord" class="noOfWord">
                 <option value="5">5</option>

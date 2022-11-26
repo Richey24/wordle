@@ -2086,7 +2086,6 @@ const fiveLetters = [
     "grail",
     "clone",
     "guise",
-    "ralph",
     "tango",
     "biddy",
     "smith",
