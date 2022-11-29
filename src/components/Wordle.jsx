@@ -23,6 +23,10 @@ import thirteenDict from "../utils/thirteenDict.js"
 import fourDict from "../utils/fourDict.js"
 import fifteenDict from "../utils/fifteenDict"
 import Result from "./Result"
+import { useLocation, useNavigate } from "react-router-dom"
+import axios from "axios"
+import url from "../url"
+import { Spinner } from "react-bootstrap"
 
 let timer = null
 
@@ -30,13 +34,37 @@ const Wordle = () => {
 
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)
-    const [num, setNum] = useState(5)
     const [firstLet, setFirstLet] = useState("")
     const [hint, setHint] = useState("")
     const [count, setCount] = useState(0)
     const [word, setWord] = useState([])
     const [cor, setCor] = useState([])
     const [theWord, setTheWord] = useState("")
+    const [user, setUser] = useState({})
+    const id = localStorage.getItem("id")
+    const { state } = useLocation()
+    const numb = state?.numb
+    const [num, setNum] = useState(numb)
+    const [spin, setSpin] = useState(true)
+    const [hide, setHide] = useState(false)
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+        if (!numb) {
+            navigate("/")
+        }
+        if (id) {
+            (async () => {
+                const res = await axios.get(`${url}/user/get/${id}`)
+                const rep = await res.data
+                setUser(rep)
+                setSpin(false)
+            })()
+        } else {
+            setSpin(false)
+        }
+    }, [id])
 
     const startInt = () => {
         timer = setInterval(() => {
@@ -53,6 +81,10 @@ const Wordle = () => {
     }
 
     useEffect(() => {
+
+        if (spin) {
+            return
+        }
 
         if (num > 15) {
             setNum(5)
@@ -181,7 +213,8 @@ const Wordle = () => {
         console.log(targetWord);
         setTheWord(targetWord)
         setFirstLet(targetWord[0])
-        // setCount(0)
+        setHide(false)
+        setCount(0)
 
         function startInteraction() {
             document.addEventListener("click", handleMouseClick)
@@ -375,7 +408,7 @@ const Wordle = () => {
 
 
 
-    }, [num])
+    }, [num, spin])
 
     const showHint = () => {
         if (count < 1) {
@@ -388,13 +421,40 @@ const Wordle = () => {
         } else {
             const arr = theWord.split("").filter((ar) => !cor.includes(ar))
             setHint(`The magic word contains the letter ${arr[Math.floor(Math.random() * arr.length)]}`)
+            setCount(count + 1)
         }
         document.getElementById("hint").style.display = "block"
+        console.log(count);
+        if (count >= 2 && num <= 7) {
+            setHide(true)
+        } else if (count >= 3 && num <= 9) {
+            setHide(true)
+        } else if (count >= 4 && num <= 11) {
+            setHide(true)
+        } else if (count >= 5 && num <= 13) {
+            setHide(true)
+        } else if (count >= 6 && num <= 15) {
+            setHide(true)
+        }
+    }
+
+    if (spin) {
+        return (
+            <div style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Spinner animation="border" color="#3d1152" />
+            </div>
+        )
     }
 
     return (
-        <div className="wordleMain">
-            <p onClick={showHint} className="hint">Hint</p>
+        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="wordleMain">
+            {!hide && <p onClick={showHint} className="hint">Hint</p>}
             <div className="myTimer">
                 <p id="sec">0</p>
                 <p>s</p>

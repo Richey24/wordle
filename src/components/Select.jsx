@@ -9,11 +9,13 @@ import { useState } from "react"
 import { useEffect } from "react"
 import axios from "axios"
 import url from "../url"
+import { Spinner } from "react-bootstrap"
 
 const Select = () => {
     const navigate = useNavigate()
     const id = localStorage.getItem("id")
     const [user, setUser] = useState({})
+    const [spin, setSpin] = useState(true)
 
     useEffect(() => {
         if (id) {
@@ -21,11 +23,30 @@ const Select = () => {
                 const res = await axios.get(`${url}/user/get/${id}`)
                 const rep = await res.data
                 setUser(rep)
+                setSpin(false)
             })()
+        } else {
+            setSpin(false)
         }
     }, [id])
+
+    if (spin) {
+        return (
+            <div style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Spinner animation="border" color="#3d1152" />
+            </div>
+        )
+    }
+
+
     return (
-        <div className="selectMain">
+        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain">
             <div className="firstDiv">
                 {
                     user.username ? (

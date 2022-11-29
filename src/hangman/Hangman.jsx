@@ -1,4 +1,6 @@
+import axios from "axios"
 import { useCallback, useEffect, useState } from "react"
+import url from "../url"
 import { HangmanDrawing } from "./HangmanDrawing"
 import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
@@ -11,6 +13,19 @@ function getWord() {
 function Hangman() {
     const [wordToGuess, setWordToGuess] = useState(getWord)
     const [guessedLetters, setGuessedLetters] = useState([])
+    const [user, setUser] = useState({})
+    const id = localStorage.getItem("id")
+
+
+    useEffect(() => {
+        if (id) {
+            (async () => {
+                const res = await axios.get(`${url}/user/get/${id}`)
+                const rep = await res.data
+                setUser(rep)
+            })()
+        }
+    }, [id])
 
     const incorrectLetters = guessedLetters.filter(
         letter => !wordToGuess.includes(letter)
@@ -65,7 +80,7 @@ function Hangman() {
 
     return (
         <div style={{
-            backgroundColor: "#3d1152"
+            backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
         }}>
             <div
                 style={{
