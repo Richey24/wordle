@@ -1,6 +1,7 @@
 import "./Select.css"
 import word from "../img/wordd.avif"
 import bible from "../img/bible.jpg"
+import shield from "../img/shield.jpg"
 import biblequest from "../img/biblequest.jpg"
 import hang from "../img/hangman.jpg"
 import { useNavigate } from "react-router-dom"
@@ -50,12 +51,21 @@ const Select = () => {
 
                 <div>
                     <img src={bible} alt="" />
-                    <p>Bible trivial</p>
+                    <p>Bible game</p>
                 </div>
 
                 <div onClick={() => navigate("/hangman")}>
                     <img src={hang} alt="" />
                     <p>Hangman</p>
+                </div>
+                <div>
+                    <img src={shield} alt="" />
+                    <p>Watchman Shield</p>
+                </div>
+
+                <div onClick={() => navigate("/hangman")}>
+                    <img src={shield} alt="" />
+                    <p>My Shield</p>
                 </div>
             </div>
         </div>

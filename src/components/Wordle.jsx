@@ -35,6 +35,8 @@ const Wordle = () => {
     const [hint, setHint] = useState("")
     const [count, setCount] = useState(0)
     const [word, setWord] = useState([])
+    const [cor, setCor] = useState([])
+    const [theWord, setTheWord] = useState("")
 
     const startInt = () => {
         timer = setInterval(() => {
@@ -177,8 +179,9 @@ const Wordle = () => {
                 break;
         }
         console.log(targetWord);
+        setTheWord(targetWord)
         setFirstLet(targetWord[0])
-        setCount(0)
+        // setCount(0)
 
         function startInteraction() {
             document.addEventListener("click", handleMouseClick)
@@ -263,7 +266,6 @@ const Wordle = () => {
             }
 
             stopInteraction()
-            setCount(count + 1)
             activeTiles.forEach((...params) => flipTile(...params, guess))
         }
 
@@ -279,10 +281,12 @@ const Wordle = () => {
                 () => {
                     tile.classList.remove("flip")
                     if (targetWord[index] === letter) {
+                        cor.push(letter)
                         tile.dataset.state = "correct"
                         key.classList.add("correct")
                     } else if (targetWord.includes(letter)) {
                         tile.dataset.state = "wrong-location"
+                        cor.push(letter)
                         key.classList.add("wrong-location")
                     } else {
                         tile.dataset.state = "wrong"
@@ -377,8 +381,13 @@ const Wordle = () => {
         if (count < 1) {
             const filterWord = word.filter((theWord) => theWord.startsWith(firstLet))
             setHint(`Don't know where to start? try ${filterWord[Math.floor(Math.random() * filterWord.length)]}`)
-        } else {
+            setCount(1)
+        } else if (count < 2) {
             setHint(`Still can't get the word? try ${word[Math.floor(Math.random() * word.length)]}`)
+            setCount(2)
+        } else {
+            const arr = theWord.split("").filter((ar) => !cor.includes(ar))
+            setHint(`The magic word contains the letter ${arr[Math.floor(Math.random() * arr.length)]}`)
         }
         document.getElementById("hint").style.display = "block"
     }

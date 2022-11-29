@@ -12,7 +12,7 @@ const Register = () => {
     const [err, setErr] = useState("")
     const [num, setNum] = useState(1)
     const [first, setFirst] = useState({})
-    const [tribe, setTribe] = useState("Asher")
+    const [tribe, setTribe] = useState(["Asher", "yellow"])
     const navigate = useNavigate()
 
     const submitForm = async (e) => {
@@ -131,20 +131,20 @@ const Register = () => {
                                 </div>
                                 <div className='tribeDiv'>
                                     <label>Select your tribe</label>
-                                    <p onClick={selectTribe} className='tribeMain'>{tribe} <img src={drop} alt="" /></p>
+                                    <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
                                     <ul id='tribe' className='tribeList'>
-                                        <li onClick={() => getTribe("Asher")}>Asher</li>
-                                        <li onClick={() => getTribe("Dan")}>Dan</li>
-                                        <li onClick={() => getTribe("Ephraim")}>Ephraim</li>
-                                        <li onClick={() => getTribe("Gad")}>Gad</li>
-                                        <li onClick={() => getTribe("Issachar")}>Issachar</li>
-                                        <li onClick={() => getTribe("Manasseh")}>Manasseh</li>
-                                        <li onClick={() => getTribe("Naphtali")}>Naphtali</li>
-                                        <li onClick={() => getTribe("Reuben")}>Reuben</li>
-                                        <li onClick={() => getTribe("Simeon")}>Simeon</li>
-                                        <li onClick={() => getTribe("Zebulun")}>Zebulun</li>
-                                        <li onClick={() => getTribe("Judah")}>Judah</li>
-                                        <li onClick={() => getTribe("Benjamin")}>Benjamin</li>
+                                        <li onClick={() => getTribe(["Asher", "yellow"])}>Asher</li>
+                                        <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"])}>Dan</li>
+                                        <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"])}>Ephraim</li>
+                                        <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"])}>Gad</li>
+                                        <li onClick={() => getTribe(["Issachar", "rgb(12, 57, 11)"])}>Issachar</li>
+                                        <li onClick={() => getTribe(["Manasseh", "rgb(237, 31, 237)"])}>Manasseh</li>
+                                        <li onClick={() => getTribe(["Naphtali", "lightgreen"])}>Naphtali</li>
+                                        <li onClick={() => getTribe(["Reuben", "orangered"])}>Reuben</li>
+                                        <li onClick={() => getTribe(["Simeon", "black"])}>Simeon</li>
+                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"])}>Zebulun</li>
+                                        <li onClick={() => getTribe(["Judah", "purple"])}>Judah</li>
+                                        <li onClick={() => getTribe(["Benjamin", "rgb(249, 213, 115)"])}>Benjamin</li>
                                     </ul>
                                 </div>
                                 {
