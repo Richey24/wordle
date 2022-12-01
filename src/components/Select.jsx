@@ -65,7 +65,7 @@ const Select = () => {
                     <p>Word quest</p>
                 </div>
 
-                <div onClick={() => navigate("/select")}>
+                <div onClick={() => navigate("/word", { state: { numb: 1 } })}>
                     <img src={biblequest} alt="" />
                     <p>Bible quest</p>
                 </div>
@@ -81,12 +81,12 @@ const Select = () => {
                 </div>
                 <div>
                     <img src={shield} alt="" />
-                    <p>Watchman Shield</p>
+                    <p>Watchman Sword&Shield</p>
                 </div>
 
                 <div onClick={() => navigate("/hangman")}>
                     <img src={shield} alt="" />
-                    <p>My Shield</p>
+                    <p>My Sword&Shield</p>
                 </div>
             </div>
         </div>

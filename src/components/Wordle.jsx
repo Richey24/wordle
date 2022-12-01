@@ -22,6 +22,7 @@ import twelveDict from "../utils/twelveDict.js"
 import thirteenDict from "../utils/thirteenDict.js"
 import fourDict from "../utils/fourDict.js"
 import fifteenDict from "../utils/fifteenDict"
+import bible from "../utils/bible"
 import Result from "./Result"
 import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
@@ -115,19 +116,39 @@ const Wordle = () => {
             }
         }
 
-        // const noOfWord = document.getElementById("noOfWord")
-        let WORD_LENGTH = Number(num)
         let targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)];
-        const myGuessGrid = document.getElementById("guessGrid")
-        const value = num
-        myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
-        myGuessGrid.style.gridTemplateRows = `repeat(${Number(value) + 1}, 2.7em)`
-        guessGrid.innerHTML = ""
-        for (let index = 0; index < value * Number(value) + Number(value); index++) {
-            myGuessGrid.innerHTML += `<div class="tile"></div>`
+        let WORD_LENGTH = Number(num)
+        if (num !== 1) {
+            const myGuessGrid = document.getElementById("guessGrid")
+            const value = num
+            myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
+            myGuessGrid.style.gridTemplateRows = `repeat(${Number(value) + 1}, 2.7em)`
+            guessGrid.innerHTML = ""
+            for (let index = 0; index < value * Number(value) + Number(value); index++) {
+                myGuessGrid.innerHTML += `<div class="tile"></div>`
+            }
+        } else {
+            const myGuessGrid = document.getElementById("guessGrid")
+            targetWord = bible[Math.floor(Math.random() * bible.length)].toLowerCase().trim()
+            const value = targetWord.length
+            WORD_LENGTH = targetWord.length
+            myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
+            myGuessGrid.style.gridTemplateRows = `repeat(${Number(value) + 1}, 2.7em)`
+            guessGrid.innerHTML = ""
+            for (let index = 0; index < value * Number(value) + Number(value); index++) {
+                myGuessGrid.innerHTML += `<div class="tile"></div>`
+            }
         }
-        WORD_LENGTH = Number(num)
+
+
         switch (WORD_LENGTH) {
+            case 1:
+                console.log(targetWord);
+                setWord(bible)
+                dictionary = bible.map((letter) => letter.toLowerCase().trim())
+                reset()
+                startInteraction()
+                break
             case 5:
                 targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)].toLowerCase().trim()
                 setWord(fiveLetters)
@@ -459,6 +480,7 @@ const Wordle = () => {
                 <p id="sec">0</p>
                 <p>s</p>
             </div>
+            {num === 1 && <p className="bible">Bible version</p>}
             <p id="hint" className="theHint">{hint}</p>
             {/* <label class="wordLabel" htmlFor="noOfWord">Select Difficulty</label>
             <select name="noOfWord" id="noOfWord" class="noOfWord">
