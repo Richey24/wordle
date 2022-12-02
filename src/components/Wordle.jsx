@@ -28,11 +28,12 @@ import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
+import { useCookies } from "react-cookie"
 
 let timer = null
 
 const Wordle = () => {
-
+    const [cookie] = useCookies(["playedBible", "playedWord"])
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)
     const [firstLet, setFirstLet] = useState("")
@@ -115,10 +116,13 @@ const Wordle = () => {
                 }
             }
         }
-
         let targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)];
         let WORD_LENGTH = Number(num)
         if (num !== 1) {
+            if (cookie.playedWord) {
+                navigate("/")
+                return
+            }
             const myGuessGrid = document.getElementById("guessGrid")
             const value = num
             myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
@@ -128,6 +132,10 @@ const Wordle = () => {
                 myGuessGrid.innerHTML += `<div class="tile"></div>`
             }
         } else {
+            if (cookie.playedBible) {
+                navigate("/")
+                return
+            }
             const myGuessGrid = document.getElementById("guessGrid")
             targetWord = bible[Math.floor(Math.random() * bible.length)].toLowerCase().trim()
             const value = targetWord.length
@@ -141,9 +149,8 @@ const Wordle = () => {
         }
 
 
-        switch (WORD_LENGTH) {
+        switch (num) {
             case 1:
-                console.log(targetWord);
                 setWord(bible)
                 dictionary = bible.map((letter) => letter.toLowerCase().trim())
                 reset()
@@ -432,11 +439,11 @@ const Wordle = () => {
     }, [num, spin])
 
     const showHint = () => {
-        if (count < 1) {
+        if (count < 1 && num !== 1) {
             const filterWord = word.filter((theWord) => theWord.startsWith(firstLet))
             setHint(`Don't know where to start? try ${filterWord[Math.floor(Math.random() * filterWord.length)]}`)
             setCount(1)
-        } else if (count < 2) {
+        } else if (count < 2 && num !== 1) {
             setHint(`Still can't get the word? try ${word[Math.floor(Math.random() * word.length)]}`)
             setCount(2)
         } else {
@@ -445,16 +452,15 @@ const Wordle = () => {
             setCount(count + 1)
         }
         document.getElementById("hint").style.display = "block"
-        console.log(count);
-        if (count >= 2 && num <= 7) {
+        if (count >= 2 && theWord.length <= 7) {
             setHide(true)
-        } else if (count >= 3 && num <= 9) {
+        } else if (count >= 3 && theWord.length <= 9) {
             setHide(true)
-        } else if (count >= 4 && num <= 11) {
+        } else if (count >= 4 && theWord.length <= 11) {
             setHide(true)
-        } else if (count >= 5 && num <= 13) {
+        } else if (count >= 5 && theWord.length <= 13) {
             setHide(true)
-        } else if (count >= 6 && num <= 15) {
+        } else if (count >= 6 && theWord.length <= 15) {
             setHide(true)
         }
     }

@@ -269,7 +269,8 @@
 
 .bible {
     position: absolute;
-    left: 42.5%;
+    left: 1%;
+    top: 1px;
     height: 25px;
     color: white;
     font-size: 30px;
