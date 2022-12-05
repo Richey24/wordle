@@ -230,7 +230,7 @@
 
 .hint {
     position: absolute;
-    right: 150px;
+    right: 15%;
     background-color: white;
     width: 80px;
     height: 30px;
@@ -250,7 +250,7 @@
 .myTimer {
     position: absolute;
     display: flex;
-    right: 5%;
+    right: 11%;
 }
 
 .myTimer p {
@@ -275,6 +275,17 @@
     color: white;
     font-size: 30px;
     text-transform: capitalize;
+}
+
+.leader {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    cursor: pointer;
+    filter: invert(1);
+    box-shadow: 0 0 6px 6px black;
 }
 
 .startBtn {

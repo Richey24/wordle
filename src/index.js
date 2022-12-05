@@ -11,6 +11,8 @@ import Reset from './components/Reset';
 import Difficult from './components/Difficult';
 import Hangman from './hangman/Hangman';
 import Register from './Register';
+import Leader from './components/Leader';
+import BibleLeader from './components/bibleLeader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +25,8 @@ root.render(
       <Route path='/select' element={<Difficult />} />
       <Route path='/hangman' element={<Hangman />} />
       <Route path='/reset/:id' element={<Reset />} />
+      <Route path='/word/leader' element={<Leader />} />
+      <Route path='/bible/leader' element={<BibleLeader />} />
     </Routes>
   </BrowserRouter>
 );

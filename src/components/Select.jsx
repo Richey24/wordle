@@ -20,8 +20,12 @@ const Select = () => {
     useEffect(() => {
         if (id) {
             (async () => {
-                const res = await axios.get(`${url}/user/get/${id}`)
+                const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
                 const rep = await res.data
+                if (res.status !== 200) {
+                    setSpin(false)
+                    return
+                }
                 setUser(rep)
                 setSpin(false)
             })()
@@ -72,7 +76,7 @@ const Select = () => {
 
                 <div>
                     <img src={bible} alt="" />
-                    <p>Bible game</p>
+                    <p>Bible learning game</p>
                 </div>
 
                 <div onClick={() => navigate("/hangman")}>

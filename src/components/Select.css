@@ -48,6 +48,7 @@
     font-weight: 600;
     font-family: 'Switzer';
     font-style: normal;
+    text-transform: capitalize;
 }
 
 .innerMain>div>img {

@@ -12,7 +12,7 @@ const Register = () => {
     const [err, setErr] = useState("")
     const [num, setNum] = useState(1)
     const [first, setFirst] = useState({})
-    const [tribe, setTribe] = useState(["Asher", "yellow"])
+    const [tribe, setTribe] = useState(["Asher", "rgb(111, 111, 21)"])
     const navigate = useNavigate()
 
     const submitForm = async (e) => {
@@ -25,7 +25,11 @@ const Register = () => {
             email: first.email,
             tribe: tribe,
             password: e.target.password?.value,
-            confirmPass: e.target.confirmPassword?.value || ""
+            confirmPass: e.target.confirmPassword?.value || "",
+            bibleQuestScore: 0,
+            wordQuestScore: 0,
+            bibleGameScore: 0,
+            hangmanScore: 0
         }
         console.log(user);
         if (user.password.length < 8) {
@@ -133,7 +137,7 @@ const Register = () => {
                                     <label>Select your tribe</label>
                                     <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
                                     <ul id='tribe' className='tribeList'>
-                                        <li onClick={() => getTribe(["Asher", "yellow"])}>Asher</li>
+                                        <li onClick={() => getTribe(["Asher", "rgb(111, 111, 21)"])}>Asher</li>
                                         <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"])}>Dan</li>
                                         <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"])}>Ephraim</li>
                                         <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"])}>Gad</li>

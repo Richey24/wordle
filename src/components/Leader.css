@@ -1,0 +1,36 @@
+.mainTable {
+    width: 100%;
+    padding-top: 20px;
+    background-color: #3d1152;
+    height: 100vh;
+}
+
+.mainTable>div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.firstTable {
+    border-bottom: 1px solid white;
+    font-weight: bold;
+    color: white;
+}
+
+.secondTable {
+    padding-top: 20px;
+    text-transform: capitalize;
+    color: white;
+}
+
+.mainTable>h3 {
+    color: white;
+    text-align: center;
+    margin-bottom: 40px;
+    text-decoration: underline;
+}
+
+.mainTable p {
+    text-align: center;
+    width: 20%;
+}

@@ -29,6 +29,7 @@ import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
 import { useCookies } from "react-cookie"
+import leader from "../img/leader.webp"
 
 let timer = null
 
@@ -58,8 +59,12 @@ const Wordle = () => {
         }
         if (id) {
             (async () => {
-                const res = await axios.get(`${url}/user/get/${id}`)
+                const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
                 const rep = await res.data
+                if (res.status !== 200) {
+                    setSpin(false)
+                    return
+                }
                 setUser(rep)
                 setSpin(false)
             })()
@@ -488,6 +493,7 @@ const Wordle = () => {
             </div>
             {num === 1 && <p className="bible">Bible version</p>}
             <p id="hint" className="theHint">{hint}</p>
+            <img onClick={() => navigate(num === 1 ? "/bible/leader" : "/word/leader")} className="leader" src={leader} alt="" />
             {/* <label class="wordLabel" htmlFor="noOfWord">Select Difficulty</label>
             <select name="noOfWord" id="noOfWord" class="noOfWord">
                 <option value="5">5</option>
