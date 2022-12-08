@@ -13,6 +13,7 @@ import Hangman from './hangman/Hangman';
 import Register from './Register';
 import Leader from './components/Leader';
 import BibleLeader from './components/bibleLeader';
+import HangLeader from './hangman/hangLead';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,6 +28,7 @@ root.render(
       <Route path='/reset/:id' element={<Reset />} />
       <Route path='/word/leader' element={<Leader />} />
       <Route path='/bible/leader' element={<BibleLeader />} />
+      <Route path='/hangman/leader' element={<HangLeader />} />
     </Routes>
   </BrowserRouter>
 );

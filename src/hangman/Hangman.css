@@ -1,0 +1,34 @@
+.secDiv {
+    color: white;
+    display: flex;
+    position: fixed;
+    right: 110px;
+    top: 20px;
+    font-size: 18px
+}
+
+.hangBigDiv {
+    width: 100%;
+    height: 100vh;
+    background-color: aliceblue;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+}
+
+.hangBtn {
+    width: 18%;
+    height: 60px;
+    position: fixed;
+    top: 50%;
+    left: 42.5%;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.hangBtn:hover {
+    background-color: purple;
+    color: white;
+}

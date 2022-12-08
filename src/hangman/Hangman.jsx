@@ -5,6 +5,14 @@ import { HangmanDrawing } from "./HangmanDrawing"
 import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
 import words from "./wordList.json"
+import "./Hangman.css"
+import Result from "./Result"
+import leader from "../img/leader.webp"
+import { useNavigate } from "react-router-dom"
+import { Spinner } from "react-bootstrap"
+
+
+let timer = null
 
 function getWord() {
     return words[Math.floor(Math.random() * words.length)]
@@ -14,16 +22,39 @@ function Hangman() {
     const [wordToGuess, setWordToGuess] = useState(getWord)
     const [guessedLetters, setGuessedLetters] = useState([])
     const [user, setUser] = useState({})
+    const [spin, setSpin] = useState(true)
     const id = localStorage.getItem("id")
+    const navigate = useNavigate()
+    console.log(wordToGuess);
 
+    const startInt = () => {
+        timer = setInterval(() => {
+            document.getElementById("hangSec").innerHTML = Number(document.getElementById("hangSec").innerHTML) + 1
+        }, 1000)
+    }
+
+    const startGame = () => {
+        document.getElementById("hangStart").style.display = "none"
+        document.getElementById("hangBigDiv").style.display = "none"
+        setTimeout(() => {
+            startInt()
+        }, 1000)
+    }
 
     useEffect(() => {
         if (id) {
             (async () => {
-                const res = await axios.get(`${url}/user/get/${id}`)
+                const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
                 const rep = await res.data
+                if (res.status !== 200) {
+                    setSpin(false)
+                    return
+                }
                 setUser(rep)
+                setSpin(false)
             })()
+        } else {
+            setSpin(false)
         }
     }, [id])
 
@@ -36,10 +67,13 @@ function Hangman() {
         .split("")
         .every(letter => guessedLetters.includes(letter))
 
+    if (isWinner) {
+        clearInterval(timer)
+    }
+
     const addGuessedLetter = useCallback(
         (letter) => {
             if (guessedLetters.includes(letter) || isLoser || isWinner) return
-
             setGuessedLetters(currentLetters => [...currentLetters, letter])
         },
         [guessedLetters, isWinner, isLoser]
@@ -78,6 +112,21 @@ function Hangman() {
         }
     }, [])
 
+    if (spin) {
+        return (
+            <div style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Spinner animation="border" color="#3d1152" />
+            </div>
+        )
+    }
+
+
     return (
         <div style={{
             backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
@@ -94,9 +143,14 @@ function Hangman() {
                 }}
             >
                 <div style={{ fontSize: "2rem", textAlign: "center", color: "white" }}>
-                    {isWinner && "Winner! - Refresh to try again"}
+                    {isWinner && <Result time={document.getElementById("hangSec").innerHTML} trial={incorrectLetters} />}
                     {isLoser && "Nice Try - Refresh to try again"}
                 </div>
+                <div className="secDiv">
+                    <p id="hangSec">0</p>
+                    <p>s</p>
+                </div>
+                <img onClick={() => navigate("/hangman/leader")} className="leader" src={leader} alt="" />
                 <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
                 <HangmanWord
                     reveal={isLoser}
@@ -114,6 +168,8 @@ function Hangman() {
                     />
                 </div>
             </div>
+            <div id="hangBigDiv" className="hangBigDiv"></div>
+            <button onClick={startGame} id="hangStart" className="hangBtn">Start game</button>
         </div>
     )
 }

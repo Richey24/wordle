@@ -1,0 +1,77 @@
+.hangResultDiv {
+    width: 30%;
+    height: 600px;
+    background-color: white;
+    position: fixed;
+    top: 10%;
+    left: 35%;
+    border-radius: 8px;
+    text-align: center;
+    /* display: none; */
+    z-index: 100;
+}
+
+.hangResultDiv p {
+    color: black;
+    font-size: 18px;
+}
+
+.hangResultDiv>h2 {
+    color: black;
+}
+
+.cancel {
+    margin-left: 90%;
+    margin-top: 2%;
+    cursor: pointer;
+}
+
+.score {
+    font-weight: 700;
+    font-style: italic;
+}
+
+.next {
+    width: 35%;
+    height: 50px;
+    margin-top: 20px;
+    border: 2px solid #3d1152;
+    outline: none;
+    border-radius: 24px;
+    font-size: 18px;
+}
+
+.next:hover {
+    background-color: #3d1152;
+    color: white;
+}
+
+.next:hover .arrow {
+    filter: invert(100%);
+}
+
+.authDiv {
+    border-top: 1px solid #3d1152;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.authDiv p {
+    font-family: 'Switzer';
+    font-style: normal;
+}
+
+.authDiv button {
+    width: 90%;
+    height: 50px;
+    border: 2px solid #3d1152;
+    outline: none;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.authDiv button:hover {
+    background-color: #3d1152;
+    color: white;
+}
