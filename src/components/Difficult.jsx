@@ -16,14 +16,18 @@ const Difficult = () => {
     useEffect(() => {
         if (id) {
             (async () => {
-                const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
-                const rep = await res.data
-                if (res.status !== 200) {
+                try {
+                    const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+                    const rep = await res.data
+                    if (res.status !== 200) {
+                        setSpin(false)
+                        return
+                    }
+                    setUser(rep)
                     setSpin(false)
-                    return
+                } catch (error) {
+                    setSpin(false)
                 }
-                setUser(rep)
-                setSpin(false)
             })()
         } else {
             setSpin(false)

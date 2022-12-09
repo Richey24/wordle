@@ -1,0 +1,209 @@
+.swordDiv {
+    width: 100%;
+    font-family: 'Switzer';
+    font-style: normal;
+    text-transform: capitalize;
+    padding: 20px 0px;
+}
+
+.swordDiv>h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #3d1152;
+    font-style: italic;
+}
+
+.swordSearch {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 0px 100px;
+}
+
+.swordSearch>input {
+    width: 80%;
+    border-radius: 12px;
+    border: 1px solid #3d1152;
+    font-family: 'Switzer';
+    padding-left: 10px;
+    height: 40px;
+    color: gray;
+    outline: none;
+}
+
+.swordSearch>p {
+    width: 15%;
+    border-radius: 12px;
+    background-color: #3d1152;
+    color: white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.swordSearch>p:hover {
+    background-color: white;
+    color: #3d1152;
+    border: #3d1152 1px solid;
+    font-weight: 600;
+}
+
+.swordMain {
+    padding-top: 30px;
+}
+
+.swordMain>div {
+    height: 200px;
+    width: 87%;
+    margin: 0 auto;
+    border-radius: 24px;
+    box-shadow: 2px 2px 4px #3d1152;
+    margin-top: 30px;
+    cursor: pointer;
+    padding: 25px;
+    overflow: hidden;
+}
+
+.verses {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.verses>p {
+    border: #3d1152 1px solid;
+    padding: 6px 10px;
+    border-radius: 8px;
+    color: #3d1152;
+}
+
+.verses>p:hover {
+    background-color: #3d1152;
+    color: white;
+}
+
+.theNote {
+    line-height: 1.5rem;
+    max-height: 3rem;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}
+
+.chapter {
+    width: 35%;
+    height: 90%;
+    position: fixed;
+    border-radius: 12px;
+    box-shadow: 1px 1px 6px black;
+    background-color: #fdfdff;
+    top: 40px;
+    left: 32.5%;
+    padding: 30px 20px;
+    display: none;
+}
+
+.chapter>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.chapter>div>h5 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.chapter>div>img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.chapter>p {
+    margin-top: 20px;
+    line-height: 30px;
+    font-weight: 500;
+}
+
+.innerSword {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.innerSword img {
+    width: 20px;
+}
+
+.delDiv {
+    width: 35%;
+    height: 230px;
+    position: fixed;
+    border-radius: 12px;
+    box-shadow: 1px 1px 6px black;
+    background-color: #fdfdff;
+    top: 30%;
+    left: 32.5%;
+    padding: 30px 20px;
+    display: none;
+}
+
+.firstDel {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.firstDel>img {
+    width: 120px;
+}
+
+.delDiv h5 {
+    font-weight: 600;
+    font-size: 18px;
+    font-family: 'Switzer';
+}
+
+.secondDel {
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+
+.delCan {
+    background: #FFFFFF;
+    border: 1px solid #F3F4F6;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 44px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delDel {
+    background: #F43F5E;
+    border: 1px solid #F43F5E;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 44px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.show {
+    display: block;
+}
