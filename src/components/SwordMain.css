@@ -1,0 +1,122 @@
+.theMain {
+    padding: 30px;
+}
+
+.mainFirst {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainFirst>div {
+    display: flex;
+    gap: 20px;
+}
+
+.mainDel {
+    background: #F43F5E;
+    border: 1px solid #F43F5E;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 44px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.mainEdit {
+    background: #2E7DD7;
+    border: 1px solid #2E7DD7;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 44px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.mainSecond {
+    margin-top: 50px;
+}
+
+.verseContent>p {
+    line-height: 1.5rem;
+    max-height: 3rem;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+}
+
+.mainSecond>div {
+    margin-top: 20px;
+}
+
+.mainSecond>div span {
+    color: #2E7DD7;
+    cursor: pointer;
+}
+
+.mainThird {
+    margin-top: 50px;
+}
+
+.chapterx {
+    width: 35%;
+    height: 90%;
+    position: fixed;
+    border-radius: 12px;
+    box-shadow: 1px 1px 6px black;
+    background-color: #fdfdff;
+    top: 40px;
+    left: 32.5%;
+    padding: 30px 20px;
+    display: none;
+}
+
+.chapterx>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.chapterx>div>h5 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.chapterx>div>img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.chapterx>p {
+    margin-top: 20px;
+    line-height: 30px;
+    font-weight: 500;
+}
+
+.delDivX {
+    width: 35%;
+    height: 230px;
+    position: fixed;
+    border-radius: 12px;
+    box-shadow: 1px 1px 6px black;
+    background-color: #fdfdff;
+    top: 30%;
+    left: 32.5%;
+    padding: 30px 20px;
+    display: none;
+}
+
+.show {
+    display: block;
+}

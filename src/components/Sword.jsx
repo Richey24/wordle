@@ -5,10 +5,11 @@ import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
 import { useEffect } from "react"
 import { OverlayTrigger, Tooltip } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 
 const arr = ['a', 'b', 'c', 'd']
 const Sword = () => {
-
+    const navigate = useNavigate()
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
@@ -28,7 +29,7 @@ const Sword = () => {
                 {
                     arr.map((ar, i) => (
                         <div key={i}>
-                            <div className="innerSword">
+                            <div onClick={() => navigate(`/watchman/${ar}`)} className="innerSword">
                                 <h4>The significance of the crucifixion</h4>
                                 <div className="swordBtn" id="swordBtn">
                                     <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
@@ -45,7 +46,7 @@ const Sword = () => {
                                 <p onClick={() => showModal("chapter")} >Psalm 91:1-8</p>
                                 <p onClick={() => showModal("chapter")} >Act 3:15</p>
                             </div>
-                            <p className="theNote">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem porro a vel? Earum deserunt, placeat, blanditiis reiciendis obcaecati quam iste temporibus magnam nesciunt consequatur, itaque accusantium. Aperiam, cupiditate itaque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto voluptatem quis incidunt optio pariatur blanditiis. Reiciendis dicta nisi eos hic, obcaecati pariatur id odio recusandae iste aliquid libero quod delectus.</p>
+                            <p onClick={() => navigate(`/watchman/${ar}`)} className="theNote">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus exercitationem porro a vel? Earum deserunt, placeat, blanditiis reiciendis obcaecati quam iste temporibus magnam nesciunt consequatur, itaque accusantium. Aperiam, cupiditate itaque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto voluptatem quis incidunt optio pariatur blanditiis. Reiciendis dicta nisi eos hic, obcaecati pariatur id odio recusandae iste aliquid libero quod delectus.</p>
                         </div>
                     ))
                 }
