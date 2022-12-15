@@ -29,16 +29,16 @@ const Sword = () => {
                 {
                     arr.map((ar, i) => (
                         <div key={i}>
+                            <div className="swordBtn" id="swordBtn">
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
+                                    <img style={{ marginRight: "20px" }} src={edit} alt="" />
+                                </OverlayTrigger>
+                                <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
+                                    <img onClick={() => showModal("delDiv")} src={del} alt="" />
+                                </OverlayTrigger>
+                            </div>
                             <div onClick={() => navigate(`/watchman/${ar}`)} className="innerSword">
                                 <h4>The significance of the crucifixion</h4>
-                                <div className="swordBtn" id="swordBtn">
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
-                                        <img style={{ marginRight: "20px" }} src={edit} alt="" />
-                                    </OverlayTrigger>
-                                    <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
-                                        <img onClick={() => showModal("delDiv")} src={del} alt="" />
-                                    </OverlayTrigger>
-                                </div>
                             </div>
                             <div className="verses">
                                 <p onClick={() => showModal("chapter")} >Matthew 12:5</p>

@@ -5,6 +5,12 @@
 .mainFirst {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 30px;
+}
+
+.mainFirst>h4 {
+    font-weight: 600;
 }
 
 .mainFirst>div {
@@ -40,8 +46,31 @@
     cursor: pointer;
 }
 
-.mainSecond {
+.vers {
     margin-top: 50px;
+    font-weight: 600;
+}
+
+.mainSecond {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.mainSecond>div {
+    width: 31%;
+    height: 150px;
+    box-shadow: 2px 2px 4px #3d1152;
+    border-radius: 12px;
+    margin-top: 20px;
+    padding: 10px 20px;
+}
+
+.mainVerse {
+    font-weight: 600;
 }
 
 .verseContent>p {
@@ -55,10 +84,6 @@
     -webkit-line-clamp: 2;
 }
 
-.mainSecond>div {
-    margin-top: 20px;
-}
-
 .mainSecond>div span {
     color: #2E7DD7;
     cursor: pointer;
@@ -68,9 +93,13 @@
     margin-top: 50px;
 }
 
+.mainThird>h3 {
+    font-weight: 600;
+}
+
 .chapterx {
     width: 35%;
-    height: 90%;
+    height: auto;
     position: fixed;
     border-radius: 12px;
     box-shadow: 1px 1px 6px black;
@@ -119,4 +148,26 @@
 
 .show {
     display: block;
+}
+
+@media screen and (max-width: 800px) {
+    .mainSecond>div {
+        width: 100%;
+    }
+
+    .mainSecond {
+        gap: 20px;
+    }
+
+    .chapterx {
+        width: 90%;
+        left: 5%;
+        top: 100px;
+    }
+
+    .delDivX {
+        width: 90%;
+        left: 5%;
+        height: 260px;
+    }
 }

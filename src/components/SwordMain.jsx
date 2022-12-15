@@ -15,8 +15,8 @@ const SwordMain = () => {
                     <p onClick={() => showModal("delDivX")} className="mainDel">Delete</p>
                 </div>
             </div>
+            <h4 className="vers">Verses</h4>
             <div className="mainSecond">
-                <h4>Verses</h4>
                 <div>
                     <p className="mainVerse">Matthew 7:7</p>
                     <div className="verseContent"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam molestiae, quia voluptas fugit enim veritatis! Reiciendis eveniet in veritatis soluta molestias illum aliquid, enim repellat aperiam, nemo atque, impedit similique! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, quos modi. Numquam ut similique dolores deleniti expedita possimus ullam facilis illo beatae. Officia similique eius aliquid amet neque, praesentium non!</p><span onClick={() => showModal("chapterx")}>see all{">>"}</span></div>
@@ -29,14 +29,10 @@ const SwordMain = () => {
                     <p className="mainVerse">Psalm 130:1</p>
                     <div className="verseContent"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam molestiae, quia voluptas fugit enim veritatis! Reiciendis eveniet in veritatis soluta molestias illum aliquid, enim repellat aperiam, nemo atque, impedit similique! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, quos modi. Numquam ut similique dolores deleniti expedita possimus ullam facilis illo beatae. Officia similique eius aliquid amet neque, praesentium non!</p><span>see all{">>"}</span></div>
                 </div>
-                <div>
-                    <p className="mainVerse">Mark 7:2</p>
-                    <div className="verseContent"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam molestiae, quia voluptas fugit enim veritatis! Reiciendis eveniet in veritatis soluta molestias illum aliquid, enim repellat aperiam, nemo atque, impedit similique! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, quos modi. Numquam ut similique dolores deleniti expedita possimus ullam facilis illo beatae. Officia similique eius aliquid amet neque, praesentium non!</p><span>see all{">>"}</span></div>
-                </div>
             </div>
             <div className="mainThird">
                 <h3>Note</h3>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At rem provident earum in nulla dolorem accusantium, dolor, incidunt consequatur molestiae facilis labore iste unde amet inventore quo neque, perspiciatis ad. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ipsa architecto autem! Perferendis, officia. Adipisci facilis sint labore quibusdam nihil et, temporibus quidem sapiente qui quisquam tenetur voluptatibus rerum vel. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur neque recusandae cumque, voluptatem dolores delectus dicta tempora velit ipsam laborum praesentium debitis libero nihil explicabo nostrum aspernatur officiis esse ducimus?</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At rem provident earum in nulla dolorem accusantium, dolor, incidunt consequatur molestiae facilis labore iste unde amet inventore quo neque, perspiciatis ad. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ipsa architecto autem! Perferendis, officia. Adipisci facilis sint labore quibusdam nihil et, temporibus quidem sapiente qui quisquam tenetur voluptatibus rerum vel. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur neque recusandae cumque, voluptatem dolores delectus dicta tempora velit ipsam laborum praesentium debitis libero nihil explicabo nostrum aspernatur officiis esse ducimus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam officiis velit distinctio ipsam. Molestiae placeat expedita obcaecati veritatis alias repudiandae ut eligendi tempora sapiente eos, dignissimos, dolorum dolore necessitatibus cupiditate! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis perspiciatis ducimus soluta enim, voluptate minus impedit doloribus possimus voluptates temporibus voluptatum repellat recusandae ad reprehenderit cum earum neque omnis velit.</p>
             </div>
             <div id="chapterx" className="chapterx">
                 <div>

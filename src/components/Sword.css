@@ -56,7 +56,7 @@
 }
 
 .swordMain>div {
-    height: 200px;
+    height: auto;
     width: 87%;
     margin: 0 auto;
     border-radius: 24px;
@@ -65,10 +65,19 @@
     cursor: pointer;
     padding: 25px;
     overflow: hidden;
+    position: relative;
+    z-index: 100;
+}
+
+.swordBtn {
+    position: absolute;
+    right: 20px;
+    z-index: 2;
 }
 
 .verses {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 20px;
 }
@@ -98,7 +107,7 @@
 
 .chapter {
     width: 35%;
-    height: 90%;
+    height: auto;
     position: fixed;
     border-radius: 12px;
     box-shadow: 1px 1px 6px black;
@@ -107,6 +116,7 @@
     left: 32.5%;
     padding: 30px 20px;
     display: none;
+    z-index: 150;
 }
 
 .chapter>div {
@@ -138,8 +148,12 @@
     align-items: baseline;
 }
 
-.innerSword img {
+.swordBtn img {
     width: 20px;
+}
+
+.innerSword>h4 {
+    width: 70%;
 }
 
 .delDiv {
@@ -148,11 +162,12 @@
     position: fixed;
     border-radius: 12px;
     box-shadow: 1px 1px 6px black;
-    background-color: #fdfdff;
+    background-color: #fdfdfe;
     top: 30%;
     left: 32.5%;
     padding: 30px 20px;
     display: none;
+    z-index: 200;
 }
 
 .firstDel {
@@ -179,7 +194,7 @@
 
 .delCan {
     background: #FFFFFF;
-    border: 1px solid #F3F4F6;
+    border: 1px solid #dfe1e4;
     border-radius: 8px;
     display: flex;
     justify-content: center;
@@ -206,4 +221,48 @@
 
 .show {
     display: block;
+}
+
+@media screen and (max-width: 800px) {
+    .swordDiv>h1 {
+        font-size: 22px;
+    }
+
+    .swordSearch {
+        padding: 0px 30px;
+    }
+
+    .swordSearch>input {
+        width: 70%;
+    }
+
+    .swordSearch>p {
+        width: 25%;
+    }
+
+    .innerSword>h4 {
+        font-size: 18px;
+    }
+
+    .swordBtn {
+        flex-shrink: 0;
+    }
+
+    .chapter {
+        width: 90%;
+        left: 5%;
+        top: 100px;
+    }
+
+    .delDiv {
+        width: 90%;
+        left: 5%;
+        height: 260px;
+    }
+
+    #edit,
+    #delete {
+        display: none;
+    }
+
 }
