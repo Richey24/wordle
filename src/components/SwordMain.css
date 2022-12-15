@@ -100,6 +100,7 @@
 .chapterx {
     width: 35%;
     height: auto;
+    max-height: 550px;
     position: fixed;
     border-radius: 12px;
     box-shadow: 1px 1px 6px black;
@@ -108,6 +109,8 @@
     left: 32.5%;
     padding: 30px 20px;
     display: none;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .chapterx>div {
@@ -163,6 +166,7 @@
         width: 90%;
         left: 5%;
         top: 100px;
+        max-height: 700px;
     }
 
     .delDivX {

@@ -16,6 +16,7 @@ import BibleLeader from './components/bibleLeader';
 import HangLeader from './hangman/hangLead';
 import Sword from './components/Sword';
 import SwordMain from './components/SwordMain';
+import AddSword from './components/AddSword';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -33,6 +34,7 @@ root.render(
       <Route path='/hangman/leader' element={<HangLeader />} />
       <Route path='/watchman' element={<Sword />} />
       <Route path='/watchman/:id' element={<SwordMain />} />
+      <Route path='/watchman/create' element={<AddSword />} />
     </Routes>
   </BrowserRouter>
 );

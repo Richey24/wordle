@@ -23,7 +23,7 @@ const Sword = () => {
             <h1>My sword and shield</h1>
             <div className="swordSearch">
                 <input placeholder="Type to search" type="text" />
-                <p>Add new</p>
+                <p onClick={() => navigate("/watchman/create")}>Add new</p>
             </div>
             <div className="swordMain">
                 {
