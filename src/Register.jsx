@@ -31,7 +31,6 @@ const Register = () => {
             bibleGameScore: 0,
             hangmanScore: 0
         }
-        console.log(user);
         if (user.password.length < 8) {
             setErr('Password must be at least 8 characters')
             setShowErr(true)

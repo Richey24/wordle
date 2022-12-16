@@ -33,7 +33,7 @@ root.render(
       <Route path='/bible/leader' element={<BibleLeader />} />
       <Route path='/hangman/leader' element={<HangLeader />} />
       <Route path='/watchman' element={<Sword />} />
-      <Route path='/watchman/:id' element={<SwordMain />} />
+      <Route path='/watchman/:idd' element={<SwordMain />} />
       <Route path='/watchman/create' element={<AddSword />} />
     </Routes>
   </BrowserRouter>

@@ -73,7 +73,7 @@
     font-weight: 600;
 }
 
-.verseContent>p {
+.verseContentX>p {
     line-height: 1.5rem;
     max-height: 3rem;
     -webkit-box-orient: vertical;

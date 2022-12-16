@@ -1,15 +1,73 @@
 import "./SwordMain.css"
 import cancel from "../img/cancel.svg"
 import bigdel from "../img/bigdel.svg"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { useState } from "react"
+import axios from "axios"
+import url from "../url"
+import { Spinner } from "react-bootstrap"
 
 const SwordMain = () => {
-    const showModal = (id) => {
+    const id = localStorage.getItem("id")
+    const [study, setStudy] = useState({})
+    const [spin, setSpin] = useState(true)
+    const [content, setContent] = useState({})
+    const navigate = useNavigate()
+    const { idd } = useParams()
+
+    const getStudy = async () => {
+        try {
+            const res = await axios.get(`${url}/sword/get/one/${idd}`, { validateStatus: () => true })
+            if (res.status !== 200) {
+                navigate("/watchman")
+            }
+            const rep = await res.data
+            setStudy(rep)
+            setSpin(false)
+        } catch (error) {
+            navigate("/watchman")
+        }
+    }
+
+    useEffect(() => {
+        if (!id) {
+            navigate("/")
+        }
+        getStudy()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const showModal = (id, value) => {
+        setContent(value)
         document.getElementById(id).classList.toggle("show")
     }
+
+    const deleteStudy = async () => {
+        const res = await axios.delete(`${url}/sword/delete/${idd}`, { validateStatus: () => true })
+        if (res.status === 200) {
+            navigate("/watchman")
+        }
+    }
+
+    if (spin) {
+        return (
+            <div style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Spinner animation="border" color="#3d1152" />
+            </div>
+        )
+    }
+
     return (
         <div className="theMain">
             <div className="mainFirst">
-                <h4>Topic: The significance of the crucifixion</h4>
+                <h4>Topic: {study?.topic}</h4>
                 <div>
                     <p className="mainEdit">Edit</p>
                     <p onClick={() => showModal("delDivX")} className="mainDel">Delete</p>
@@ -17,29 +75,25 @@ const SwordMain = () => {
             </div>
             <h4 className="vers">Verses</h4>
             <div className="mainSecond">
-                <div>
-                    <p className="mainVerse">Matthew 7:7</p>
-                    <div className="verseContent"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam molestiae, quia voluptas fugit enim veritatis! Reiciendis eveniet in veritatis soluta molestias illum aliquid, enim repellat aperiam, nemo atque, impedit similique! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, quos modi. Numquam ut similique dolores deleniti expedita possimus ullam facilis illo beatae. Officia similique eius aliquid amet neque, praesentium non!</p><span onClick={() => showModal("chapterx")}>see all{">>"}</span></div>
-                </div>
-                <div>
-                    <p className="mainVerse">John 12:2</p>
-                    <div className="verseContent"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam molestiae, quia voluptas fugit enim veritatis! Reiciendis eveniet in veritatis soluta molestias illum aliquid, enim repellat aperiam, nemo atque, impedit similique! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, quos modi. Numquam ut similique dolores deleniti expedita possimus ullam facilis illo beatae. Officia similique eius aliquid amet neque, praesentium non!</p><span onClick={() => showModal("chapterx")}>see all{">>"}</span></div>
-                </div>
-                <div>
-                    <p className="mainVerse">Psalm 130:1</p>
-                    <div className="verseContent"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam molestiae, quia voluptas fugit enim veritatis! Reiciendis eveniet in veritatis soluta molestias illum aliquid, enim repellat aperiam, nemo atque, impedit similique! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero, quos modi. Numquam ut similique dolores deleniti expedita possimus ullam facilis illo beatae. Officia similique eius aliquid amet neque, praesentium non!</p><span>see all{">>"}</span></div>
-                </div>
+                {
+                    study?.scripture?.map((script, i) => (
+                        <div key={i}>
+                            <p className="mainVerse">{script?.verse}</p>
+                            <div className="verseContentX"><p>{script?.verseContent}</p><span onClick={() => showModal("chapterx", script)}>see all{">>"}</span></div>
+                        </div>
+                    ))
+                }
             </div>
             <div className="mainThird">
                 <h3>Note</h3>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. At rem provident earum in nulla dolorem accusantium, dolor, incidunt consequatur molestiae facilis labore iste unde amet inventore quo neque, perspiciatis ad. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ipsa architecto autem! Perferendis, officia. Adipisci facilis sint labore quibusdam nihil et, temporibus quidem sapiente qui quisquam tenetur voluptatibus rerum vel. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur neque recusandae cumque, voluptatem dolores delectus dicta tempora velit ipsam laborum praesentium debitis libero nihil explicabo nostrum aspernatur officiis esse ducimus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam officiis velit distinctio ipsam. Molestiae placeat expedita obcaecati veritatis alias repudiandae ut eligendi tempora sapiente eos, dignissimos, dolorum dolore necessitatibus cupiditate! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis perspiciatis ducimus soluta enim, voluptate minus impedit doloribus possimus voluptates temporibus voluptatum repellat recusandae ad reprehenderit cum earum neque omnis velit.</p>
+                <p>{study?.note}</p>
             </div>
             <div id="chapterx" className="chapterx">
                 <div>
-                    <h5>Matthew 12:5</h5>
+                    <h5>{content?.verse}</h5>
                     <img onClick={() => showModal("chapterx")} src={cancel} alt="" />
                 </div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab voluptas accusantium enim laboriosam laborum aut accusamus cupiditate, ducimus sed officia distinctio nesciunt, dolor minus, pariatur est quia perspiciatis placeat doloribus! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem ducimus dolores consequatur magni nesciunt quibusdam molestiae officiis, quidem possimus atque incidunt, labore similique accusamus odio? Omnis incidunt quisquam perferendis laudantium!</p>
+                <p>{content?.verseContent}</p>
             </div>
             <div id="delDivX" className="delDivX">
                 <div className="firstDel">
@@ -51,7 +105,7 @@ const SwordMain = () => {
                 </div>
                 <div className="secondDel">
                     <p onClick={() => showModal("delDivX")} className="delCan">Cancel</p>
-                    <p className="delDel">Delete</p>
+                    <p onClick={deleteStudy} className="delDel">Delete</p>
                 </div>
             </div>
         </div>
