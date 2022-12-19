@@ -24,6 +24,7 @@ const Register = () => {
             username: first.username,
             email: first.email,
             tribe: tribe,
+            admin: false,
             password: e.target.password?.value,
             confirmPass: e.target.confirmPassword?.value || "",
             bibleQuestScore: 0,

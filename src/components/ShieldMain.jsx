@@ -8,11 +8,12 @@ import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
 
-const SwordMain = () => {
+const ShieldMain = () => {
     const id = localStorage.getItem("id")
     const [study, setStudy] = useState({})
     const [spin, setSpin] = useState(true)
     const [content, setContent] = useState({})
+    const [user, setUser] = useState({})
     const navigate = useNavigate()
     const { idd } = useParams()
 
@@ -20,20 +21,27 @@ const SwordMain = () => {
         try {
             const res = await axios.get(`${url}/sword/get/one/${idd}`, { validateStatus: () => true })
             if (res.status !== 200) {
-                navigate("/watchman")
+                navigate("/shield")
             }
             const rep = await res.data
             setStudy(rep)
             setSpin(false)
         } catch (error) {
-            navigate("/watchman")
+            navigate("/shield")
         }
+    }
+
+    const getUser = async () => {
+        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const rep = await res.data
+        setUser(rep)
     }
 
     useEffect(() => {
         if (!id) {
-            navigate("/")
+            navigate("/login")
         }
+        getUser()
         getStudy()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -46,7 +54,7 @@ const SwordMain = () => {
     const deleteStudy = async () => {
         const res = await axios.delete(`${url}/sword/delete/${idd}`, { validateStatus: () => true })
         if (res.status === 200) {
-            navigate("/watchman")
+            navigate("/shield")
         }
     }
 
@@ -64,14 +72,15 @@ const SwordMain = () => {
         )
     }
 
+
     return (
         <div className="theMain">
             <div className="mainFirst">
                 <h4>Topic: {study?.topic}</h4>
-                <div>
-                    <p onClick={() => navigate("/watchman/create", { state: { study: study } })} className="mainEdit">Edit</p>
+                {user?.admin && <div>
+                    <p onClick={() => navigate("/shield/create", { state: { study: study } })} className="mainEdit">Edit</p>
                     <p onClick={() => showModal("delDivX")} className="mainDel">Delete</p>
-                </div>
+                </div>}
             </div>
             <h4 className="vers">Verses</h4>
             <div className="mainSecond">
@@ -112,4 +121,4 @@ const SwordMain = () => {
     )
 }
 
-export default SwordMain
+export default ShieldMain

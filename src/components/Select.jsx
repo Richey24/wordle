@@ -87,7 +87,7 @@ const Select = () => {
                     <img src={hang} alt="" />
                     <p>Hangman</p>
                 </div>
-                <div>
+                <div onClick={() => navigate("/shield")}>
                     <img src={shield} alt="" />
                     <p>Watchman Sword&Shield</p>
                 </div>

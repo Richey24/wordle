@@ -17,6 +17,9 @@ import HangLeader from './hangman/hangLead';
 import Sword from './components/Sword';
 import SwordMain from './components/SwordMain';
 import AddSword from './components/AddSword';
+import Shield from './components/Shield';
+import ShieldMain from './components/ShieldMain';
+import AddShield from './components/AddShield';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -35,6 +38,9 @@ root.render(
       <Route path='/watchman' element={<Sword />} />
       <Route path='/watchman/:idd' element={<SwordMain />} />
       <Route path='/watchman/create' element={<AddSword />} />
+      <Route path='/shield' element={<Shield />} />
+      <Route path='/shield/:idd' element={<ShieldMain />} />
+      <Route path='/shield/create' element={<AddShield />} />
     </Routes>
   </BrowserRouter>
 );

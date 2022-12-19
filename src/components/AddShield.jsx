@@ -6,14 +6,24 @@ import { useLocation, useNavigate } from "react-router-dom"
 import url from "../url"
 import "./AddSword.css"
 
-const AddSword = () => {
+const AddShield = () => {
     const id = localStorage.getItem("id")
+    const navigate = useNavigate()
     const { state } = useLocation()
     const study = state?.study
-    const navigate = useNavigate()
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState(false)
     const [arr, setArr] = useState(['a'])
+    const [user, setUser] = useState({})
+
+    const getUser = async () => {
+        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const rep = await res.data
+        setUser(rep)
+        if (!rep.admin) {
+            navigate("/shield")
+        }
+    }
 
     useEffect(() => {
         if (!id) {
@@ -22,18 +32,22 @@ const AddSword = () => {
         if (study) {
             setArr(study.scripture)
         }
+        getUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const submitSword = async (e) => {
-        setSpin(true)
         e.preventDefault()
+        if (!user.admin) {
+            return
+        }
+        setSpin(true)
         const body = {
             topic: e.target.topic.value,
             scripture: [],
             note: e.target.note.value,
             userId: id,
-            admin: false
+            admin: true
         }
         const theVerses = document.getElementsByClassName("theVerse")
         Array.from(theVerses).forEach((theVerse) => {
@@ -50,7 +64,7 @@ const AddSword = () => {
                     setErr(true)
                     break;
                 case 200:
-                    navigate("/watchman")
+                    navigate("/shield")
                     break
                 default:
                     setErr(true)
@@ -66,7 +80,7 @@ const AddSword = () => {
                 setErr(true)
                 break;
             case 200:
-                navigate("/watchman")
+                navigate("/shield")
                 break
             default:
                 setErr(true)
@@ -117,4 +131,4 @@ const AddSword = () => {
     )
 }
 
-export default AddSword
+export default AddShield

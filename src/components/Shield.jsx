@@ -10,18 +10,19 @@ import { useState } from "react"
 import axios from "axios"
 import url from "../url"
 
-const Sword = () => {
+const Shield = () => {
     const id = localStorage.getItem("id")
     const [studies, setStudies] = useState([])
     const [fit, setFit] = useState([])
     const [spin, setSpin] = useState(true)
     const [content, setContent] = useState({})
     const [delId, setDelId] = useState("")
+    const [user, setUser] = useState({})
     const navigate = useNavigate()
 
     const getItems = async () => {
         try {
-            const res = await axios.get(`${url}/sword/get/all/${id}`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/sword/get/all/admin`, { validateStatus: () => true })
             if (res.status !== 200) {
 
             }
@@ -30,16 +31,24 @@ const Sword = () => {
             setFit(rep)
             setSpin(false)
         } catch (error) {
-            navigate("/")
+            setSpin(false)
+            // navigate("/")
         }
 
     }
 
+    const getUser = async () => {
+        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const rep = await res.data
+        setUser(rep)
+    }
+
     useEffect(() => {
         if (!id) {
-            navigate("/")
+            navigate("/login")
         }
         window.scrollTo(0, 0)
+        getUser()
         getItems()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -78,31 +87,30 @@ const Sword = () => {
         )
     }
 
-
     return (
         <div className="swordDiv">
             <h1>My sword and shield</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
-                <p onClick={() => navigate("/watchman/create")}>Add new</p>
+                {user?.admin && <p onClick={() => navigate("/shield/create")}>Add new</p>}
             </div>
             {
                 studies.length < 1 ? (
-                    <p className="empty">You have no study yet, create one</p>
+                    <p className="empty">No study yet</p>
                 ) : (
                     <div className="swordMain">
                         {
                             studies.map((study, i) => (
                                 <div key={i}>
-                                    <div className="swordBtn" id="swordBtn">
+                                    {user?.admin && <div className="swordBtn" id="swordBtn">
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
-                                            <img onClick={() => navigate("/watchman/create", { state: { study: study } })} style={{ marginRight: "20px" }} src={edit} alt="" />
+                                            <img onClick={() => navigate("/shield/create", { state: { study: study } })} style={{ marginRight: "20px" }} src={edit} alt="" />
                                         </OverlayTrigger>
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
                                             <img onClick={() => showModal("delDiv", study._id)} src={del} alt="" />
                                         </OverlayTrigger>
-                                    </div>
-                                    <div onClick={() => navigate(`/watchman/${study?._id}`)} className="innerSword">
+                                    </div>}
+                                    <div onClick={() => navigate(`/shield/${study?._id}`)} className="innerSword">
                                         <h4>{study?.topic}</h4>
                                     </div>
                                     <div className="verses">
@@ -112,7 +120,7 @@ const Sword = () => {
                                             ))
                                         }
                                     </div>
-                                    <p onClick={() => navigate(`/watchman/${study?._id}`)} className="theNote">{study?.note}</p>
+                                    <p onClick={() => navigate(`/shield/${study?._id}`)} className="theNote">{study?.note}</p>
                                 </div>
                             ))
                         }
@@ -144,4 +152,4 @@ const Sword = () => {
     )
 }
 
-export default Sword
+export default Shield
