@@ -71,6 +71,7 @@
 
 .mainVerse {
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .verseContentX>p {
@@ -122,6 +123,7 @@
 .chapterx>div>h5 {
     font-size: 20px;
     font-weight: 600;
+    text-transform: capitalize;
 }
 
 .chapterx>div>img {
