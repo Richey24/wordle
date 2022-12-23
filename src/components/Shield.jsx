@@ -92,7 +92,7 @@ const Shield = () => {
 
     return (
         <div className="swordDiv">
-            <h1>My sword and shield</h1>
+            <h1>Watchman sword and shield</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
                 {user?.admin && <p onClick={() => navigate("/shield/create")}>Add new</p>}
