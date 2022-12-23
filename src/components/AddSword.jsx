@@ -86,23 +86,23 @@ const AddSword = () => {
                 <label htmlFor="topic">Topic</label>
                 <br />
                 <input defaultValue={study?.topic} placeholder="Enter the topic of your new study" required className="topic" type="text" id="topic" name="topic" />
-                <h6 htmlFor="">Verses</h6>
+                <h6 htmlFor="">Precepts</h6>
                 {
                     arr.map((ar, i) => (
                         <div key={i} className="theVerse">
                             <hr />
-                            <label htmlFor="">Verse</label>
+                            <label htmlFor="">Precept</label>
                             <br />
-                            <input defaultValue={study ? ar?.verse : ''} placeholder="Enter a bible verse" className="topic" type="text" name="verse" />
+                            <input defaultValue={study ? ar?.verse : ''} placeholder="Enter a bible precept" className="topic" type="text" name="verse" />
                             <br />
                             <br />
-                            <label htmlFor="">Verse content</label>
+                            <label htmlFor="">Precept content</label>
                             <br />
-                            <textarea defaultValue={study ? ar?.verseContent : ''} placeholder="Enter the verse content" className="verseContent" name="verseContent"></textarea>
+                            <textarea defaultValue={study ? ar?.verseContent : ''} placeholder="Enter the precept content" className="verseContent" name="verseContent"></textarea>
                         </div>
                     ))
                 }
-                <p onClick={addAnother} className="another">Add another verse</p>
+                <p onClick={addAnother} className="another">Add another precept</p>
                 <br />
                 <br />
                 <label htmlFor="">Note</label>

@@ -66,7 +66,10 @@ const Shield = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.delete(`${url}/sword/delete/${delId}`, { validateStatus: () => true })
+        const res = await axios.delete(`${url}/sword/delete/${delId._id}`, { validateStatus: () => true })
+        const date = new Date().toLocaleString()
+        const text = `${user.username} deleted ${delId.topic} on ${date}`
+        await axios.post(`${url}/audit/add`, { audit: text })
         if (res.status === 200) {
             showModal("delDiv")
             getItems()
@@ -107,7 +110,7 @@ const Shield = () => {
                                             <img onClick={() => navigate("/shield/create", { state: { study: study } })} style={{ marginRight: "20px" }} src={edit} alt="" />
                                         </OverlayTrigger>
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
-                                            <img onClick={() => showModal("delDiv", study._id)} src={del} alt="" />
+                                            <img onClick={() => showModal("delDiv", study)} src={del} alt="" />
                                         </OverlayTrigger>
                                     </div>}
                                     <div onClick={() => navigate(`/shield/${study?._id}`)} className="innerSword">

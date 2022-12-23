@@ -1,0 +1,88 @@
+.adminDiv {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.adminDiv>h2 {
+    font-weight: 600;
+    font-style: italic;
+    color: #3d1152;
+}
+
+.inputDiv {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 30px;
+}
+
+.inputDiv>input {
+    margin-top: 30px;
+    width: 80%;
+    border-radius: 12px;
+    border: 1px solid #3d1152;
+    font-family: 'Switzer';
+    padding-left: 10px;
+    height: 40px;
+    color: gray;
+    outline: none;
+}
+
+.inputDiv>p {
+    width: 15%;
+    border-radius: 12px;
+    background-color: #3d1152;
+    color: white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.adminDiv>div {
+    margin-top: 30px;
+    width: 60%;
+}
+
+.adminInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    border: 2px solid #3d1152;
+    padding: 20px 20px 10px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.adminInner button {
+    border-radius: 12px;
+    background-color: #3d1152;
+    color: white;
+    height: 40px;
+    width: 200px;
+}
+
+.adminInner button:hover {
+    background-color: white;
+    color: #3d1152;
+    border: #3d1152 1px solid;
+    font-weight: 600;
+}
+
+.adminInner p {
+    font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+    .adminDiv>div {
+        width: 90%;
+    }
+
+    .adminInner button {
+        width: 120px;
+    }
+}

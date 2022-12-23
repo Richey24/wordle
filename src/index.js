@@ -20,6 +20,9 @@ import AddSword from './components/AddSword';
 import Shield from './components/Shield';
 import ShieldMain from './components/ShieldMain';
 import AddShield from './components/AddShield';
+import AdminLogin from './AdminLogin';
+import Admin from './components/Admin';
+import Audit from './components/Audit';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,6 +44,9 @@ root.render(
       <Route path='/shield' element={<Shield />} />
       <Route path='/shield/:idd' element={<ShieldMain />} />
       <Route path='/shield/create' element={<AddShield />} />
+      <Route path='/admin/login' element={<AdminLogin />} />
+      <Route path='/admin' element={<Admin />} />
+      <Route path='/audit' element={<Audit />} />
     </Routes>
   </BrowserRouter>
 );

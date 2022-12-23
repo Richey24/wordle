@@ -53,6 +53,9 @@ const ShieldMain = () => {
 
     const deleteStudy = async () => {
         const res = await axios.delete(`${url}/sword/delete/${idd}`, { validateStatus: () => true })
+        const date = new Date().toLocaleString()
+        const text = `${user.username} deleted ${study.topic} on ${date}`
+        await axios.post(`${url}/audit/add`, { audit: text })
         if (res.status === 200) {
             navigate("/shield")
         }
