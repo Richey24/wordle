@@ -23,6 +23,7 @@ import AddShield from './components/AddShield';
 import AdminLogin from './AdminLogin';
 import Admin from './components/Admin';
 import Audit from './components/Audit';
+import ToBeDel from './components/ToBeDel';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -47,6 +48,7 @@ root.render(
       <Route path='/admin/login' element={<AdminLogin />} />
       <Route path='/admin' element={<Admin />} />
       <Route path='/audit' element={<Audit />} />
+      <Route path='/delete' element={<ToBeDel />} />
     </Routes>
   </BrowserRouter>
 );

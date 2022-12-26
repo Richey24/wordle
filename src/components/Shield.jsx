@@ -22,7 +22,7 @@ const Shield = () => {
 
     const getItems = async () => {
         try {
-            const res = await axios.get(`${url}/sword/get/all/admin`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, { validateStatus: () => true })
             if (res.status !== 200) {
 
             }
@@ -66,9 +66,9 @@ const Shield = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.delete(`${url}/sword/delete/${delId._id}`, { validateStatus: () => true })
+        const res = await axios.put(`${url}/sword/update/${delId._id}`, { toBeDeleted: true }, { validateStatus: () => true })
         const date = new Date().toLocaleString()
-        const text = `${user.username} deleted ${delId.topic} on ${date}`
+        const text = `${user.username} marked ${delId.topic} to be deleted on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text })
         if (res.status === 200) {
             showModal("delDiv")

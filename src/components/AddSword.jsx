@@ -33,7 +33,8 @@ const AddSword = () => {
             scripture: [],
             note: e.target.note.value,
             userId: id,
-            admin: false
+            admin: false,
+            toBeDeleted: false
         }
         const theVerses = document.getElementsByClassName("theVerse")
         Array.from(theVerses).forEach((theVerse) => {

@@ -47,7 +47,8 @@ const AddShield = () => {
             scripture: [],
             note: e.target.note.value,
             userId: id,
-            admin: true
+            admin: true,
+            toBeDeleted: false
         }
         const theVerses = document.getElementsByClassName("theVerse")
         Array.from(theVerses).forEach((theVerse) => {

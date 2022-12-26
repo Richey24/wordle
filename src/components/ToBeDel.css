@@ -1,0 +1,46 @@
+.adminDel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.adminDel>div {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    border: 1px solid purple;
+    padding: 20px 20px 10px 20px;
+    border-radius: 12px;
+    align-items: baseline;
+}
+
+.adminDel>div>p {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.adminDel>div>div {
+    display: flex;
+    gap: 20px;
+}
+
+.adminDel>div>div>p {
+    border-radius: 12px;
+    background-color: #3d1152;
+    color: white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 150px;
+}
+
+.adminDel>div>div>p:hover {
+    background-color: white;
+    color: #3d1152;
+    border: #3d1152 1px solid;
+    font-weight: 600;
+}
