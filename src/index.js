@@ -24,6 +24,9 @@ import AdminLogin from './AdminLogin';
 import Admin from './components/Admin';
 import Audit from './components/Audit';
 import ToBeDel from './components/ToBeDel';
+import SelectNum from './learn/SelectNum';
+import Names from './learn/Names';
+import Game from './learn/Game';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -49,6 +52,9 @@ root.render(
       <Route path='/admin' element={<Admin />} />
       <Route path='/audit' element={<Audit />} />
       <Route path='/delete' element={<ToBeDel />} />
+      <Route path='/bible/select' element={<SelectNum />} />
+      <Route path='/bible/names' element={<Names />} />
+      <Route path='/bible/game' element={<Game />} />
     </Routes>
   </BrowserRouter>
 );

@@ -1,0 +1,109 @@
+.mainGame {
+    padding: 30px;
+    background-color: #3d1152;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.mainGame>div {
+    width: 100%;
+    min-height: 80vh;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.mainGame>div>h1 {
+    text-align: center;
+    color: #3d1152;
+    text-decoration: underline;
+}
+
+.mainGame>div>p {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+    color: #3d1152;
+    font-weight: 600;
+}
+
+.theAnswer {
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.mainGame>div>div>p {
+    font-size: 24px;
+    font-weight: 600;
+    color: #3d1152;
+    margin-top: 20px;
+}
+
+.mainGame>div>div>p>span {
+    width: auto;
+    height: 50px;
+    background-color: #3d1152;
+    color: white;
+    font-weight: 200;
+    padding: 5px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mainGame>div>div>p>span:hover {
+    background-color: white;
+    color: #3d1152;
+    border: 1px solid #3d1152;
+    font-weight: 600;
+}
+
+.learnButton {
+    width: 100%;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 50px;
+    row-gap: 20px;
+    margin-left: 0px;
+}
+
+.learnMore {
+    width: 45%;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid #3d1152;
+    outline: none;
+    color: #3d1152;
+    background-color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    visibility: hidden;
+}
+
+.nextQuest {
+    width: 45%;
+    height: 50px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: #3d1152;
+    color: white;
+}
+
+#quizTimer {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 800px) {
+
+    .learnMore,
+    .nextQuest {
+        width: 100%;
+    }
+}

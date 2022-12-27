@@ -78,7 +78,7 @@ const Select = () => {
                     <p>Bible quest</p>
                 </div>
 
-                <div>
+                <div onClick={() => navigate("/bible/select")}>
                     <img src={bible} alt="" />
                     <p>Bible learning game</p>
                 </div>
