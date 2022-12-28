@@ -126,6 +126,7 @@
     background: #F3F4F6;
     display: none;
     top: 100px;
+    z-index: 1;
 }
 
 .tribeList::-webkit-scrollbar {
