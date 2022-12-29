@@ -1,5 +1,4 @@
-import "./Sword.css"
-import cancel from "../img/cancel.svg"
+import "./QuestionList.css"
 import edit from "../img/Edit.svg"
 import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
@@ -10,31 +9,22 @@ import { useState } from "react"
 import axios from "axios"
 import url from "../url"
 
-const Shield = () => {
+
+const QuestionList = () => {
+    const navigate = useNavigate()
     const id = localStorage.getItem("id")
-    const [studies, setStudies] = useState([])
-    const [fit, setFit] = useState([])
     const [spin, setSpin] = useState(true)
-    const [content, setContent] = useState({})
+    const [lists, setLists] = useState([])
+    const [fit, setFit] = useState([])
     const [delId, setDelId] = useState("")
     const [user, setUser] = useState({})
-    const navigate = useNavigate()
 
     const getItems = async () => {
-        try {
-            const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, { validateStatus: () => true })
-            if (res.status !== 200) {
-
-            }
-            const rep = await res.data
-            setStudies(rep)
-            setFit(rep)
-            setSpin(false)
-        } catch (error) {
-            setSpin(false)
-            // navigate("/")
-        }
-
+        const res = await axios.get(`${url}/quiz/get/all`, { validateStatus: () => true })
+        const rep = await res.data
+        setFit(rep)
+        setLists(rep)
+        setSpin(false)
     }
 
     const getUser = async () => {
@@ -45,34 +35,31 @@ const Shield = () => {
 
     useEffect(() => {
         if (!id) {
-            navigate("/admin/login")
+            // navigate("/admin/login")
         }
-        window.scrollTo(0, 0)
-        getUser()
         getItems()
+        getUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const showModal = (id, value) => {
-        setContent(value)
-        setDelId(value)
         document.getElementById(id).classList.toggle("show")
+        setDelId(value)
     }
 
     const filterItem = (e) => {
         const value = e.target.value
-        const newArr = fit.filter((fi) => fi.topic.toLowerCase().includes(value.toLowerCase()))
-        setStudies(newArr)
+        const newArr = fit.filter((fi) => fi.question.toLowerCase().includes(value.toLowerCase()))
+        setLists(newArr)
     }
 
     const deleteStudy = async () => {
         const res = await axios.put(`${url}/sword/update/${delId._id}`, { toBeDeleted: true }, { validateStatus: () => true })
         const date = new Date().toLocaleString()
-        const text = `${user.username} marked ${delId.topic} to be deleted on ${date}`
+        const text = `${user.username} marked ${delId.question} to be deleted on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text })
         if (res.status === 200) {
             showModal("delDiv")
-            getItems()
         }
     }
 
@@ -90,40 +77,41 @@ const Shield = () => {
         )
     }
 
+
     return (
         <div className="swordDiv">
-            <h1>Watchman sword and shield</h1>
+            <h1>Questions list</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
-                {user?.admin && <p onClick={() => navigate("/shield/create")}>Add new</p>}
+                <p onClick={() => navigate("/question/add")}>Add new question</p>
             </div>
             {
-                studies.length < 1 ? (
-                    <p className="empty">No study yet</p>
+                lists.length < 1 ? (
+                    <p className="empty">You have no question yet, create one</p>
                 ) : (
                     <div className="swordMain">
                         {
-                            studies.map((study, i) => (
+                            lists.map((list, i) => (
                                 <div key={i}>
-                                    {user?.admin && <div className="swordBtn" id="swordBtn">
+                                    <div className="swordBtn" id="swordBtn">
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
-                                            <img onClick={() => navigate("/shield/create", { state: { study: study } })} style={{ marginRight: "20px" }} src={edit} alt="" />
+                                            <img onClick={() => navigate("/question/add", { state: { list: list } })} style={{ marginRight: "20px" }} src={edit} alt="" />
                                         </OverlayTrigger>
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
-                                            <img onClick={() => showModal("delDiv", study)} src={del} alt="" />
+                                            <img onClick={() => showModal("delDiv", list)} src={del} alt="" />
                                         </OverlayTrigger>
-                                    </div>}
-                                    <div onClick={() => navigate(`/shield/${study?._id}`)} className="innerSword">
-                                        <h4>{study?.topic}</h4>
+                                    </div>
+                                    <div className="innerSword">
+                                        <h4>{list?.question}</h4>
                                     </div>
                                     <div className="verses">
                                         {
-                                            study?.scripture?.map((script, i) => (
-                                                <p key={i} onClick={() => showModal("chapter", script)} >{script?.verse}</p>
+                                            list?.answer?.map((ans, i) => (
+                                                <p style={{ backgroundColor: ans?.correct ? "green" : "red", border: "none", color: "white" }} key={i}>{ans?.value}</p>
                                             ))
                                         }
                                     </div>
-                                    <p onClick={() => navigate(`/shield/${study?._id}`)} className="theNote">{study?.note}</p>
+                                    <p className="theNote">{list.learnMore}</p>
                                 </div>
                             ))
                         }
@@ -131,13 +119,6 @@ const Shield = () => {
                 )
             }
 
-            <div id="chapter" className="chapter">
-                <div>
-                    <h5>{content?.verse}</h5>
-                    <img onClick={() => showModal("chapter")} src={cancel} alt="" />
-                </div>
-                <p>{content?.verseContent}</p>
-            </div>
             <div id="delDiv" className="delDiv">
                 <div className="firstDel">
                     <img src={bigdel} alt="" />
@@ -155,4 +136,4 @@ const Shield = () => {
     )
 }
 
-export default Shield
+export default QuestionList

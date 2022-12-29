@@ -52,10 +52,10 @@ const Game = () => {
                     <h1>Question 1</h1>
                     <p>Who was the first son of Jacob?</p>
                     <div className="theAnswer">
-                        <p>A. <span onClick={(e) => checkAnswer(e, false)}>Joseph</span></p>
-                        <p>B. <span onClick={(e) => checkAnswer(e, true)}>Reuben</span></p>
-                        <p>C. <span onClick={(e) => checkAnswer(e, false)}>Dan</span></p>
-                        <p>D. <span onClick={(e) => checkAnswer(e, false)}>Asher</span></p>
+                        <p>A. <p onClick={(e) => checkAnswer(e, false)}>Joseph</p></p>
+                        <p>B. <p onClick={(e) => checkAnswer(e, true)}>Reuben</p></p>
+                        <p>C. <p onClick={(e) => checkAnswer(e, false)}>Dan</p></p>
+                        <p>D. <p onClick={(e) => checkAnswer(e, false)}>Asher</p></p>
                     </div>
                     <div className="learnButton">
                         <button onClick={() => showModal()} id="learnMore" className="learnMore">Learn more</button>

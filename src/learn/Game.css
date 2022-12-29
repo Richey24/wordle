@@ -22,7 +22,8 @@
 
 .mainGame>div>p {
     font-size: 30px;
-    text-align: center;
+    text-align: left;
+    margin-left: 40px;
     margin-top: 30px;
     margin-bottom: 30px;
     text-transform: capitalize;
@@ -40,10 +41,14 @@
     font-weight: 600;
     color: #3d1152;
     margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
 }
 
-.mainGame>div>div>p>span {
-    width: auto;
+.mainGame>div>div>p>p {
+    min-width: 300px;
+    max-width: auto;
     height: 50px;
     background-color: #3d1152;
     color: white;
@@ -53,7 +58,7 @@
     cursor: pointer;
 }
 
-.mainGame>div>div>p>span:hover {
+.mainGame>div>div>p>p:hover {
     background-color: white;
     color: #3d1152;
     border: 1px solid #3d1152;

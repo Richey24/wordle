@@ -87,7 +87,7 @@ const AddSword = () => {
                 <label htmlFor="topic">Topic</label>
                 <br />
                 <input defaultValue={study?.topic} placeholder="Enter the topic of your new study" required className="topic" type="text" id="topic" name="topic" />
-                <h6 htmlFor="">Precepts</h6>
+                <h6>Precepts</h6>
                 {
                     arr.map((ar, i) => (
                         <div key={i} className="theVerse">

@@ -27,6 +27,8 @@ import ToBeDel from './components/ToBeDel';
 import SelectNum from './learn/SelectNum';
 import Names from './learn/Names';
 import Game from './learn/Game';
+import QuestionList from './learn/QuestionList';
+import AddQuest from './learn/AddQuest';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -55,6 +57,8 @@ root.render(
       <Route path='/bible/select' element={<SelectNum />} />
       <Route path='/bible/names' element={<Names />} />
       <Route path='/bible/game' element={<Game />} />
+      <Route path='/question/list' element={<QuestionList />} />
+      <Route path='/question/add' element={<AddQuest />} />
     </Routes>
   </BrowserRouter>
 );

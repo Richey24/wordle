@@ -27,7 +27,7 @@ const Admin = () => {
 
     useEffect(() => {
         if (!id) {
-            navigate("/admin/login")
+            // navigate("/admin/login")
         }
         getUsers()
         getUser()
@@ -61,6 +61,7 @@ const Admin = () => {
             <div className="inputDiv">
                 <input onChange={filterUser} type="text" placeholder="Search user" />
                 <p onClick={() => navigate("/audit")}>Audit</p>
+                <p onClick={() => navigate("/question/list")}>Bible trivial</p>
                 {use?.superAdmin && <p onClick={() => navigate("/delete")}>To Be Deleted</p>}
             </div>
             <div>
