@@ -27,7 +27,7 @@ const Admin = () => {
 
     useEffect(() => {
         if (!id) {
-            // navigate("/admin/login")
+            navigate("/admin/login")
         }
         getUsers()
         getUser()

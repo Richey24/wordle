@@ -7,13 +7,18 @@ import "./ToBeDel.css"
 
 const ToBeDel = () => {
     const [items, setItems] = useState([])
+    const [questions, setQuestions] = useState([])
     const id = sessionStorage.getItem("id")
     const navigate = useNavigate()
 
     const getItems = async () => {
         const res = await axios.get(`${url}/sword/get/all/deleted/${true}`, { validateStatus: () => true })
         const rep = await res.data
+        const res1 = await axios.get(`${url}/quiz/get/all`, { validateStatus: () => true })
+        const rep1 = await res1.data
+        const newArr = rep1.filter((re) => re.toBeDeleted === true)
         setItems(rep)
+        setQuestions(newArr)
     }
 
     const getUsers = async () => {
@@ -44,7 +49,21 @@ const ToBeDel = () => {
         }
     }
 
-    if (items.length < 1) {
+    const cancelQuest = async (id) => {
+        const res = await axios.put(`${url}/quiz/update/${id}`, { toBeDeleted: false }, { validateStatus: () => true })
+        if (res.status === 200) {
+            getItems()
+        }
+    }
+
+    const delQuest = async (id) => {
+        const res = await axios.delete(`${url}/quiz/delete/${id}`, { validateStatus: () => true })
+        if (res.status === 200) {
+            getItems()
+        }
+    }
+
+    if (items.length < 1 && questions.length < 1) {
         return (
             <p style={{ textAlign: "center" }}>No study to be deleted</p>
         )
@@ -59,6 +78,17 @@ const ToBeDel = () => {
                         <div>
                             <p onClick={() => delItem(item?._id)}>Confirm delete</p>
                             <p onClick={() => cancelDel(item?._id)}>Cancel</p>
+                        </div>
+                    </div>
+                ))
+            }
+            {
+                questions.map((item, i) => (
+                    <div key={i}>
+                        <p>{item?.question}</p>
+                        <div>
+                            <p onClick={() => delQuest(item?._id)}>Confirm delete</p>
+                            <p onClick={() => cancelQuest(item?._id)}>Cancel</p>
                         </div>
                     </div>
                 ))

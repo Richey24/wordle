@@ -22,8 +22,9 @@ const QuestionList = () => {
     const getItems = async () => {
         const res = await axios.get(`${url}/quiz/get/all`, { validateStatus: () => true })
         const rep = await res.data
-        setFit(rep)
-        setLists(rep)
+        const newArr = rep.filter((re) => re.toBeDeleted !== true)
+        setFit(newArr)
+        setLists(newArr)
         setSpin(false)
     }
 
@@ -54,12 +55,13 @@ const QuestionList = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.put(`${url}/sword/update/${delId._id}`, { toBeDeleted: true }, { validateStatus: () => true })
+        const res = await axios.put(`${url}/quiz/update/${delId._id}`, { toBeDeleted: true }, { validateStatus: () => true })
         const date = new Date().toLocaleString()
-        const text = `${user.username} marked ${delId.question} to be deleted on ${date}`
+        const text = `${user.username} marked bible trivial question ${delId.question} to be deleted on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text })
         if (res.status === 200) {
             showModal("delDiv")
+            getItems()
         }
     }
 
