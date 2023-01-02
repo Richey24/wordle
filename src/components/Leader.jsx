@@ -7,10 +7,15 @@ import "./Leader.css"
 const Leader = () => {
     const [users, setUsers] = useState([])
     const [spin, setSpin] = useState(true)
+    const token = localStorage.getItem("token")
 
     useEffect(() => {
         (async () => {
-            const res = await axios.get(`${url}/user/find/all`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/user/find/all`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, { validateStatus: () => true })
             const rep = await res.data
             if (res.status !== 200) {
                 setSpin(false)

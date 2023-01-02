@@ -12,6 +12,7 @@ import url from "../url"
 
 const Sword = () => {
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     const [studies, setStudies] = useState([])
     const [fit, setFit] = useState([])
     const [spin, setSpin] = useState(true)
@@ -21,7 +22,11 @@ const Sword = () => {
 
     const getItems = async () => {
         try {
-            const res = await axios.get(`${url}/sword/get/all/${id}`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/sword/get/all/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, { validateStatus: () => true })
             if (res.status !== 200) {
 
             }

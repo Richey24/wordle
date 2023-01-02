@@ -8,6 +8,7 @@ import "./AddSword.css"
 
 const AddShield = () => {
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     const navigate = useNavigate()
     const { state } = useLocation()
     const study = state?.study
@@ -17,7 +18,11 @@ const AddShield = () => {
     const [user, setUser] = useState({})
 
     const getUser = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         setUser(rep)
         if (!rep.admin) {

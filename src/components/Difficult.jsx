@@ -10,6 +10,7 @@ import { Spinner } from "react-bootstrap"
 const Difficult = () => {
     const navigate = useNavigate()
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     const [user, setUser] = useState({})
     const [spin, setSpin] = useState(true)
 
@@ -17,9 +18,18 @@ const Difficult = () => {
         if (id) {
             (async () => {
                 try {
-                    const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+                    const res = await axios.get(`${url}/user/get/${id}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }, { validateStatus: () => true })
                     const rep = await res.data
                     if (res.status !== 200) {
+                        setSpin(false)
+                        return
+                    }
+                    if (token !== rep.mainToken) {
+                        localStorage.clear()
                         setSpin(false)
                         return
                     }
@@ -32,6 +42,7 @@ const Difficult = () => {
         } else {
             setSpin(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
     if (spin) {

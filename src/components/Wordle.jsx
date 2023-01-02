@@ -45,6 +45,7 @@ const Wordle = () => {
     const [theWord, setTheWord] = useState("")
     const [user, setUser] = useState({})
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     const { state } = useLocation()
     const numb = state?.numb
     const [num, setNum] = useState(numb)
@@ -60,9 +61,18 @@ const Wordle = () => {
         if (id) {
             (async () => {
                 try {
-                    const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+                    const res = await axios.get(`${url}/user/get/${id}`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }, { validateStatus: () => true })
                     const rep = await res.data
                     if (res.status !== 200) {
+                        setSpin(false)
+                        return
+                    }
+                    if (token !== rep.mainToken) {
+                        localStorage.clear()
                         setSpin(false)
                         return
                     }
@@ -75,6 +85,7 @@ const Wordle = () => {
         } else {
             setSpin(false)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
     const startInt = () => {

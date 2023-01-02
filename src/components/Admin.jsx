@@ -7,21 +7,34 @@ import "./Admin.css"
 
 const Admin = () => {
     const id = sessionStorage.getItem("id")
+    const token = sessionStorage.getItem("token")
     const navigate = useNavigate()
     const [users, setUsers] = useState([])
     const [use, setUser] = useState({})
     const [fil, setFil] = useState([])
 
     const getUsers = async () => {
-        const res = await axios.get(`${url}/user/find/all`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/find/all`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         setUsers(rep)
         setFil(rep)
     }
 
     const getUser = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
+        if (token !== rep.mainToken) {
+            sessionStorage.clear()
+            navigate("/admin/login")
+        }
         setUser(rep)
     }
 

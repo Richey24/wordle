@@ -12,6 +12,7 @@ import url from "../url"
 
 const Shield = () => {
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     const [studies, setStudies] = useState([])
     const [fit, setFit] = useState([])
     const [spin, setSpin] = useState(true)
@@ -22,7 +23,11 @@ const Shield = () => {
 
     const getItems = async () => {
         try {
-            const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, { validateStatus: () => true })
             if (res.status !== 200) {
 
             }
@@ -38,7 +43,11 @@ const Shield = () => {
     }
 
     const getUser = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         setUser(rep)
     }

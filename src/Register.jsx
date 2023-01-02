@@ -65,6 +65,7 @@ const Register = () => {
             case 200:
                 const rep = await res.data
                 localStorage.setItem('id', rep._id)
+                localStorage.setItem('token', rep.mainToken)
                 navigate('/')
                 break;
             default:

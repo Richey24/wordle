@@ -41,6 +41,7 @@ const AdminLogin = () => {
                 const rep = await res.data
                 if (rep.admin) {
                     sessionStorage.setItem('id', rep._id)
+                    sessionStorage.setItem('token', rep.mainToken)
                     navigate('/admin')
                 } else {
                     setErr("You are not an admin")
