@@ -5,6 +5,20 @@ import { Alert, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import url from './url'
 import drop from "./img/drop.svg"
+import benjamin from "./img/benjamin.png"
+import dan from "./img/dan.png"
+import ephraim from "./img/ephraim.png"
+import gad from "./img/gad.png"
+import issachar from "./img/issachar.png"
+import joseph from "./img/joseph.png"
+import judah from "./img/judah.png"
+import levi from "./img/levi.png"
+import manasseh from "./img/manasseh.png"
+import naftali from "./img/naftali.png"
+import reuben from "./img/reuben.png"
+import simeon from "./img/simeon.png"
+import zebulun from "./img/zebulun.png"
+import asher from "./img/asher.png"
 
 const Register = () => {
     const [spin, setSpin] = useState(false)
@@ -138,18 +152,20 @@ const Register = () => {
                                     <label>Select your tribe</label>
                                     <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
                                     <ul id='tribe' className='tribeList'>
-                                        <li onClick={() => getTribe(["Asher", "rgb(111, 111, 21)"])}>Asher</li>
-                                        <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"])}>Dan</li>
-                                        <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"])}>Ephraim</li>
-                                        <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"])}>Gad</li>
-                                        <li onClick={() => getTribe(["Issachar", "rgb(12, 57, 11)"])}>Issachar</li>
-                                        <li onClick={() => getTribe(["Manasseh", "rgb(237, 31, 237)"])}>Manasseh</li>
-                                        <li onClick={() => getTribe(["Naphtali", "lightgreen"])}>Naphtali</li>
-                                        <li onClick={() => getTribe(["Reuben", "orangered"])}>Reuben</li>
-                                        <li onClick={() => getTribe(["Simeon", "black"])}>Simeon</li>
-                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"])}>Zebulun</li>
-                                        <li onClick={() => getTribe(["Judah", "purple"])}>Judah</li>
-                                        <li onClick={() => getTribe(["Benjamin", "rgb(249, 213, 115)"])}>Benjamin</li>
+                                        <li onClick={() => getTribe(["Asher", "rgb(111, 111, 21)"])}>Asher <img src={asher} alt="" /></li>
+                                        <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"])}>Dan <img src={dan} alt="" /></li>
+                                        <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"])}>Ephraim <img src={ephraim} alt="" /></li>
+                                        <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"])}>Gad <img src={gad} alt="" /></li>
+                                        <li onClick={() => getTribe(["Issachar", "rgb(12, 57, 11)"])}>Issachar <img src={issachar} alt="" /></li>
+                                        <li onClick={() => getTribe(["Joseph", "rgb(12, 571, 31)"])}>Joseph <img src={joseph} alt="" /></li>
+                                        <li onClick={() => getTribe(["Manasseh", "rgb(237, 31, 237)"])}>Manasseh <img src={manasseh} alt="" /></li>
+                                        <li onClick={() => getTribe(["Naphtali", "lightgreen"])}>Naphtali <img src={naftali} alt="" /></li>
+                                        <li onClick={() => getTribe(["Reuben", "orangered"])}>Reuben <img src={reuben} alt="" /></li>
+                                        <li onClick={() => getTribe(["Simeon", "black"])}>Simeon <img src={simeon} alt="" /></li>
+                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"])}>Zebulun <img src={zebulun} alt="" /></li>
+                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"])}>Levi <img src={levi} alt="" /></li>
+                                        <li onClick={() => getTribe(["Judah", "purple"])}>Judah <img src={judah} alt="" /></li>
+                                        <li onClick={() => getTribe(["Benjamin", "rgb(249, 213, 115)"])}>Benjamin <img src={benjamin} alt="" /></li>
                                     </ul>
                                 </div>
                                 {

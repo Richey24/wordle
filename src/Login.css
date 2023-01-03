@@ -138,9 +138,15 @@
     font-size: 20px;
     cursor: pointer;
     width: 100%;
-    padding-left: 20px;
+    padding: 20px;
     height: 50px;
-    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tribeList>li>img {
+    width: 60px;
 }
 
 .tribeList>li:hover {

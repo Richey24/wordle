@@ -15,10 +15,15 @@ const SwordMain = () => {
     const [content, setContent] = useState({})
     const navigate = useNavigate()
     const { idd } = useParams()
+    const token = localStorage.getItem("token")
 
     const getStudy = async () => {
         try {
-            const res = await axios.get(`${url}/sword/get/one/${idd}`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/sword/get/one/${idd}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, { validateStatus: () => true })
             if (res.status !== 200) {
                 navigate("/watchman")
             }
@@ -44,7 +49,11 @@ const SwordMain = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.delete(`${url}/sword/delete/${idd}`, { validateStatus: () => true })
+        const res = await axios.delete(`${url}/sword/delete/${idd}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         if (res.status === 200) {
             navigate("/watchman")
         }

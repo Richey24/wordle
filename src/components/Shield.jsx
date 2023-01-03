@@ -83,7 +83,11 @@ const Shield = () => {
         })
         const date = new Date().toLocaleString()
         const text = `${user.username} marked ${delId.topic} to be deleted on ${date}`
-        await axios.post(`${url}/audit/add`, { audit: text })
+        await axios.post(`${url}/audit/add`, { audit: text }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         if (res.status === 200) {
             showModal("delDiv")
             getItems()

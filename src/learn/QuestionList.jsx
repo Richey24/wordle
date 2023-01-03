@@ -18,9 +18,14 @@ const QuestionList = () => {
     const [fit, setFit] = useState([])
     const [delId, setDelId] = useState("")
     const [user, setUser] = useState({})
+    const token = localStorage.getItem("token")
 
     const getItems = async () => {
-        const res = await axios.get(`${url}/quiz/get/all`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/quiz/get/all`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         const newArr = rep.filter((re) => re.toBeDeleted !== true)
         setFit(newArr)
@@ -29,7 +34,11 @@ const QuestionList = () => {
     }
 
     const getUser = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         setUser(rep)
     }
@@ -55,10 +64,19 @@ const QuestionList = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.put(`${url}/quiz/update/${delId._id}`, { toBeDeleted: true }, { validateStatus: () => true })
+        const res = await axios.put(`${url}/quiz/update/${delId._id}`, { toBeDeleted: true }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         const date = new Date().toLocaleString()
         const text = `${user.username} marked bible trivial question ${delId.question} to be deleted on ${date}`
-        await axios.post(`${url}/audit/add`, { audit: text })
+        await axios.post(`${url}/audit/add`, { audit: text }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         if (res.status === 200) {
             showModal("delDiv")
             getItems()

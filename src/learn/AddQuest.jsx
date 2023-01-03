@@ -12,6 +12,7 @@ const AddQuest = () => {
     const list = state?.list
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState(false)
+    const token = localStorage.getItem("token")
 
     const submitForm = async (e) => {
         setErr(false)
@@ -40,7 +41,12 @@ const AddQuest = () => {
             learnMore: e.target.learnMore.value
         }
         if (list) {
-            const res = await axios.put(`${url}/quiz/update/${list._id}`, body, { validateStatus: () => true })
+            const res = await axios.put(`${url}/quiz/update/${list._id}`, body, {
+                validateStatus: () => true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             setSpin(false)
             if (res.status === 200) {
                 navigate("/question/list")
@@ -49,7 +55,12 @@ const AddQuest = () => {
             }
             return
         }
-        const res = await axios.post(`${url}/quiz/create`, body, { validateStatus: () => true })
+        const res = await axios.post(`${url}/quiz/create`, body, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         setSpin(false)
         if (res.status === 200) {
             navigate("/question/list")

@@ -16,10 +16,15 @@ const ShieldMain = () => {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
     const { idd } = useParams()
+    const token = localStorage.getItem("token")
 
     const getStudy = async () => {
         try {
-            const res = await axios.get(`${url}/sword/get/one/${idd}`, { validateStatus: () => true })
+            const res = await axios.get(`${url}/sword/get/one/${idd}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }, { validateStatus: () => true })
             if (res.status !== 200) {
                 navigate("/shield")
             }
@@ -32,7 +37,11 @@ const ShieldMain = () => {
     }
 
     const getUser = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         setUser(rep)
     }
@@ -52,10 +61,19 @@ const ShieldMain = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.put(`${url}/sword/update/${idd}`, { toBeDeleted: true }, { validateStatus: () => true })
+        const res = await axios.put(`${url}/sword/update/${idd}`, { toBeDeleted: true }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         const date = new Date().toLocaleString()
         const text = `${user.username} marked ${study.topic} to be deleted on ${date}`
-        await axios.post(`${url}/audit/add`, { audit: text })
+        await axios.post(`${url}/audit/add`, { audit: text }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         if (res.status === 200) {
             navigate("/shield")
         }

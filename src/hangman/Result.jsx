@@ -9,27 +9,44 @@ import url from '../url'
 const Result = ({ time, trial }) => {
     const navigate = useNavigate()
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
 
     const hideModal = async () => {
         if (id) {
-            const res = await axios.get(`${url}/user/get/${id}`)
+            const res = await axios.get(`${url}/user/get/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             const rep = await res.data
             const body = {
                 hangmanScore: Number(rep.hangmanScore) + Number(((6 - trial.length) / time).toFixed(2))
             }
-            await axios.put(`${url}/user/update/${id}`, body)
+            await axios.put(`${url}/user/update/${id}`, body, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
         }
         navigate(0)
     }
 
     const nextRound = async () => {
         if (id) {
-            const res = await axios.get(`${url}/user/get/${id}`)
+            const res = await axios.get(`${url}/user/get/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             const rep = await res.data
             const body = {
                 hangmanScore: Number(rep.hangmanScore) + Number(((6 - trial.length) / time).toFixed(2))
             }
-            await axios.put(`${url}/user/update/${id}`, body)
+            await axios.put(`${url}/user/update/${id}`, body, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
         }
         navigate(0)
     }
