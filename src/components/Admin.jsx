@@ -57,14 +57,22 @@ const Admin = () => {
         if (!user.paid) {
             return
         }
-        await axios.put(`${url}/user/update/${user._id}`, { admin: value })
+        await axios.put(`${url}/user/update/${user._id}`, { admin: value }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         getUsers()
     }
     const makeSuperAdmin = async (user, value) => {
         if (!user.paid) {
             return
         }
-        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: value })
+        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: value }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         getUsers()
     }
 

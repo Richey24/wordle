@@ -64,7 +64,12 @@ const AddShield = () => {
         })
 
         if (study) {
-            const res = await axios.put(`${url}/sword/update/${study._id}`, body, { validateStatus: () => true })
+            const res = await axios.put(`${url}/sword/update/${study._id}`, body, {
+                validateStatus: () => true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             const date = new Date().toLocaleString()
             const text = `${user.username} edited ${body.topic} on ${date}`
             await axios.post(`${url}/audit/add`, { audit: text })
@@ -83,7 +88,12 @@ const AddShield = () => {
             return
         }
 
-        const res = await axios.post(`${url}/sword/create`, body, { validateStatus: () => true })
+        const res = await axios.post(`${url}/sword/create`, body, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         const date = new Date().toLocaleString()
         const text = `${user.username} added ${body.topic} on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text })

@@ -9,12 +9,21 @@ const ToBeDel = () => {
     const [items, setItems] = useState([])
     const [questions, setQuestions] = useState([])
     const id = sessionStorage.getItem("id")
+    const token = sessionStorage.getItem("token")
     const navigate = useNavigate()
 
     const getItems = async () => {
-        const res = await axios.get(`${url}/sword/get/all/deleted/${true}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/sword/get/all/deleted/${true}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
-        const res1 = await axios.get(`${url}/quiz/get/all`, { validateStatus: () => true })
+        const res1 = await axios.get(`${url}/quiz/get/all`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep1 = await res1.data
         const newArr = rep1.filter((re) => re.toBeDeleted === true)
         setItems(rep)
@@ -22,7 +31,11 @@ const ToBeDel = () => {
     }
 
     const getUsers = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, { validateStatus: () => true })
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         const rep = await res.data
         if (!rep.superAdmin) {
             navigate("/admin")
@@ -36,28 +49,47 @@ const ToBeDel = () => {
     }, [])
 
     const cancelDel = async (id) => {
-        const res = await axios.put(`${url}/sword/update/${id}`, { toBeDeleted: false }, { validateStatus: () => true })
+        const res = await axios.put(`${url}/sword/update/${id}`, { toBeDeleted: false }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         if (res.status === 200) {
             getItems()
         }
     }
 
     const delItem = async (id) => {
-        const res = await axios.delete(`${url}/sword/delete/${id}`, { validateStatus: () => true })
+        const res = await axios.delete(`${url}/sword/delete/${id}`, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         if (res.status === 200) {
             getItems()
         }
     }
 
     const cancelQuest = async (id) => {
-        const res = await axios.put(`${url}/quiz/update/${id}`, { toBeDeleted: false }, { validateStatus: () => true })
+        const res = await axios.put(`${url}/quiz/update/${id}`, { toBeDeleted: false }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         if (res.status === 200) {
             getItems()
         }
     }
 
     const delQuest = async (id) => {
-        const res = await axios.delete(`${url}/quiz/delete/${id}`, { validateStatus: () => true })
+        const res = await axios.delete(`${url}/quiz/delete/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         if (res.status === 200) {
             getItems()
         }

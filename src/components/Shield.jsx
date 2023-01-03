@@ -53,9 +53,9 @@ const Shield = () => {
     }
 
     useEffect(() => {
-        if (!id) {
-            navigate("/admin/login")
-        }
+        // if (!id) {
+        //     navigate("/login")
+        // }
         window.scrollTo(0, 0)
         getUser()
         getItems()
@@ -75,7 +75,12 @@ const Shield = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.put(`${url}/sword/update/${delId._id}`, { toBeDeleted: true }, { validateStatus: () => true })
+        const res = await axios.put(`${url}/sword/update/${delId._id}`, { toBeDeleted: true }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         const date = new Date().toLocaleString()
         const text = `${user.username} marked ${delId.topic} to be deleted on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text })

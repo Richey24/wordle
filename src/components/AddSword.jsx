@@ -8,6 +8,7 @@ import "./AddSword.css"
 
 const AddSword = () => {
     const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
     const { state } = useLocation()
     const study = state?.study
     const navigate = useNavigate()
@@ -45,7 +46,12 @@ const AddSword = () => {
         })
 
         if (study) {
-            const res = await axios.put(`${url}/sword/update/${study._id}`, body, { validateStatus: () => true })
+            const res = await axios.put(`${url}/sword/update/${study._id}`, body, {
+                validateStatus: () => true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             switch (res.status) {
                 case 500:
                     setErr(true)
@@ -61,7 +67,12 @@ const AddSword = () => {
             return
         }
 
-        const res = await axios.post(`${url}/sword/create`, body, { validateStatus: () => true })
+        const res = await axios.post(`${url}/sword/create`, body, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         switch (res.status) {
             case 500:
                 setErr(true)

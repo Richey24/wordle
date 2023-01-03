@@ -35,14 +35,14 @@ const Sword = () => {
             setFit(rep)
             setSpin(false)
         } catch (error) {
-            navigate("/")
+            navigate("/login")
         }
 
     }
 
     useEffect(() => {
         if (!id) {
-            navigate("/")
+            navigate("/login")
         }
         window.scrollTo(0, 0)
         getItems()
@@ -62,7 +62,11 @@ const Sword = () => {
     }
 
     const deleteStudy = async () => {
-        const res = await axios.delete(`${url}/sword/delete/${delId}`, { validateStatus: () => true })
+        const res = await axios.delete(`${url}/sword/delete/${delId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }, { validateStatus: () => true })
         if (res.status === 200) {
             showModal("delDiv")
             getItems()
