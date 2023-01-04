@@ -16,6 +16,9 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
+import axios from "axios";
+import url from "../url"
+import { Spinner } from "react-bootstrap";
 
 let timer;
 const images = {
@@ -36,12 +39,15 @@ const images = {
 }
 const Game = () => {
     const [click, setClick] = useState(false)
+    const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
+    const [question, setQuestion] = useState([])
+    const [num, setNum] = useState(0)
+    const [spin, setSpin] = useState(true)
     const { state } = useLocation()
     const navigate = useNavigate()
     const names = state?.names
     const tribe = state?.tribe
-    console.log(names);
-    console.log(tribe);
 
     const startTimer = () => {
         const theTimer = document.getElementById("quizTimer")
@@ -56,12 +62,52 @@ const Game = () => {
         }, 1000)
     }
 
-    useEffect(() => {
-        if (!names) {
+    const getQuestions = async () => {
+        const res = await axios.get(`${url}/quiz/get/all`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        const rep = await res.data
+        if (res.status !== 200) {
             navigate("/bible/select")
             return
         }
-        startTimer()
+        const arr = []
+        const selected = []
+        let ansArr = []
+        let ansSel = []
+        while (arr.length < 5) {
+            const num = Math.floor(Math.random() * rep.length)
+            if (!selected.includes(num)) {
+                selected.push(num)
+                while (ansArr.length < 4) {
+                    const ansNum = Math.floor(Math.random() * 4)
+                    if (!ansSel.includes(ansNum)) {
+                        ansSel.push(ansNum)
+                        ansArr.push(rep[num].answer[ansNum])
+                    }
+                }
+                rep[num].answer = ansArr
+                arr.push(rep[num])
+                ansArr = []
+                ansSel = []
+            }
+        }
+        setQuestion(arr)
+        setSpin(false)
+        setTimeout(() => {
+            startTimer()
+        }, 1000)
+    }
+
+    useEffect(() => {
+        if (!names || !id) {
+            navigate("/bible/select")
+            return
+        }
+        getQuestions()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -70,12 +116,10 @@ const Game = () => {
             return
         }
         const target = e.target
-        console.log(target);
-        console.log(value);
         if (value) {
-            target.style.backgroundColor = "green"
+            target.classList.toggle("correct")
         } else {
-            target.style.backgroundColor = "red"
+            target.classList.toggle("wrong")
         }
         clearInterval(timer)
         setClick(true)
@@ -86,29 +130,60 @@ const Game = () => {
         document.getElementById("learnModal").classList.toggle("showLearn")
     }
 
+    const nextQuest = () => {
+        if (num >= question.length - 1) {
+            return
+        }
+        setNum(num + 1)
+        const answers = document.getElementsByClassName("answer")
+        Array.from(answers).forEach((ans) => {
+            ans.classList.remove("correct", "wrong")
+        })
+        const theTimer = document.getElementById("quizTimer")
+        theTimer.innerHTML = "60"
+        document.getElementById("learnMore").style.visibility = "hidden"
+        startTimer()
+        setClick(false)
+    }
+
+    if (spin) {
+        return (
+            <div style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Spinner animation="border" color="#3d1152" />
+            </div>
+        )
+    }
+
     return (
         <div>
             <div className="mainGame">
                 <div>
                     <span id="quizTimer">60</span>
-                    <h1>Question 1</h1>
-                    <p>Who was the first son of Jacob?</p>
+                    <h1>Question {num + 1}</h1>
+                    <p>{question[num]?.question}</p>
                     <img src={images[tribe[0]]} alt="" />
                     <div className="theAnswer">
-                        <p>A. <p onClick={(e) => checkAnswer(e, false)}>Joseph</p></p>
-                        <p>B. <p onClick={(e) => checkAnswer(e, true)}>Reuben</p></p>
-                        <p>C. <p onClick={(e) => checkAnswer(e, false)}>Dan</p></p>
-                        <p>D. <p onClick={(e) => checkAnswer(e, false)}>Asher</p></p>
+                        {
+                            question[num]?.answer?.map((ans, i) => (
+                                <p key={i}>{i + 1}. <p className="answer" onClick={(e) => checkAnswer(e, ans?.correct)}>{ans?.value}</p></p>
+                            ))
+                        }
                     </div>
                     <div className="learnButton">
                         <button onClick={() => showModal()} id="learnMore" className="learnMore">Learn more</button>
-                        <button className="nextQuest">Next question</button>
+                        <button onClick={nextQuest} className="nextQuest">Next question</button>
                     </div>
                 </div>
             </div>
             <div id="learnModal" className="learnModal">
                 <img onClick={showModal} src={cancel} alt="" />
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nisi rem omnis aliquam, culpa sapiente magni error officiis architecto quos atque, deserunt ullam laborum maxime, nam expedita. Quae, sequi accusamus? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus dolore quasi dignissimos fugiat praesentium, atque vitae deserunt maiores. Tenetur illum quod, aliquam enim quisquam explicabo quo perferendis ad sit id! Lorem ipsum dolor sit amet consectetur adipisicing elit. A blanditiis deleniti, esse architecto tempore nobis, ipsum nemo, cupiditate consequuntur voluptatem eveniet maxime libero quaerat error aperiam fuga sequi rem laudantium? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse saepe a tempore, facere aperiam impedit. Laboriosam fuga ullam totam, delectus iure, sequi quo repellat ex quas consectetur nihil perspiciatis sapiente.</p>
+                <p>{question[num]?.learnMore}</p>
             </div>
         </div>
 

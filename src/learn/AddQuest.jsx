@@ -18,26 +18,36 @@ const AddQuest = () => {
         setErr(false)
         e.preventDefault()
         setSpin(true)
+        const arr = [
+            {
+                value: e.target.correctAnswer.value,
+                correct: true,
+            },
+            {
+                value: e.target.wrongAnswer1.value,
+                correct: false,
+            },
+            {
+                value: e.target.wrongAnswer2.value,
+                correct: false,
+            },
+            {
+                value: e.target.wrongAnswer3.value,
+                correct: false,
+            },
+        ]
+        const newArr = []
+        const selected = []
+        while (newArr.length < 4) {
+            const num = Math.floor(Math.random() * arr.length)
+            if (!selected.includes(num)) {
+                selected.push(num)
+                newArr.push(arr[num])
+            }
+        }
         const body = {
             question: e.target.question.value,
-            answer: [
-                {
-                    value: e.target.correctAnswer.value,
-                    correct: true,
-                },
-                {
-                    value: e.target.wrongAnswer1.value,
-                    correct: false,
-                },
-                {
-                    value: e.target.wrongAnswer2.value,
-                    correct: false,
-                },
-                {
-                    value: e.target.wrongAnswer3.value,
-                    correct: false,
-                },
-            ],
+            answer: newArr,
             learnMore: e.target.learnMore.value
         }
         if (list) {

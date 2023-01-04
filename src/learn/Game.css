@@ -56,7 +56,7 @@
     align-items: baseline;
 }
 
-.mainGame>div>div>p>p {
+.answer {
     min-width: 300px;
     max-width: auto;
     height: 50px;
@@ -66,9 +66,10 @@
     padding: 5px 30px;
     border-radius: 6px;
     cursor: pointer;
+    text-transform: capitalize;
 }
 
-.mainGame>div>div>p>p:hover {
+.answer:hover {
     background-color: white;
     color: #3d1152;
     border: 1px solid #3d1152;
@@ -147,6 +148,28 @@
 
 .showLearn {
     display: block;
+}
+
+.correct {
+    background-color: green;
+}
+
+.correct:hover {
+    background-color: green;
+    color: white;
+    border: none;
+    font-weight: 400;
+}
+
+.wrong {
+    background-color: red;
+}
+
+.wrong:hover {
+    background-color: red;
+    color: white;
+    border: none;
+    font-weight: 400;
 }
 
 @media screen and (max-width: 800px) {
