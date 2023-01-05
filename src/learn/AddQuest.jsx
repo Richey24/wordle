@@ -36,18 +36,10 @@ const AddQuest = () => {
                 correct: false,
             },
         ]
-        const newArr = []
-        const selected = []
-        while (newArr.length < 4) {
-            const num = Math.floor(Math.random() * arr.length)
-            if (!selected.includes(num)) {
-                selected.push(num)
-                newArr.push(arr[num])
-            }
-        }
+
         const body = {
             question: e.target.question.value,
-            answer: newArr,
+            answer: arr,
             learnMore: e.target.learnMore.value
         }
         if (list) {
@@ -105,7 +97,7 @@ const AddQuest = () => {
                 <textarea defaultValue={list?.learnMore} className="learnMoreArea" name="learnMore" id="learnMore"></textarea>
                 <br />
                 <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
-                ) : list ? "Edit" : "Create"} question</button>
+                ) : list ? "Edit question" : "Create question"} </button>
                 {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
             </form>
         </div>

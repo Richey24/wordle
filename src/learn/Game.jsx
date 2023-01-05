@@ -48,6 +48,7 @@ const Game = () => {
     const navigate = useNavigate()
     const names = state?.names
     const tribe = state?.tribe
+    const [playerNum, setPlayerNum] = useState(0)
 
     const startTimer = () => {
         const theTimer = document.getElementById("quizTimer")
@@ -78,7 +79,24 @@ const Game = () => {
         const selected = []
         let ansArr = []
         let ansSel = []
-        while (arr.length < 5) {
+        let noOfQuest;
+        switch (names.length) {
+            case 1:
+                noOfQuest = 5
+                break;
+            case 2:
+                noOfQuest = 10
+                break;
+            case 3:
+                noOfQuest = 15
+                break;
+            case 4:
+                noOfQuest = 20
+                break;
+            default:
+                break;
+        }
+        while (arr.length < noOfQuest) {
             const num = Math.floor(Math.random() * rep.length)
             if (!selected.includes(num)) {
                 selected.push(num)
@@ -135,6 +153,11 @@ const Game = () => {
             return
         }
         setNum(num + 1)
+        if (playerNum >= names.length - 1) {
+            setPlayerNum(0)
+        } else {
+            setPlayerNum(playerNum + 1)
+        }
         const answers = document.getElementsByClassName("answer")
         Array.from(answers).forEach((ans) => {
             ans.classList.remove("correct", "wrong")
@@ -164,10 +187,10 @@ const Game = () => {
         <div>
             <div className="mainGame">
                 <div>
-                    <span id="quizTimer">60</span>
+                    <p>Timer:  <span id="quizTimer">60</span></p>
                     <h1>Question {num + 1}</h1>
-                    <p>{question[num]?.question}</p>
-                    <img src={images[tribe[0]]} alt="" />
+                    <p>{names[playerNum]} - {question[num]?.question}?</p>
+                    <img src={images[tribe[playerNum]]} alt="" />
                     <div className="theAnswer">
                         {
                             question[num]?.answer?.map((ans, i) => (

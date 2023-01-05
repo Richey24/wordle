@@ -29,13 +29,13 @@
 .innerMain>div {
     width: 22%;
     height: 300px;
-    background-color: white;
+    background-color: black;
     border-radius: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    box-shadow: 2px 2px 4px rgba(242, 239, 239, 0.958);
+    /* box-shadow: 2px 2px 4px rgba(242, 239, 239, 0.958); */
     cursor: pointer;
 }
 
@@ -49,6 +49,7 @@
     font-family: 'Switzer';
     font-style: normal;
     text-transform: capitalize;
+    color: white;
 }
 
 .innerMain>div>img {
