@@ -243,7 +243,7 @@ const Game = () => {
                     <button onClick={() => navigate("/quiz/leader")}>Leaderboard</button>
                 </div>
                 <div>
-                    <p>Subscribe to play multiple times a day and premium access to all other games and features</p>
+                    <p>Subscribe to play multiple times a day and gain premium access to all other games and features</p>
                     <button>Subscribe</button>
                 </div>
             </div>
