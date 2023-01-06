@@ -2,9 +2,9 @@
     width: 100%;
     padding-top: 20px;
     background-color: #3d1152;
-    background-size: contain;
+    background-size: 300px;
     background-repeat: no-repeat;
-    background-position: top;
+    background-position: bottom;
     height: 100vh;
 }
 

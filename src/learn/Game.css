@@ -146,6 +146,55 @@
     margin-top: 20px;
 }
 
+.quizScoreModal {
+    width: 30%;
+    height: 600px;
+    position: fixed;
+    background-color: rgb(225, 221, 221);
+    top: 60px;
+    left: 32.5%;
+    border-radius: 12px;
+    padding: 20px;
+    display: none;
+}
+
+.quizScoreModal>img {
+    margin-left: 96%;
+    width: 20px;
+    cursor: pointer;
+}
+
+.quizScoreModal>div {
+    margin-top: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #3d1152;
+}
+
+.quizScoreModal>div>p {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3d1152;
+    text-transform: capitalize;
+}
+
+.quizScoreModal>div>button {
+    width: 35%;
+    height: 50px;
+    margin-top: 20px;
+    border: 2px solid #3d1152;
+    outline: none;
+    border-radius: 24px;
+    font-size: 18px;
+    color: #3d1152;
+    font-weight: 600;
+}
+
+.quizScoreModal>div>button:hover {
+    background-color: #3d1152;
+    color: white;
+}
+
 .showLearn {
     display: block;
 }

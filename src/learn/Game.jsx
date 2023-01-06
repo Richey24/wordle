@@ -49,6 +49,7 @@ const Game = () => {
     const names = state?.names
     const tribe = state?.tribe
     const [playerNum, setPlayerNum] = useState(0)
+    const [score, setScore] = useState([])
 
     const startTimer = () => {
         const theTimer = document.getElementById("quizTimer")
@@ -125,6 +126,11 @@ const Game = () => {
             navigate("/bible/select")
             return
         }
+        const arr = []
+        for (let i = 0; i < names.length; i++) {
+            arr.push(0)
+        }
+        setScore(arr)
         getQuestions()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -136,6 +142,9 @@ const Game = () => {
         const target = e.target
         if (value) {
             target.classList.toggle("correct")
+            const arr = [...score]
+            arr[playerNum] = arr[playerNum] + 1
+            setScore(arr)
         } else {
             target.classList.toggle("wrong")
         }
@@ -144,12 +153,27 @@ const Game = () => {
         document.getElementById("learnMore").style.visibility = "visible"
     }
 
-    const showModal = () => {
-        document.getElementById("learnModal").classList.toggle("showLearn")
+    const showModal = (id) => {
+        console.log(document.getElementById(id));
+        document.getElementById(id).classList.toggle("showLearn")
     }
 
-    const nextQuest = () => {
+    const nextQuest = async () => {
         if (num >= question.length - 1) {
+            for (let i = 0; i < names.length; i++) {
+                const body = {
+                    playerName: names[i],
+                    tribe: tribe[i],
+                    score: score[i]
+                }
+                await axios.post(`${url}/score/create`, body, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    validateStatus: () => true
+                })
+            }
+            showModal("quizScoreModal")
             return
         }
         setNum(num + 1)
@@ -199,14 +223,29 @@ const Game = () => {
                         }
                     </div>
                     <div className="learnButton">
-                        <button onClick={() => showModal()} id="learnMore" className="learnMore">Learn more</button>
+                        <button onClick={() => showModal("learnModal")} id="learnMore" className="learnMore">Learn more</button>
                         <button onClick={nextQuest} className="nextQuest">Next question</button>
                     </div>
                 </div>
             </div>
             <div id="learnModal" className="learnModal">
-                <img onClick={showModal} src={cancel} alt="" />
+                <img onClick={() => showModal("learnModal")} src={cancel} alt="" />
                 <p>{question[num]?.learnMore}</p>
+            </div>
+            <div className="quizScoreModal" id="quizScoreModal">
+                <img onClick={() => showModal("quizScoreModal")} src={cancel} alt="" />
+                <div>
+                    {
+                        score.map((sc, i) => (
+                            <p key={i}>{names[i]} scored {sc}</p>
+                        ))
+                    }
+                    <button onClick={() => navigate("/quiz/leader")}>Leaderboard</button>
+                </div>
+                <div>
+                    <p>Subscribe to play multiple times a day and premium access to all other games and features</p>
+                    <button>Subscribe</button>
+                </div>
             </div>
         </div>
 
