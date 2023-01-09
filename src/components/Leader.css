@@ -2,10 +2,10 @@
     width: 100%;
     padding-top: 20px;
     background-color: #3d1152;
-    background-size: 300px;
+    background-size: 100px;
     background-repeat: no-repeat;
     background-position: bottom;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .mainTable>div {
@@ -26,6 +26,10 @@
     color: white;
 }
 
+.secondTable img {
+    width: 100px;
+}
+
 .mainTable>h3 {
     color: white;
     text-align: center;
@@ -36,4 +40,12 @@
 .mainTable p {
     text-align: center;
     width: 20%;
+}
+
+.doom {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
 }

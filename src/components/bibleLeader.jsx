@@ -18,6 +18,7 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
+// import test from "../img/test.mp4"
 
 const images = {
     benjamin: benjamin,
@@ -38,7 +39,7 @@ const images = {
 
 const BibleLeader = () => {
     const [users, setUsers] = useState([])
-    const [spin, setSpin] = useState(true)
+    const [spin, setSpin] = useState(false)
     const token = localStorage.getItem("token")
 
     useEffect(() => {
@@ -77,6 +78,9 @@ const BibleLeader = () => {
 
     return (
         <div style={{ backgroundImage: `url(${images[users[0]?.tribe[0]?.toLowerCase()]})` }} className="mainTable">
+            {/* <video className="doom" autoPlay muted loop>
+                <source src={test} type="" />
+            </video> */}
             <h3>Bible Quest Leader Board</h3>
             <div className="firstTable">
                 <p>Username</p>

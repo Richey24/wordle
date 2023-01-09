@@ -73,7 +73,7 @@ const LeaderQuiz = () => {
         )
     }
     return (
-        <div style={{ backgroundImage: `url(${images[users[0]?.tribe?.toLowerCase()]})` }} className="mainTable">
+        <div className="mainTable">
             <h3>Bible Trivial Leader Board</h3>
             <div className="firstTable">
                 <p>Username</p>
@@ -84,7 +84,7 @@ const LeaderQuiz = () => {
                 users.map((user, i) => (
                     <div key={i} className="secondTable">
                         <p>{user?.playerName}</p>
-                        <p>{user?.tribe}</p>
+                        <img src={images[user?.tribe?.toLowerCase()]} alt="" />
                         <p>{user?.score}</p>
                     </div>
                 ))

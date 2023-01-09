@@ -41,6 +41,7 @@ const Wordle = () => {
     const [hint, setHint] = useState("")
     const [count, setCount] = useState(0)
     const [word, setWord] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [cor, setCor] = useState([])
     const [theWord, setTheWord] = useState("")
     const [user, setUser] = useState({})
@@ -456,6 +457,7 @@ const Wordle = () => {
 
 
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [num, spin])
 
     const showHint = () => {
