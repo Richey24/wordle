@@ -17,6 +17,8 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
+import { useNavigate } from "react-router-dom"
+import test from "../img/test.mp4"
 
 const images = {
     benjamin: benjamin,
@@ -39,17 +41,21 @@ const Leader = () => {
     const [users, setUsers] = useState([])
     const [spin, setSpin] = useState(true)
     const token = localStorage.getItem("token")
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
             const res = await axios.get(`${url}/user/find/all`, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
-            }, { validateStatus: () => true })
+                },
+                validateStatus: () => true
+            })
             const rep = await res.data
+            console.log(rep);
             if (res.status !== 200) {
                 setSpin(false)
+                navigate("/")
                 return
             }
             const arr = rep.sort((a, b) => b.wordQuestScore - a.wordQuestScore)
@@ -73,22 +79,28 @@ const Leader = () => {
         )
     }
     return (
-        <div style={{ backgroundImage: `url(${images[users[0]?.tribe[0]?.toLowerCase()]})` }} className="mainTable">
-            <h3>Word Quest Leader Board</h3>
-            <div className="firstTable">
-                <p>Username</p>
-                <p>Tribe</p>
-                <p>Score</p>
+        <div className="mainTable">
+            <video className="doom" autoPlay muted loop>
+                <source src={test} type="" />
+            </video>
+            <div>
+                <p onClick={() => navigate("/")}>Home</p>
+                <h3>Word Quest Leader Board</h3>
+                <div className="firstTable">
+                    <p>Username</p>
+                    <p>Tribe</p>
+                    <p>Score</p>
+                </div>
+                {
+                    users.map((user, i) => (
+                        <div key={i} className="secondTable">
+                            <p>{user?.username}</p>
+                            <img src={images[user?.tribe[0]?.toLowerCase()]} alt="" />
+                            <p>{user?.wordQuestScore}</p>
+                        </div>
+                    ))
+                }
             </div>
-            {
-                users.map((user, i) => (
-                    <div key={i} className="secondTable">
-                        <p>{user?.username}</p>
-                        <p>{user?.tribe[0]}</p>
-                        <p>{user?.wordQuestScore}</p>
-                    </div>
-                ))
-            }
         </div>
     )
 }

@@ -49,8 +49,9 @@ function Hangman() {
                     const res = await axios.get(`${url}/user/get/${id}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
-                        }
-                    }, { validateStatus: () => true })
+                        },
+                        validateStatus: () => true
+                    })
                     const rep = await res.data
                     if (res.status !== 200) {
                         setSpin(false)

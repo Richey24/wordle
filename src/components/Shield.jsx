@@ -26,10 +26,11 @@ const Shield = () => {
             const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
-            }, { validateStatus: () => true })
+                },
+                validateStatus: () => true
+            })
             if (res.status !== 200) {
-
+                navigate("/")
             }
             const rep = await res.data
             setStudies(rep)

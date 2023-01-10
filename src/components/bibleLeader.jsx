@@ -18,7 +18,8 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
-// import test from "../img/test.mp4"
+import { useNavigate } from "react-router-dom"
+import test from "../img/test.mp4"
 
 const images = {
     benjamin: benjamin,
@@ -41,17 +42,22 @@ const BibleLeader = () => {
     const [users, setUsers] = useState([])
     const [spin, setSpin] = useState(false)
     const token = localStorage.getItem("token")
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
+            console.log('sad');
             const res = await axios.get(`${url}/user/find/all`, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
-            }, { validateStatus: () => true })
+                },
+                validateStatus: () => true
+            })
             const rep = await res.data
+            console.log(res.status);
             if (res.status !== 200) {
                 setSpin(false)
+                navigate("/")
                 return
             }
             console.log(rep);
@@ -77,25 +83,28 @@ const BibleLeader = () => {
     }
 
     return (
-        <div style={{ backgroundImage: `url(${images[users[0]?.tribe[0]?.toLowerCase()]})` }} className="mainTable">
-            {/* <video className="doom" autoPlay muted loop>
+        <div className="mainTable">
+            <video className="doom" autoPlay muted loop>
                 <source src={test} type="" />
-            </video> */}
-            <h3>Bible Quest Leader Board</h3>
-            <div className="firstTable">
-                <p>Username</p>
-                <p>Tribe</p>
-                <p>Score</p>
+            </video>
+            <div>
+                <p onClick={() => navigate("/")}>Home</p>
+                <h3>Bible Quest Leader Board</h3>
+                <div className="firstTable">
+                    <p>Username</p>
+                    <p>Tribe</p>
+                    <p>Score</p>
+                </div>
+                {
+                    users.map((user, i) => (
+                        <div key={i} className="secondTable">
+                            <p>{user?.username}</p>
+                            <img src={images[user?.tribe[0]?.toLowerCase()]} alt="" />
+                            <p>{user?.bibleQuestScore}</p>
+                        </div>
+                    ))
+                }
             </div>
-            {
-                users.map((user, i) => (
-                    <div key={i} className="secondTable">
-                        <p>{user?.username}</p>
-                        <p>{user?.tribe[0]}</p>
-                        <p>{user?.bibleQuestScore}</p>
-                    </div>
-                ))
-            }
         </div>
     )
 }

@@ -19,6 +19,9 @@ const Admin = () => {
                 Authorization: `Bearer ${token}`
             }
         }, { validateStatus: () => true })
+        if (res.status !== 200) {
+            navigate("/admin/login")
+        }
         const rep = await res.data
         setUsers(rep)
         setFil(rep)

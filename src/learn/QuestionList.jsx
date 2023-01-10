@@ -24,8 +24,9 @@ const QuestionList = () => {
         const res = await axios.get(`${url}/quiz/get/all`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         const rep = await res.data
         const newArr = rep.filter((re) => re.toBeDeleted !== true)
         setFit(newArr)
@@ -37,8 +38,9 @@ const QuestionList = () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         const rep = await res.data
         setUser(rep)
     }

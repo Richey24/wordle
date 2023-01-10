@@ -21,8 +21,12 @@ const AddShield = () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
+        if (res.status !== 200) {
+            navigate("/shield")
+        }
         const rep = await res.data
         setUser(rep)
         if (!rep.admin) {

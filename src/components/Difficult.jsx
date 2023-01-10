@@ -21,8 +21,9 @@ const Difficult = () => {
                     const res = await axios.get(`${url}/user/get/${id}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
-                        }
-                    }, { validateStatus: () => true })
+                        },
+                        validateStatus: () => true
+                    })
                     const rep = await res.data
                     if (res.status !== 200) {
                         setSpin(false)
@@ -73,7 +74,7 @@ const Difficult = () => {
                     )
                 }
             </div>
-            <div style={{ columnGap: "200px" }} className="innerMain">
+            <div style={{ columnGap: "300px" }} className="innerMain">
                 <button className="normal" onClick={() => navigate("/word", { state: { numb: 5 } })}>
                     Easy
                 </button>

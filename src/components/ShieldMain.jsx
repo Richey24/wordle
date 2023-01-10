@@ -23,8 +23,9 @@ const ShieldMain = () => {
             const res = await axios.get(`${url}/sword/get/one/${idd}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
-                }
-            }, { validateStatus: () => true })
+                },
+                validateStatus: () => true
+            })
             if (res.status !== 200) {
                 navigate("/shield")
             }

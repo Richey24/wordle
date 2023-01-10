@@ -73,7 +73,7 @@ const Game = () => {
         })
         const rep = await res.data
         if (res.status !== 200) {
-            navigate("/bible/select")
+            navigate("/login")
             return
         }
         const arr = []
@@ -143,7 +143,7 @@ const Game = () => {
         if (value) {
             target.classList.toggle("correct")
             const arr = [...score]
-            arr[playerNum] = arr[playerNum] + 1
+            arr[playerNum] = arr[playerNum] + Number(document.getElementById("quizTimer").innerHTML)
             setScore(arr)
         } else {
             target.classList.toggle("wrong")

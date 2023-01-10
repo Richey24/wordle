@@ -24,6 +24,9 @@ const ToBeDel = () => {
                 Authorization: `Bearer ${token}`
             }
         }, { validateStatus: () => true })
+        if (res.status !== 200 || res1.status !== 200) {
+            navigate("/admin/login")
+        }
         const rep1 = await res1.data
         const newArr = rep1.filter((re) => re.toBeDeleted === true)
         setItems(rep)
