@@ -46,6 +46,22 @@ const Difficult = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
+    const showModal = (id) => {
+        document.getElementById(id).classList.toggle("show")
+    }
+
+    const navi = (num) => {
+        if (num !== 5 && !id) {
+            navigate("/login")
+            return
+        }
+        if (num !== 5 && !user.paid) {
+            showModal("swordSub")
+            return
+        }
+        navigate("/word", { state: { numb: num } })
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -75,21 +91,26 @@ const Difficult = () => {
                 }
             </div>
             <div style={{ columnGap: "300px" }} className="innerMain">
-                <button className="normal" onClick={() => navigate("/word", { state: { numb: 5 } })}>
+                <button className="normal" onClick={() => navi(5)}>
                     Easy
                 </button>
 
-                <button className="hard" onClick={() => navigate("/word", { state: { numb: 8 } })}>
+                <button className="hard" onClick={() => navi(8)}>
                     Normal
                 </button>
 
-                <button className="veryHard" onClick={() => navigate("/word", { state: { numb: 11 } })}>
+                <button className="veryHard" onClick={() => navi(11)}>
                     Hard
                 </button>
 
-                <button className="impossible" onClick={() => navigate("/word", { state: { numb: 14 } })}>
+                <button className="impossible" onClick={() => navi(14)}>
                     Very Hard
                 </button>
+            </div>
+            <div id="swordSub" className="swordSub">
+                <p>You have to subscribe to gain premium access to all difficulty level in the game</p>
+                <button>Subscribe</button>
+                <button onClick={() => showModal("swordSub")}>Cancel</button>
             </div>
         </div>
     )

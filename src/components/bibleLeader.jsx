@@ -61,7 +61,7 @@ const BibleLeader = () => {
                 return
             }
             console.log(rep);
-            const arr = rep.sort((a, b) => b.bibleQuestScore - a.bibleQuestScore)
+            const arr = rep.sort((a, b) => b.dailyBQS - a.dailyBQS)
             setUsers(arr)
             setSpin(false)
         })()

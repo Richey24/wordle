@@ -58,7 +58,7 @@ const Leader = () => {
                 navigate("/")
                 return
             }
-            const arr = rep.sort((a, b) => b.wordQuestScore - a.wordQuestScore)
+            const arr = rep.sort((a, b) => b.dailyWQS - a.dailyWQS)
             setUsers(arr)
             setSpin(false)
         })()

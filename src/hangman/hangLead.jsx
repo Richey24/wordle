@@ -52,7 +52,7 @@ const HangLeader = () => {
                 setSpin(false)
                 return
             }
-            const arr = rep.sort((a, b) => b.hangmanScore - a.hangmanScore)
+            const arr = rep.sort((a, b) => b.dailyHS - a.dailyHS)
             setUsers(arr)
             setSpin(false)
         })()

@@ -173,6 +173,7 @@ const Game = () => {
                     validateStatus: () => true
                 })
             }
+            await axios.put(`${url}/user/update/${id}`, { playedTrivial: true })
             showModal("quizScoreModal")
             return
         }
