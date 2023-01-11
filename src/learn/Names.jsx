@@ -59,6 +59,7 @@ const Names = () => {
 
     return (
         <div className="mainNames">
+            <p className="homeBtnNames" onClick={() => navigate("/")}>Home</p>
             <form onSubmit={submitForm}>
                 <h4>Enter player(s) name</h4>
                 {

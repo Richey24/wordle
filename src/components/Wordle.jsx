@@ -504,6 +504,7 @@ const Wordle = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="wordleMain">
+            <p className="homeButton" onClick={() => navigate("/")}>Home</p>
             {!hide && <p onClick={showHint} className="hint">Hint</p>}
             <div className="myTimer">
                 <p id="sec">0</p>

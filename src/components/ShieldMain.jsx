@@ -98,6 +98,7 @@ const ShieldMain = () => {
     return (
         <div className="theMain">
             <div className="mainFirst">
+                <p onClick={() => navigate("/shield")}>{"<<"}</p>
                 <h4>Topic: {study?.topic}</h4>
                 {user?.admin && <div>
                     <p onClick={() => navigate("/shield/create", { state: { study: study } })} className="mainEdit">Edit</p>

@@ -91,6 +91,7 @@ const Sword = () => {
 
     return (
         <div className="swordDiv">
+            <p className="homeBtnSword" onClick={() => navigate("/")}>Home</p>
             <h1>My sword and shield</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />

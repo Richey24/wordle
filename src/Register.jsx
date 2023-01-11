@@ -111,6 +111,7 @@ const Register = () => {
 
     return (
         <div className="loginMainDiv">
+            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
             <div className="loginDiv">
                 <h1>Register your account</h1>
                 {showErr && <Alert variant="danger">{err}</Alert>}

@@ -77,6 +77,7 @@ const SwordMain = () => {
     return (
         <div className="theMain">
             <div className="mainFirst">
+                <p onClick={() => navigate("/watchman")}>{"<<"}</p>
                 <h4>Topic: {study?.topic}</h4>
                 <div>
                     <p onClick={() => navigate("/watchman/create", { state: { study: study } })} className="mainEdit">Edit</p>

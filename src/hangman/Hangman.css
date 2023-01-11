@@ -32,3 +32,12 @@
     background-color: purple;
     color: white;
 }
+
+.homeBtn {
+    font-size: 20px;
+    padding: 20px;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    z-index: 2;
+}

@@ -12,8 +12,8 @@
 }
 
 .btnActive {
-    background-color: hsl(200, 100%, 50%);
     color: white;
+    background-color: hsl(200, 100%, 75%);
 }
 
 .btnInactive {
@@ -22,10 +22,11 @@
 
 .btn:hover:not(:disabled),
 .btn:focus:not(:disabled) {
-    background-color: hsl(200, 100%, 75%);
+    background-color: red;
     color: white;
 }
 
 .btn:disabled {
     color: white;
+    background-color: red;
 }

@@ -70,7 +70,6 @@
 }
 
 .createStudy {
-    margin-top: 20px;
     width: 164px;
     height: 46px;
     background: green;
@@ -80,9 +79,32 @@
     color: white;
 }
 
+.cancelBtn {
+    width: 164px;
+    height: 46px;
+    background: tomato;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.theCancelDiv {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 @media screen and (max-width: 800px) {
     .addForm {
         padding: 30px 20px;
+    }
+
+    .createStudy,
+    .cancelBtn {
+        width: 100%;
     }
 
 }

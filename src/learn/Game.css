@@ -221,6 +221,17 @@
     font-weight: 400;
 }
 
+.homeBtnGame {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3d1152;
+    cursor: pointer;
+    position: absolute;
+    right: 80px;
+    top: 50px;
+    z-index: 2;
+}
+
 @media screen and (max-width: 800px) {
 
     .learnMore,

@@ -148,6 +148,7 @@ function Hangman() {
         <div style={{
             backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
         }}>
+            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
             <div
                 style={{
                     maxWidth: "800px",

@@ -75,6 +75,15 @@
     margin-bottom: 5px;
 }
 
+.homeBtnNames {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    z-index: 2;
+    left: 30px;
+}
+
 @media screen and (max-width: 800px) {
     .mainNames>form {
         width: 100%;
