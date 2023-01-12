@@ -154,7 +154,6 @@ const Game = () => {
     }
 
     const showModal = (id) => {
-        console.log(document.getElementById(id));
         document.getElementById(id).classList.toggle("showLearn")
     }
 
@@ -173,7 +172,12 @@ const Game = () => {
                     validateStatus: () => true
                 })
             }
-            await axios.put(`${url}/user/update/${id}`, { playedTrivial: true })
+            await axios.put(`${url}/user/update/${id}`, { playedTrivial: true }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                validateStatus: () => true
+            })
             showModal("quizScoreModal")
             return
         }

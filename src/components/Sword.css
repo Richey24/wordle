@@ -277,6 +277,12 @@
 }
 
 @media screen and (max-width: 800px) {
+    .swordSub {
+        width: 90%;
+        left: 5%;
+        height: 260px;
+    }
+
     .swordDiv>h1 {
         font-size: 22px;
     }

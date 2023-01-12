@@ -22,21 +22,22 @@
     font-style: italic;
 }
 
-.next {
+.nextX {
     width: 35%;
     height: 50px;
     margin-top: 20px;
     border: 2px solid #3d1152;
     outline: none;
     border-radius: 24px;
+    font-size: 14px;
 }
 
-.next:hover {
+.nextX:hover {
     background-color: #3d1152;
     color: white;
 }
 
-.next:hover .arrow {
+.nextX:hover .arrow {
     filter: invert(100%);
 }
 
@@ -63,4 +64,19 @@
 .authDiv button:hover {
     background-color: #3d1152;
     color: white;
+}
+
+@media (max-width: 700px) {
+    .resultDiv {
+        width: 90%;
+        left: 5%;
+    }
+
+    .resultDiv>p {
+        font-size: 14px;
+    }
+
+    .authDiv p {
+        font-size: 14px
+    }
 }
