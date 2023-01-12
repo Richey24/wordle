@@ -17,6 +17,7 @@ import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
 import test from "../img/test.mp4"
+import { useNavigate } from "react-router-dom"
 
 const images = {
     benjamin: benjamin,
@@ -39,6 +40,7 @@ const HangLeader = () => {
     const [users, setUsers] = useState([])
     const [spin, setSpin] = useState(true)
     const token = localStorage.getItem("token")
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
@@ -50,6 +52,7 @@ const HangLeader = () => {
             const rep = await res.data
             if (res.status !== 200) {
                 setSpin(false)
+                navigate("/login")
                 return
             }
             const arr = rep.sort((a, b) => b.dailyHS - a.dailyHS)

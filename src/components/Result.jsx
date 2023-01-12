@@ -83,7 +83,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
                 <h2>You Win</h2>
                 <p>You completed {num !== 1 ? `stage ${noOfTry[1]}` : "it"} using {(noOfTry[1] + 1) - (noOfTry[0] / noOfTry[1])} trials in {time} seconds</p>
                 <p className="score">and your total score is {((noOfTry[0] / noOfTry[1]) / time).toFixed(2)}</p>
-                <button onClick={nextRound} className="next">{num === 1 ? "Play again " : "Next stage "}<img className="arrow" src={arrow} alt="" /></button>
+                <button onClick={nextRound} className="nextX">{num === 1 ? "Play again " : "Next stage "}<img className="arrow" src={arrow} alt="" /></button>
                 <div className="authDiv">
                     <p>Link your stats to all your devices and compete with others on the leaderboard</p>
                     <button onClick={() => navigate("/login")}>Log in or create a free account</button>

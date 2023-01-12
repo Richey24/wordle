@@ -41,10 +41,14 @@ const Register = () => {
             admin: false,
             password: e.target.password?.value,
             confirmPass: e.target.confirmPassword?.value || "",
-            bibleQuestScore: 0,
-            wordQuestScore: 0,
-            bibleGameScore: 0,
-            hangmanScore: 0
+            dailyWQS: 0,
+            dailyBQS: 0,
+            dailyHS: 0,
+            paid: false,
+            playedTrivial: false,
+            playedBible: false,
+            playedHang: false,
+            superAdmin: false
         }
         if (user.password.length < 8) {
             setErr('Password must be at least 8 characters')

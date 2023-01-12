@@ -140,7 +140,6 @@ const Login = () => {
 
     return (
         <div className="loginMainDiv">
-            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
             <div className="loginDiv">
                 <h1>Login your account</h1>
                 {showErr && <Alert variant="danger">{err}</Alert>}
@@ -166,6 +165,7 @@ const Login = () => {
                 </form>
                 <p>Don't have an account? <span onClick={() => { setShowErr(false); navigate("/register") }}>Register</span></p>
                 <p onClick={() => { setShowErr(false); setReg("forgot") }} className="forgotPass"><span>Forgot password</span></p>
+                <p onClick={() => navigate("/")} className="forgotPass"><span>Home</span></p>
             </div>
         </div>
     )

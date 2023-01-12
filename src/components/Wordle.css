@@ -258,7 +258,7 @@
 
 .myTimer p {
     color: white;
-    font-size: 2vw;
+    font-size: 30px;
 }
 
 .theHint {
@@ -300,6 +300,8 @@
     top: 50%;
     left: 42.5%;
     cursor: pointer;
+    border-radius: 12px;
+    border: #3d1152 1px solid;
 }
 
 .bigDiv {
@@ -320,4 +322,53 @@
     cursor: pointer;
     position: fixed;
     z-index: 2;
+}
+
+@media (max-width: 700px) {
+    .theHint {
+        top: 110px;
+        left: 20%;
+        font-size: 14px;
+        width: 80%;
+    }
+
+    .homeButton {
+        left: 20px;
+        font-size: 16px;
+    }
+
+    .startBtn {
+        width: 30%;
+        left: 35%;
+        height: 35px;
+    }
+
+    .myTimer {
+        left: 20px;
+        top: 70px;
+    }
+
+    .myTimer p {
+        font-size: 18px;
+    }
+
+    .hint {
+        right: 42.5%;
+        width: 60px;
+        height: 20px;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .leader {
+        width: 35px;
+        height: 35px;
+    }
+
+    .guess-grid {
+        grid-template-columns: repeat(5, 0.7em);
+        grid-template-rows: repeat(6, 0.7em);
+        gap: .25em;
+        margin-left: 100px;
+    }
 }

@@ -36,7 +36,7 @@ const AddShield = () => {
 
     useEffect(() => {
         if (!id) {
-            navigate("/")
+            navigate("/login")
         }
         if (study) {
             setArr(study.scripture)

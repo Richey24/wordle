@@ -57,7 +57,7 @@ const BibleLeader = () => {
             console.log(res.status);
             if (res.status !== 200) {
                 setSpin(false)
-                navigate("/")
+                navigate("/login")
                 return
             }
             console.log(rep);

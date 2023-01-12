@@ -59,7 +59,6 @@ const Names = () => {
 
     return (
         <div className="mainNames">
-            <p className="homeBtnNames" onClick={() => navigate("/")}>Home</p>
             <form onSubmit={submitForm}>
                 <h4>Enter player(s) name</h4>
                 {
@@ -90,6 +89,7 @@ const Names = () => {
                     ))
                 }
                 <button type="submit">Submit</button>
+                <button style={{ backgroundColor: "tomato" }} onClick={() => navigate("/bible/select")} type="submit">Cancel</button>
             </form>
         </div>
     )

@@ -38,7 +38,6 @@ const Select = () => {
                         setSpin(false)
                         return
                     }
-                    console.log(rep);
                     setUser(rep)
                     setSpin(false)
                 } catch (error) {

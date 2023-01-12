@@ -30,7 +30,7 @@ const Shield = () => {
                 validateStatus: () => true
             })
             if (res.status !== 200) {
-                navigate("/")
+                navigate("/login")
             }
             const rep = await res.data
             setStudies(rep)
@@ -38,7 +38,7 @@ const Shield = () => {
             setSpin(false)
         } catch (error) {
             setSpin(false)
-            // navigate("/")
+            navigate("/login")
         }
 
     }
@@ -47,16 +47,17 @@ const Shield = () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         const rep = await res.data
         setUser(rep)
     }
 
     useEffect(() => {
-        // if (!id) {
-        //     navigate("/login")
-        // }
+        if (!id) {
+            navigate("/login")
+        }
         window.scrollTo(0, 0)
         getUser()
         getItems()
