@@ -48,8 +48,6 @@ import vid6 from '../../videos/vid-6.mp4';
 import vid7 from '../../videos/vid-7.mp4';
 import vid8 from '../../videos/vid-8.mp4';
 
-
-
 const images = {
     benjamin: benjamin,
     dan: dan,
