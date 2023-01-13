@@ -11,7 +11,8 @@ import Reset from './components/Reset';
 import Difficult from './components/Difficult';
 import Hangman from './hangman/Hangman';
 import Register from './Register';
-import Leader from './components/Leader';
+// import Leader from './components/Leader';
+import Leader from './views/Leader';
 import BibleLeader from './components/bibleLeader';
 import HangLeader from './hangman/hangLead';
 import Sword from './components/Sword';
@@ -31,38 +32,39 @@ import QuestionList from './learn/QuestionList';
 import AddQuest from './learn/AddQuest';
 import LeaderQuiz from './learn/LeaderQuiz';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Select />} />
-      <Route path='/word' element={<App />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/select' element={<Difficult />} />
-      <Route path='/hangman' element={<Hangman />} />
-      <Route path='/reset/:id' element={<Reset />} />
-      <Route path='/word/leader' element={<Leader />} />
-      <Route path='/bible/leader' element={<BibleLeader />} />
-      <Route path='/hangman/leader' element={<HangLeader />} />
-      <Route path='/watchman' element={<Sword />} />
-      <Route path='/watchman/:idd' element={<SwordMain />} />
-      <Route path='/watchman/create' element={<AddSword />} />
-      <Route path='/shield' element={<Shield />} />
-      <Route path='/shield/:idd' element={<ShieldMain />} />
-      <Route path='/shield/create' element={<AddShield />} />
-      <Route path='/admin/login' element={<AdminLogin />} />
-      <Route path='/admin' element={<Admin />} />
-      <Route path='/audit' element={<Audit />} />
-      <Route path='/delete' element={<ToBeDel />} />
-      <Route path='/bible/select' element={<SelectNum />} />
-      <Route path='/bible/names' element={<Names />} />
-      <Route path='/bible/game' element={<Game />} />
-      <Route path='/quiz/leader' element={<LeaderQuiz />} />
-      <Route path='/question/list' element={<QuestionList />} />
-      <Route path='/question/add' element={<AddQuest />} />
-    </Routes>
-  </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Select />} />
+        <Route path='/word' element={<App />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/select' element={<Difficult />} />
+        <Route path='/hangman' element={<Hangman />} />
+        <Route path='/reset/:id' element={<Reset />} />
+        <Route path='/word/leader' element={<Leader />} />
+        <Route path='/bible/leader' element={<BibleLeader />} />
+        <Route path='/hangman/leader' element={<HangLeader />} />
+        <Route path='/watchman' element={<Sword />} />
+        <Route path='/watchman/:idd' element={<SwordMain />} />
+        <Route path='/watchman/create' element={<AddSword />} />
+        <Route path='/shield' element={<Shield />} />
+        <Route path='/shield/:idd' element={<ShieldMain />} />
+        <Route path='/shield/create' element={<AddShield />} />
+        <Route path='/admin/login' element={<AdminLogin />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/audit' element={<Audit />} />
+        <Route path='/delete' element={<ToBeDel />} />
+        <Route path='/bible/select' element={<SelectNum />} />
+        <Route path='/bible/names' element={<Names />} />
+        <Route path='/bible/game' element={<Game />} />
+        <Route path='/quiz/leader' element={<LeaderQuiz />} />
+        <Route path='/question/list' element={<QuestionList />} />
+        <Route path='/question/add' element={<AddQuest />} />
+      </Routes>
+    </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
