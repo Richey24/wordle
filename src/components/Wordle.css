@@ -116,7 +116,7 @@
 
 .tile[data-state="wrong"] {
     border: none;
-    background-color: hsl(240, 2%, 23%);
+    background-color: black;
 }
 
 .tile[data-state="wrong-location"] {

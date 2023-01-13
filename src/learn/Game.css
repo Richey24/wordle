@@ -146,6 +146,7 @@
 
 .learnModal>p {
     margin-top: 20px;
+    line-height: 45px;
 }
 
 .quizScoreModal {
