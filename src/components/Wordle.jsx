@@ -34,6 +34,7 @@ import leader from "../img/leader.webp"
 let timer = null
 
 const Wordle = () => {
+  
     const [cookie] = useCookies(["playedBible", "playedWord"])
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)

@@ -16,6 +16,7 @@ const Result = ({ noOfTry, time, num, setNum }) => {
         document.getElementById("resultDiv").style.display = "none"
     }
     const nextRound = async () => {
+       
         if (num === 1) {
             document.getElementById("hint").style.display = "none"
             hideModal()
@@ -71,6 +72,7 @@ const Result = ({ noOfTry, time, num, setNum }) => {
         document.getElementById("startGame").style.display = "block"
         document.getElementById("bigDiv").style.display = "block"
     }
+
     return (
         <div id="resultDiv" className="resultDiv">
             <img onClick={hideModal} src={cancel} alt="cancel" className="cancel" />
