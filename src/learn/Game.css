@@ -61,9 +61,11 @@
     max-width: auto;
     height: 50px;
     background-color: #3d1152;
+    display: flex;
+    align-items: center;
     color: white;
     font-weight: 200;
-    padding: 5px 30px;
+    padding: 5px 15px;
     border-radius: 6px;
     cursor: pointer;
     text-transform: capitalize;
@@ -221,10 +223,61 @@
     font-weight: 400;
 }
 
+.homeBtnGame {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3d1152;
+    cursor: pointer;
+    position: absolute;
+    right: 80px;
+    top: 50px;
+    z-index: 2;
+}
+
 @media screen and (max-width: 800px) {
+    .mainGame {
+        padding: 10px;
+    }
 
     .learnMore,
     .nextQuest {
         width: 100%;
+    }
+
+    .mainGame>div>img {
+        display: none;
+    }
+
+    .homeBtnGame {
+        right: 25px;
+        top: 25px;
+    }
+
+    .mainGame>div>h1,
+    .mainGame>div>p,
+    .theAnswer {
+        margin-left: 0px;
+    }
+
+    .mainGame>div>p {
+        font-size: 16px;
+    }
+
+    .answer {
+        font-size: 14px;
+    }
+
+    .learnModal {
+        width: 90%;
+        left: 5%;
+    }
+
+    .quizScoreModal {
+        width: 90%;
+        left: 5%;
+    }
+
+    .quizScoreModal>div>button {
+        width: 50%;
     }
 }

@@ -18,6 +18,7 @@ const Sword = () => {
     const [spin, setSpin] = useState(true)
     const [content, setContent] = useState({})
     const [delId, setDelId] = useState("")
+    const [user, setUser] = useState({})
     const navigate = useNavigate()
 
     const getItems = async () => {
@@ -29,7 +30,7 @@ const Sword = () => {
                 validateStatus: () => true
             })
             if (res.status !== 200) {
-                navigate("/")
+                navigate("/login")
             }
             const rep = await res.data
             setStudies(rep)
@@ -41,11 +42,26 @@ const Sword = () => {
 
     }
 
+    const getUser = async () => {
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        if (res.status !== 200) {
+            navigate("/login")
+        }
+        const rep = await res.data
+        setUser(rep)
+    }
+
     useEffect(() => {
         if (!id) {
             navigate("/login")
         }
         window.scrollTo(0, 0)
+        getUser()
         getItems()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -74,6 +90,14 @@ const Sword = () => {
         }
     }
 
+    const createStudy = () => {
+        if (studies.length >= 5 && !user.paid) {
+            showModal("swordSub")
+            return
+        }
+        navigate("/watchman/create")
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -91,10 +115,11 @@ const Sword = () => {
 
     return (
         <div className="swordDiv">
+            <p className="homeBtnSword" onClick={() => navigate("/")}>Home</p>
             <h1>My sword and shield</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
-                <p onClick={() => navigate("/watchman/create")}>Add new</p>
+                <p onClick={createStudy}>Add new</p>
             </div>
             {
                 studies.length < 1 ? (
@@ -149,6 +174,11 @@ const Sword = () => {
                     <p onClick={() => showModal("delDiv")} className="delCan">Cancel</p>
                     <p onClick={deleteStudy} className="delDel">Delete</p>
                 </div>
+            </div>
+            <div id="swordSub" className="swordSub">
+                <p>You have reach the maximum amount of study for the free plan, kindly subscribe to create more study</p>
+                <button>Subscribe</button>
+                <button onClick={() => showModal("swordSub")}>Cancel</button>
             </div>
         </div>
     )

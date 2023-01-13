@@ -89,6 +89,7 @@ const Names = () => {
                     ))
                 }
                 <button type="submit">Submit</button>
+                <button style={{ backgroundColor: "tomato" }} onClick={() => navigate("/bible/select")} type="submit">Cancel</button>
             </form>
         </div>
     )

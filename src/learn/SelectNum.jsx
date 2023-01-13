@@ -5,7 +5,8 @@ const SelectNum = () => {
     const navigate = useNavigate()
     return (
         <div className="mainNum">
-            <p>Choose the number of players</p>
+            <p className="homeBtnNum" onClick={() => navigate("/")}>Home</p>
+            <p className="chooseNum">Choose the number of players</p>
             <div>
                 <div onClick={() => navigate("/bible/names", { state: { count: [1] } })}>
                     <h2>1</h2>

@@ -4,11 +4,12 @@
     min-height: 100vh;
 }
 
-.mainNum>p {
+.chooseNum {
     text-align: center;
     font-size: 24px;
     font-weight: 600;
     color: #FFFFFF;
+    padding: 0px;
 }
 
 .mainNum>div {
@@ -46,8 +47,24 @@
     color: white;
 }
 
+.homeBtnNum {
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+}
+
 @media screen and (max-width: 800px) {
     .mainNum>div>div {
         width: 100%;
+    }
+
+    .chooseNum {
+        font-size: 14px;
+    }
+
+    .homeBtnNum {
+        font-size: 14px;
     }
 }
