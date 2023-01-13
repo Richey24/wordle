@@ -28,14 +28,11 @@ import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
-import { useCookies } from "react-cookie"
 import leader from "../img/leader.webp"
 
 let timer = null
 
 const Wordle = () => {
-  
-    const [cookie] = useCookies(["playedBible", "playedWord"])
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)
     const [firstLet, setFirstLet] = useState("")
@@ -142,10 +139,6 @@ const Wordle = () => {
         let targetWord = fiveLetters[Math.floor(Math.random() * fiveLetters.length)];
         let WORD_LENGTH = Number(num)
         if (num !== 1) {
-            if (cookie.playedWord) {
-                navigate("/")
-                return
-            }
             const myGuessGrid = document.getElementById("guessGrid")
             const value = num
             myGuessGrid.style.gridTemplateColumns = `repeat(${value}, 2.7em)`
@@ -155,10 +148,6 @@ const Wordle = () => {
                 myGuessGrid.innerHTML += `<div class="tile"></div>`
             }
         } else {
-            if (cookie.playedBible) {
-                navigate("/")
-                return
-            }
             const myGuessGrid = document.getElementById("guessGrid")
             targetWord = bible[Math.floor(Math.random() * bible.length)].toLowerCase().trim()
             const value = targetWord.length
@@ -505,6 +494,7 @@ const Wordle = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="wordleMain">
+            <p className="homeButton" onClick={() => navigate("/")}>Home</p>
             {!hide && <p onClick={showHint} className="hint">Hint</p>}
             <div className="myTimer">
                 <p id="sec">0</p>
@@ -603,7 +593,7 @@ const Wordle = () => {
             <div id="bigDiv" className="bigDiv">
             </div>
             <button onClick={startGame} id="startGame" className="startBtn">Press to start</button>
-            <Result num={num} setNum={setNum} time={time} noOfTry={trials} />
+            <Result num={num} setNum={setNum} time={time} noOfTry={trials} user={user} />
         </div>
     )
 }

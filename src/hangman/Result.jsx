@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import url from '../url'
 
-const Result = ({ time, trial }) => {
+const Result = ({ time, trial, user }) => {
     const navigate = useNavigate()
     const id = localStorage.getItem("id")
     const token = localStorage.getItem("token")
@@ -20,7 +20,8 @@ const Result = ({ time, trial }) => {
             })
             const rep = await res.data
             const body = {
-                hangmanScore: Number(rep.hangmanScore) + Number(((6 - trial.length) / time).toFixed(2))
+                hangmanScore: Number(rep.hangmanScore) + Number(((6 - trial.length) / time).toFixed(2)),
+                playedHang: true
             }
             await axios.put(`${url}/user/update/${id}`, body, {
                 headers: {
@@ -28,7 +29,11 @@ const Result = ({ time, trial }) => {
                 }
             })
         }
-        navigate(0)
+        if (user.paid) {
+            navigate(0)
+        } else {
+            navigate("/")
+        }
     }
 
     const nextRound = async () => {
@@ -40,7 +45,8 @@ const Result = ({ time, trial }) => {
             })
             const rep = await res.data
             const body = {
-                hangmanScore: Number(rep.hangmanScore) + Number(((6 - trial.length) / time).toFixed(2))
+                dailyHS: Number(rep.dailyHS) + Number(((6 - trial.length) / time).toFixed(2)),
+                playedHang: true
             }
             await axios.put(`${url}/user/update/${id}`, body, {
                 headers: {

@@ -123,7 +123,7 @@ const Game = () => {
 
     useEffect(() => {
         if (!names || !id) {
-            navigate("/bible/select")
+            navigate("/login")
             return
         }
         const arr = []
@@ -154,7 +154,6 @@ const Game = () => {
     }
 
     const showModal = (id) => {
-        console.log(document.getElementById(id));
         document.getElementById(id).classList.toggle("showLearn")
     }
 
@@ -173,6 +172,12 @@ const Game = () => {
                     validateStatus: () => true
                 })
             }
+            await axios.put(`${url}/user/update/${id}`, { playedTrivial: true }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                validateStatus: () => true
+            })
             showModal("quizScoreModal")
             return
         }
@@ -209,6 +214,7 @@ const Game = () => {
 
     return (
         <div>
+            <p className="homeBtnGame" onClick={() => navigate("/")}>Home</p>
             <div className="mainGame">
                 <div>
                     <p>Timer:  <span id="quizTimer">60</span></p>
@@ -233,7 +239,7 @@ const Game = () => {
                 <p>{question[num]?.learnMore}</p>
             </div>
             <div className="quizScoreModal" id="quizScoreModal">
-                <img onClick={() => showModal("quizScoreModal")} src={cancel} alt="" />
+                <img onClick={() => { showModal("quizScoreModal"); navigate(0) }} src={cancel} alt="" />
                 <div>
                     {
                         score.map((sc, i) => (

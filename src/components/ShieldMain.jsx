@@ -41,8 +41,12 @@ const ShieldMain = () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
+        if (res.status !== 200) {
+            navigate("/shield")
+        }
         const rep = await res.data
         setUser(rep)
     }
@@ -98,6 +102,7 @@ const ShieldMain = () => {
     return (
         <div className="theMain">
             <div className="mainFirst">
+                <p onClick={() => navigate("/shield")}>{"<<"}</p>
                 <h4>Topic: {study?.topic}</h4>
                 {user?.admin && <div>
                     <p onClick={() => navigate("/shield/create", { state: { study: study } })} className="mainEdit">Edit</p>

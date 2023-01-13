@@ -57,11 +57,11 @@ const BibleLeader = () => {
             console.log(res.status);
             if (res.status !== 200) {
                 setSpin(false)
-                navigate("/")
+                navigate("/login")
                 return
             }
             console.log(rep);
-            const arr = rep.sort((a, b) => b.bibleQuestScore - a.bibleQuestScore)
+            const arr = rep.sort((a, b) => b.dailyBQS - a.dailyBQS)
             setUsers(arr)
             setSpin(false)
         })()

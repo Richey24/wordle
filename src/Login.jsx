@@ -165,6 +165,7 @@ const Login = () => {
                 </form>
                 <p>Don't have an account? <span onClick={() => { setShowErr(false); navigate("/register") }}>Register</span></p>
                 <p onClick={() => { setShowErr(false); setReg("forgot") }} className="forgotPass"><span>Forgot password</span></p>
+                <p onClick={() => navigate("/")} className="forgotPass"><span>Home</span></p>
             </div>
         </div>
     )

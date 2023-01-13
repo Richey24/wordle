@@ -50,6 +50,34 @@ const Select = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
+    const showModal = (id) => {
+        document.getElementById(id).classList.toggle("show")
+    }
+
+    const navBible = () => {
+        if (user.playedBible) {
+            showModal("swordSub")
+            return
+        }
+        navigate("/word", { state: { numb: 1 } })
+    }
+
+    const navHang = () => {
+        if (user.playedHang) {
+            showModal("swordSub")
+            return
+        }
+        navigate("/hangman")
+    }
+
+    const navTrivial = () => {
+        if (user.playedTrivial) {
+            showModal("swordSub")
+            return
+        }
+        navigate("/bible/select")
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -85,17 +113,17 @@ const Select = () => {
                     <p>Word quest</p>
                 </div>
 
-                <div onClick={() => navigate("/word", { state: { numb: 1 } })}>
+                <div onClick={navBible}>
                     <img src={biblequest} alt="" />
                     <p>Bible quest</p>
                 </div>
 
-                <div onClick={() => navigate("/bible/select")}>
+                <div onClick={navTrivial}>
                     <img src={bible} alt="" />
                     <p>Bible learning game</p>
                 </div>
 
-                <div onClick={() => navigate("/hangman")}>
+                <div onClick={navHang}>
                     <img src={hang} alt="" />
                     <p>Hangman</p>
                 </div>
@@ -108,6 +136,11 @@ const Select = () => {
                     <img src={shield} alt="" />
                     <p>My Sword&Shield</p>
                 </div>
+            </div>
+            <div id="swordSub" className="swordSub">
+                <p>You have use your free daily pass, kindly subscribe to have unlimited access</p>
+                <button>Subscribe</button>
+                <button onClick={() => showModal("swordSub")}>Cancel</button>
             </div>
         </div>
     )

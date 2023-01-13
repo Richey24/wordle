@@ -62,6 +62,9 @@ function Hangman() {
                         setSpin(false)
                         return
                     }
+                    if (rep.playedHang && !rep.paid) {
+                        navigate("/")
+                    }
                     setUser(rep)
                     setSpin(false)
                 } catch (error) {
@@ -70,6 +73,7 @@ function Hangman() {
             })()
         } else {
             setSpin(false)
+            navigate("/login")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
@@ -148,6 +152,7 @@ function Hangman() {
         <div style={{
             backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
         }}>
+            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
             <div
                 style={{
                     maxWidth: "800px",
@@ -160,7 +165,7 @@ function Hangman() {
                 }}
             >
                 <div style={{ fontSize: "2rem", textAlign: "center", color: "white" }}>
-                    {isWinner && <Result time={document.getElementById("hangSec").innerHTML} trial={incorrectLetters} />}
+                    {isWinner && <Result time={document.getElementById("hangSec").innerHTML} trial={incorrectLetters} user={user} />}
                     {isLoser && "Nice Try - Refresh to try again"}
                 </div>
                 <div className="secDiv">

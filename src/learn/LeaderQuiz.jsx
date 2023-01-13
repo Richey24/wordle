@@ -54,7 +54,7 @@ const LeaderQuiz = () => {
             const rep = await res.data
             if (res.status !== 200) {
                 setSpin(false)
-                navigate("/")
+                navigate("/login")
                 return
             }
             const arr = rep.sort((a, b) => b.score - a.score)

@@ -5,17 +5,25 @@
 .mainFirst {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     flex-wrap: wrap;
     row-gap: 30px;
 }
 
+.mainFirst>p {
+    font-size: 30px;
+    cursor: pointer;
+}
+
 .mainFirst>h4 {
     font-weight: 600;
+    margin-left: 200px;
 }
 
 .mainFirst>div {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .mainDel {
@@ -176,4 +184,18 @@
         left: 5%;
         height: 260px;
     }
+
+    .mainFirst>h4 {
+        margin-left: 0px;
+    }
+
+    .mainDel,
+    .mainEdit {
+        width: 100%;
+    }
+
+    .mainFirst>div {
+        width: 100%;
+    }
+
 }

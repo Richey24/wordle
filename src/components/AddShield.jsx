@@ -36,7 +36,7 @@ const AddShield = () => {
 
     useEffect(() => {
         if (!id) {
-            navigate("/")
+            navigate("/login")
         }
         if (study) {
             setArr(study.scripture)
@@ -149,8 +149,11 @@ const AddShield = () => {
                 <br />
                 <textarea defaultValue={study?.note} placeholder="Enter study note" className="note" name="note"></textarea>
                 <br />
-                <button className="createStudy">{spin ? (<Spinner animation="border" color="#3d1152" />
-                ) : study ? "Edit study" : "Create study"}</button>
+                <div>
+                    <button className="createStudy">{spin ? (<Spinner animation="border" color="#3d1152" />
+                    ) : study ? "Edit study" : "Create study"}</button>
+                    <button className="cancelBtn" onClick={() => navigate("/shield")}>Cancel</button>
+                </div>
                 {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
             </form>
         </div>

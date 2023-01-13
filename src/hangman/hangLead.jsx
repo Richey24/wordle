@@ -16,6 +16,8 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
+import test from "../img/test.mp4"
+import { useNavigate } from "react-router-dom"
 
 const images = {
     benjamin: benjamin,
@@ -38,6 +40,7 @@ const HangLeader = () => {
     const [users, setUsers] = useState([])
     const [spin, setSpin] = useState(true)
     const token = localStorage.getItem("token")
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
@@ -49,9 +52,10 @@ const HangLeader = () => {
             const rep = await res.data
             if (res.status !== 200) {
                 setSpin(false)
+                navigate("/login")
                 return
             }
-            const arr = rep.sort((a, b) => b.hangmanScore - a.hangmanScore)
+            const arr = rep.sort((a, b) => b.dailyHS - a.dailyHS)
             setUsers(arr)
             setSpin(false)
         })()
@@ -72,22 +76,27 @@ const HangLeader = () => {
         )
     }
     return (
-        <div style={{ backgroundImage: `url(${images[users[0]?.tribe[0]?.toLowerCase()]})` }} className="mainTable">
-            <h3>Hangman Leader Board</h3>
-            <div className="firstTable">
-                <p>Username</p>
-                <p>Tribe</p>
-                <p>Score</p>
+        <div className="mainTable">
+            <video className="doom" autoPlay muted loop>
+                <source src={test} type="" />
+            </video>
+            <div>
+                <h3>Hangman Leader Board</h3>
+                <div className="firstTable">
+                    <p>Username</p>
+                    <p>Tribe</p>
+                    <p>Score</p>
+                </div>
+                {
+                    users.map((user, i) => (
+                        <div key={i} className="secondTable">
+                            <p>{user?.username}</p>
+                            <img src={images[user?.tribe[0]?.toLowerCase()]} alt="" />
+                            <p>{user?.hangmanScore}</p>
+                        </div>
+                    ))
+                }
             </div>
-            {
-                users.map((user, i) => (
-                    <div key={i} className="secondTable">
-                        <p>{user?.username}</p>
-                        <p>{user?.tribe[0]}</p>
-                        <p>{user?.hangmanScore}</p>
-                    </div>
-                ))
-            }
         </div>
     )
 }
