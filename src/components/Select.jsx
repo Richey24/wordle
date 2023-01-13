@@ -129,12 +129,12 @@ const Select = () => {
                 </div>
                 <div onClick={() => navigate("/shield")}>
                     <img src={shield} alt="" />
-                    <p>Watchman Sword&Shield</p>
+                    <p>Watchman Sword & Shield</p>
                 </div>
 
                 <div onClick={() => navigate("/watchman")}>
                     <img src={shield} alt="" />
-                    <p>My Sword&Shield</p>
+                    <p>My Sword & Shield</p>
                 </div>
             </div>
             <div id="swordSub" className="swordSub">

@@ -50,6 +50,7 @@
     font-style: normal;
     text-transform: capitalize;
     color: white;
+    text-align: center;
 }
 
 .innerMain>div>img {
