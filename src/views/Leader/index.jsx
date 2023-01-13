@@ -1,7 +1,8 @@
 import axios from "axios"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState } from "react"
 import { Spinner } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import "./leader.css"
 import Container from 'react-bootstrap/Container';
@@ -13,9 +14,7 @@ import Card from 'react-bootstrap/Card';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
-import ReactPlayer from 'react-player'
 
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 // begin:Assets
@@ -34,7 +33,6 @@ import reuben from "../../img/reuben.png"
 import simeon from "../../img/simeon.png"
 import zebulun from "../../img/zebulun.png"
 import asher from "../../img/asher.png"
-import test from "../../img/test.mp4"
 // end:Assets
 
 // Videos
@@ -70,7 +68,6 @@ const Leader = () => {
     const [spin, setSpin] = useState(true)
     const token = localStorage.getItem("token")
     const navigate = useNavigate()
-    const videoRef = useRef();
 
     const [ bground, setBackground ] = useState(() => {
          // getting stored value
@@ -79,10 +76,7 @@ const Leader = () => {
         return initialValue || "";
     });
     
-    const handleBackground = (param) => {
-        setBackground(param)
-    }
-    
+ 
     // Pop functionalies goes here
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -110,18 +104,14 @@ const Leader = () => {
             setUsers(arr)
             setSpin(false)
         })()
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         // storing input name
         localStorage.setItem("background1", bground);
-        // const myVideo  = innerDoc.querySelector('#videoPlayer');
-        // const mySource = innerDoc.querySelector('#thevid');
-        // if (mySource && myVideo) {
-        //   mySource.setAttribute('src', bground);
-        //   myVideo.load();
-        // }
 
+         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [bground]);
 
     if (spin) {
@@ -140,7 +130,6 @@ const Leader = () => {
     return (
         <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
             
-                {/* <ReactPlayer className="doom"  url={bground} /> */}
                 <video src={bground} autoPlay muted loop id='thevid' />
                 <Container fluid id="videoMessage">
                     <Container>
@@ -265,17 +254,16 @@ const Leader = () => {
                         </div>
                     </div>
                     <div className="sub-button shadow">
-                        <a  onClick={handleShow} href="#" target="_blank">
+                        <a onClick={handleShow} href="/" target="_blank">
                             <FontAwesomeIcon icon={faToolbox} className="text-white" />
                         </a>
                     </div>
 
                     <div className="sub-button shadow">
-                        <a  href="#" target="_blank">
-                            <FontAwesomeIcon icon={faHome} className="text-white" />
-                        </a>
+                      <Link to="/">
+                         <FontAwesomeIcon icon={faHome} className="text-white" />
+                      </Link>
                     </div>
-                    
               </div>
         </Container>
     )
