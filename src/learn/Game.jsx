@@ -50,6 +50,7 @@ const Game = () => {
     const tribe = state?.tribe
     const [playerNum, setPlayerNum] = useState(0)
     const [score, setScore] = useState([])
+    const [user, setUser] = useState({})
 
     const startTimer = () => {
         const theTimer = document.getElementById("quizTimer")
@@ -62,6 +63,33 @@ const Game = () => {
             }
             theTimer.innerHTML = Number(theTimer.innerHTML) - 1
         }, 1000)
+    }
+
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`${url}/user/get/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                validateStatus: () => true
+            })
+            const rep = await res.data
+            if (res.status !== 200) {
+                setSpin(false)
+                navigate("/login")
+                return
+            }
+            if (token !== rep.mainToken) {
+                localStorage.clear()
+                setSpin(false)
+                return
+            }
+            setUser(rep)
+            setSpin(false)
+        } catch (error) {
+            setSpin(false)
+            navigate("/login")
+        }
     }
 
     const getQuestions = async () => {
@@ -131,6 +159,7 @@ const Game = () => {
             arr.push(0)
         }
         setScore(arr)
+        getUser()
         getQuestions()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -147,6 +176,7 @@ const Game = () => {
             setScore(arr)
         } else {
             target.classList.toggle("wrong")
+            document.getElementById("true").style.border = "4px solid green"
         }
         clearInterval(timer)
         setClick(true)
@@ -158,6 +188,8 @@ const Game = () => {
     }
 
     const nextQuest = async () => {
+        document.getElementById("learnModal").classList.remove("showLearn")
+        document.getElementById("true").style.border = "none"
         if (num >= question.length - 1) {
             for (let i = 0; i < names.length; i++) {
                 const body = {
@@ -215,7 +247,7 @@ const Game = () => {
     return (
         <div>
             <p className="homeBtnGame" onClick={() => navigate("/")}>Home</p>
-            <div className="mainGame">
+            <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainGame">
                 <div>
                     <p>Timer:  <span id="quizTimer">60</span></p>
                     <h1>Question {num + 1}</h1>
@@ -224,7 +256,7 @@ const Game = () => {
                     <div className="theAnswer">
                         {
                             question[num]?.answer?.map((ans, i) => (
-                                <p key={i}>{i + 1}. <p className="answer" onClick={(e) => checkAnswer(e, ans?.correct)}>{ans?.value}</p></p>
+                                <p key={i}>{i + 1}. <p className="answer" id={`${ans?.correct}`} onClick={(e) => checkAnswer(e, ans?.correct)}>{ans?.value}</p></p>
                             ))
                         }
                     </div>

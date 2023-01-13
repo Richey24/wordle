@@ -91,6 +91,17 @@ function Hangman() {
         clearInterval(timer)
     }
 
+    (async () => {
+        if (isLoser) {
+            clearInterval(timer)
+            await axios.put(`${url}/user/update/${id}`, { playedHang: true }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        }
+    })()
+
     const addGuessedLetter = useCallback(
         (letter) => {
             if (guessedLetters.includes(letter) || isLoser || isWinner) return

@@ -413,7 +413,7 @@ const Wordle = () => {
             })
         }
 
-        function checkWinLose(guess, tiles) {
+        async function checkWinLose(guess, tiles) {
             const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
             if (guess === targetWord) {
                 clearInterval(timer)
@@ -427,7 +427,20 @@ const Wordle = () => {
 
             if (remainingTiles.length === 0) {
                 showAlert(targetWord.toUpperCase(), null)
+                clearInterval(timer)
                 stopInteraction()
+                if (num === 1 && id) {
+                    await axios.put(`${url}/user/update/${id}`, { playedBible: true }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                }
+                if (user.paid) {
+                    navigate(0)
+                } else {
+                    navigate("/")
+                }
             }
         }
 
