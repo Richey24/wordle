@@ -118,6 +118,11 @@ const Select = () => {
                     <p>Bible quest</p>
                 </div>
 
+                <div onClick={navBible}>
+                    <img src={word} alt="" />
+                    <p>Bible Crossword</p>
+                </div>
+
                 <div onClick={navTrivial}>
                     <img src={bible} alt="" />
                     <p>Bible learning game</p>
