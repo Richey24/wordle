@@ -4,6 +4,17 @@ import { useState } from "react"
 import { Spinner } from "react-bootstrap"
 import url from "../url"
 import "./Leader.css"
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
+import Image from 'react-bootstrap/Image'
+import Card from 'react-bootstrap/Card';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
+
 import benjamin from "../img/benjamin.png"
 import dan from "../img/dan.png"
 import ephraim from "../img/ephraim.png"
@@ -83,29 +94,34 @@ const BibleLeader = () => {
     }
 
     return (
-        <div className="mainTable">
-            <video className="doom" autoPlay muted loop>
-                <source src={test} type="" />
-            </video>
-            <div>
-                <p onClick={() => navigate("/")}>Home</p>
-                <h3>Bible Quest Leader Board</h3>
-                <div className="firstTable">
-                    <p>Username</p>
-                    <p>Tribe</p>
-                    <p>Score</p>
+        <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
+           <video src={bground} autoPlay muted loop id='thevid' />
+        
+        
+            <div className="mainTable">
+                <video className="doom" autoPlay muted loop>
+                    <source src={test} type="" />
+                </video>
+                <div>
+                    <p onClick={() => navigate("/")}>Home</p>
+                    <h3>Bible Quest Daily Leader Board</h3>
+                    <div className="firstTable">
+                        <p>Username</p>
+                        <p>Tribe</p>
+                        <p>Score</p>
+                    </div>
+                    {
+                        users.map((user, i) => (
+                            <div key={i} className="secondTable">
+                                <p>{user?.username}</p>
+                                <img src={images[user?.tribe[0]?.toLowerCase()]} alt="" />
+                                <p>{user?.bibleQuestScore}</p>
+                            </div>
+                        ))
+                    }
                 </div>
-                {
-                    users.map((user, i) => (
-                        <div key={i} className="secondTable">
-                            <p>{user?.username}</p>
-                            <img src={images[user?.tribe[0]?.toLowerCase()]} alt="" />
-                            <p>{user?.bibleQuestScore}</p>
-                        </div>
-                    ))
-                }
             </div>
-        </div>
+        </Container>
     )
 }
 

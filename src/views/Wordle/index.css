@@ -28,7 +28,7 @@
     grid-auto-rows: 3em;
     gap: .25em;
     justify-content: flex-end;
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 
 .key {
@@ -81,14 +81,17 @@
 }
 
 .guess-grid {
-    margin-top: 2rem;
+    margin-top: 5rem;
     display: grid;
     justify-content: flex-start;
     align-content: center;
     flex-grow: 1;
+    width: 100% !important;
+    max-height: 70% !important;
     grid-template-columns: repeat(5, 2.7em);
     grid-template-rows: repeat(6, 2.7em);
     gap: .25em;
+    /* overflow-y: scroll; */
     margin-bottom: 1em;
 }
 
@@ -290,8 +293,17 @@
 }
 
 .startBtn {
-    width: 15%;
-    height: 50px;
+    width: 30%;
+    height: 10%;
+    position: fixed;
+    top: 50%;
+    left: 42.5%;
+    cursor: pointer;
+}
+
+.startBtnLandscape {
+    width: 30%;
+    height: 10%;
     position: fixed;
     top: 50%;
     left: 42.5%;
@@ -317,7 +329,7 @@
     user-select: none;
     position: absolute;
     bottom: 30px;
-    right: 30px;
+    right: 10px;
   }
   .fab-container:hover {
     height: 100%;
@@ -387,4 +399,23 @@
   .fab-container .sub-button .material-icons {
     color: white;
     padding-top: 6px;
+  }
+
+  .btn-keyboard {
+    font-size: inherit;
+    border: none;
+    padding: 0;
+    align-items: center;
+    background-color: red !important;
+    /* color: white;
+    fill: white; */
+    text-transform: uppercase;
+    border-radius: .25em;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .h-100-vh {
+    min-height: 100vh !important;
+    /* height: 100vh !important; */
   }

@@ -12,8 +12,8 @@ import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image'
 import Card from 'react-bootstrap/Card';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid';
 
 import Modal from 'react-bootstrap/Modal';
 
@@ -133,10 +133,13 @@ const Leader = () => {
                 <video src={bground} autoPlay muted loop id='thevid' />
                 <Container fluid id="videoMessage">
                     <Container>
-                        <Row>                            <Col className="text-center mt-5 mb-5">
-                                <h3 className="text-white">Word Quest Leader Board</h3>
+                        
+                        <Row>
+                             <Col className="text-center mt-5 mb-5">
+                                <h3 className="text-white">Word Quest Daily Leader Board</h3>
                             </Col>
                         </Row>
+
                         <Row>
                             <Col className="text-center">
                                 <Table borderless className="justify-content-center">

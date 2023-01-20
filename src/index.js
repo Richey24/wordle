@@ -13,7 +13,7 @@ import Hangman from './hangman/Hangman';
 import Register from './Register';
 // import Leader from './components/Leader';
 import Leader from './views/Leader';
-import BibleLeader from './components/bibleLeader';
+import BibleLeader from './views/Leader/bibleLeader';
 import HangLeader from './hangman/hangLead';
 import Sword from './components/Sword';
 import SwordMain from './components/SwordMain';
