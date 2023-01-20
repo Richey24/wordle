@@ -54,7 +54,7 @@ const Game = () => {
 
     const startTimer = () => {
         const theTimer = document.getElementById("quizTimer")
-        timer = setInterval(() => {
+        timer = setInterval(async () => {
             if (Number(theTimer.innerHTML) < 1) {
                 clearInterval(timer)
                 setClick(true)
@@ -164,17 +164,21 @@ const Game = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const checkAnswer = (e, value) => {
+    const checkAnswer = async (e, value) => {
         if (click) {
             return
         }
         const target = e.target
         if (value) {
+            await new Audio(require("../sound/interface.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 1000))
             target.classList.toggle("correct")
             const arr = [...score]
             arr[playerNum] = arr[playerNum] + Number(document.getElementById("quizTimer").innerHTML)
             setScore(arr)
         } else {
+            new Audio(require("../sound/ES_Knife.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 1000))
             target.classList.toggle("wrong")
             document.getElementById("true").style.border = "4px solid green"
         }
@@ -183,7 +187,14 @@ const Game = () => {
         document.getElementById("learnMore").style.visibility = "visible"
     }
 
-    const showModal = (id) => {
+    const showModal = async (id) => {
+        if (id === "learnModal") {
+            await new Audio(require("../sound/big-paper.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 500))
+        } else {
+            await new Audio(require("../sound/battle_horn.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 500))
+        }
         document.getElementById(id).classList.toggle("showLearn")
     }
 
@@ -213,6 +224,8 @@ const Game = () => {
             showModal("quizScoreModal")
             return
         }
+        await new Audio(require("../sound/small-page.mp3")).play()
+        await new Promise(resolve => setTimeout(resolve, 1000))
         setNum(num + 1)
         if (playerNum >= names.length - 1) {
             setPlayerNum(0)
