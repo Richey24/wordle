@@ -133,7 +133,7 @@ const Leader = () => {
             <Container fluid id="videoMessage">
                 <Container>
                     <Row>                            <Col className="text-center mt-5 mb-5">
-                        <h3 className="text-white">Word Quest Leader Board</h3>
+                        <h3 className="text-white">Word Quest Daily Leader Board</h3>
                     </Col>
                     </Row>
                     <Row>
