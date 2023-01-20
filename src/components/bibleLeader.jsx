@@ -149,6 +149,7 @@ const BibleLeader = () => {
                                 <tbody className="text-white align-middle">
                                     {
                                         users.map((user, i) => (
+                                            user?.dailyBQS !== 0 &&
                                             <tr key={i}>
                                                 <td>{user?.username}</td>
                                                 <td><Image fluid src={images[user?.tribe[0]?.toLowerCase()]} alt="" style={{ width: 100, height: 100 }} /></td>
