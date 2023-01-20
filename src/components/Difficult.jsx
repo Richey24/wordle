@@ -6,6 +6,8 @@ import { useEffect } from "react"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome } from '@fortawesome/fontawesome-free-solid'
 
 const Difficult = () => {
     const navigate = useNavigate()
@@ -62,6 +64,32 @@ const Difficult = () => {
         navigate("/word", { state: { numb: num } })
     }
 
+    const playSound = (val) => {
+        console.log("sad");
+        switch (val) {
+            case "easy":
+                new Audio(require("../sound/single.mp3")).play()
+                break;
+            case "normal":
+                new Audio(require("../sound/swinging.mp3")).play()
+                break;
+            case "hard":
+                new Audio(require("../sound/swish.mp3")).play()
+                break;
+            case "very":
+                new Audio(require("../sound/whiff.mp3")).play()
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    const logOut = () => {
+        localStorage.clear()
+        navigate(0)
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -81,7 +109,7 @@ const Difficult = () => {
             <div className="firstDiv">
                 {
                     user.username ? (
-                        <p>Welcome back {user.username}</p>
+                        <p>Welcome back {user.username} <span onClick={logOut}>Logout</span></p>
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
@@ -89,21 +117,24 @@ const Difficult = () => {
                         </>
                     )
                 }
+                <div onClick={() => navigate("/")}>
+                    <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+                </div>
             </div>
             <div style={{ columnGap: "300px" }} className="innerMain">
-                <button className="normal" onClick={() => navi(5)}>
+                <button onMouseEnter={() => playSound("easy")} className="normal" onClick={() => navi(5)}>
                     Easy
                 </button>
 
-                <button className="hard" onClick={() => navi(8)}>
+                <button onMouseEnter={() => playSound("normal")} className="hard" onClick={() => navi(8)}>
                     Normal
                 </button>
 
-                <button className="veryHard" onClick={() => navi(11)}>
+                <button onMouseEnter={() => playSound("hard")} className="veryHard" onClick={() => navi(11)}>
                     Hard
                 </button>
 
-                <button className="impossible" onClick={() => navi(14)}>
+                <button onMouseEnter={() => playSound("very")} className="impossible" onClick={() => navi(14)}>
                     Very Hard
                 </button>
             </div>

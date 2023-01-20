@@ -7,6 +7,8 @@ import url from "./url"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { Alert, Spinner } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/fontawesome-free-solid"
 
 const Login = () => {
     const [reg, setReg] = useState("login")
@@ -166,6 +168,9 @@ const Login = () => {
                 <p>Don't have an account? <span onClick={() => { setShowErr(false); navigate("/register") }}>Register</span></p>
                 <p onClick={() => { setShowErr(false); setReg("forgot") }} className="forgotPass"><span>Forgot password</span></p>
                 <p onClick={() => navigate("/")} className="forgotPass"><span>Home</span></p>
+                <div className="homeBtnLog" onClick={() => navigate("/")}>
+                    <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+                </div>
             </div>
         </div>
     )

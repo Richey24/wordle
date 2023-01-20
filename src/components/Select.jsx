@@ -97,7 +97,7 @@ const Select = () => {
                 new Audio(require("../sound/battle_horn.mp3")).play()
                 break;
             case "cross":
-                new Audio(require("../sound/battle_horn.mp3")).play()
+                new Audio(require("../sound/cross.mp3")).play()
                 break;
             case "learn":
                 new Audio(require("../sound/small-page.mp3")).play()
@@ -114,6 +114,11 @@ const Select = () => {
             default:
                 break;
         }
+    }
+
+    const logOut = () => {
+        localStorage.clear()
+        navigate(0)
     }
 
     if (spin) {
@@ -136,7 +141,7 @@ const Select = () => {
             <div className="firstDiv">
                 {
                     user.username ? (
-                        <p>Welcome back {user.username}</p>
+                        <p>Welcome back {user.username} <span onClick={logOut}>Logout</span></p>
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>

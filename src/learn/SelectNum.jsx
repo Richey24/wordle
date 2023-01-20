@@ -1,3 +1,5 @@
+import { faHome } from "@fortawesome/fontawesome-free-solid"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
@@ -48,6 +50,25 @@ const SelectNum = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const playSound = (val) => {
+        switch (val) {
+            case "1":
+                new Audio(require("../sound/single.mp3")).play()
+                break;
+            case "2":
+                new Audio(require("../sound/swinging.mp3")).play()
+                break;
+            case "3":
+                new Audio(require("../sound/swish.mp3")).play()
+                break;
+            case "4":
+                new Audio(require("../sound/whiff.mp3")).play()
+                break;
+
+            default:
+                break;
+        }
+    }
 
     if (spin) {
         return (
@@ -65,22 +86,24 @@ const SelectNum = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNum">
-            <p className="homeBtnNum" onClick={() => navigate("/")}>Home</p>
+            <div className="homeBtnNum" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+            </div>
             <p className="chooseNum">Choose the number of players</p>
             <div>
-                <div onClick={() => navigate("/bible/names", { state: { count: [1] } })}>
+                <div onMouseEnter={() => playSound("1")} onClick={() => navigate("/bible/names", { state: { count: [1] } })}>
                     <h2>1</h2>
                     <p>player</p>
                 </div>
-                <div onClick={() => navigate("/bible/names", { state: { count: [1, 2] } })}>
+                <div onMouseEnter={() => playSound("2")} onClick={() => navigate("/bible/names", { state: { count: [1, 2] } })}>
                     <h2>2</h2>
                     <p>players</p>
                 </div>
-                <div onClick={() => navigate("/bible/names", { state: { count: [1, 2, 3] } })}>
+                <div onMouseEnter={() => playSound("3")} onClick={() => navigate("/bible/names", { state: { count: [1, 2, 3] } })}>
                     <h2>3</h2>
                     <p>players</p>
                 </div>
-                <div onClick={() => navigate("/bible/names", { state: { count: [1, 2, 3, 4] } })}>
+                <div onMouseEnter={() => playSound("4")} onClick={() => navigate("/bible/names", { state: { count: [1, 2, 3, 4] } })}>
                     <h2>4</h2>
                     <p>players</p>
                 </div>

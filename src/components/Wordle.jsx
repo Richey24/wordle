@@ -29,6 +29,8 @@ import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
 import leader from "../img/leader.webp"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/fontawesome-free-solid"
 
 let timer = null
 
@@ -511,7 +513,9 @@ const Wordle = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="wordleMain">
-            <p className="homeButton" onClick={() => navigate("/")}>Home</p>
+            <div className="homeButton" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+            </div>
             {!hide && <p onClick={showHint} className="hint">Hint</p>}
             <div className="myTimer">
                 <p id="sec">0</p>

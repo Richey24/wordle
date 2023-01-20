@@ -10,6 +10,8 @@ import Result from "./Result"
 import leader from "../img/leader.webp"
 import { useNavigate } from "react-router-dom"
 import { Spinner } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/fontawesome-free-solid"
 
 
 let timer = null
@@ -167,7 +169,9 @@ function Hangman() {
         <div style={{
             backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
         }}>
-            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
+            <div className="homeBtn" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+            </div>
             <div
                 style={{
                     maxWidth: "800px",

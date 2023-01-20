@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import url from "../url"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/fontawesome-free-solid"
 
 const Sword = () => {
     const id = localStorage.getItem("id")
@@ -115,7 +117,9 @@ const Sword = () => {
 
     return (
         <div className="swordDiv">
-            <p className="homeBtnSword" onClick={() => navigate("/")}>Home</p>
+            <div className="homeBtnSword" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="1x" icon={faHome} className="text-primary" />
+            </div>
             <h1>My sword and shield</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />

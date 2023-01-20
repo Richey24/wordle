@@ -19,6 +19,8 @@ import asher from "../img/asher.png"
 import axios from "axios";
 import url from "../url"
 import { Spinner } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/fontawesome-free-solid";
 
 let timer;
 const images = {
@@ -259,7 +261,9 @@ const Game = () => {
 
     return (
         <div>
-            <p className="homeBtnGame" onClick={() => navigate("/")}>Home</p>
+            <div className="homeBtnGame" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-primary" />
+            </div>
             <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainGame">
                 <div>
                     <p>Timer:  <span id="quizTimer">60</span></p>
