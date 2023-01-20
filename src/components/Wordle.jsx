@@ -468,6 +468,7 @@ const Wordle = () => {
     }, [num, spin])
 
     const showHint = () => {
+        new Audio(require("../sound/success.mp3")).play()
         if (count < 1 && num !== 1) {
             const filterWord = word.filter((theWord) => theWord.startsWith(firstLet))
             setHint(`Don't know where to start? try ${filterWord[Math.floor(Math.random() * filterWord.length)]}`)
