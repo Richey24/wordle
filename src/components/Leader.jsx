@@ -96,7 +96,7 @@ const Leader = () => {
                         <div key={i} className="secondTable">
                             <p>{user?.username}</p>
                             <img src={images[user?.tribe[0]?.toLowerCase()]} alt="" />
-                            <p>{user?.wordQuestScore}</p>
+                            <p>{user?.dailyWQS}</p>
                         </div>
                     ))
                 }

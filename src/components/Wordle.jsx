@@ -270,6 +270,7 @@ const Wordle = () => {
 
         function handleMouseClick(e) {
             if (e.target.matches("[data-key]")) {
+                new Audio(require("../sound/keyPress.mp3")).play()
                 pressKey(e.target.dataset.key)
                 return
             }
@@ -280,6 +281,7 @@ const Wordle = () => {
             }
 
             if (e.target.matches("[data-delete]")) {
+                new Audio(require("../sound/backspace.mp3")).play()
                 deleteKey()
                 return
             }
@@ -292,11 +294,13 @@ const Wordle = () => {
             }
 
             if (e.key === "Backspace" || e.key === "Delete") {
+                new Audio(require("../sound/backspace.mp3")).play()
                 deleteKey()
                 return
             }
 
             if (e.key.match(/^[a-z]$/)) {
+                new Audio(require("../sound/keyPress.mp3")).play()
                 pressKey(e.key)
                 return
             }
@@ -323,6 +327,7 @@ const Wordle = () => {
         function submitGuess() {
             const activeTiles = [...getActiveTiles()]
             if (activeTiles.length !== WORD_LENGTH) {
+                new Audio(require("../sound/wrong.mp3")).play()
                 showAlert("Not enough letters")
                 shakeTiles(activeTiles)
                 return
@@ -333,10 +338,12 @@ const Wordle = () => {
             }, "")
 
             if (!dictionary.includes(guess)) {
+                new Audio(require("../sound/wrong.mp3")).play()
                 showAlert("Not in word list")
                 shakeTiles(activeTiles)
                 return
             }
+            new Audio(require("../sound/ES_SwordIn.mp3")).play()
 
             stopInteraction()
             activeTiles.forEach((...params) => flipTile(...params, guess))
@@ -416,6 +423,7 @@ const Wordle = () => {
         async function checkWinLose(guess, tiles) {
             const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
             if (guess === targetWord) {
+                new Audio(require("../sound/battle_horn.mp3")).play()
                 clearInterval(timer)
                 setTime(document.getElementById("sec").innerHTML)
                 setTry([remainingTiles.length, WORD_LENGTH])
@@ -435,11 +443,6 @@ const Wordle = () => {
                             Authorization: `Bearer ${token}`
                         }
                     })
-                }
-                if (user.paid) {
-                    navigate(0)
-                } else {
-                    navigate("/")
                 }
             }
         }
