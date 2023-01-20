@@ -88,6 +88,10 @@ const Select = () => {
         navigate("/bible/select")
     }
 
+    const navCross = () => {
+        navigate("/crossword")
+    }
+
     const playSound = async (val) => {
         switch (val) {
             case "word":
@@ -161,7 +165,7 @@ const Select = () => {
                     <p>Bible quest</p>
                 </div>
 
-                <div onMouseEnter={() => playSound("cross")} onClick={navBible}>
+                <div onMouseEnter={() => playSound("cross")} onClick={navCross}>
                     <img src={word} alt="" />
                     <p>Bible Crossword</p>
                 </div>
