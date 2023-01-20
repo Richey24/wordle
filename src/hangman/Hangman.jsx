@@ -55,11 +55,13 @@ function Hangman() {
                     const rep = await res.data
                     if (res.status !== 200) {
                         setSpin(false)
+                        navigate("/login")
                         return
                     }
                     if (token !== rep.mainToken) {
                         localStorage.clear()
                         setSpin(false)
+                        navigate("/login")
                         return
                     }
                     if (rep.playedHang && !rep.paid) {
@@ -89,6 +91,7 @@ function Hangman() {
 
     if (isWinner) {
         clearInterval(timer)
+        new Audio(require("../sound/battle_horn.mp3")).play()
     }
 
     (async () => {
@@ -104,6 +107,7 @@ function Hangman() {
 
     const addGuessedLetter = useCallback(
         (letter) => {
+            new Audio(require("../sound/keyPress.mp3")).play()
             if (guessedLetters.includes(letter) || isLoser || isWinner) return
             setGuessedLetters(currentLetters => [...currentLetters, letter])
         },

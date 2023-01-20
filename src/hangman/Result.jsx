@@ -54,7 +54,11 @@ const Result = ({ time, trial, user }) => {
                 }
             })
         }
-        navigate(0)
+        if (user.paid) {
+            navigate(0)
+        } else {
+            navigate("/")
+        }
     }
     return (
         <div id="hangResultDiv" className="hangResultDiv">
