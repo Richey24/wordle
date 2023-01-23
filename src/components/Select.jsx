@@ -145,7 +145,7 @@ const Select = () => {
             <div className="firstDiv">
                 {
                     user.username ? (
-                        <p>Welcome back {user.username} <span onClick={logOut}>Logout</span></p>
+                        <p>Shalom {user.username} <span onClick={logOut}>Logout</span></p>
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
