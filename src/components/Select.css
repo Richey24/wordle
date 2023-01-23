@@ -15,6 +15,11 @@
     cursor: pointer;
 }
 
+.firstDiv>p>span {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
 .innerMain {
     width: 100%;
     display: flex;
@@ -50,6 +55,7 @@
     font-style: normal;
     text-transform: capitalize;
     color: white;
+    text-align: center;
 }
 
 .innerMain>div>img {

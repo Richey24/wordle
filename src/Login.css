@@ -7,7 +7,7 @@
 
 .loginDiv {
     width: 40%;
-    height: 95vh;
+    height: auto;
     background-color: white;
     margin: 0 auto;
     padding: 20px 20px 10px 20px;
@@ -157,6 +157,19 @@
 .tribeDiv {
     position: relative;
 }
+
+.homeBtnLog {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+@media (max-width: 700px) {
+    .homeBtnLog {
+        display: none;
+    }
+}
+
 
 @media screen and (max-width: 800px) {
     .loginDiv {

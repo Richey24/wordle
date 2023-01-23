@@ -19,6 +19,8 @@ import reuben from "./img/reuben.png"
 import simeon from "./img/simeon.png"
 import zebulun from "./img/zebulun.png"
 import asher from "./img/asher.png"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome } from '@fortawesome/fontawesome-free-solid'
 
 const Register = () => {
     const [spin, setSpin] = useState(false)
@@ -115,7 +117,9 @@ const Register = () => {
 
     return (
         <div className="loginMainDiv">
-            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
+            <div className="homeBtnLog" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+            </div>
             <div className="loginDiv">
                 <h1>Register your account</h1>
                 {showErr && <Alert variant="danger">{err}</Alert>}
@@ -188,6 +192,7 @@ const Register = () => {
 
                 <p>Already have an account? <span onClick={() => { setShowErr(false); navigate("/login") }}>Login</span></p>
                 {num === 2 && <p onClick={() => setNum(1)}><span>Back</span></p>}
+                <p onClick={() => navigate("/")} className="forgotPass"><span>Home</span></p>
             </div>
         </div>
     )

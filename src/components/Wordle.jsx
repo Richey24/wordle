@@ -29,6 +29,8 @@ import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
 import leader from "../img/leader.webp"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/fontawesome-free-solid"
 
 let timer = null
 
@@ -270,6 +272,7 @@ const Wordle = () => {
 
         function handleMouseClick(e) {
             if (e.target.matches("[data-key]")) {
+                new Audio(require("../sound/keyPress.mp3")).play()
                 pressKey(e.target.dataset.key)
                 return
             }
@@ -280,6 +283,7 @@ const Wordle = () => {
             }
 
             if (e.target.matches("[data-delete]")) {
+                new Audio(require("../sound/backspace.mp3")).play()
                 deleteKey()
                 return
             }
@@ -292,11 +296,13 @@ const Wordle = () => {
             }
 
             if (e.key === "Backspace" || e.key === "Delete") {
+                new Audio(require("../sound/backspace.mp3")).play()
                 deleteKey()
                 return
             }
 
             if (e.key.match(/^[a-z]$/)) {
+                new Audio(require("../sound/keyPress.mp3")).play()
                 pressKey(e.key)
                 return
             }
@@ -323,6 +329,7 @@ const Wordle = () => {
         function submitGuess() {
             const activeTiles = [...getActiveTiles()]
             if (activeTiles.length !== WORD_LENGTH) {
+                new Audio(require("../sound/wrong.mp3")).play()
                 showAlert("Not enough letters")
                 shakeTiles(activeTiles)
                 return
@@ -333,10 +340,12 @@ const Wordle = () => {
             }, "")
 
             if (!dictionary.includes(guess)) {
+                new Audio(require("../sound/wrong.mp3")).play()
                 showAlert("Not in word list")
                 shakeTiles(activeTiles)
                 return
             }
+            new Audio(require("../sound/ES_SwordIn.mp3")).play()
 
             stopInteraction()
             activeTiles.forEach((...params) => flipTile(...params, guess))
@@ -413,9 +422,10 @@ const Wordle = () => {
             })
         }
 
-        function checkWinLose(guess, tiles) {
+        async function checkWinLose(guess, tiles) {
             const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
             if (guess === targetWord) {
+                new Audio(require("../sound/battle_horn.mp3")).play()
                 clearInterval(timer)
                 setTime(document.getElementById("sec").innerHTML)
                 setTry([remainingTiles.length, WORD_LENGTH])
@@ -427,7 +437,15 @@ const Wordle = () => {
 
             if (remainingTiles.length === 0) {
                 showAlert(targetWord.toUpperCase(), null)
+                clearInterval(timer)
                 stopInteraction()
+                if (num === 1 && id) {
+                    await axios.put(`${url}/user/update/${id}`, { playedBible: true }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                }
             }
         }
 
@@ -452,6 +470,7 @@ const Wordle = () => {
     }, [num, spin])
 
     const showHint = () => {
+        new Audio(require("../sound/success.mp3")).play()
         if (count < 1 && num !== 1) {
             const filterWord = word.filter((theWord) => theWord.startsWith(firstLet))
             setHint(`Don't know where to start? try ${filterWord[Math.floor(Math.random() * filterWord.length)]}`)
@@ -494,7 +513,9 @@ const Wordle = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="wordleMain">
-            <p className="homeButton" onClick={() => navigate("/")}>Home</p>
+            <div className="homeButton" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+            </div>
             {!hide && <p onClick={showHint} className="hint">Hint</p>}
             <div className="myTimer">
                 <p id="sec">0</p>
@@ -582,8 +603,8 @@ const Wordle = () => {
                     <button class="key" data-key="N">N</button>
                     <button class="key" data-key="M">M</button>
                     <button data-delete class="key large">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                            <path fill="var(--color-tone-1)"
+                        <svg data-delete xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                            <path data-delete fill="var(--color-tone-1)"
                                 d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z">
                             </path>
                         </svg>

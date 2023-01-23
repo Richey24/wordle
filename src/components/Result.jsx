@@ -16,7 +16,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
         document.getElementById(id).classList.toggle("show")
     }
     const nextRound = async () => {
-       
+
         if (num === 1) {
             document.getElementById("hint").style.display = "none"
             hideModal()

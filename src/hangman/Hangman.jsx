@@ -10,6 +10,8 @@ import Result from "./Result"
 import leader from "../img/leader.webp"
 import { useNavigate } from "react-router-dom"
 import { Spinner } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faHome } from "@fortawesome/fontawesome-free-solid"
 
 
 let timer = null
@@ -55,11 +57,13 @@ function Hangman() {
                     const rep = await res.data
                     if (res.status !== 200) {
                         setSpin(false)
+                        navigate("/login")
                         return
                     }
                     if (token !== rep.mainToken) {
                         localStorage.clear()
                         setSpin(false)
+                        navigate("/login")
                         return
                     }
                     if (rep.playedHang && !rep.paid) {
@@ -89,10 +93,23 @@ function Hangman() {
 
     if (isWinner) {
         clearInterval(timer)
+        new Audio(require("../sound/battle_horn.mp3")).play()
     }
+
+    (async () => {
+        if (isLoser) {
+            clearInterval(timer)
+            await axios.put(`${url}/user/update/${id}`, { playedHang: true }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        }
+    })()
 
     const addGuessedLetter = useCallback(
         (letter) => {
+            new Audio(require("../sound/keyPress.mp3")).play()
             if (guessedLetters.includes(letter) || isLoser || isWinner) return
             setGuessedLetters(currentLetters => [...currentLetters, letter])
         },
@@ -152,7 +169,9 @@ function Hangman() {
         <div style={{
             backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
         }}>
-            <p className="homeBtn" onClick={() => navigate("/")}>Home</p>
+            <div className="homeBtn" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+            </div>
             <div
                 style={{
                     maxWidth: "800px",

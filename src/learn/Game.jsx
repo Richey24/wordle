@@ -19,6 +19,8 @@ import asher from "../img/asher.png"
 import axios from "axios";
 import url from "../url"
 import { Spinner } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/fontawesome-free-solid";
 
 let timer;
 const images = {
@@ -50,10 +52,11 @@ const Game = () => {
     const tribe = state?.tribe
     const [playerNum, setPlayerNum] = useState(0)
     const [score, setScore] = useState([])
+    const [user, setUser] = useState({})
 
     const startTimer = () => {
         const theTimer = document.getElementById("quizTimer")
-        timer = setInterval(() => {
+        timer = setInterval(async () => {
             if (Number(theTimer.innerHTML) < 1) {
                 clearInterval(timer)
                 setClick(true)
@@ -62,6 +65,33 @@ const Game = () => {
             }
             theTimer.innerHTML = Number(theTimer.innerHTML) - 1
         }, 1000)
+    }
+
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`${url}/user/get/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                validateStatus: () => true
+            })
+            const rep = await res.data
+            if (res.status !== 200) {
+                setSpin(false)
+                navigate("/login")
+                return
+            }
+            if (token !== rep.mainToken) {
+                localStorage.clear()
+                setSpin(false)
+                return
+            }
+            setUser(rep)
+            setSpin(false)
+        } catch (error) {
+            setSpin(false)
+            navigate("/login")
+        }
     }
 
     const getQuestions = async () => {
@@ -131,33 +161,48 @@ const Game = () => {
             arr.push(0)
         }
         setScore(arr)
+        getUser()
         getQuestions()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const checkAnswer = (e, value) => {
+    const checkAnswer = async (e, value) => {
         if (click) {
             return
         }
         const target = e.target
         if (value) {
+            await new Audio(require("../sound/interface.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 1000))
             target.classList.toggle("correct")
             const arr = [...score]
             arr[playerNum] = arr[playerNum] + Number(document.getElementById("quizTimer").innerHTML)
             setScore(arr)
         } else {
+            new Audio(require("../sound/ES_Knife.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 1000))
             target.classList.toggle("wrong")
+            document.getElementById("true").style.border = "4px solid green"
         }
         clearInterval(timer)
         setClick(true)
         document.getElementById("learnMore").style.visibility = "visible"
     }
 
-    const showModal = (id) => {
+    const showModal = async (id) => {
+        if (id === "learnModal") {
+            await new Audio(require("../sound/big-paper.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 500))
+        } else {
+            await new Audio(require("../sound/battle_horn.mp3")).play()
+            await new Promise(resolve => setTimeout(resolve, 500))
+        }
         document.getElementById(id).classList.toggle("showLearn")
     }
 
     const nextQuest = async () => {
+        document.getElementById("learnModal").classList.remove("showLearn")
+        document.getElementById("true").style.border = "none"
         if (num >= question.length - 1) {
             for (let i = 0; i < names.length; i++) {
                 const body = {
@@ -181,6 +226,8 @@ const Game = () => {
             showModal("quizScoreModal")
             return
         }
+        await new Audio(require("../sound/small-page.mp3")).play()
+        await new Promise(resolve => setTimeout(resolve, 1000))
         setNum(num + 1)
         if (playerNum >= names.length - 1) {
             setPlayerNum(0)
@@ -214,8 +261,10 @@ const Game = () => {
 
     return (
         <div>
-            <p className="homeBtnGame" onClick={() => navigate("/")}>Home</p>
-            <div className="mainGame">
+            <div className="homeBtnGame" onClick={() => navigate("/")}>
+                <FontAwesomeIcon size="2x" icon={faHome} className="text-primary" />
+            </div>
+            <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainGame">
                 <div>
                     <p>Timer:  <span id="quizTimer">60</span></p>
                     <h1>Question {num + 1}</h1>
@@ -224,7 +273,7 @@ const Game = () => {
                     <div className="theAnswer">
                         {
                             question[num]?.answer?.map((ans, i) => (
-                                <p key={i}>{i + 1}. <p className="answer" onClick={(e) => checkAnswer(e, ans?.correct)}>{ans?.value}</p></p>
+                                <p key={i}>{i + 1}. <p className="answer" id={`${ans?.correct}`} onClick={(e) => checkAnswer(e, ans?.correct)}>{ans?.value}</p></p>
                             ))
                         }
                     </div>

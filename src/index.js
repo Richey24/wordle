@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -31,6 +32,7 @@ import Game from './learn/Game';
 import QuestionList from './learn/QuestionList';
 import AddQuest from './learn/AddQuest';
 import LeaderQuiz from './learn/LeaderQuiz';
+import Crossword from './views/Crossword';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -63,7 +65,8 @@ root.render(
         <Route path='/quiz/leader' element={<LeaderQuiz />} />
         <Route path='/question/list' element={<QuestionList />} />
         <Route path='/question/add' element={<AddQuest />} />
-      </Routes>
+        <Route path="/crossword" element={<Crossword />} />
+       </Routes>
     </BrowserRouter>
 );
 

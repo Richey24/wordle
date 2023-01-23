@@ -17,21 +17,59 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
+import url from "../url"
+import axios from "axios"
+import { Spinner } from "react-bootstrap"
 
 
 const Names = () => {
     const [arr, setArr] = useState([1])
     const [tribe, setTribe] = useState(["asher", "asher", "asher", "asher"])
+    const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
+    const [spin, setSpin] = useState(true)
+    const [user, setUser] = useState({})
     const { state } = useLocation()
     const navigate = useNavigate()
     const count = state?.count
+
+    const getUser = async () => {
+        try {
+            const res = await axios.get(`${url}/user/get/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                validateStatus: () => true
+            })
+            const rep = await res.data
+            if (res.status !== 200) {
+                setSpin(false)
+                navigate("/login")
+                return
+            }
+            if (token !== rep.mainToken) {
+                localStorage.clear()
+                setSpin(false)
+                return
+            }
+            setUser(rep)
+            setSpin(false)
+        } catch (error) {
+            setSpin(false)
+            navigate("/login")
+        }
+    }
 
     useEffect(() => {
         if (!count) {
             navigate("/bible/select")
             return
         }
+        if (!id) {
+            navigate("/login")
+        }
         setArr(count)
+        getUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const submitForm = (e) => {
@@ -57,8 +95,23 @@ const Names = () => {
         selectTribe(id)
     }
 
+
+    if (spin) {
+        return (
+            <div style={{
+                width: "100%",
+                height: "100vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Spinner animation="border" color="#3d1152" />
+            </div>
+        )
+    }
+
     return (
-        <div className="mainNames">
+        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNames">
             <form onSubmit={submitForm}>
                 <h4>Enter player(s) name</h4>
                 {
