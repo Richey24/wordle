@@ -1,4 +1,6 @@
-import { useEffect, useState} from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import url from "../../../url"
 
 import './crossword.css';
 import './crossword.js';
@@ -9,20 +11,27 @@ export default function CrosswordPuzzle() {
     // const [keysAllowed, setKeysAllow ] = useState(false);
     // const [data, setData ] = useState();
     // const [sample, setSample ] = useState();
-    
-    useEffect(() => {
-            placeResults()
 
-             // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getWords = async () => {
+        const res = await axios.get(`${url}/word/get/all`)
+        const rep = await res.data
+        console.log(rep);
+    }
+
+    useEffect(() => {
+        // getWords()
+        placeResults()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         document.addEventListener("keydown", async (e) => {
-            
-             const inputString = document.querySelector('#inputstring')
-             const alphaKeys = document.querySelectorAll('.alphabetickey')
-             const backspaceKeyImg = document.querySelector('#backspacekey')
-             const body = document.querySelector('body')
+
+            const inputString = document.querySelector('#inputstring')
+            const alphaKeys = document.querySelectorAll('.alphabetickey')
+            const backspaceKeyImg = document.querySelector('#backspacekey')
+            const body = document.querySelector('body')
 
             if (window.keysAllowed && window.sample.includes(e.key.toLowerCase()) && inputString.innerHTML.length !== 6 && !e.repeat) {
                 inputString.innerHTML = inputString.innerHTML + e.key.toLowerCase()
@@ -56,7 +65,7 @@ export default function CrosswordPuzzle() {
                             [{ color: "lime" }, { color: "white" }],
                             { duration: 3000, easing: "linear", fill: "forwards" }
                         )
-        
+
                         object.occupied.forEach((cellNo) => {
                             let blocksArray = getBlocksAtCellNo(cellNo)
                             if (blocksArray.length === 1) {
@@ -70,7 +79,7 @@ export default function CrosswordPuzzle() {
                             }
                         })
                         window.solved.push(object.result)
-        
+
                         if (window.solved.length === 8) {
                             bgMusic.pause()
                             new Audio("audio/win.mp3").play()
@@ -98,18 +107,18 @@ export default function CrosswordPuzzle() {
                 window.keysAllowed = false
                 body.style.filter = "blur(200px)"
                 body.style.backdropFilter = "blur(200px)"
-                
+
                 await new Promise(resolve => setTimeout(resolve, 500))
-        
+
                 window.data = []
                 while (window.data.length !== 8) {
                     placeResults()
                 }
-        
+
                 body.style.filter = "blur(0px)"
                 body.style.backdropFilter = "blur(0px)"
                 await new Promise(resolve => setTimeout(resolve, 500))
-        
+
                 triggerCountdown()
                 // bgMusic.play()
                 window.keysAllowed = true
@@ -139,7 +148,7 @@ export default function CrosswordPuzzle() {
             countdown.innerHTML === "0" && gameOver()
         }, 1000)
     }
-    
+
     const gameOver = () => {
         // bgMusic.pause()
         // new Audio("game over.wav").play()
@@ -153,11 +162,11 @@ export default function CrosswordPuzzle() {
     const placeResults = () => {
         window.data = []
         blocks().forEach(block => block.remove())
-        
+
         const cells = document.querySelectorAll('.cell')
         cells.forEach(cell => cell.style.opacity = "1")
         let results = getResults()
-            console.log(results)
+        console.log(results)
         placeFirstResult(results)
 
         let remaining = results.slice(1)
@@ -180,21 +189,21 @@ export default function CrosswordPuzzle() {
                     })
                 })
             })
-    
+
             let validPlacement = false
             for (let i = 0; i < placements.length; i++) {
                 let X = cellNoToX(placements[i].firstAlphabetCellNo)
                 let Y = cellNoToY(placements[i].firstAlphabetCellNo)
                 delete placements[i].firstAlphabetCellNo
                 placements[i].occupied = placeResult(remaining[0], placements[i].direction, X, Y)
-    
+
                 let outOfGrid = false
                 blocks().forEach((block) => {
                     if (marginLeft(block) < 0 || marginLeft(block) > 450 || marginTop(block) < 0 || marginTop(block) > 450) {
                         outOfGrid = true
                     }
                 })
-    
+
                 let test = true
                 if (!outOfGrid) {
                     let gridWords = getGridWords()
@@ -203,7 +212,7 @@ export default function CrosswordPuzzle() {
                             test = false
                         }
                     })
-    
+
                     if (new Set(gridWords).size !== gridWords.length || gridWords.length !== results.slice(0, window.data.length + 1).length) {
                         test = false
                     }
@@ -225,7 +234,7 @@ export default function CrosswordPuzzle() {
                 remaining.push(remaining.shift())
             }
         }
-        
+
         arrangeWords()
         cells.forEach((cell, cellNo) => {
             if (!window.data.find(object => object.occupied.includes(cellNo))) {
@@ -239,34 +248,36 @@ export default function CrosswordPuzzle() {
         const alphaKeys = document.querySelectorAll('.alphabetickey')
         let results;
         let alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-        
+
         do {
             window.sample = ''
             results = []
-    
+
             let toBeSelectedFrom = [...alphabets]
-    
+
             for (let i = 0; i < 6; i++) {
                 let randomAlphabet = toBeSelectedFrom[Math.floor(Math.random() * toBeSelectedFrom.length)]
                 window.sample = window.sample + randomAlphabet
                 toBeSelectedFrom.splice(toBeSelectedFrom.indexOf(randomAlphabet), 1)
             }
-    
-            window.sample =  window.sample.split("").sort().join("")
-    
+
+            window.sample = window.sample.split("").sort().join("")
+
             alphaKeys.forEach((elem, i) => {
                 elem.querySelector("b").innerHTML = window.sample[i].toUpperCase()
             })
-    
+
+            console.log(window.sample);
+
             window.dictionary.forEach((word) => {
                 let test = true
-    
+
                 alphabets.forEach((alphabet) => {
                     if (word.includes(alphabet) && !window.sample.includes(alphabet)) {
                         test = false
                     }
                 })
-    
+
                 if (test) {
                     if (word.length > 2 && word.length < 7) {
                         results.push(word)
@@ -274,7 +285,7 @@ export default function CrosswordPuzzle() {
                 }
             })
         } while (results.length <= 15 || results.filter((result) => result.length >= 5).length > 3);
-    
+
         results.sort((a, b) => b.length - a.length)
         results = results.slice(0, 15)
         return results
@@ -284,7 +295,7 @@ export default function CrosswordPuzzle() {
         let X = 150
         let Y = 150
         let direction = ["horizontal", "vertical"][Math.floor(Math.random() * 2)]
-       
+
         window.data.push({
             result: results[0],
             direction: direction,
@@ -307,31 +318,31 @@ export default function CrosswordPuzzle() {
 
         return occupied
     }
-     
+
     const coordsToCellNo = (X, Y) => {
         return ((Y / 50) * 10) + (X / 50)
     }
-    
+
     const cellNoToX = (cellNo) => {
         return (cellNo % 10) * 50
     }
-    
+
     const cellNoToY = (cellNo) => {
         return Math.trunc(cellNo / 10) * 50
     }
-    
+
     const marginLeft = (block) => {
         return Number(block.style.marginLeft.split("px")[0])
     }
-    
+
     const marginTop = (block) => {
         return Number(block.style.marginTop.split("px")[0])
     }
-    
+
     const invertDirection = (direction) => {
         return direction === "horizontal" ? "vertical" : "horizontal"
     }
-    
+
     const blocks = () => {
         return document.querySelectorAll(".block")
     }
@@ -339,7 +350,7 @@ export default function CrosswordPuzzle() {
     const getGridWords = () => {
         let gridWords = []
         for (let row = 0; row <= 9; row++) {
-            let word = "" 
+            let word = ""
             for (let column = 0; column <= 9; column++) {
                 if (getBlocksAtCellNo((row * 10) + column).length) {
                     word = word + getBlocksAtCellNo((row * 10) + column)[0].innerHTML
@@ -352,7 +363,7 @@ export default function CrosswordPuzzle() {
                 }
             }
         }
-    
+
         for (let column = 0; column <= 9; column++) {
             let word = ""
             for (let row = 0; row <= 9; row++) {
@@ -379,9 +390,9 @@ export default function CrosswordPuzzle() {
         })
         return blocksFound
     }
-    
+
     const arrangeWords = (data) => {
-      
+
         let minX = +Infinity
         let maxX = -Infinity
         let minY = +Infinity
@@ -416,11 +427,11 @@ export default function CrosswordPuzzle() {
         blocks().forEach((block) => {
             block.style.marginTop = `${marginTop(block) + (Math.trunc((emptyRowOnBS - emptyRowOnUS) / 2) * 50)}px`
         })
-}
+    }
 
-   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage:`url('https://images.unsplash.com/photo-1514897575457-c4db467cf78e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920')` }}>
-  
-   <div className="grid h-screen place-items-center" >
+    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1514897575457-c4db467cf78e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920')` }}>
+
+        <div className="grid h-screen place-items-center" >
             <div id="container">
                 <div className="cell"></div>
                 <div className="cell"></div>
@@ -528,10 +539,10 @@ export default function CrosswordPuzzle() {
                 <div className="px-6 py-4">
                     <div className="">
                         <div id="inputinfo">
-                            <div id="inputstring" onClick={startGame}> {gameStarted ? ''  :  "CLICK TO START"}  </div>
+                            <div id="inputstring" onClick={startGame}> {gameStarted ? '' : "CLICK TO START"}  </div>
                             <div id="alphabetickeys">
                                 <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" /> 
+                                    <img src="img/alphabet key.jpg" alt="" />
                                     <span><b>A</b></span>
                                 </div>
                                 <div className="alphabetickey">
@@ -579,6 +590,6 @@ export default function CrosswordPuzzle() {
                 </div>
             </div>
         </div>
-        
-   </div> 
+
+    </div>
 }
