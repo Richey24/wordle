@@ -12,8 +12,8 @@ import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image'
 import Card from 'react-bootstrap/Card';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid';
 
 import Modal from 'react-bootstrap/Modal';
 
@@ -128,7 +128,6 @@ const Leader = () => {
     }
     return (
         <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
-
             <video src={bground} autoPlay muted loop id='thevid' />
             <Container fluid id="videoMessage">
                 <Container>

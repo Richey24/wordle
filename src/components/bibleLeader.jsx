@@ -19,6 +19,8 @@ import Modal from 'react-bootstrap/Modal';
 
 // begin:Assets
 import url from "../url"
+import "./Leader.css"
+
 import benjamin from "../img/benjamin.png"
 import dan from "../img/dan.png"
 import ephraim from "../img/ephraim.png"
@@ -128,7 +130,6 @@ const BibleLeader = () => {
     }
     return (
         <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
-
             <video src={bground} autoPlay muted loop id='thevid' />
             <Container fluid id="videoMessage">
                 <Container>
@@ -263,9 +264,9 @@ const BibleLeader = () => {
                     <Link to="/">
                         <FontAwesomeIcon icon={faHome} className="text-white" />
                     </Link>
-                </div>
-            </div>
-        </Container>
+                </div >
+            </div >
+        </Container >
     )
 }
 
