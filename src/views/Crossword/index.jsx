@@ -4,16 +4,66 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
 import { Link } from "react-router-dom";
 import '../../assets/fab.css';
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
+// Should be Props
+const bgImages = [
+    { img: 'bg-0.jpg'},
+    { img: 'bg-1.jpg'},
+    { img: 'bg-2.jpg'},
+    { img: 'bg-3.jpg'},
+    { img: 'bg-4.jpg'},
+    { img: 'bg-5.jpg'},
+    { img: 'bg-6.jpg'},
+    { img: 'bg-7.jpg'},
+    { img: 'bg-8.jpg'}
+]
+
+ const puzzleColor = [
+    { color: '#2596be', type: "flat-color" },
+    { color: '#e28743', type: "flat-color" },
+    { color: '#e28743', type: "flat-color" },
+    { color: '#eab676', type: 'flat-color'},
+    { color: '#76b5c5', type: 'flat-color'},
+    { color: '#bea925', type: 'flat-color'},
+    { color: '#cf2f74', type: 'flat-color'},
+    { color: '#f62459', type: 'flat-color'},
+    { color: '#825e5c', type: 'flat-color'},
+    { color: '#16453e', type: 'flat-color'},
+    { color: '#006992', type: 'flat-color'},
+    { color: '#2e3131', type: 'flat-color'},
+    { color: '#16a085', type: 'flat-color'},
+ ]
 
 export default function Puzzle() {
 
-    const [background, setBackground ] = useState([
-        {}
-    ]);
+    const [background, setBackground ] = useState(() => {
+       const saved = localStorage.getItem("background2");
+       const initialValue = saved;
+       return initialValue || "";
+   });
+
+   const [color, setColor ] = useState(() => {
+       const saved = localStorage.getItem("crossword-color");
+       const initialValue = saved;
+       return initialValue || "";
+   });
+
+
+
+   const selectBackground = (url) => {
+       setBackground(url)
+   }
+
+  
+   useEffect(() => {
+        // storing input name
+        localStorage.setItem("background2", background);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [background]);
+
    const [open, setOpen] = useState(false)
    const cancelButtonRef = useRef(null)
 
@@ -25,8 +75,7 @@ export default function Puzzle() {
     return<div>
         <div className="min-h-full">
              <Header />
-             <CrosswordPuzzle />
-             
+             <CrosswordPuzzle background={background} color={color} />
              <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                     <Transition.Child
@@ -53,38 +102,48 @@ export default function Puzzle() {
                         >
                         <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div className="sm:flex sm:items-start">
-                                <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
+                                <div className="">
+                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                    <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                    Background Setting
+                                    </Dialog.Title>
+                                    <div className="mt-5">
+                                        <div class="grid grid-cols-6 gap-1">
+                                        {
+                                            bgImages.map((job, index )=> (
+                                            <div  key={index}>
+                                                <img onClick={() => selectBackground(job.img)} class="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" src={'bg/'+job.img} alt="" />
+                                            </div>
+                                            ))
+                                        }
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-5">
+                                        <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                        Color Setting
+                                        </Dialog.Title>
+                                        <div class="grid grid-cols-6 gap-1 mt-5">
+                                        {
+                                                puzzleColor.map( (clr, index )=> (
+                                                    <div onClick={() => setColor(clr.color)} key={index} class="shadow-lg bg-blue-500 h-10 w-10 rounded-full ml-2 cursor-pointer" style={{ backgroundColor: clr.color }}>
+                                                    </div>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                               </div>
+                                    
+
                                 </div>
-                                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                                   Game Settings
-                                </Dialog.Title>
-                                <div className="mt-2">
-                                    <p className="text-sm text-gray-500">
-                                    Are you sure you want to deactivate your account? All of your data will be permanently
-                                    removed. This action cannot be undone.
-                                    </p>
-                                </div>
-                                </div>
-                            </div>
                             </div>
                             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                             <button
                                 type="button"
-                                className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                                onClick={() => setOpen(false)}
-                            >
-                                Deactivate
-                            </button>
-                            <button
-                                type="button"
                                 className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                                 onClick={() => setOpen(false)}
-                                ref={cancelButtonRef}
-                            >
-                                Cancel
+                                ref={cancelButtonRef}>
+                                Close
                             </button>
                             </div>
                         </Dialog.Panel>
