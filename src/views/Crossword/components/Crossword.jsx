@@ -34,7 +34,7 @@ export default function CrosswordPuzzle() {
                 gameOver()
             }
 
-            if (window.keysAllowed && e.code === "Space" && !e.repeat && inputString.innerHTML.length >= 3) {
+            if (window.keysAllowed && e.code === "Enter" && !e.repeat && inputString.innerHTML.length >= 3) {
 
 
                 const scoreValue = document.querySelector('#scoreValue')
@@ -89,25 +89,24 @@ export default function CrosswordPuzzle() {
                 new Audio("audio/backspace.mp3").play()
             }
 
-            if (e.key === "Enter" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
+            if (e.key === "Space" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
 
+                alert('Are you sure you want to start')
                 window.solved.length !== 8 && window.skips++
                 window.solved = []
                 inputString.innerHTML = ""
                 clearInterval(window.countdownID)
                 window.keysAllowed = false
-                body.style.filter = "blur(200px)"
-                body.style.backdropFilter = "blur(200px)"
+                // body.style.filter = "blur(200px)"
+                // body.style.backdropFilter = "blur(200px)"
                 
                 await new Promise(resolve => setTimeout(resolve, 500))
         
                 window.data = []
-                while (window.data.length !== 8) {
-                    placeResults()
-                }
+                placeResults()
         
-                body.style.filter = "blur(0px)"
-                body.style.backdropFilter = "blur(0px)"
+                // body.style.filter = "blur(0px)"
+                // body.style.backdropFilter = "blur(0px)"
                 await new Promise(resolve => setTimeout(resolve, 500))
         
                 triggerCountdown()
@@ -122,7 +121,7 @@ export default function CrosswordPuzzle() {
         setGameStarted(true)
         new Promise(resolve => setTimeout(resolve, 500))
 
-        new Audio("audio/bgMusic.mp3").play()
+        // new Audio("audio/bgMusic.mp3").play()
         // inputString.innerHTML = ""
         triggerCountdown()
         document.querySelectorAll(".alphabetickey span").forEach(elem => elem.style.opacity = "1")
@@ -142,7 +141,7 @@ export default function CrosswordPuzzle() {
     
     const gameOver = () => {
         // bgMusic.pause()
-        // new Audio("game over.wav").play()
+        new Audio("game over.wav").play()
         const inputString = document.querySelector('#inputstring')
         inputString.innerHTML = ""
         blocks().forEach(block => block.style.transform = "scale(1)")
@@ -276,7 +275,7 @@ export default function CrosswordPuzzle() {
         } while (results.length <= 15 || results.filter((result) => result.length >= 5).length > 3);
     
         results.sort((a, b) => b.length - a.length)
-        results = results.slice(0, 15)
+        results = results.slice(0, 25)
         return results
     }
 
@@ -418,167 +417,224 @@ export default function CrosswordPuzzle() {
         })
 }
 
-   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage:`url('https://images.unsplash.com/photo-1514897575457-c4db467cf78e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920')` }}>
+   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage:`url('https://images.unsplash.com/photo-1514897575457-c4db467cf78e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1')` }}>
   
-   <div className="grid h-screen place-items-center" >
-            <div id="container">
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-                <div className="cell"></div>
-            </div>
-            <div className="max-w-lg rounded overflow-hidden shadow-lg">
-                <div className="px-6 py-4">
+           <div className="grid h-screen place-items-center" >
+                <div id="container">
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                    <div className="cell"></div>
+                </div>
+                <div className="max-w-lg rounded overflow-hidden shadow-lg">
                     <div className="">
-                        <div id="inputinfo">
-                            <div id="inputstring" onClick={startGame}> {gameStarted ? ''  :  "CLICK TO START"}  </div>
-                            <div id="alphabetickeys">
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" /> 
-                                    <span><b>A</b></span>
+                        <div className="">
+                            <div id="inputinfo">
+                                <div id="inputstring" onClick={startGame}> {gameStarted ? ''  :  "CLICK TO START"}  </div>
+                                <div id="alphabetickeys">
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" /> 
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
                                 </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
+                                <div id="otherkeys">
+                                    <div id="spacekey">
+                                        <img src="img/space key.jpg" alt="" />
+                                        <span><b>Enter</b></span>
+                                    </div>
+                                    <div id="backspacekey">
+                                        <img src="img/backspace key.jpg" alt="" />
+                                        <span><b>Backspace</b></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="otherkeys">
-                                <div id="spacekey">
-                                    <img src="img/space key.jpg" alt="" />
-                                    <span><b>Spacebar</b></span>
-                                </div>
-                                <div id="backspacekey">
-                                    <img src="img/backspace key.jpg" alt="" />
-                                    <span><b>Backspace</b></span>
+                            <hr />
+                            <div id="timer">
+                                <div id="clock">
+                                    <div id="countdown">300</div>
                                 </div>
                             </div>
-                        </div>
-                        <hr />
-                        <div id="timer">
-                            <div id="clock">
-                                <div id="countdown">300</div>
+                            <div id="score">
+                                <span id="scoreText">SCORE: <span id="scoreValue">0</span></span>
                             </div>
-                        </div>
-                        <div id="score">
-                            <span id="scoreText">SCORE: <span id="scoreValue">0</span></span>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
+        {/* <div className="grid h-screen place-items-center" >
+             
+                <div className="max-w-lg rounded overflow-hidden shadow-lg">
+                    <div className="">
+                        <div className="">
+                            <div id="inputinfo">
+                                <div id="inputstring" onClick={startGame}> {gameStarted ? ''  :  "CLICK TO START"}  </div>
+                                <div id="alphabetickeys">
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" /> 
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                </div>
+                                <div id="otherkeys">
+                                    <div id="spacekey">
+                                        <img src="img/space key.jpg" alt="" />
+                                        <span><b>Spacebar</b></span>
+                                    </div>
+                                    <div id="backspacekey">
+                                        <img src="img/backspace key.jpg" alt="" />
+                                        <span><b>Backspace</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div id="timer">
+                                <div id="clock">
+                                    <div id="countdown">300</div>
+                                </div>
+                            </div>
+                            <div id="score">
+                                <span id="scoreText">SCORE: <span id="scoreValue">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div> */}
         
    </div> 
 }
