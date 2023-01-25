@@ -566,12 +566,12 @@ export default function CrosswordPuzzle(props) {
                             </div>
                             <hr />
                             <div id="timer">
-                                <div id="clock">
-                                    <div id="countdown">300</div>
+                                <div id="clock" style={style}>
+                                    <div id="countdown"  >300</div>
                                 </div>
                             </div>
                             <div id="score">
-                                <span id="scoreText">SCORE: <span id="scoreValue">0</span></span>
+                                <span id="scoreText"  >SCORE: <span id="scoreValue">0</span></span>
                             </div>
                         </div>
                     </div>

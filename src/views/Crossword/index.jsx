@@ -3,13 +3,27 @@ import Header from '../../components/TheHeader.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
 import { Link } from "react-router-dom";
-import '../../assets/fab.css';
+import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 
 // Should be Props
 const bgImages = [
+    { img: 'bg-levi-1.jpg'},
+    { img: 'bg-asher.jpg'},
+    { img: 'bg-benjamin.jpg'},
+    { img: 'bg-dan.jpg'},
+    { img: 'bg-ephraim.jpg'},
+    { img: 'bg-gad.jpg'},
+    { img: 'bg-issachar.jpg'},
+    { img: 'bg-joseph.jpg'},
+    { img: 'bg-judah.jpg'},
+    { img: 'bg-manasseh.jpg'},
+    { img: 'bg-naftali.jpg'},
+    { img: 'bg-reuben.jpg'},
+    { img: 'bg-simeon.jpg'},
+    { img: 'bg-zebulun.jpg'},
     { img: 'bg-0.jpg'},
     { img: 'bg-1.jpg'},
     { img: 'bg-2.jpg'},
@@ -34,6 +48,7 @@ const bgImages = [
     { color: '#16453e', type: 'flat-color'},
     { color: '#006992', type: 'flat-color'},
     { color: '#2e3131', type: 'flat-color'},
+    { color: '#16a085', type: 'flat-color'},
     { color: '#16a085', type: 'flat-color'},
  ]
 
@@ -75,7 +90,9 @@ export default function Puzzle() {
     return<div>
         <div className="min-h-full">
              <Header />
+
              <CrosswordPuzzle background={background} color={color} />
+
              <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                     <Transition.Child
@@ -151,25 +168,25 @@ export default function Puzzle() {
                     </div>
                     </div>
                 </Dialog>
-            </Transition.Root>
-            <div className="fab-container">
-                    <div className="fab shadow">
-                        <div className="fab-content">
-                        <FontAwesomeIcon icon={faPlus} className="text-white" />
+             </Transition.Root>
+             <div className="fab-container">
+                        <div className="fab shadow">
+                            <div className="fab-content">
+                            <FontAwesomeIcon icon={faPlus} className="text-white" />
+                            </div>
                         </div>
-                    </div>
-                    <div className="sub-button shadow">
-                        <a onClick={handleShow} href="/" target="_blank">
-                            <FontAwesomeIcon icon={faToolbox} className="text-white" />
-                        </a>
-                    </div>
+                        <div className="sub-button shadow">
+                            <a onClick={handleShow} href="/" target="_blank">
+                                <FontAwesomeIcon icon={faToolbox} className="text-white" />
+                            </a>
+                        </div>
 
-                    <div className="sub-button shadow">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faHome} className="text-white" />
-                    </Link>
-                    </div>
-            </div>
+                        <div className="sub-button shadow">
+                        <Link to="/">
+                            <FontAwesomeIcon icon={faHome} className="text-white" />
+                        </Link>
+                        </div>
+             </div>
         </div>
     </div>
 }
