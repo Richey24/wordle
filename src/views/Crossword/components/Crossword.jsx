@@ -267,7 +267,6 @@ export default function CrosswordPuzzle() {
                 elem.querySelector("b").innerHTML = window.sample[i].toUpperCase()
             })
 
-            console.log(window.sample);
 
             window.dictionary.forEach((word) => {
                 let test = true
