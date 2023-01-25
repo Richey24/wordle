@@ -5,9 +5,10 @@ import url from "../../../url"
 import './crossword.css';
 import './crossword.js';
 
-export default function CrosswordPuzzle() {
+export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
+<<<<<<< HEAD
     // const [keysAllowed, setKeysAllow ] = useState(false);
     // const [data, setData ] = useState();
     // const [sample, setSample ] = useState();
@@ -23,15 +24,32 @@ export default function CrosswordPuzzle() {
         placeResults()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
+=======
+   
+    const style =  {
+        background:  props.color,
+    };
+
+    useEffect(() => {
+            placeResults()
+             // eslint-disable-next-line react-hooks/exhaustive-deps
+>>>>>>> fb248ab9258b674a57ba7f7485dbce8795e3e7c0
     }, [])
 
     useEffect(() => {
         document.addEventListener("keydown", async (e) => {
+<<<<<<< HEAD
 
             const inputString = document.querySelector('#inputstring')
             const alphaKeys = document.querySelectorAll('.alphabetickey')
             const backspaceKeyImg = document.querySelector('#backspacekey')
             const body = document.querySelector('body')
+=======
+            
+             const inputString = document.querySelector('#inputstring')
+             const alphaKeys = document.querySelectorAll('.alphabetickey')
+             const backspaceKeyImg = document.querySelector('#backspacekey')
+>>>>>>> fb248ab9258b674a57ba7f7485dbce8795e3e7c0
 
             if (window.keysAllowed && window.sample.includes(e.key.toLowerCase()) && inputString.innerHTML.length !== 6 && !e.repeat) {
                 inputString.innerHTML = inputString.innerHTML + e.key.toLowerCase()
@@ -43,9 +61,7 @@ export default function CrosswordPuzzle() {
                 gameOver()
             }
 
-            if (window.keysAllowed && e.code === "Space" && !e.repeat && inputString.innerHTML.length >= 3) {
-
-
+            if (window.keysAllowed && e.code === "Enter" && !e.repeat && inputString.innerHTML.length >= 3) {
                 const scoreValue = document.querySelector('#scoreValue')
                 const bgMusic = document.getElementById("bgMusic")
                 const countdown = document.querySelector('#countdown')
@@ -65,7 +81,10 @@ export default function CrosswordPuzzle() {
                             [{ color: "lime" }, { color: "white" }],
                             { duration: 3000, easing: "linear", fill: "forwards" }
                         )
+<<<<<<< HEAD
 
+=======
+>>>>>>> fb248ab9258b674a57ba7f7485dbce8795e3e7c0
                         object.occupied.forEach((cellNo) => {
                             let blocksArray = getBlocksAtCellNo(cellNo)
                             if (blocksArray.length === 1) {
@@ -98,13 +117,15 @@ export default function CrosswordPuzzle() {
                 new Audio("audio/backspace.mp3").play()
             }
 
-            if (e.key === "Enter" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
+            if (e.key === "Space" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
 
+                alert('Are you sure you want to start')
                 window.solved.length !== 8 && window.skips++
                 window.solved = []
                 inputString.innerHTML = ""
                 clearInterval(window.countdownID)
                 window.keysAllowed = false
+<<<<<<< HEAD
                 body.style.filter = "blur(200px)"
                 body.style.backdropFilter = "blur(200px)"
 
@@ -119,19 +140,36 @@ export default function CrosswordPuzzle() {
                 body.style.backdropFilter = "blur(0px)"
                 await new Promise(resolve => setTimeout(resolve, 500))
 
+=======
+                // body.style.filter = "blur(200px)"
+                // body.style.backdropFilter = "blur(200px)"
+                await new Promise(resolve => setTimeout(resolve, 500))
+                window.data = []
+                placeResults()
+                // body.style.filter = "blur(0px)"
+                // body.style.backdropFilter = "blur(0px)"
+                await new Promise(resolve => setTimeout(resolve, 500))
+>>>>>>> fb248ab9258b674a57ba7f7485dbce8795e3e7c0
                 triggerCountdown()
                 // bgMusic.play()
                 window.keysAllowed = true
-
             }
         })
     }, [])
 
+    const handleKeySelect = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = inputString.toString();
+        
+        console.log(arr[0]);
+        inputString.innerHTML = "A"
+    }   
+
     const startGame = () => {
         setGameStarted(true)
         new Promise(resolve => setTimeout(resolve, 500))
-
-        new Audio("audio/bgMusic.mp3").play()
+        // new Audio("audio/bgMusic.mp3").play()
         // inputString.innerHTML = ""
         triggerCountdown()
         document.querySelectorAll(".alphabetickey span").forEach(elem => elem.style.opacity = "1")
@@ -151,7 +189,7 @@ export default function CrosswordPuzzle() {
 
     const gameOver = () => {
         // bgMusic.pause()
-        // new Audio("game over.wav").play()
+        new Audio("game over.wav").play()
         const inputString = document.querySelector('#inputstring')
         inputString.innerHTML = ""
         blocks().forEach(block => block.style.transform = "scale(1)")
@@ -246,6 +284,7 @@ export default function CrosswordPuzzle() {
     const getResults = () => {
 
         const alphaKeys = document.querySelectorAll('.alphabetickey')
+
         let results;
         let alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
@@ -286,7 +325,7 @@ export default function CrosswordPuzzle() {
         } while (results.length <= 15 || results.filter((result) => result.length >= 5).length > 3);
 
         results.sort((a, b) => b.length - a.length)
-        results = results.slice(0, 15)
+        results = results.slice(0, 25)
         return results
     }
 
@@ -428,6 +467,7 @@ export default function CrosswordPuzzle() {
         })
     }
 
+<<<<<<< HEAD
     return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1514897575457-c4db467cf78e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920')` }}>
 
         <div className="grid h-screen place-items-center" >
@@ -543,52 +583,174 @@ export default function CrosswordPuzzle() {
                                 <div className="alphabetickey">
                                     <img src="img/alphabet key.jpg" alt="" />
                                     <span><b>A</b></span>
+=======
+   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
+           <div className="grid h-screen place-items-center" >
+                <div id="container">
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                    <div className="cell" style={style}></div>
+                </div>
+                <div className="max-w-lg rounded overflow-hidden shadow-lg">
+                    <div className="">
+                        <div className="">
+                            <div id="inputinfo">
+                                <div id="inputstring" onClick={startGame}> {gameStarted ? ''  :  "CLICK TO START"}  </div>
+                                <div id="alphabetickeys">
+                                    <div className="alphabetickey" onClick={handleKeySelect}>
+                                        <img src="img/alphabet key.jpg" alt="" /> 
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey" onClick={handleKeySelect}>
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey">
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+>>>>>>> fb248ab9258b674a57ba7f7485dbce8795e3e7c0
                                 </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
+                                <div id="otherkeys">
+                                    <div id="spacekey">
+                                        <img src="img/space key.jpg" alt="" />
+                                        <span><b>Enter</b></span>
+                                    </div>
+                                    <div id="backspacekey">
+                                        <img src="img/backspace key.jpg" alt="" />
+                                        <span><b>Backspace</b></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="otherkeys">
-                                <div id="spacekey">
-                                    <img src="img/space key.jpg" alt="" />
-                                    <span><b>Spacebar</b></span>
-                                </div>
-                                <div id="backspacekey">
-                                    <img src="img/backspace key.jpg" alt="" />
-                                    <span><b>Backspace</b></span>
+                            <hr />
+                            <div id="timer">
+                                <div id="clock" style={style}>
+                                    <div id="countdown"  >300</div>
                                 </div>
                             </div>
-                        </div>
-                        <hr />
-                        <div id="timer">
-                            <div id="clock">
-                                <div id="countdown">300</div>
+                            <div id="score">
+                                <span id="scoreText"  >SCORE: <span id="scoreValue">0</span></span>
                             </div>
-                        </div>
-                        <div id="score">
-                            <span id="scoreText">SCORE: <span id="scoreValue">0</span></span>
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
             </div>
         </div>
 
     </div>
+=======
+           </div>
+   </div> 
+>>>>>>> fb248ab9258b674a57ba7f7485dbce8795e3e7c0
 }
