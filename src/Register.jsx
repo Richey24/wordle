@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import "./Register.css"
 import { useState } from 'react'
 import { Alert, Spinner } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
@@ -29,6 +30,7 @@ const Register = () => {
     const [num, setNum] = useState(1)
     const [first, setFirst] = useState({})
     const [tribe, setTribe] = useState(["Asher", "rgb(111, 111, 21)"])
+    const [church, setChurch] = useState("Non-Affiliated (NA)")
     const navigate = useNavigate()
 
     const submitForm = async (e) => {
@@ -84,9 +86,7 @@ const Register = () => {
                 break;
             case 200:
                 const rep = await res.data
-                localStorage.setItem('id', rep._id)
-                localStorage.setItem('token', rep.mainToken)
-                navigate('/')
+                navigate('/verify', { state: { email: rep.email } })
                 break;
             default:
                 break;
@@ -96,13 +96,18 @@ const Register = () => {
 
     const firstStage = (e) => {
         e.preventDefault()
-        setShowErr(false)
         const user = {
             name: e.target.name?.value || "",
             username: e.target.username?.value || "",
             email: e.target.email?.value,
         }
+        if (!user.email.includes("@")) {
+            setErr("Invalid email")
+            setShowErr(true)
+            return
+        }
         setFirst(user)
+        setShowErr(false)
         setNum(2)
     }
 
@@ -110,9 +115,18 @@ const Register = () => {
         document.getElementById("tribe").classList.toggle("show")
     }
 
+    const selectChurch = () => {
+        document.getElementById("church").classList.toggle("show")
+    }
+
     const getTribe = (value) => {
         setTribe(value)
         selectTribe()
+    }
+
+    const getChurch = (value) => {
+        setChurch(value)
+        selectChurch()
     }
 
     return (
@@ -139,6 +153,36 @@ const Register = () => {
                             <label htmlFor="email">Email</label>
                             <br />
                             <input required type="text" id="email" placeholder="Enter your email" name="email" />
+                        </div>
+                        <div className='tribeDiv'>
+                            <label>Select your school / church affiliation</label>
+                            <p id='churchMain' onClick={selectChurch} className='tribeMain'>{church} <img src={drop} alt="" /></p>
+                            <ul id='church' className='tribeList'>
+                                <li onClick={() => getChurch("1WEST (Messianic, Harlem-School Influenced) CAMPS")}>1WEST1 (Messianic, Harlem-School Influenced) CAMPS </li>
+                                <li onClick={() => getChurch("Ambassadors of Christ (AOC)")}>Ambassadors of Christ (AOC)</li>
+                                <li onClick={() => getChurch("Army of Israel (AOI) ")}>Army of Israel (AOI) </li>
+                                <li onClick={() => getChurch("Future World of Israel (FWOI)")}>Future World of Israel (FWOI)</li>
+                                <li onClick={() => getChurch("Gathering of Christ Church (GOCC)")}>Gathering of Christ Church (GOCC)</li>
+                                <li onClick={() => getChurch("Great MillStone Israelites (GMS)")}>Great MillStone Israelites (GMS)</li>
+                                <li onClick={() => getChurch("House of Israel (HOI)")}>House of Israel (HOI)</li>
+                                <li onClick={() => getChurch("Israel United in Christ (IUIC)")}>Israel United in Christ (IUIC)</li>
+                                <li onClick={() => getChurch("Israelite Church of God in Jesus Christ (ICGJC)")}>Israelite Church of God in Jesus Christ (ICGJC)</li>
+                                <li onClick={() => getChurch("Israelite School of Biblical & Practical Knowledge (ISBPK)")}>Israelite School of Biblical & Practical Knowledge (ISBPK)</li>
+                                <li onClick={() => getChurch("Israelite School of Knowledge (ISOK)")}>Israelite School of Knowledge (ISOK)</li>
+                                <li onClick={() => getChurch("Israelite School of Universal Practical Knowledge (ISUPK)")}>Israelite School of Universal Practical Knowledge (ISUPK)</li>
+                                <li onClick={() => getChurch("Lions of Israel / We Got Next (LOI)")}>Lions of Israel / We Got Next (LOI)</li>
+                                <li onClick={() => getChurch("Nation of Yahweh (NOY)")}>Nation of Yahweh (NOY)</li>
+                                <li onClick={() => getChurch("Sons of Thunder (SOT)")}>Sons of Thunder (SOT)</li>
+                                <li onClick={() => getChurch("Shut ‘Em Down Crew / RAM Squad (RAM)")}>Shut ‘Em Down Crew / RAM Squad (RAM)</li>
+                                <li onClick={() => getChurch("Sicarii")}>Sicarii</li>
+                                <li onClick={() => getChurch("Thee Light of Zion (TLOZ)")}>Thee Light of Zion (TLOZ)</li>
+                                <li onClick={() => getChurch("True Nation Israelite (TNI)")}>True Nation Israelite (TNI)</li>
+                                <li onClick={() => getChurch("United Kingdom of Israel (UKIOC)")}>United Kingdom of Israel (UKIOC)</li>
+                                <li onClick={() => getChurch("We Got Next (WGN )")}>We Got Next (WGN )</li>
+                                <li onClick={() => getChurch("Yahawashi’s Servants in Y’Sharael (YSIY)")}>Yahawashi’s Servants in Y’Sharael (YSIY)</li>
+                                <li onClick={() => getChurch("TANAKH-Only (TO)")}>TANAKH-Only (TO)</li>
+                                <li onClick={() => getChurch("Church of God and Saints of Christ (COGASOC)")}>Church of God and Saints of Christ (COGASOC)</li>
+                            </ul>
                         </div>
                         <button type='submit'>Next</button>
                     </form>
