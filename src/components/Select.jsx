@@ -194,6 +194,7 @@ const Select = () => {
                 <button>Subscribe</button>
                 <button onClick={() => showModal("swordSub")}>Cancel</button>
             </div>
+
         </div>
     )
 }

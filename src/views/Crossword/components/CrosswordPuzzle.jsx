@@ -6,11 +6,9 @@ import './crossword.js';
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
-   
-    const style =  {
-        background:  props.color,
-    };
-
+    
+    const style  =  { background:  props.color, };
+    
     useEffect(() => {
             placeResults()
              // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,6 +28,7 @@ export default function CrosswordPuzzle(props) {
             }
 
             if (e.key === "Escape" && window.keysAllowed) {
+                // alert('Are you sure you want to quite')
                 gameOver()
             }
 
@@ -88,6 +87,7 @@ export default function CrosswordPuzzle(props) {
             if (e.key === "Space" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
 
                 alert('Are you sure you want to start')
+
                 window.solved.length !== 8 && window.skips++
                 window.solved = []
                 inputString.innerHTML = ""
@@ -108,13 +108,46 @@ export default function CrosswordPuzzle(props) {
         })
     }, [])
 
-    const handleKeySelect = () => {
+    const handleKeySelectA = () => {
         console.log(window.sample)
         const inputString = document.querySelector('#inputstring');
-        var arr = inputString.toString();
-        
-        console.log(arr[0]);
-        inputString.innerHTML = "A"
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[0]
+    }   
+
+    const handleKeySelectB = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[1]
+    }   
+
+    const handleKeySelectC = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[2]
+    }   
+
+    const handleKeySelectD = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[3]
+    }   
+
+    const handleKeySelectE = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[4]
+    }   
+
+    const handleKeySelectF = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[5]
     }   
 
     const startGame = () => {
@@ -139,9 +172,9 @@ export default function CrosswordPuzzle(props) {
     }
     
     const gameOver = () => {
-        // bgMusic.pause()
         new Audio("game over.wav").play()
         const inputString = document.querySelector('#inputstring')
+       
         inputString.innerHTML = ""
         blocks().forEach(block => block.style.transform = "scale(1)")
         clearInterval(window.countdownID)
@@ -418,137 +451,145 @@ export default function CrosswordPuzzle(props) {
 }
 
    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
-           <div className="grid h-screen place-items-center" >
-                <div id="container">
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
-                    <div className="cell" style={style}></div>
+           <div className="grid h-screen place-items-center overflow-auto" >
+                <div>
+                    <div id="container">
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                    </div>
                 </div>
+
                 <div className="max-w-lg rounded overflow-hidden shadow-lg">
                     <div className="">
                         <div className="">
                             <div id="inputinfo">
-                                <div id="inputstring" onClick={startGame}> {gameStarted ? ''  :  "CLICK TO START"}  </div>
+
+                                {gameStarted ?
+                                    <div id="inputstring"  style={style} ></div>
+                                    :
+                                    <div id="inputstring"  style={style} onClick={startGame} > CLICK TO START</div>
+                                }
                                 <div id="alphabetickeys">
-                                    <div className="alphabetickey" onClick={handleKeySelect}>
+                                    <div className="alphabetickey" onClick={handleKeySelectA}>
                                         <img src="img/alphabet key.jpg" alt="" /> 
                                         <span><b>A</b></span>
                                     </div>
-                                    <div className="alphabetickey" onClick={handleKeySelect}>
+                                    <div className="alphabetickey" onClick={handleKeySelectB}>
                                         <img src="img/alphabet key.jpg" alt="" />
                                         <span><b>A</b></span>
                                     </div>
-                                    <div className="alphabetickey">
+                                    <div className="alphabetickey" onClick={handleKeySelectC}>
                                         <img src="img/alphabet key.jpg" alt="" />
                                         <span><b>A</b></span>
                                     </div>
-                                    <div className="alphabetickey">
+                                    <div className="alphabetickey" onClick={handleKeySelectD}>
                                         <img src="img/alphabet key.jpg" alt="" />
                                         <span><b>A</b></span>
                                     </div>
-                                    <div className="alphabetickey">
+                                    <div className="alphabetickey" onClick={handleKeySelectE}>
                                         <img src="img/alphabet key.jpg" alt="" />
                                         <span><b>A</b></span>
                                     </div>
-                                    <div className="alphabetickey">
+                                    <div className="alphabetickey" onClick={handleKeySelectF}>
                                         <img src="img/alphabet key.jpg" alt="" />
                                         <span><b>A</b></span>
                                     </div>
@@ -570,6 +611,11 @@ export default function CrosswordPuzzle(props) {
                                     <div id="countdown"  >300</div>
                                 </div>
                             </div>
+
+                            <div id="levels">
+                                <div id="level" style={style} >Level 1</div>
+                            </div>
+
                             <div id="score">
                                 <span id="scoreText"  >SCORE: <span id="scoreValue">0</span></span>
                             </div>

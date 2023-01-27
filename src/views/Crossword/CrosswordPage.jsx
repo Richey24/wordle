@@ -1,15 +1,17 @@
-import CrosswordPuzzle from "./components/Crossword.jsx"
+import CrosswordPuzzle from "./components/CrosswordPuzzle.jsx"
 import Header from '../../components/TheHeader.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
+import {  faToolbox, faPlus, faHome, faUserGraduate } from '@fortawesome/fontawesome-free-solid'
 import { Link } from "react-router-dom";
 import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { useNavigate  } from "react-router-dom";
 
 // Should be Props
 const bgImages = [
+    { img: 'bg-boogle.jpg'},
     { img: 'bg-levi-1.jpg'},
     { img: 'bg-asher.jpg'},
     { img: 'bg-benjamin.jpg'},
@@ -35,7 +37,7 @@ const bgImages = [
     { img: 'bg-8.jpg'}
 ]
 
- const puzzleColor = [
+const puzzleColor = [
     { color: '#2596be', type: "flat-color" },
     { color: '#e28743', type: "flat-color" },
     { color: '#e28743', type: "flat-color" },
@@ -50,11 +52,21 @@ const bgImages = [
     { color: '#2e3131', type: 'flat-color'},
     { color: '#16a085', type: 'flat-color'},
     { color: '#16a085', type: 'flat-color'},
- ]
+]
 
 export default function Puzzle() {
 
+    const navigate = useNavigate()
     const [background, setBackground ] = useState(() => {
+
+    //   const settings = JSON.parse(localStorage.getItem('settings'));
+    //   const background = settings.background;
+
+    //   if (background.transitionmode === true) {
+    //        const image =  randomSelectImage()
+    //        return image;
+    //   }
+       
        const saved = localStorage.getItem("background2");
        const initialValue = saved;
        return initialValue || "";
@@ -72,6 +84,9 @@ export default function Puzzle() {
        setBackground(url)
    }
 
+   const randomSelectImage = () => {
+
+   }
   
    useEffect(() => {
         // storing input name
@@ -91,7 +106,7 @@ export default function Puzzle() {
         <div className="min-h-full">
              <Header />
 
-             <CrosswordPuzzle background={background} color={color} />
+             <CrosswordPuzzle background={background} color={color}   />
 
              <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -169,6 +184,7 @@ export default function Puzzle() {
                     </div>
                 </Dialog>
              </Transition.Root>
+             
              <div className="fab-container">
                         <div className="fab shadow">
                             <div className="fab-content">
@@ -180,13 +196,15 @@ export default function Puzzle() {
                                 <FontAwesomeIcon icon={faToolbox} className="text-white" />
                             </a>
                         </div>
-
+                        <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
+                            <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
+                        </div>
                         <div className="sub-button shadow">
                         <Link to="/">
                             <FontAwesomeIcon icon={faHome} className="text-white" />
                         </Link>
                         </div>
-             </div>
+                 </div>
         </div>
     </div>
 }

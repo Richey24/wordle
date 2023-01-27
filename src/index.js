@@ -32,7 +32,8 @@ import Game from './learn/Game';
 import QuestionList from './learn/QuestionList';
 import AddQuest from './learn/AddQuest';
 import LeaderQuiz from './learn/LeaderQuiz';
-import Crossword from './views/Crossword';
+import Crossword from './views/Crossword/CrosswordPage';
+import CrosswordLeaderboard from './views/Crossword/CrosswordLeaderboard';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -66,6 +67,7 @@ root.render(
         <Route path='/question/list' element={<QuestionList />} />
         <Route path='/question/add' element={<AddQuest />} />
         <Route path="/crossword" element={<Crossword />} />
+        <Route path="/crossword/leader" element={<CrosswordLeaderboard />} />
        </Routes>
     </BrowserRouter>
 );
