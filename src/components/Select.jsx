@@ -10,26 +10,13 @@ import { useEffect } from "react"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Select = () => {
     const navigate = useNavigate()
     const id = localStorage.getItem("id")
     const token = localStorage.getItem("token")
     const [user, setUser] = useState({})
-    const [soundOn, setSoundOn] = useState(true)
     const [spin, setSpin] = useState(true)
-    const soundOnLocation = "img/soundOn.png"
-    const soundOffLocation = "img/soundOff.png"
-
-
-    useEffect (()=>{
-        const settings = {
-            sound:true
-        }
-        localStorage.setItem("Settings", JSON.stringify(settings))
-    },[])
-
 
     useEffect(() => {
         if (id) {
@@ -106,58 +93,36 @@ const Select = () => {
     }
 
     const playSound = async (val) => {
-        console.log(soundOn)
-        if(soundOn) {
-            switch (val) {
-                case "word":
-                    new Audio(require("../sound/hit-low-gravity.mp3")).play()
-                    break;
-                case "quest":
-                    new Audio(require("../sound/battle_horn.mp3")).play()
-                    break;
-                case "cross":
-                    new Audio(require("../sound/cross.mp3")).play()
-                    break;
-                case "learn":
-                    new Audio(require("../sound/small-page.mp3")).play()
-                    break;
-                case "hang":
-                    new Audio(require("../sound/geo.mp3")).play()
-                    break;
-                case "sword":
-                    new Audio(require("../sound/ES_SwordIn.mp3")).play()
-                    break;
-                case "shield":
-                    new Audio(require("../sound/shield-guard.mp3")).play()
-                    break;
-                default:
-                    break;
-            }
+        switch (val) {
+            case "word":
+                new Audio(require("../sound/hit-low-gravity.mp3")).play()
+                break;
+            case "quest":
+                new Audio(require("../sound/battle_horn.mp3")).play()
+                break;
+            case "cross":
+                new Audio(require("../sound/cross.mp3")).play()
+                break;
+            case "learn":
+                new Audio(require("../sound/small-page.mp3")).play()
+                break;
+            case "hang":
+                new Audio(require("../sound/geo.mp3")).play()
+                break;
+            case "sword":
+                new Audio(require("../sound/ES_SwordIn.mp3")).play()
+                break;
+            case "shield":
+                new Audio(require("../sound/shield-guard.mp3")).play()
+                break;
+            default:
+                break;
         }
-
     }
 
     const logOut = () => {
         localStorage.clear()
         navigate(0)
-    }
-    const soundClick = () => {
-
-
-
-        const localStorageSettings = localStorage.getItem("Settings")
-        let settings = JSON.parse(localStorageSettings)
-
-        //
-        setSoundOn(!soundOn)
-
-        //set sound
-        settings.sound = !soundOn
-
-
-
-        //set Local Storage for sound
-        localStorage.setItem("Settings", JSON.stringify(settings))
     }
 
     if (spin) {
@@ -180,20 +145,11 @@ const Select = () => {
             <div className="firstDiv">
                 {
                     user.username ? (
-                        <>
-                            <p>Shalom {user.username} <span onClick={logOut}>Logout</span></p>
-                            <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
-                        </>
-
-
+                        <p>Welcome back {user.username} <span onClick={logOut}>Logout</span></p>
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
                             <p onClick={() => navigate("/login")}>Login</p>
-                            {/*<p onClick={() => console.log("Sound Clicked")}></p>*/}
-                            <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
-
-
                         </>
                     )
                 }
@@ -238,6 +194,7 @@ const Select = () => {
                 <button>Subscribe</button>
                 <button onClick={() => showModal("swordSub")}>Cancel</button>
             </div>
+
         </div>
     )
 }

@@ -437,7 +437,6 @@ const Wordle = () => {
 
             if (remainingTiles.length === 0) {
                 showAlert(targetWord.toUpperCase(), null)
-                new Audio(require("../sound/wrong.mp3")).play()
                 clearInterval(timer)
                 stopInteraction()
                 if (num === 1 && id) {

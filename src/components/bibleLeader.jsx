@@ -264,9 +264,10 @@ const BibleLeader = () => {
                     <Link to="/">
                         <FontAwesomeIcon icon={faHome} className="text-white" />
                     </Link>
-                </div >
-            </div >
-        </Container >
+>>>>>>> 5b00e7582389528f4bfaea26d3245983ff8d1e30
+                </div>
+            </div>
+        </Container>
     )
 }
 

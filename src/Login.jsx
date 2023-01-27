@@ -55,13 +55,9 @@ const Login = () => {
                     break;
                 case 200:
                     const rep = await res.data
-                    if (rep.confirmed) {
-                        localStorage.setItem('id', rep._id)
-                        localStorage.setItem('token', rep.mainToken)
-                        navigate('/')
-                    } else {
-                        navigate("/verify")
-                    }
+                    localStorage.setItem('id', rep._id)
+                    localStorage.setItem('token', rep.mainToken)
+                    navigate('/')
                     break;
                 default:
                     break;
@@ -131,7 +127,7 @@ const Login = () => {
     if (reg === "sent") {
         return (
             <div className="loginMainDiv">
-                <div style={{ position: "relative", height: "600px" }} className="loginDiv">
+                <div style={{ position: "relative" }} className="loginDiv">
                     <div className="lockImage">
                         <img src={mail} alt="" />
                     </div>

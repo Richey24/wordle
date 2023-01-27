@@ -1,6 +1,4 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import url from "../../../url"
+import { useEffect, useState} from 'react';
 
 import './crossword.css';
 import './crossword.js';
@@ -8,22 +6,20 @@ import './crossword.js';
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
-
-    const style = {
-        background: props.color,
-    };
-
+    
+    const style  =  { background:  props.color, };
+    
     useEffect(() => {
-        placeResults()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+            placeResults()
+             // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
         document.addEventListener("keydown", async (e) => {
-
-            const inputString = document.querySelector('#inputstring')
-            const alphaKeys = document.querySelectorAll('.alphabetickey')
-            const backspaceKeyImg = document.querySelector('#backspacekey')
+            
+             const inputString = document.querySelector('#inputstring')
+             const alphaKeys = document.querySelectorAll('.alphabetickey')
+             const backspaceKeyImg = document.querySelector('#backspacekey')
 
             if (window.keysAllowed && window.sample.includes(e.key.toLowerCase()) && inputString.innerHTML.length !== 6 && !e.repeat) {
                 inputString.innerHTML = inputString.innerHTML + e.key.toLowerCase()
@@ -32,6 +28,7 @@ export default function CrosswordPuzzle(props) {
             }
 
             if (e.key === "Escape" && window.keysAllowed) {
+                // alert('Are you sure you want to quite')
                 gameOver()
             }
 
@@ -68,7 +65,7 @@ export default function CrosswordPuzzle(props) {
                             }
                         })
                         window.solved.push(object.result)
-
+        
                         if (window.solved.length === 8) {
                             bgMusic.pause()
                             new Audio("audio/win.mp3").play()
@@ -90,6 +87,7 @@ export default function CrosswordPuzzle(props) {
             if (e.key === "Space" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
 
                 alert('Are you sure you want to start')
+
                 window.solved.length !== 8 && window.skips++
                 window.solved = []
                 inputString.innerHTML = ""
@@ -110,14 +108,47 @@ export default function CrosswordPuzzle(props) {
         })
     }, [])
 
-    const handleKeySelect = () => {
+    const handleKeySelectA = () => {
         console.log(window.sample)
         const inputString = document.querySelector('#inputstring');
-        var arr = inputString.toString();
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[0]
+    }   
 
-        console.log(arr[0]);
-        inputString.innerHTML = "A"
-    }
+    const handleKeySelectB = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[1]
+    }   
+
+    const handleKeySelectC = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[2]
+    }   
+
+    const handleKeySelectD = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[3]
+    }   
+
+    const handleKeySelectE = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[4]
+    }   
+
+    const handleKeySelectF = () => {
+        console.log(window.sample)
+        const inputString = document.querySelector('#inputstring');
+        var arr = window.sample.toString();
+        inputString.innerHTML += arr[5]
+    }   
 
     const startGame = () => {
         setGameStarted(true)
@@ -139,11 +170,11 @@ export default function CrosswordPuzzle(props) {
             countdown.innerHTML === "0" && gameOver()
         }, 1000)
     }
-
+    
     const gameOver = () => {
-        // bgMusic.pause()
         new Audio("game over.wav").play()
         const inputString = document.querySelector('#inputstring')
+       
         inputString.innerHTML = ""
         blocks().forEach(block => block.style.transform = "scale(1)")
         clearInterval(window.countdownID)
@@ -153,11 +184,11 @@ export default function CrosswordPuzzle(props) {
     const placeResults = () => {
         window.data = []
         blocks().forEach(block => block.remove())
-
+        
         const cells = document.querySelectorAll('.cell')
         cells.forEach(cell => cell.style.opacity = "1")
         let results = getResults()
-        console.log(results)
+            console.log(results)
         placeFirstResult(results)
 
         let remaining = results.slice(1)
@@ -180,21 +211,21 @@ export default function CrosswordPuzzle(props) {
                     })
                 })
             })
-
+    
             let validPlacement = false
             for (let i = 0; i < placements.length; i++) {
                 let X = cellNoToX(placements[i].firstAlphabetCellNo)
                 let Y = cellNoToY(placements[i].firstAlphabetCellNo)
                 delete placements[i].firstAlphabetCellNo
                 placements[i].occupied = placeResult(remaining[0], placements[i].direction, X, Y)
-
+    
                 let outOfGrid = false
                 blocks().forEach((block) => {
                     if (marginLeft(block) < 0 || marginLeft(block) > 450 || marginTop(block) < 0 || marginTop(block) > 450) {
                         outOfGrid = true
                     }
                 })
-
+    
                 let test = true
                 if (!outOfGrid) {
                     let gridWords = getGridWords()
@@ -203,7 +234,7 @@ export default function CrosswordPuzzle(props) {
                             test = false
                         }
                     })
-
+    
                     if (new Set(gridWords).size !== gridWords.length || gridWords.length !== results.slice(0, window.data.length + 1).length) {
                         test = false
                     }
@@ -225,7 +256,7 @@ export default function CrosswordPuzzle(props) {
                 remaining.push(remaining.shift())
             }
         }
-
+        
         arrangeWords()
         cells.forEach((cell, cellNo) => {
             if (!window.data.find(object => object.occupied.includes(cellNo))) {
@@ -240,35 +271,34 @@ export default function CrosswordPuzzle(props) {
 
         let results;
         let alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
+        
         do {
             window.sample = ''
             results = []
-
+    
             let toBeSelectedFrom = [...alphabets]
-
+    
             for (let i = 0; i < 6; i++) {
                 let randomAlphabet = toBeSelectedFrom[Math.floor(Math.random() * toBeSelectedFrom.length)]
                 window.sample = window.sample + randomAlphabet
                 toBeSelectedFrom.splice(toBeSelectedFrom.indexOf(randomAlphabet), 1)
             }
-
-            window.sample = window.sample.split("").sort().join("")
-
+    
+            window.sample =  window.sample.split("").sort().join("")
+    
             alphaKeys.forEach((elem, i) => {
                 elem.querySelector("b").innerHTML = window.sample[i].toUpperCase()
             })
-
-
+    
             window.dictionary.forEach((word) => {
                 let test = true
-
+    
                 alphabets.forEach((alphabet) => {
                     if (word.includes(alphabet) && !window.sample.includes(alphabet)) {
                         test = false
                     }
                 })
-
+    
                 if (test) {
                     if (word.length > 2 && word.length < 7) {
                         results.push(word)
@@ -276,7 +306,7 @@ export default function CrosswordPuzzle(props) {
                 }
             })
         } while (results.length <= 15 || results.filter((result) => result.length >= 5).length > 3);
-
+    
         results.sort((a, b) => b.length - a.length)
         results = results.slice(0, 25)
         return results
@@ -286,7 +316,7 @@ export default function CrosswordPuzzle(props) {
         let X = 150
         let Y = 150
         let direction = ["horizontal", "vertical"][Math.floor(Math.random() * 2)]
-
+       
         window.data.push({
             result: results[0],
             direction: direction,
@@ -309,31 +339,31 @@ export default function CrosswordPuzzle(props) {
 
         return occupied
     }
-
+     
     const coordsToCellNo = (X, Y) => {
         return ((Y / 50) * 10) + (X / 50)
     }
-
+    
     const cellNoToX = (cellNo) => {
         return (cellNo % 10) * 50
     }
-
+    
     const cellNoToY = (cellNo) => {
         return Math.trunc(cellNo / 10) * 50
     }
-
+    
     const marginLeft = (block) => {
         return Number(block.style.marginLeft.split("px")[0])
     }
-
+    
     const marginTop = (block) => {
         return Number(block.style.marginTop.split("px")[0])
     }
-
+    
     const invertDirection = (direction) => {
         return direction === "horizontal" ? "vertical" : "horizontal"
     }
-
+    
     const blocks = () => {
         return document.querySelectorAll(".block")
     }
@@ -341,7 +371,7 @@ export default function CrosswordPuzzle(props) {
     const getGridWords = () => {
         let gridWords = []
         for (let row = 0; row <= 9; row++) {
-            let word = ""
+            let word = "" 
             for (let column = 0; column <= 9; column++) {
                 if (getBlocksAtCellNo((row * 10) + column).length) {
                     word = word + getBlocksAtCellNo((row * 10) + column)[0].innerHTML
@@ -354,7 +384,7 @@ export default function CrosswordPuzzle(props) {
                 }
             }
         }
-
+    
         for (let column = 0; column <= 9; column++) {
             let word = ""
             for (let row = 0; row <= 9; row++) {
@@ -381,9 +411,9 @@ export default function CrosswordPuzzle(props) {
         })
         return blocksFound
     }
-
+    
     const arrangeWords = (data) => {
-
+      
         let minX = +Infinity
         let maxX = -Infinity
         let minY = +Infinity
@@ -418,167 +448,180 @@ export default function CrosswordPuzzle(props) {
         blocks().forEach((block) => {
             block.style.marginTop = `${marginTop(block) + (Math.trunc((emptyRowOnBS - emptyRowOnUS) / 2) * 50)}px`
         })
-    }
+}
 
-    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
-        <div className="grid h-screen place-items-center" >
-            <div id="container">
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-                <div className="cell" style={style}></div>
-            </div>
-            <div className="max-w-lg rounded overflow-hidden shadow-lg">
-                <div className="">
+   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
+           <div className="grid h-screen place-items-center overflow-auto" >
+                <div>
+                    <div id="container">
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                        <div className="cell" style={style}></div>
+                    </div>
+                </div>
+
+                <div className="max-w-lg rounded overflow-hidden shadow-lg">
                     <div className="">
-                        <div id="inputinfo">
-                            <div id="inputstring" onClick={startGame}> {gameStarted ? '' : "CLICK TO START"}  </div>
-                            <div id="alphabetickeys">
-                                <div className="alphabetickey" onClick={handleKeySelect}>
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
+                        <div className="">
+                            <div id="inputinfo">
+
+                                {gameStarted ?
+                                    <div id="inputstring"  style={style} ></div>
+                                    :
+                                    <div id="inputstring"  style={style} onClick={startGame} > CLICK TO START</div>
+                                }
+                                <div id="alphabetickeys">
+                                    <div className="alphabetickey" onClick={handleKeySelectA}>
+                                        <img src="img/alphabet key.jpg" alt="" /> 
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey" onClick={handleKeySelectB}>
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey" onClick={handleKeySelectC}>
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey" onClick={handleKeySelectD}>
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey" onClick={handleKeySelectE}>
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
+                                    <div className="alphabetickey" onClick={handleKeySelectF}>
+                                        <img src="img/alphabet key.jpg" alt="" />
+                                        <span><b>A</b></span>
+                                    </div>
                                 </div>
-                                <div className="alphabetickey" onClick={handleKeySelect}>
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
-                                </div>
-                                <div className="alphabetickey">
-                                    <img src="img/alphabet key.jpg" alt="" />
-                                    <span><b>A</b></span>
+                                <div id="otherkeys">
+                                    <div id="spacekey">
+                                        <img src="img/space key.jpg" alt="" />
+                                        <span><b>Enter</b></span>
+                                    </div>
+                                    <div id="backspacekey">
+                                        <img src="img/backspace key.jpg" alt="" />
+                                        <span><b>Backspace</b></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="otherkeys">
-                                <div id="spacekey">
-                                    <img src="img/space key.jpg" alt="" />
-                                    <span><b>Enter</b></span>
-                                </div>
-                                <div id="backspacekey">
-                                    <img src="img/backspace key.jpg" alt="" />
-                                    <span><b>Backspace</b></span>
+                            <hr />
+                            <div id="timer">
+                                <div id="clock" style={style}>
+                                    <div id="countdown"  >300</div>
                                 </div>
                             </div>
-                        </div>
-                        <hr />
-                        <div id="timer">
-                            <div id="clock" style={style}>
-                                <div id="countdown"  >300</div>
+
+                            <div id="levels">
+                                <div id="level" style={style} >Level 1</div>
                             </div>
-                        </div>
-                        <div id="score">
-                            <span id="scoreText"  >SCORE: <span id="scoreValue">0</span></span>
+
+                            <div id="score">
+                                <span id="scoreText"  >SCORE: <span id="scoreValue">0</span></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+           </div>
+   </div> 
 }
