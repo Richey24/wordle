@@ -37,6 +37,19 @@ const bgImages = [
     { img: 'bg-8.jpg'}
 ]
 
+// Should be Props
+const bgRandomImages = [
+    { img: 'bg-0.jpg'},
+    { img: 'bg-1.jpg'},
+    { img: 'bg-2.jpg'},
+    { img: 'bg-3.jpg'},
+    { img: 'bg-4.jpg'},
+    { img: 'bg-5.jpg'},
+    { img: 'bg-6.jpg'},
+    { img: 'bg-7.jpg'},
+    { img: 'bg-8.jpg'}
+]
+
 const puzzleColor = [
     { color: '#2596be', type: "flat-color" },
     { color: '#e28743', type: "flat-color" },
@@ -55,46 +68,46 @@ const puzzleColor = [
 ]
 
 export default function Puzzle() {
+    
+    const randomSelectImage = () => {
+        const random = Math.floor(Math.random() * bgRandomImages.length);
+        return bgRandomImages[random].img;
+   }
 
     const navigate = useNavigate()
     const [background, setBackground ] = useState(() => {
+        const saved = localStorage.getItem("image-backround");
 
-    //   const settings = JSON.parse(localStorage.getItem('settings'));
-    //   const background = settings.background;
+        const transition = localStorage.getItem("transition-mode");
+        if ( transition === 'true' ) {
+            return randomSelectImage()
+        }
+        // return randomSelectImage()
+        const initialValue = saved;
+        return initialValue || "";
+    });
 
-    //   if (background.transitionmode === true) {
-    //        const image =  randomSelectImage()
-    //        return image;
-    //   }
-       
-       const saved = localStorage.getItem("image-backround");
-       const initialValue = saved;
-       return initialValue || "";
+   const [transition, setTransition] = useState(() => {
+     const initialValue  =  localStorage.getItem("transition-mode");
+     return initialValue || "";
    });
-
-   const [checked, setChecked] = useState(false);
+   
    const handleChange = () => {
-     alert(checked)
-     setChecked(!checked);
+        setTransition(!transition);
    };
 
-   
    const [color, setColor ] = useState(() => {
        const saved = localStorage.getItem("crossword-color");
        const initialValue = saved;
        return initialValue || "";
    });
 
-
-
-   const selectBackground = (url) => {
-       setBackground(url)
-   }
-
-   const randomSelectImage = () => {
-
-   }
+ 
   
+   useEffect(() => {
+        localStorage.setItem("transition-mode", transition);
+   }, [transition])
+
    useEffect(() => {
         // storing input name
         localStorage.setItem("image-backround", background);
@@ -113,9 +126,7 @@ export default function Puzzle() {
         <div className="min-h-full">
              
              <Header />
-
              <CrosswordPuzzle background={background} color={color}   />
-
              <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                     <Transition.Child
@@ -143,34 +154,36 @@ export default function Puzzle() {
                         <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                 <div className="">
-                                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                    <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
                                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                     Background Setting
                                     </Dialog.Title>
 
                                     <div class="mt-5">
-                                        <label class="relative inline-flex items-center cursor-pointer">
+                                        <label class="relative inline-flex cursor-pointer">
+                                           
                                             <input 
                                             type="checkbox" 
                                             class="sr-only peer"
-                                            checked={checked}
+                                            checked={transition}
                                             onChange={handleChange} />
 
-                                            <div class="w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                            <div class="w-12 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                                             <span class="ml-3 text-sm font-medium">Enable Backround Image Transition Mode</span>
                                         </label>
                                     </div>
-                                    <hr />
                                     <div className="mt-4">
+                                    { !transition &&
                                         <div class="grid grid-cols-6 gap-1">
                                         {
                                             bgImages.map((job, index )=> (
                                             <div  key={index}>
-                                                <img onClick={() => selectBackground(job.img)} class="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" src={'bg/'+job.img} alt="" />
+                                                <img onClick={() => setBackground(job.img)} class="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" src={'bg/'+job.img} alt="" />
                                             </div>
                                             ))
                                         }
                                         </div>
+                                     }
                                     </div>
 
                                     <div className="mt-5">
@@ -227,7 +240,7 @@ export default function Puzzle() {
                 </Link>
                 </div>
              </div>
-             
+
         </div>
     </div>
 }
