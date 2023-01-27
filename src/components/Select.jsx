@@ -180,7 +180,12 @@ const Select = () => {
             <div className="firstDiv">
                 {
                     user.username ? (
-                        <p>Shalom {user.username} <span onClick={logOut}>Logout</span></p>
+                        <>
+                            <p>Shalom {user.username} <span onClick={logOut}>Logout</span></p>
+                            <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
+                        </>
+
+
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
