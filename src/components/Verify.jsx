@@ -15,6 +15,7 @@ const Verify = () => {
                 <p style={{ position: "absolute", bottom: "45px", left: "7%" }}>Did not receive email? <b>Check your spam folder</b> or <span>resend verification link</span></p>
                 <p style={{ textAlign: "center", marginTop: "60px" }} onClick={() => navigate("/login")} className="forgotPass"><span>Back to login page</span></p>
             </div>
+
         </div>
     )
 }
