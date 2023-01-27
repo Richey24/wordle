@@ -208,25 +208,26 @@ export default function Puzzle() {
              </Transition.Root>
              
              <div className="fab-container">
-                        <div className="fab shadow">
-                            <div className="fab-content">
-                            <FontAwesomeIcon icon={faPlus} className="text-white" />
-                            </div>
-                        </div>
-                        <div className="sub-button shadow">
-                            <a onClick={handleShow} href="/" target="_blank">
-                                <FontAwesomeIcon icon={faToolbox} className="text-white" />
-                            </a>
-                        </div>
-                        <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
-                            <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
-                        </div>
-                        <div className="sub-button shadow">
-                        <Link to="/">
-                            <FontAwesomeIcon icon={faHome} className="text-white" />
-                        </Link>
-                        </div>
+                <div className="fab shadow">
+                    <div className="fab-content">
+                    <FontAwesomeIcon icon={faPlus} className="text-white" />
+                    </div>
+                </div>
+                <div className="sub-button shadow">
+                    <a onClick={handleShow} href="/" target="_blank">
+                        <FontAwesomeIcon icon={faToolbox} className="text-white" />
+                    </a>
+                </div>
+                <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
+                    <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
+                </div>
+                <div className="sub-button shadow">
+                <Link to="/">
+                    <FontAwesomeIcon icon={faHome} className="text-white" />
+                </Link>
+                </div>
              </div>
+             
         </div>
     </div>
 }
