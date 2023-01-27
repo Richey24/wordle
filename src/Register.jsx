@@ -84,9 +84,7 @@ const Register = () => {
                 break;
             case 200:
                 const rep = await res.data
-                localStorage.setItem('id', rep._id)
-                localStorage.setItem('token', rep.mainToken)
-                navigate('/')
+                navigate('/verify', { state: { email: rep.email } })
                 break;
             default:
                 break;
@@ -96,13 +94,18 @@ const Register = () => {
 
     const firstStage = (e) => {
         e.preventDefault()
-        setShowErr(false)
         const user = {
             name: e.target.name?.value || "",
             username: e.target.username?.value || "",
             email: e.target.email?.value,
         }
+        if (!user.email.includes("@")) {
+            setErr("Invalid email")
+            setShowErr(true)
+            return
+        }
         setFirst(user)
+        setShowErr(false)
         setNum(2)
     }
 
