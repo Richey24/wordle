@@ -213,6 +213,7 @@ const Register = () => {
                                         <li onClick={() => getChurch("1WEST (Messianic, Harlem-School Influenced) CAMPS")}>1WEST1 (Messianic, Harlem-School Influenced) CAMPS </li>
                                         <li onClick={() => getChurch("Ambassadors of Christ (AOC)")}>Ambassadors of Christ (AOC)</li>
                                         <li onClick={() => getChurch("Army of Israel (AOI) ")}>Army of Israel (AOI) </li>
+                                        <li onClick={() => getChurch("Church of God and Saints of Christ (COGASOC)")}>Church of God and Saints of Christ (COGASOC)</li>
                                         <li onClick={() => getChurch("Future World of Israel (FWOI)")}>Future World of Israel (FWOI)</li>
                                         <li onClick={() => getChurch("Gathering of Christ Church (GOCC)")}>Gathering of Christ Church (GOCC)</li>
                                         <li onClick={() => getChurch("Great MillStone Israelites (GMS)")}>Great MillStone Israelites (GMS)</li>
@@ -227,13 +228,13 @@ const Register = () => {
                                         <li onClick={() => getChurch("Sons of Thunder (SOT)")}>Sons of Thunder (SOT)</li>
                                         <li onClick={() => getChurch("Shut ‘Em Down Crew / RAM Squad (RAM)")}>Shut ‘Em Down Crew / RAM Squad (RAM)</li>
                                         <li onClick={() => getChurch("Sicarii")}>Sicarii</li>
+                                        <li onClick={() => getChurch("TANAKH-Only (TO)")}>TANAKH-Only (TO)</li>
                                         <li onClick={() => getChurch("Thee Light of Zion (TLOZ)")}>Thee Light of Zion (TLOZ)</li>
                                         <li onClick={() => getChurch("True Nation Israelite (TNI)")}>True Nation Israelite (TNI)</li>
                                         <li onClick={() => getChurch("United Kingdom of Israel (UKIOC)")}>United Kingdom of Israel (UKIOC)</li>
                                         <li onClick={() => getChurch("We Got Next (WGN )")}>We Got Next (WGN )</li>
+                                        <li onClick={() => getChurch("Watchmen For Israel (WFI)")}>Watchmen For Israel (WFI)</li>
                                         <li onClick={() => getChurch("Yahawashi’s Servants in Y’Sharael (YSIY)")}>Yahawashi’s Servants in Y’Sharael (YSIY)</li>
-                                        <li onClick={() => getChurch("TANAKH-Only (TO)")}>TANAKH-Only (TO)</li>
-                                        <li onClick={() => getChurch("Church of God and Saints of Christ (COGASOC)")}>Church of God and Saints of Christ (COGASOC)</li>
                                         <li onClick={() => getChurch("Others")}>Others</li>
                                     </ul>
                                 </div>
