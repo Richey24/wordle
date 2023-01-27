@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import url from "../url"
 import { useEffect } from "react"
 import { useState } from "react"
@@ -7,10 +7,15 @@ import { useState } from "react"
 const VerifyUser = () => {
     const { id } = useParams()
     const [err, setErr] = useState(false)
+    const navigate = useNavigate()
+
     const verifyUser = async () => {
         const res = await axios.post(`${url}/user/confirm/${id}`, {}, { validateStatus: () => true })
         if (res.status !== 200) {
             setErr(true)
+            setTimeout(() => {
+                navigate("/login")
+            }, 5000)
         }
     }
     useEffect(() => {
@@ -24,7 +29,7 @@ const VerifyUser = () => {
                         <p>Something went wrong, try again</p>
                     ) :
                     (
-                        <p>Your account have been confirmed, close this tab and login to your account</p>
+                        <p>Your account have been confirmed, redirecting to the login page...</p>
                     )
             }
         </div>
