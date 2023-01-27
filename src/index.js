@@ -32,7 +32,8 @@ import Game from './learn/Game';
 import QuestionList from './learn/QuestionList';
 import AddQuest from './learn/AddQuest';
 import LeaderQuiz from './learn/LeaderQuiz';
-import Crossword from './views/Crossword';
+import Crossword from './views/Crossword/CrosswordPage';
+import CrosswordLeader from './views/Crossword/CrosswordLeaderboard';
 import StripeContainer from './stripe/StripeContainer';
 import Verify from './components/Verify';
 import VerifyUser from './components/VerifyUser';
@@ -69,6 +70,7 @@ root.render(
       <Route path='/question/list' element={<QuestionList />} />
       <Route path='/question/add' element={<AddQuest />} />
       <Route path="/crossword" element={<Crossword />} />
+      <Route path="/crossword/leader" element={<CrosswordLeader />} />
       <Route path='/subscription' element={<StripeContainer />} />
       <Route path='/verify' element={<Verify />} />
       <Route path='/verify/:id' element={<VerifyUser />} />
