@@ -117,6 +117,24 @@
     font-size: 30px;
 }
 
+#levels {
+    position: absolute;
+    top: 23%;
+    right: 5%;
+}
+
+#level {
+    height: 80px;
+    width: 80px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 50%;
+    background: linear-gradient(to right, #f12711, #f5af19);
+    text-align: center;
+    line-height: 80px;
+    font-size: 18px;
+}
+
 .alphabetickey {
     width: 45px;
     height: 45px;
