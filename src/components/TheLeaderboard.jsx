@@ -6,7 +6,7 @@ import bronze from '../img/bronze-medal.png'
 
 export default function TheLeaderboard(props){
     return <div className="min-h-screen">
-        <video  style={{ zIndex: -1 }} className="absolute w-auto min-w-full min-h-full max-w-none" src="/videos/test.mp4" autoPlay muted loop id='thevid' />
+        <video  style={{ zIndex: -1 }} className="absolute w-auto min-w-full min-h-full max-w-none" src={`/videos/${props.bground}`} autoPlay muted loop id='thevid' />
         <section class="container mx-auto px-6 py-16 text-center"  >
             <div class="mx-auto max-w-lg" style={{ zIndex: 2 }}>
                     <header class="px-5 py-4 border-b border-gray-100">
