@@ -72,6 +72,13 @@ export default function Puzzle() {
        return initialValue || "";
    });
 
+   const [checked, setChecked] = useState(false);
+   const handleChange = () => {
+     alert(checked)
+     setChecked(!checked);
+   };
+
+   
    const [color, setColor ] = useState(() => {
        const saved = localStorage.getItem("crossword-color");
        const initialValue = saved;
@@ -141,16 +148,20 @@ export default function Puzzle() {
                                     Background Setting
                                     </Dialog.Title>
 
-                                    <div class="mg-5">
-                                      <div class="flex justify-center">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-                                                <label class="form-check-label inline-block text-gray-800" for="flexSwitchCheckDefault">Default switch checkbox input</label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <div class="mt-5">
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input 
+                                            type="checkbox" 
+                                            class="sr-only peer"
+                                            checked={checked}
+                                            onChange={handleChange} />
 
-                                    <div className="mt-5">
+                                            <div class="w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                            <span class="ml-3 text-sm font-medium">Enable Backround Image Transition Mode</span>
+                                        </label>
+                                    </div>
+                                    <hr />
+                                    <div className="mt-4">
                                         <div class="grid grid-cols-6 gap-1">
                                         {
                                             bgImages.map((job, index )=> (
