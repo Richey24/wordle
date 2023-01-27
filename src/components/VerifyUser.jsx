@@ -13,10 +13,11 @@ const VerifyUser = () => {
         const res = await axios.post(`${url}/user/confirm/${id}`, {}, { validateStatus: () => true })
         if (res.status !== 200) {
             setErr(true)
-            setTimeout(() => {
-                navigate("/login")
-            }, 5000)
+            return
         }
+        setTimeout(() => {
+            navigate("/login")
+        }, 1500)
     }
     useEffect(() => {
         verifyUser()
