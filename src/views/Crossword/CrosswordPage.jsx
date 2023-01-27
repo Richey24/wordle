@@ -67,7 +67,7 @@ export default function Puzzle() {
     //        return image;
     //   }
        
-       const saved = localStorage.getItem("background2");
+       const saved = localStorage.getItem("image-backround");
        const initialValue = saved;
        return initialValue || "";
    });
@@ -90,7 +90,7 @@ export default function Puzzle() {
   
    useEffect(() => {
         // storing input name
-        localStorage.setItem("background2", background);
+        localStorage.setItem("image-backround", background);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [background]);
 
@@ -104,6 +104,7 @@ export default function Puzzle() {
 
     return<div>
         <div className="min-h-full">
+             
              <Header />
 
              <CrosswordPuzzle background={background} color={color}   />
@@ -139,6 +140,16 @@ export default function Puzzle() {
                                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                     Background Setting
                                     </Dialog.Title>
+
+                                    <div class="mg-5">
+                                      <div class="flex justify-center">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                                                <label class="form-check-label inline-block text-gray-800" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div className="mt-5">
                                         <div class="grid grid-cols-6 gap-1">
                                         {
@@ -204,7 +215,7 @@ export default function Puzzle() {
                             <FontAwesomeIcon icon={faHome} className="text-white" />
                         </Link>
                         </div>
-                 </div>
+             </div>
         </div>
     </div>
 }

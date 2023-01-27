@@ -45,7 +45,7 @@ export default function CrosswordLeaderboard() {
 
    const [bground, setBackground] = useState(() => {
          // getting stored value
-        return localStorage.getItem("background2");
+        return localStorage.getItem("video-backround");
    });
 
     const handleShow = (e) => {
@@ -59,7 +59,7 @@ export default function CrosswordLeaderboard() {
 
     useEffect(() => {
         // storing input name
-        localStorage.setItem("background2", bground);
+        localStorage.setItem("video-backround", bground);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [bground]);
 
