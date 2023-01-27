@@ -4,6 +4,7 @@ import silver from '../img/silver-medal.png'
 import bronze from '../img/bronze-medal.png'
 // import bground from 'videos/test.mp4';
 
+
 export default function TheLeaderboard(props){
     return <div className="min-h-screen">
         <video  style={{ zIndex: -1 }} className="absolute w-auto min-w-full min-h-full max-w-none" src="/videos/test.mp4" autoPlay muted loop id='thevid' />
