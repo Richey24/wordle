@@ -1,3 +1,3 @@
-const url = "https://wordle-back.azurewebsites.net"
+const url = "http://localhost:5000"
 
 export default url

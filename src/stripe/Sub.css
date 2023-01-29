@@ -26,3 +26,12 @@
     margin-top: 30px;
     border-radius: 12px;
 }
+
+.payDiv select {
+    margin-bottom: 25px;
+    height: 35px;
+    padding: 5px;
+    border: 1px solid purple;
+    border-radius: 6px;
+    outline: none;
+}
