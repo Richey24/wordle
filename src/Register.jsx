@@ -39,8 +39,8 @@ const Register = () => {
     const getCount = async () => {
         const res = await axios.get("https://restcountries.com/v3.1/all")
         const rep = await res.data
-        setCountry(rep)
-        console.log(rep);
+        const arr = rep.sort((a, b) => a.name.common.localeCompare(b.name.common))
+        setCountry(arr)
     }
 
     useEffect(() => {
