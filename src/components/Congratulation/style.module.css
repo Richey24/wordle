@@ -29,46 +29,10 @@
   }
 }
 
-.con-container {
-  width: 100vw;
-  height: 100vh;
-  background: #ffffff;
-  border: 1px solid white;
-  display: fixed;
-  top: 0px;
-}
 
-.confetti-container {
-  perspective: 700px;
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.confetti {
-  position: absolute;
-  z-index: 1;
-  top: -10px;
-  border-radius: 0%;
-
-  &--animation-slow {
-    animation: confetti-slow 2.25s linear 1 forwards;
-  }
-
-  &--animation-medium {
-    animation: confetti-medium 1.75s linear 1 forwards;
-  }
-
-  &--animation-fast {
-    animation: confetti-fast 1.25s linear 1 forwards;
-  }
-}
 
 /* Checkmark */
-.checkmark-circle {
+.checkmarkCircle {
   width: 150px;
   height: 150px;
   position: relative;
@@ -76,18 +40,19 @@
   vertical-align: top;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
-.checkmark-circle .background {
-  width: 150px;
-  height: 150px;
+.checkmarkCircle .background {
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: #00c09d;
   position: absolute;
 }
-.checkmark-circle .checkmark {
+.checkmarkCircle .checkmark {
   border-radius: 5px;
 }
-.checkmark-circle .checkmark.draw:after {
+.checkmarkCircle .checkmark.draw:after {
   -webkit-animation-delay: 100ms;
   -moz-animation-delay: 100ms;
   animation-delay: 100ms;
@@ -109,7 +74,7 @@
   -moz-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
-.checkmark-circle .checkmark:after {
+.checkmarkCircle .checkmark:after {
   opacity: 1;
   height: 75px;
   width: 37.5px;
@@ -122,8 +87,8 @@
   border-top: 15px solid white;
   border-radius: 2.5px !important;
   content: "";
-  left: 25px;
-  top: 75px;
+  left: 35px;
+  top: 80px;
   position: absolute;
 }
 
@@ -194,7 +159,7 @@
   }
 }
 
-.submit-btn {
+.submitBtn {
   height: 45px;
   width: 200px;
   font-size: 15px;
@@ -204,11 +169,12 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(87, 71, 81, 0.2);
   cursor: pointer;
+  margin-top: 20px;
   transition: all 2s ease-out;
   transition: all 0.2s ease-out;
 }
 
-.submit-btn:hover {
+.submitBtn:hover {
   background-color: #2ca893;
   transition: all 0.2s ease-out;
 }

@@ -50,21 +50,39 @@ const bgRandomImages = [
     { img: 'bg-8.jpg'}
 ]
 
-const puzzleColor = [
-    { color: '#2596be', type: "flat-color" },
-    { color: '#e28743', type: "flat-color" },
-    { color: '#e28743', type: "flat-color" },
-    { color: '#eab676', type: 'flat-color'},
-    { color: '#76b5c5', type: 'flat-color'},
-    { color: '#bea925', type: 'flat-color'},
-    { color: '#cf2f74', type: 'flat-color'},
-    { color: '#f62459', type: 'flat-color'},
-    { color: '#825e5c', type: 'flat-color'},
-    { color: '#16453e', type: 'flat-color'},
-    { color: '#006992', type: 'flat-color'},
-    { color: '#2e3131', type: 'flat-color'},
-    { color: '#16a085', type: 'flat-color'},
-    { color: '#16a085', type: 'flat-color'},
+const puzzleColorGradient = [
+    { color1: '#f12711', color2: '#f5af19' },
+    { color1: '#845EC2', color2: '#D65DB1' },
+    { color1: '#FF6F91', color2: '#FF9671' },
+    { color1: '#FFC75F', color2: '#F9F871' },
+    { color1: '#4B597A', color2: '#2F4858' },
+    { color1: '#6967A9', color2: '#1B6299' },
+    { color1: '#D26F9D', color2: '#A36AAA' },
+    { color1: '#FF8597', color2: '#C55065' },
+    { color1: '#FF9671', color2: '#FFBDCD' },
+    { color1: '#FFF5EE', color2: '#E5DBCE' },
+    { color1: '#57B7FF', color2: '#E5DBCE' },
+    { color1: '#7D6592', color2: '#6170A4' },
+    { color1: '#2F7BAE', color2: '#6170A4' },
+    { color1: '#008D9B', color2: '#009281' },
+    { color1: '#FFC96A', color2: '#F9F871' },
+    { color1: '#00C9AD', color2: '#FEFEDF' },
+    { color1: '#EFA10D', color2: '#92A31E' },
+    { color1: '#3C954E', color2: '#007E6D' },
+    { color1: '#006370', color2: '#2F4858' },
+    { color1: '#EF4F0D', color2: '#E42C5B' },
+    { color1: '#B43D87', color2: '#734F92' },
+    { color1: '#3C517D', color2: '#3C517D' },
+    { color1: '#EF4F0D', color2: '#FA1B4F' },
+    { color1: '#EC0085', color2: '#C334B4' },
+    { color1: '#7B55D5', color2: '#0068DF' },
+    { color1: '#EF4F0D', color2: '#FFC07A' },
+    { color1: '#E24300', color2: '#890000' },
+    { color1: '#00B292', color2: '#008F9A' },
+    { color1: '#006A84', color2: '#2F4858' },
+    { color1: '#5DEF0D', color2: '#006789' },
+    { color1: '#00F4FF', color2: '#00BBFF' },
+    { color1: '#00DD5E', color2: '#00C692' },
 ]
 
 export default function Puzzle() {
@@ -102,6 +120,17 @@ export default function Puzzle() {
        return initialValue || "";
    });
 
+   const [color1, setColor1 ] = useState(() => {
+    const saved = localStorage.getItem("crossword-color2");
+    const initialValue = saved;
+    return initialValue || "";
+});
+
+  const handleColor = (c1, c2) => {
+    setColor(c1)
+    setColor1(c2)
+  }
+
  
   
    useEffect(() => {
@@ -126,7 +155,8 @@ export default function Puzzle() {
         <div className="min-h-full">
              
              <Header />
-             <CrosswordPuzzle background={background} color={color}   />
+             <CrosswordPuzzle background={background} color={color} color1={color1}   />
+            
              <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                     <Transition.Child
@@ -156,7 +186,7 @@ export default function Puzzle() {
                                 <div className="">
                                     <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
                                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                                    Background Setting
+                                    Game Settings
                                     </Dialog.Title>
 
                                     <div class="mt-5">
@@ -188,15 +218,17 @@ export default function Puzzle() {
 
                                     <div className="mt-5">
                                         <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                                        Color Setting
+                                        Color Setting 
                                         </Dialog.Title>
-                                        <div class="grid grid-cols-6 gap-1 mt-5">
-                                        {
-                                                puzzleColor.map( (clr, index )=> (
-                                                    <div onClick={() => setColor(clr.color)} key={index} class="shadow-lg bg-blue-500 h-10 w-10 rounded-full ml-2 cursor-pointer" style={{ backgroundColor: clr.color }}>
-                                                    </div>
-                                                ))
-                                            }
+                                        <div>
+                                            <div class="grid grid-cols-10 gap-1 mt-2">
+                                            {
+                                                    puzzleColorGradient.map( (clr, index )=> (
+                                                        <div onClick={() => handleColor(clr.color1, clr.color2)} key={index} class="shadow-lg bg-blue-500 h-10 w-10 ml-1 cursor-pointer" style={{background: `linear-gradient(to left,  ${clr.color1} 0%,${clr.color2} 100%)`}}>
+                                                        </div>
+                                                    ))
+                                                }
+                                            </div>
                                         </div>
                                     </div>
                                </div>

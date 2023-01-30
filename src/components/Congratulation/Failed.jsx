@@ -9,13 +9,12 @@ export default function CongratulationView(props)  {
     const { width, height } = useWindowSize()
      
     return<div>
-             <Confetti width={width} height={height} />
             <div style={{textAlign: 'center'}}>
-                <div className={style.checkmarkCircle} >
-                    <div className={style.background}></div>
-                    <div className={`${style.checkmark} ${style.draw}` }></div>
+                <div class="grid place-items-center">
+                    <img src="img/cancel.png" alt="Cancel Icon" width="200px" hieght="200px" />
                 </div>
-                <h1>Level Up!</h1>  
+                <br />
+                <h1>{props.title}</h1>  
                 <h2>{props.message}</h2>
                 <button className={style.submitBtn} type="submit" >Continue</button>
             </div>   

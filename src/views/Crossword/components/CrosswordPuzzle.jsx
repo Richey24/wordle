@@ -5,11 +5,17 @@ import './crossword.css';
 import './crossword.js';
 
 import Congratulation from '../../../components/Congratulation/CongratulationView';
+import Failed from '../../../components/Congratulation/Failed'
 
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);    
-    const style  =  { background:  props.color, };
+    const style  =  { background:  `linear-gradient(to left,  ${props.color} 0%,${props.color1} 100%)`, };
+    const [failed, setFailed ] = useState(false);
+
+    const handleFailed = () => {
+        setFailed(true)
+    } 
 
     useEffect(() => {
             placeResults()
@@ -52,8 +58,8 @@ export default function CrosswordPuzzle(props) {
                 })
                 window.solved.push(object.result)
 
-                if (window.solved.length === 8) {
-                    bgMusic.pause()
+                if (window.solved.length === 7) {
+                    // bgMusic.pause()
                     new Audio("audio/Celebration.mp3").play()
                     clearInterval(window.countdownID)
                     scoreValue.innerHTML = Number(scoreValue.innerHTML) + Number(countdown.innerHTML) + 1000
@@ -201,6 +207,7 @@ export default function CrosswordPuzzle(props) {
         blocks().forEach(block => block.style.transform = "scale(1)")
         clearInterval(window.countdownID)
         window.keysAllowed = false
+        setFailed(true)
     }
 
     const placeResults = () => {
@@ -484,7 +491,7 @@ export default function CrosswordPuzzle(props) {
  
 
    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
-              <button onClick={handleShow}>test</button>
+              {/* <button onClick={handleFailed }>test</button> */}
            <div className="grid h-screen place-items-center overflow-auto" >
                 <div>
                     <div id="container">
@@ -669,7 +676,7 @@ export default function CrosswordPuzzle(props) {
                     leave="ease-in duration-200"
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0">
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -685,15 +692,48 @@ export default function CrosswordPuzzle(props) {
                         >
                         <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                <Congratulation message={'Congratulations on your success!'}/>
+                            <Congratulation message={'Congratulations on your success!'} title={'Level Up!'}/>
                             </div>
                         </Dialog.Panel>
                         </Transition.Child>
                     </div>
                     </div>
                 </Dialog>
-          </Transition.Root>
+           </Transition.Root>
 
-          
+           <Transition.Root show={failed} as={Fragment}>
+                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+                    <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0">
+                    <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        enterTo="opacity-100 translate-y-0 sm:scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        >
+                        <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <Failed message={'It looks like you need more practice, try again!'} title={'Sorry!'}/>
+                            </div>
+                        </Dialog.Panel>
+                        </Transition.Child>
+                    </div>
+                    </div>
+                </Dialog>
+           </Transition.Root>
    </div> 
 }
