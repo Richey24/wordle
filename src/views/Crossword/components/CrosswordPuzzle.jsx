@@ -1,25 +1,91 @@
-import { useEffect, useState} from 'react';
+import {Fragment, useEffect, useState, useRef} from 'react';
+import { Dialog, Transition } from '@headlessui/react'
 
 import './crossword.css';
 import './crossword.js';
 
+import Congratulation from '../../../components/Congratulation/CongratulationView';
+
 export default function CrosswordPuzzle(props) {
 
-    const [gameStarted, setGameStarted] = useState(false);
-    
+    const [gameStarted, setGameStarted] = useState(false);    
     const style  =  { background:  props.color, };
-    
+
     useEffect(() => {
             placeResults()
              // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const selectWord = () => {
+        const inputString = document.querySelector('#inputstring')
+
+        const scoreValue = document.querySelector('#scoreValue')
+        const bgMusic = document.getElementById("bgMusic")
+        const countdown = document.querySelector('#countdown')
+        const spaceKeyImg = document.querySelector('#spacekey')
+        const scoreText = document.querySelector('#scoreText')
+
+        spaceKeyImg.style.filter = "brightness(50%)"
+        let correct = false
+
+        window.data.forEach((object) => {
+            if (object.result === inputString.innerHTML.toLowerCase() && !window.solved.includes(inputString.innerHTML.toLowerCase())) {
+                correct = true
+                new Audio("audio/correct.mp3").play()
+                scoreValue.innerHTML = Number(scoreValue.innerHTML) + (object.result.length * 10)
+                scoreText.style.color = "lime"
+                scoreText.animate(
+                    [{ color: "lime" }, { color: "white" }],
+                    { duration: 3000, easing: "linear", fill: "forwards" }
+                )
+                object.occupied.forEach((cellNo) => {
+                    let blocksArray = getBlocksAtCellNo(cellNo)
+                    if (blocksArray.length === 1) {
+                        blocksArray[0].style.transform = "scale(1)"
+                    } else if (blocksArray.length === 2) {
+                        if (blocksArray[0].style.transform === "scale(1)") {
+                            blocksArray[0].style.transform = "scale(1)"
+                        } else {
+                            blocksArray[1].style.transform = "scale(1)"
+                        }
+                    }
+                })
+                window.solved.push(object.result)
+
+                if (window.solved.length === 8) {
+                    bgMusic.pause()
+                    new Audio("audio/Celebration.mp3").play()
+                    clearInterval(window.countdownID)
+                    scoreValue.innerHTML = Number(scoreValue.innerHTML) + Number(countdown.innerHTML) + 1000
+                    setOpen(true);
+
+                    setTimeout(() => {
+                        new Audio("audio/Celebration.mp3").stop()
+                        setOpen(false);
+                        // Update server
+                    },5000)
+                }
+            }
+        })
+        !correct && new Audio("audio/wrong.mp3").play()
+        inputString.innerHTML = ""
+    }
+
+    const deleteChar = () => {
+       
+        const inputString = document.querySelector('#inputstring')
+        const backspaceKeyImg = document.querySelector('#backspacekey')
+
+        inputString.innerHTML = inputString.innerHTML.slice(0, inputString.innerHTML.length - 1)
+        backspaceKeyImg.style.filter = "brightness(50%)"
+        new Audio("audio/backspace.mp3").play()
+    }
+    
     useEffect(() => {
         document.addEventListener("keydown", async (e) => {
             
              const inputString = document.querySelector('#inputstring')
              const alphaKeys = document.querySelectorAll('.alphabetickey')
-             const backspaceKeyImg = document.querySelector('#backspacekey')
 
             if (window.keysAllowed && window.sample.includes(e.key.toLowerCase()) && inputString.innerHTML.length !== 6 && !e.repeat) {
                 inputString.innerHTML = inputString.innerHTML + e.key.toLowerCase()
@@ -33,55 +99,11 @@ export default function CrosswordPuzzle(props) {
             }
 
             if (window.keysAllowed && e.code === "Enter" && !e.repeat && inputString.innerHTML.length >= 3) {
-                const scoreValue = document.querySelector('#scoreValue')
-                const bgMusic = document.getElementById("bgMusic")
-                const countdown = document.querySelector('#countdown')
-                const spaceKeyImg = document.querySelector('#spacekey')
-                const scoreText = document.querySelector('#scoreText')
-
-                spaceKeyImg.style.filter = "brightness(50%)"
-                let correct = false
-
-                window.data.forEach((object) => {
-                    if (object.result === inputString.innerHTML.toLowerCase() && !window.solved.includes(inputString.innerHTML.toLowerCase())) {
-                        correct = true
-                        new Audio("audio/correct.mp3").play()
-                        scoreValue.innerHTML = Number(scoreValue.innerHTML) + (object.result.length * 10)
-                        scoreText.style.color = "lime"
-                        scoreText.animate(
-                            [{ color: "lime" }, { color: "white" }],
-                            { duration: 3000, easing: "linear", fill: "forwards" }
-                        )
-                        object.occupied.forEach((cellNo) => {
-                            let blocksArray = getBlocksAtCellNo(cellNo)
-                            if (blocksArray.length === 1) {
-                                blocksArray[0].style.transform = "scale(1)"
-                            } else if (blocksArray.length === 2) {
-                                if (blocksArray[0].style.transform === "scale(1)") {
-                                    blocksArray[0].style.transform = "scale(1)"
-                                } else {
-                                    blocksArray[1].style.transform = "scale(1)"
-                                }
-                            }
-                        })
-                        window.solved.push(object.result)
-        
-                        if (window.solved.length === 8) {
-                            bgMusic.pause()
-                            new Audio("audio/win.mp3").play()
-                            clearInterval(window.countdownID)
-                            scoreValue.innerHTML = Number(scoreValue.innerHTML) + Number(countdown.innerHTML) + 1000
-                        }
-                    }
-                })
-                !correct && new Audio("wrong.mp3").play()
-                inputString.innerHTML = ""
+                selectWord();
             }
 
             if (e.key === "Backspace" && window.keysAllowed && inputString.innerHTML.length > 0 && !e.repeat) {
-                inputString.innerHTML = inputString.innerHTML.slice(0, inputString.innerHTML.length - 1)
-                backspaceKeyImg.style.filter = "brightness(50%)"
-                new Audio("audio/backspace.mp3").play()
+                deleteChar()
             }
 
             if (e.key === "Space" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
@@ -448,9 +470,21 @@ export default function CrosswordPuzzle(props) {
         blocks().forEach((block) => {
             block.style.marginTop = `${marginTop(block) + (Math.trunc((emptyRowOnBS - emptyRowOnUS) / 2) * 50)}px`
         })
-}
+
+    }
+
+
+    const [open, setOpen] = useState(false)
+    const cancelButtonRef = useRef(null)
+ 
+     const handleShow = (e) => {
+         e.preventDefault();
+         setOpen(true);
+     }
+ 
 
    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
+              <button onClick={handleShow}>test</button>
            <div className="grid h-screen place-items-center overflow-auto" >
                 <div>
                     <div id="container">
@@ -595,11 +629,11 @@ export default function CrosswordPuzzle(props) {
                                     </div>
                                 </div>
                                 <div id="otherkeys">
-                                    <div id="spacekey">
+                                    <div id="spacekey" onClick={selectWord}>
                                         <img src="img/space key.jpg" alt="" />
                                         <span><b>Enter</b></span>
                                     </div>
-                                    <div id="backspacekey">
+                                    <div id="backspacekey" onClick={deleteChar}>
                                         <img src="img/backspace key.jpg" alt="" />
                                         <span><b>Backspace</b></span>
                                     </div>
@@ -623,5 +657,43 @@ export default function CrosswordPuzzle(props) {
                     </div>
                 </div>
            </div>
+         
+            
+           <Transition.Root show={open} as={Fragment}>
+                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+                    <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0">
+                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 overflow-y-auto">
+                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        enterTo="opacity-100 translate-y-0 sm:scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                        leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                        >
+                        <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                            <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                <Congratulation message={'Congratulations on your success!'}/>
+                            </div>
+                        </Dialog.Panel>
+                        </Transition.Child>
+                    </div>
+                    </div>
+                </Dialog>
+          </Transition.Root>
+
+          
    </div> 
 }
