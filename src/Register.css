@@ -1,3 +1,9 @@
-#churchMain {
+#churchMain,
+#countryMain {
     font-size: 18px;
+}
+
+.countryMainImg,
+#country img {
+    width: 30px;
 }

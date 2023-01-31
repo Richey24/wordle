@@ -35,12 +35,12 @@ export default function THeHeader() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="img/bible.png"
+                    src="/img/bible.png"
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="img/bible.png"
+                    src="/img/bible.png"
                     alt="Your Company"
                   />
                 </div>
@@ -78,8 +78,8 @@ export default function THeHeader() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="img/profile.png"
-                        alt=""
+                        src="/img/profile.png"
+                        alt="User Name"
                       />
                     </Menu.Button>
                   </div>

@@ -83,6 +83,7 @@ const puzzleColorGradient = [
     { color1: '#5DEF0D', color2: '#006789' },
     { color1: '#00F4FF', color2: '#00BBFF' },
     { color1: '#00DD5E', color2: '#00C692' },
+    { color1: '#E19D56', color2: '#A66A24' },
 ]
 
 export default function Puzzle() {

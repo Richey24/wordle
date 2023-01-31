@@ -491,7 +491,7 @@ export default function CrosswordPuzzle(props) {
  
 
    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
-              {/* <button onClick={handleFailed }>test</button> */}
+              <button onClick={handleShow }>test</button>
            <div className="grid h-screen place-items-center overflow-auto" >
                 <div>
                     <div id="container">
