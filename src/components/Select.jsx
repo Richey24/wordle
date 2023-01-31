@@ -10,7 +10,6 @@ import { useEffect } from "react"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Select = () => {
     const navigate = useNavigate()
@@ -24,10 +23,22 @@ const Select = () => {
 
 
     useEffect (()=>{
-        const settings = {
-            sound:true
+
+        let settings = localStorage.getItem("Settings")
+
+        if(settings == undefined) {
+            const settings = {
+                sound:true
+            }
+            localStorage.setItem("Settings", JSON.stringify(settings))
+        }else{
+            const localStorageSettings = localStorage.getItem("Settings")
+            let settings = JSON.parse(localStorageSettings)
+
+            setSoundOn(settings.sound)
         }
-        localStorage.setItem("Settings", JSON.stringify(settings))
+
+
     },[])
 
 
@@ -106,7 +117,6 @@ const Select = () => {
     }
 
     const playSound = async (val) => {
-        console.log(soundOn)
         if(soundOn) {
             switch (val) {
                 case "word":
@@ -185,12 +195,10 @@ const Select = () => {
                             <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
                         </>
 
-
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
                             <p onClick={() => navigate("/login")}>Login</p>
-                            {/*<p onClick={() => console.log("Sound Clicked")}></p>*/}
                             <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
 
 
