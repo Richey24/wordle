@@ -1,0 +1,37 @@
+.payDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.payDiv>form {
+    width: 50%;
+    border: 1px solid purple;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.payDiv>form>button {
+    width: 200px;
+    height: 50px;
+    background-color: purple;
+    color: white;
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 12px;
+}
+
+.payDiv select {
+    margin-bottom: 25px;
+    height: 35px;
+    padding: 5px;
+    border: 1px solid purple;
+    border-radius: 6px;
+    outline: none;
+}

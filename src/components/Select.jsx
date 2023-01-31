@@ -117,7 +117,6 @@ const Select = () => {
     }
 
     const playSound = async (val) => {
-        console.log(soundOn)
         if(soundOn) {
             switch (val) {
                 case "word":
@@ -200,7 +199,6 @@ const Select = () => {
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
                             <p onClick={() => navigate("/login")}>Login</p>
-                            {/*<p onClick={() => console.log("Sound Clicked")}></p>*/}
                             <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
 
 

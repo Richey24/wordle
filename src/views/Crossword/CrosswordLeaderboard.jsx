@@ -43,20 +43,32 @@ export default function CrosswordLeaderboard() {
    const [open, setOpen] = useState(false)
    const cancelButtonRef = useRef(null)
 
+   const [bground, setBackground] = useState(() => {
+         // getting stored value
+        return localStorage.getItem("video-backround");
+   });
+
     const handleShow = (e) => {
         e.preventDefault();
         setOpen(true);
     }
 
-    const selectVideoBg = () => {
-
+    const selectVideoBg = (param) => {
+        setBackground(param)
     }
+
+    useEffect(() => {
+        // storing input name
+        localStorage.setItem("video-backround", bground);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [bground]);
+
 
     return<div>
           <div className="min-h-full">
              <Header />
 
-             <Leader user={testdatabase} />
+             <Leader user={testdatabase} bground={bground} />
              
              {/*Fab Component  */}
              <div className="fab-container">
@@ -113,9 +125,9 @@ export default function CrosswordLeaderboard() {
 
                                     <div className="mt-5">
                                             <div class="mx-auto max-w-7xl">
-                                                <div class="relative isolate overflow-hidden bg-gray-900 shadow-2xl sm:rounded-3xl">
-                                                    <div class="relative mt-16 h-80 lg:mt-8">
-                                                        <img class="absolute top-0 left-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png" alt="App screenshot" width="300" height="300" />
+                                                <div class="relative isolate overflow-hidden bg-gray-900 shadow-2xl">
+                                                    <div class="relative mt-10 h-30 lg:mt-8">
+                                                        <video className=""  src={`/videos/${bground}`} autoPlay muted loop />
                                                     </div>
                                                 </div>
                                            </div>

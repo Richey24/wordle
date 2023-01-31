@@ -67,11 +67,18 @@ export default function Puzzle() {
     //        return image;
     //   }
        
-       const saved = localStorage.getItem("background2");
+       const saved = localStorage.getItem("image-backround");
        const initialValue = saved;
        return initialValue || "";
    });
 
+   const [checked, setChecked] = useState(false);
+   const handleChange = () => {
+     alert(checked)
+     setChecked(!checked);
+   };
+
+   
    const [color, setColor ] = useState(() => {
        const saved = localStorage.getItem("crossword-color");
        const initialValue = saved;
@@ -90,7 +97,7 @@ export default function Puzzle() {
   
    useEffect(() => {
         // storing input name
-        localStorage.setItem("background2", background);
+        localStorage.setItem("image-backround", background);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [background]);
 
@@ -104,6 +111,7 @@ export default function Puzzle() {
 
     return<div>
         <div className="min-h-full">
+             
              <Header />
 
              <CrosswordPuzzle background={background} color={color}   />
@@ -139,7 +147,21 @@ export default function Puzzle() {
                                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                     Background Setting
                                     </Dialog.Title>
-                                    <div className="mt-5">
+
+                                    <div class="mt-5">
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input 
+                                            type="checkbox" 
+                                            class="sr-only peer"
+                                            checked={checked}
+                                            onChange={handleChange} />
+
+                                            <div class="w-11 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                            <span class="ml-3 text-sm font-medium">Enable Backround Image Transition Mode</span>
+                                        </label>
+                                    </div>
+                                    <hr />
+                                    <div className="mt-4">
                                         <div class="grid grid-cols-6 gap-1">
                                         {
                                             bgImages.map((job, index )=> (
@@ -186,25 +208,26 @@ export default function Puzzle() {
              </Transition.Root>
              
              <div className="fab-container">
-                        <div className="fab shadow">
-                            <div className="fab-content">
-                            <FontAwesomeIcon icon={faPlus} className="text-white" />
-                            </div>
-                        </div>
-                        <div className="sub-button shadow">
-                            <a onClick={handleShow} href="/" target="_blank">
-                                <FontAwesomeIcon icon={faToolbox} className="text-white" />
-                            </a>
-                        </div>
-                        <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
-                            <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
-                        </div>
-                        <div className="sub-button shadow">
-                        <Link to="/">
-                            <FontAwesomeIcon icon={faHome} className="text-white" />
-                        </Link>
-                        </div>
-                 </div>
+                <div className="fab shadow">
+                    <div className="fab-content">
+                    <FontAwesomeIcon icon={faPlus} className="text-white" />
+                    </div>
+                </div>
+                <div className="sub-button shadow">
+                    <a onClick={handleShow} href="/" target="_blank">
+                        <FontAwesomeIcon icon={faToolbox} className="text-white" />
+                    </a>
+                </div>
+                <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
+                    <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
+                </div>
+                <div className="sub-button shadow">
+                <Link to="/">
+                    <FontAwesomeIcon icon={faHome} className="text-white" />
+                </Link>
+                </div>
+             </div>
+             
         </div>
     </div>
 }

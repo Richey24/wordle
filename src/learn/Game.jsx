@@ -113,16 +113,16 @@ const Game = () => {
         let noOfQuest;
         switch (names.length) {
             case 1:
-                noOfQuest = 5
-                break;
-            case 2:
                 noOfQuest = 10
                 break;
+            case 2:
+                noOfQuest = 20
+                break;
             case 3:
-                noOfQuest = 15
+                noOfQuest = 30
                 break;
             case 4:
-                noOfQuest = 20
+                noOfQuest = 40
                 break;
             default:
                 break;
