@@ -245,42 +245,42 @@ const BibleLeader = () => {
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                <video onClick={() => setBackground("/videos/vid-9.mp4")} className="card-video" autoPlay muted loop>
                                     <source src={vid9} type="" />
                                 </video>
                             </Card>
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                <video onClick={() => setBackground("/videos/vid-10.mp4")} className="card-video" autoPlay muted loop>
                                     <source src={vid10} type="" />
                                 </video>
                             </Card>
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                <video onClick={() => setBackground("/videos/vid-11.mp4")} className="card-video" autoPlay muted loop>
                                     <source src={vid11} type="" />
                                 </video>
                             </Card>
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                <video onClick={() => setBackground("/videos/vid-12.mp4")} className="card-video" autoPlay muted loop>
                                     <source src={vid12} type="" />
                                 </video>
                             </Card>
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                <video onClick={() => setBackground("/videos/vid-13.mp4")} className="card-video" autoPlay muted loop>
                                     <source src={vid13} type="" />
                                 </video>
                             </Card>
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                <video onClick={() => setBackground("/videos/vid-14.mp4")} className="card-video" autoPlay muted loop>
                                     <source src={vid14} type="" />
                                 </video>
                             </Card>
