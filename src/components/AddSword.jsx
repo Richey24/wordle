@@ -26,13 +26,13 @@ const AddSword = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Backspace") {
-            new Audio(require("../sound/backspace.mp3")).play()
-        } else {
-            new Audio(require("../sound/keyPress.mp3")).play()
-        }
-    })
+    // document.addEventListener("keydown", (e) => {
+    //     if (e.key === "Backspace") {
+    //         new Audio(require("../sound/backspace.mp3")).play()
+    //     } else {
+    //         new Audio(require("../sound/keyPress.mp3")).play()
+    //     }
+    // })
 
     const submitSword = async (e) => {
         setSpin(true)
