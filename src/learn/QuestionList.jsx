@@ -12,13 +12,13 @@ import url from "../url"
 
 const QuestionList = () => {
     const navigate = useNavigate()
-    const id = localStorage.getItem("id")
+    const id = sessionStorage.getItem("id")
     const [spin, setSpin] = useState(true)
     const [lists, setLists] = useState([])
     const [fit, setFit] = useState([])
     const [delId, setDelId] = useState("")
     const [user, setUser] = useState({})
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
 
     const getItems = async () => {
         const res = await axios.get(`${url}/quiz/get/all`, {
@@ -113,7 +113,7 @@ const QuestionList = () => {
                 ) : (
                     <div className="swordMain">
                         {
-                            lists.map((list, i) => (
+                            lists.reverse().map((list, i) => (
                                 <div key={i}>
                                     <div className="swordBtn" id="swordBtn">
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
