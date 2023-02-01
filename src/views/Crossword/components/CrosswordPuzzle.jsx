@@ -487,7 +487,6 @@ export default function CrosswordPuzzle(props) {
          e.preventDefault();
          setOpen(true);
      }
- 
 
    return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.background}')` }}>
               <button onClick={handleShow }>test</button>
