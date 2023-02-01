@@ -16,6 +16,7 @@
     justify-content: center;
     align-items: baseline;
     gap: 30px;
+    flex-wrap: wrap;
 }
 
 .inputDiv>input {
@@ -56,6 +57,7 @@
     padding: 20px 20px 10px 20px;
     border-radius: 12px;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .adminInner button {
@@ -63,7 +65,15 @@
     background-color: #3d1152;
     color: white;
     height: 40px;
-    width: 200px;
+    width: 100px;
+}
+
+.adminInner select {
+    border: 1px solid #3d1152;
+    outline: none;
+    height: 40px;
+    padding: 0px 20px;
+    border-radius: 12px;
 }
 
 .adminInner button:hover {
@@ -73,16 +83,70 @@
     font-weight: 600;
 }
 
-.adminInner p {
+.adminInner form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.adminInner form>p {
+    border-radius: 12px;
+    background-color: red;
+    color: white;
+    height: 40px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.adminInner form>p:hover {
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    font-weight: 600;
+}
+
+.adminInner>p {
     font-weight: 600;
 }
 
 @media screen and (max-width: 800px) {
     .adminDiv>div {
-        width: 90%;
+        width: 100%;
+    }
+
+    .adminInner {
+        padding: 20px 15px;
+        row-gap: 20px;
+    }
+
+    .adminInner form>button,
+    .adminInner form>p {
+        width: 80px;
+    }
+
+    .adminInner select {
+        padding: 0px 10px;
     }
 
     .adminInner button {
         width: 120px;
+    }
+
+    .inputDiv input {
+        width: 100%;
+    }
+
+    .inputDiv {
+        column-gap: 10px;
+        row-gap: 30px;
+    }
+
+    .inputDiv p {
+        width: auto;
+        padding: 0px 20px;
     }
 }
