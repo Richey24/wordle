@@ -33,6 +33,7 @@ const Register = () => {
     const [tribe, setTribe] = useState(["Asher", "rgb(111, 111, 21)"])
     const [church, setChurch] = useState("Non-Affiliated (NA)")
     const [country, setCountry] = useState([])
+    const [fil, setFIl] = useState([])
     const [count, setCount] = useState(0)
     const navigate = useNavigate()
 
@@ -41,6 +42,7 @@ const Register = () => {
         const rep = await res.data
         const arr = rep.sort((a, b) => a.name.common.localeCompare(b.name.common))
         setCountry(arr)
+        setFIl(arr)
     }
 
     useEffect(() => {
@@ -152,6 +154,12 @@ const Register = () => {
         selectCountry()
     }
 
+    const filterCountry = (e) => {
+        const val = e.target.value
+        const arr = fil.filter((fi) => fi.name.common.toLowerCase().includes(val.toLowerCase()))
+        setCountry(arr)
+    }
+
     return (
         <div className="loginMainDiv">
             <div className="homeBtnLog" onClick={() => navigate("/")}>
@@ -181,6 +189,7 @@ const Register = () => {
                             <label>Select your country</label>
                             <p id='countryMain' onClick={selectCountry} className='tribeMain'><img className='countryMainImg' src={country[count]?.flags.svg} alt="" /> {country[count]?.name?.common} <img src={drop} alt="" /></p>
                             <ul id='country' className='tribeList'>
+                                <input onChange={filterCountry} placeholder='Search country' type="text" />
                                 {
                                     country.map((county, i) => (
                                         <li onClick={() => getCountry(i)}><img src={county?.flags.svg} alt="" /> {county?.name.common}</li>
