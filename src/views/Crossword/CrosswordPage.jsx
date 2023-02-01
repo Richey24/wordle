@@ -225,6 +225,7 @@ export default function Puzzle() {
                                         Color Setting 
                                         </Dialog.Title>
                                         <div>
+                                            
                                             <div class="grid grid-cols-10 gap-1 mt-2">
                                             {
                                                     puzzleColorGradient.map( (clr, index )=> (
