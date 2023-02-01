@@ -72,7 +72,7 @@ const SubscriptionForm = () => {
             console.log(error);
         } else {
             console.log(paymentMethod);
-            const res = await axios.post(`${url}/sub/new`, { paymentMethod: paymentMethod, email: user.email, plan: plan })
+            const res = await axios.post(`${url}/sub/new`, { paymentMethod: paymentMethod, email: user.email, name: user.name, plan: plan })
             const rep = await res.data
             const { clientSecret, status } = rep
             if (status === "requires_action") {
