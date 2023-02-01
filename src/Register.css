@@ -7,3 +7,12 @@
 #country img {
     width: 30px;
 }
+
+#country input {
+    background-color: white;
+    border: 1px solid purple;
+}
+
+#country input::placeholder {
+    color: black;
+}

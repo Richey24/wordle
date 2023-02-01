@@ -33,16 +33,6 @@ import zebulun from "../../img/zebulun.png"
 import asher from "../../img/asher.png"
 import { useNavigate } from "react-router-dom"
 
-// Videos
-import vid0 from '../../videos/vid-0.mp4';
-import vid1 from '../../videos/vid-1.mp4';
-import vid2 from '../../videos/vid-2.mp4';
-import vid3 from '../../videos/vid-3.mp4';
-import vid4 from '../../videos/vid-4.mp4';
-import vid5 from '../../videos/vid-5.mp4';
-import vid6 from '../../videos/vid-6.mp4';
-import vid7 from '../../videos/vid-7.mp4';
-import vid8 from '../../videos/vid-8.mp4';
 
 const images = {
     benjamin: benjamin,
@@ -169,71 +159,113 @@ const BibleLeader = () => {
                     <Row>
                         <Col md={3}>
                             <Card >
-                                <video onClick={() => setBackground("/videos/vid-0.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid0} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-0.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-0.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-1.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid1} type="" />
-                                </video>
-                            </Card>
-                        </Col>
-
-                        <Col md={3}>
-                            <Card>
-                                <video onClick={() => setBackground('/videos/vid-2.mp4')} className="card-video" autoPlay muted loop>
-                                    <source src={vid2} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-1.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-1.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
 
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-3.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid3} type="" />
+                                <video onClick={() => setBackground('https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-2.mp4')} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-2.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
 
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-4.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid4} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-3.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-3.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
 
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-5.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid5} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-4.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-4.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
 
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-6.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid6} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-5.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-5.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
 
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-7.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid7} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-6.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-6.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>
 
                         <Col md={3}>
                             <Card>
-                                <video onClick={() => setBackground("/videos/vid-8.mp4")} className="card-video" autoPlay muted loop>
-                                    <source src={vid8} type="" />
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-7.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-7.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-8.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-8.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-9.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-9.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-10.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-10.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-11.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-11.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-12.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-12.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-13.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-13.mp4" type="" />
+                                </video>
+                            </Card>
+                        </Col>
+                        <Col md={3}>
+                            <Card>
+                                <video onClick={() => setBackground("https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-14.mp4")} className="card-video" autoPlay muted loop>
+                                    <source src="https://absa7kzimnaf.blob.core.windows.net/newcontainer/vid-14.mp4" type="" />
                                 </video>
                             </Card>
                         </Col>

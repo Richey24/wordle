@@ -14,13 +14,13 @@ const AddQuest = () => {
     const [err, setErr] = useState(false)
     const token = localStorage.getItem("token")
 
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Backspace") {
-            new Audio(require("../sound/backspace.mp3")).play()
-        } else {
-            new Audio(require("../sound/keyPress.mp3")).play()
-        }
-    })
+    // document.addEventListener("keydown", (e) => {
+    //     if (e.key === "Backspace") {
+    //         new Audio(require("../sound/backspace.mp3")).play()
+    //     } else {
+    //         new Audio(require("../sound/keyPress.mp3")).play()
+    //     }
+    // })
 
     const submitForm = async (e) => {
         setErr(false)
