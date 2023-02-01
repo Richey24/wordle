@@ -113,7 +113,6 @@ export default function CrosswordPuzzle(props) {
             }
 
             if (e.key === "Space" && window.keysAllowed && (window.solved.length === 8 || window.skips !== 3)) {
-
                 alert('Are you sure you want to start')
 
                 window.solved.length !== 8 && window.skips++

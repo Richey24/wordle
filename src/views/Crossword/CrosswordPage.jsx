@@ -6,35 +6,38 @@ import { Link } from "react-router-dom";
 import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { useNavigate  } from "react-router-dom";
 
 // Should be Props
 const bgImages = [
-    { img: 'bg-boogle.jpg'},
-    { img: 'bg-levi-1.jpg'},
-    { img: 'bg-asher.jpg'},
-    { img: 'bg-benjamin.jpg'},
-    { img: 'bg-dan.jpg'},
-    { img: 'bg-ephraim.jpg'},
-    { img: 'bg-gad.jpg'},
-    { img: 'bg-issachar.jpg'},
-    { img: 'bg-joseph.jpg'},
-    { img: 'bg-judah.jpg'},
-    { img: 'bg-manasseh.jpg'},
-    { img: 'bg-naftali.jpg'},
-    { img: 'bg-reuben.jpg'},
-    { img: 'bg-simeon.jpg'},
-    { img: 'bg-zebulun.jpg'},
-    { img: 'bg-0.jpg'},
-    { img: 'bg-1.jpg'},
-    { img: 'bg-2.jpg'},
-    { img: 'bg-3.jpg'},
-    { img: 'bg-4.jpg'},
-    { img: 'bg-5.jpg'},
-    { img: 'bg-6.jpg'},
-    { img: 'bg-7.jpg'},
-    { img: 'bg-8.jpg'}
+    { img: 'bg-boogle.jpg',   thumb: 'bg-boogle-thumbnail.jpg'},
+    { img: 'bg-levi-1.jpg',   thumb: 'bg-levi-thumbnail.jpg'},
+    { img: 'bg-asher.jpg',    thumb:  'bg-asher-thumbnail.jpg'},
+    { img: 'bg-benjamin.jpg', thumb:  'bg-benjamin-thumbnail.jpg'},
+    { img: 'bg-dan.jpg',      thumb:  'bg-dan-thumbnail.jpg'},
+    { img: 'bg-ephraim.jpg',  thumb:  'bg-ephram-thumbnail.jpg'},
+    { img: 'bg-gad.jpg',      thumb:  'bg-gad-thumbnail.jpg'},
+    { img: 'bg-issachar.jpg', thumb:  'bg-issachar-thumbnail.jpg'},
+    { img: 'bg-joseph.jpg',   thumb:  'bg-josepth-thumbnail.jpg'},
+    { img: 'bg-judah.jpg',    thumb:  'bg-judah-thumbnail.jpg'},
+    { img: 'bg-manasseh.jpg', thumb:  'bg-manasseh-thumbnail.jpg'},
+    { img: 'bg-naftali.jpg',  thumb:  'bg-naftali-thumbnail.jpg'},
+    { img: 'bg-reuben.jpg',   thumb:  'bg-reuben-thumbnail.jpg'},
+    { img: 'bg-simeon.jpg',   thumb:  'bg-simeon-thumbnail.jpg'},
+    { img: 'bg-zebulun.jpg',  thumb:  'bg-zebulun-thumbnail.jpg'},
+    { img: 'bg-0.jpg',  thumb: 'bg-thumbnail-0.jpg'},
+    { img: 'bg-1.jpg',  thumb: 'bg-thumbnail-1.jpg'},
+    { img: 'bg-2.jpg',  thumb: 'bg-thumbnail-2.jpg'},
+    { img: 'bg-3.jpg',  thumb: 'bg-thumbnail-3.jpg'},
+    { img: 'bg-4.jpg',  thumb: 'bg-thumbnail-4.jpg'},
+    { img: 'bg-5.jpg',  thumb: 'bg-thumbnail-5.jpg'},
+    { img: 'bg-6.jpg',  thumb: 'bg-thumbnail-6.jpg'},
+    { img: 'bg-7.jpg',  thumb: 'bg-thumbnail-7.jpg'},
+    { img: 'bg-8.jpg',  thumb: 'bg-thumbnail-8.jpg'},
+    { img: 'bg-9.jpg',  thumb: 'bg-thumbnail-9.jpg'},
+    { img: 'bg-10.jpg', thumb: 'bg-thumbnail-10.jpg'},
+    { img: 'bg-angel-01.jpg', thumb: 'bg-angel-thumbnail-01.jpg'},
+    { img: 'bg-angel-02.jpg', thumb: 'bg-angel-thumbnail-02.jpg'},
 ]
 
 // Should be Props
@@ -209,7 +212,7 @@ export default function Puzzle() {
                                         {
                                             bgImages.map((job, index )=> (
                                             <div  key={index}>
-                                                <img onClick={() => setBackground(job.img)} class="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" src={'bg/'+job.img} alt="" />
+                                                <img onClick={() => setBackground(job.img)} class="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" src={'thumbnails/'+job.thumb} alt="" />
                                             </div>
                                             ))
                                         }
