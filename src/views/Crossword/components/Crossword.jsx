@@ -5,6 +5,8 @@ import url from "../../../url"
 import './crossword.css';
 import './crossword.js';
 
+import Congratulation from '../../../components/Congratulation/CongratulationView';
+
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
@@ -421,7 +423,7 @@ export default function CrosswordPuzzle(props) {
     }
 
     return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
-        <div className="grid h-screen place-items-center" >
+        {/* <div className="grid h-screen place-items-center" >
             <div id="container">
                 <div className="cell" style={style}></div>
                 <div className="cell" style={style}></div>
@@ -579,6 +581,7 @@ export default function CrosswordPuzzle(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
+        <Congratulation />
     </div>
 }

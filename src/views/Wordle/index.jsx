@@ -38,10 +38,7 @@ import DeviceOrientation, { Orientation } from 'react-screen-orientation'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import Table from 'react-bootstrap/Table';
-// import Image from 'react-bootstrap/Image'
-// import Card from 'react-bootstrap/Card';
-import Button from  'react-bootstrap/Button';
+
 // Icons Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion, faUserGraduate, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'

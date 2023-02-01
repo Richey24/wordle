@@ -2,7 +2,9 @@ import gold from '../img/gold-medal.png';
 import tribe from '../img/asher.png';
 import silver from '../img/silver-medal.png'
 import bronze from '../img/bronze-medal.png'
-// import bground from 'videos/test.mp4';
+import { findFlagUrlByNationality } from "country-flags-svg";
+
+const flagUrl = findFlagUrlByNationality("Jamaican");
 
 
 export default function TheLeaderboard(props){
@@ -19,7 +21,7 @@ export default function TheLeaderboard(props){
                                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                     <tr>
                                         <th class="p-2 whitespace-nowrap">
-                                            <div class="font-semibold text-left">Names</div>
+                                            <div class="font-semibold text-left">Name</div>
                                         </th>
                                         <th class="p-2 whitespace-nowrap">
                                             <div class="font-semibold text-left">School Affiliation</div>
@@ -47,10 +49,10 @@ export default function TheLeaderboard(props){
                                         </td>
 
                                         <td class="p-2 whitespace-nowrap">
-                                            <div class="text-left text-white font-bold ">Jamaica</div>
+                                            <img class="w-20 h-20 rounded" src={flagUrl} alt="Large avatar" />
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
-                                              <img class="rounded-full" src={tribe} width="80" height="80" alt="Asher" />
+                                              <img class="rounded-full" src={tribe} width="100" height="100" alt="Asher" />
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                             <div class="text-left text-green-500 font-bold">1000</div>
