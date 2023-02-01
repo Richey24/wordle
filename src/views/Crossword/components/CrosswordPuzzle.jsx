@@ -489,7 +489,7 @@ export default function CrosswordPuzzle(props) {
      }
  
 
-   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('bg/${props.background}')` }}>
+   return <div className="min-h-screen bg-cover bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.background}')` }}>
               <button onClick={handleShow }>test</button>
            <div className="grid h-screen place-items-center overflow-auto" >
                 <div>
