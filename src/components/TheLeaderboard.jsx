@@ -9,7 +9,7 @@ const flagUrl = findFlagUrlByNationality("Jamaican");
 
 export default function TheLeaderboard(props){
     return <div className="min-h-screen">
-         <video  style={{ zIndex: -1 }} className="absolute w-auto min-w-full min-h-full max-w-none" src={`/videos/${props.bground}`} autoPlay muted loop id='thevid' />
+         <video  style={{ zIndex: -1 }} className="absolute w-auto min-w-full min-h-full max-w-none" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.bground}`} autoPlay muted loop id='thevid' />
         <section class="container mx-auto px-6 py-16 text-center"  >
             <div class="mx-auto max-w-xl" style={{ zIndex: 2 }}>
                     <header class="px-5 py-4 border-b border-gray-100">
@@ -33,6 +33,9 @@ export default function TheLeaderboard(props){
                                             <div class="font-semibold text-left">Tribes</div>
                                         </th>
                                         <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-left">Levels</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
                                             <div class="font-semibold text-left">Scores</div>
                                         </th>
                                     </tr>
@@ -53,6 +56,9 @@ export default function TheLeaderboard(props){
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                               <img class="rounded-full" src={tribe} width="100" height="100" alt="Asher" />
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                        <div class="text-left text-red-500 font-bold">1</div>
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                             <div class="text-left text-green-500 font-bold">1000</div>

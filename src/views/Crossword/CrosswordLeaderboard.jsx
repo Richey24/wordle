@@ -5,7 +5,7 @@ import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faToolbox, faPlus, faHome, faUserGraduate } from '@fortawesome/fontawesome-free-solid'
+import {  faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
 import { Link } from "react-router-dom";
 
 
@@ -127,7 +127,7 @@ export default function CrosswordLeaderboard() {
                                             <div class="mx-auto max-w-7xl">
                                                 <div class="relative isolate overflow-hidden bg-gray-900 shadow-2xl">
                                                     <div class="relative mt-10 h-30 lg:mt-8">
-                                                        <video className=""  src={`/videos/${bground}`} autoPlay muted loop />
+                                                        <video className=""  src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${bground}`} autoPlay muted loop />
                                                     </div>
                                                 </div>
                                            </div>
@@ -139,7 +139,7 @@ export default function CrosswordLeaderboard() {
                                             bgVideos.map((vid, index )=> (
                                             <div  key={index}>
                                                    <video onClick={() => selectVideoBg(vid.vid)} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop>
-                                                        <source src={`/videos/${vid.vid}`} type="" />
+                                                        <source src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid.vid}`} type="" />
                                                     </video>
                                             </div>
                                             ))
