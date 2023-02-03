@@ -84,6 +84,17 @@ const bgImages = [
     { img: "thumb-38.jpg", thumb: "thumb-38.jpg" },
     { img: "thumb-39.jpg", thumb: "thumb-39.jpg" },
     { img: "thumb-40.jpg", thumb: "thumb-40.jpg" },
+    { img: 'bg-51.jpg', thumb: 'bg-thumbnail-51.jpg' },
+    { img: 'bg-52.jpg', thumb: 'bg-thumbnail-52.jpg' },
+    { img: 'bg-53.jpg', thumb: 'bg-thumbnail-53.jpg' },
+    { img: 'bg-54.jpg', thumb: 'bg-thumbnail-54.jpg' },
+    { img: 'bg-55.jpg', thumb: 'bg-thumbnail-55.jpg' },
+    { img: 'bg-56.jpg', thumb: 'bg-thumbnail-56.jpg' },
+    { img: 'bg-57.jpg', thumb: 'bg-thumbnail-57.jpg' },
+    { img: 'bg-58.jpg', thumb: 'bg-thumbnail-58.jpg' },
+    { img: 'bg-66.jpg', thumb: 'bg-thumbnail-59.jpg' },
+    { img: 'bg-68.jpg', thumb: 'bg-thumbnail-60.jpg' },
+
 ]
 
 // Should be Props
@@ -139,6 +150,16 @@ const bgRandomImages = [
     { img: 'bg-48.jpg', thumb: 'bg-thumbnail-48.jpg' },
     { img: 'bg-49.jpg', thumb: 'bg-thumbnail-49.jpg' },
     { img: 'bg-50.jpg', thumb: 'bg-thumbnail-50.jpg' },
+    { img: 'bg-51.jpg', thumb: 'bg-thumbnail-51.jpg' },
+    { img: 'bg-52.jpg', thumb: 'bg-thumbnail-52.jpg' },
+    { img: 'bg-53.jpg', thumb: 'bg-thumbnail-53.jpg' },
+    { img: 'bg-54.jpg', thumb: 'bg-thumbnail-54.jpg' },
+    { img: 'bg-55.jpg', thumb: 'bg-thumbnail-55.jpg' },
+    { img: 'bg-56.jpg', thumb: 'bg-thumbnail-56.jpg' },
+    { img: 'bg-57.jpg', thumb: 'bg-thumbnail-57.jpg' },
+    { img: 'bg-58.jpg', thumb: 'bg-thumbnail-58.jpg' },
+    { img: 'bg-59.jpg', thumb: 'bg-thumbnail-59.jpg' },
+    { img: 'bg-60.jpg', thumb: 'bg-thumbnail-60.jpg' },
 ]
 
 const puzzleColorGradient = [
@@ -247,6 +268,7 @@ export default function Puzzle() {
         <div className="min-h-full">
 
             <Header />
+
             <CrosswordPuzzle background={background} color={color} color1={color1} />
 
             <Transition.Root show={open} as={Fragment}>

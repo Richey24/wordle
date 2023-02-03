@@ -12,6 +12,7 @@ import Reset from './components/Reset';
 import Difficult from './components/Difficult';
 import Hangman from './hangman/Hangman';
 import Register from './Register';
+
 // import Leader from './components/Leader';
 import Leader from './views/Leader';
 import BibleLeader from './views/Leader/bibleLeader';
@@ -37,7 +38,7 @@ import CrosswordLeader from './views/Crossword/CrosswordLeaderboard';
 import StripeContainer from './stripe/StripeContainer';
 import Verify from './components/Verify';
 import VerifyUser from './components/VerifyUser';
-
+import ProfilePage from './views/Profile/PofilePage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -74,6 +75,7 @@ root.render(
       <Route path='/subscription' element={<StripeContainer />} />
       <Route path='/verify' element={<Verify />} />
       <Route path='/verify/:id' element={<VerifyUser />} />
+      <Route path="/user-account" element={<ProfilePage />} />
     </Routes>
   </BrowserRouter>
 );

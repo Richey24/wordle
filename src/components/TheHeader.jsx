@@ -1,12 +1,17 @@
-import { Fragment } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from "react-router-dom"
+
+import url from "../url"
+import axios from 'axios'
+
 
 const navigation = [
   { name: 'Home', href: '#', current: true },
-  { name: 'Wordle', href: '#', current: false },
-  { name: 'Crossword', href: '#', current: false },
-  { name: 'Hangman', href: '#', current: false },
+  // { name: 'Wordle', href: '#', current: false },
+  // { name: 'Crossword', href: '#', current: false },
+  // { name: 'Hangman', href: '#', current: false },
 ]
 
 function classNames(...classes) {
@@ -14,6 +19,43 @@ function classNames(...classes) {
 }
 
 export default function THeHeader() {
+  const navigate = useNavigate()
+  const id = localStorage.getItem("id")
+  const token = localStorage.getItem("token")
+  const [user, setUser] = useState({});
+  const [loader, setLoader] = useState(true)
+
+  useEffect(() => {
+    getUserData()
+  }, [id])
+
+  const getUserData = async () => {
+    try {
+      const res = await axios.get(`${url}/user/get/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        validateStatus: () => true
+      })
+      const response = await res.data
+      if ( response.status !== 200) {
+        setLoader(false)
+        return
+      }
+
+      if (token !== response.mainToken) {
+        localStorage.clear()
+        setLoader(false)
+        return
+      }
+
+      setUser(response)
+      setLoader(false)
+    } catch (err) {
+      setLoader(false)
+    }
+  }
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -96,10 +138,11 @@ export default function THeHeader() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
+                             onClick={() => navigate("/user-account")}
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Your Profile
+                            Your Profile 
                           </a>
                         )}
                       </Menu.Item>

@@ -359,7 +359,7 @@ export default function CrosswordPuzzle(props) {
         for (let i = 0; i < result.length; i++) {
             occupied.push(direction === "horizontal" ? cellNo + i : cellNo + (i * 10))
             let style = `margin-left: ${direction === "horizontal" ? X + (i * 50) : X}px; margin-top: ${direction === "vertical" ? Y + (i * 50) : Y}px; transform: scale(0);`
-            html += `<div class="block" style="${style}">${result[i].toUpperCase()}</div>`
+            html += `<div class="wordblock" style="${style}">${result[i].toUpperCase()}</div>`
         }
 
         const container = document.querySelector('#container')
@@ -393,7 +393,7 @@ export default function CrosswordPuzzle(props) {
     }
 
     const blocks = () => {
-        return document.querySelectorAll(".block")
+        return document.querySelectorAll(".wordblock")
     }
 
     const getGridWords = () => {
