@@ -10,6 +10,7 @@ import { useEffect } from "react"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
+import Header from './TheHeader.jsx';
 
 const Select = () => {
     const navigate = useNavigate()
@@ -186,7 +187,9 @@ const Select = () => {
 
 
     return (
+
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain" id="selectMain">
+            {/* <Header /> */}
             <div className="firstDiv">
                 {
                     user.username ? (
