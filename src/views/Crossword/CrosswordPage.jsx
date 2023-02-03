@@ -11,20 +11,20 @@ import { useNavigate } from "react-router-dom";
 // Should be Props
 const bgImages = [
     { img: 'bg-boogle.jpg', thumb: 'bg-boogle-thumbnail.jpg' },
-    { img: 'bg-levi.png', thumb: 'bg-levi-thumbnail.jpg' },
+    { img: 'bg-levi.jpg', thumb: 'bg-levi-thumbnail.jpg' },
     { img: 'bg-asher.jpg', thumb: 'bg-asher-thumbnail.jpg' },
-    { img: 'bg-benjamin.png', thumb: 'bg-benjamin-thumbnail.jpg' },
-    { img: 'bg-dan.png', thumb: 'bg-dan-thumbnail.jpg' },
-    { img: 'bg-ephraim.png', thumb: 'bg-ephram-thumbnail.jpg' },
-    { img: 'bg-gad.png', thumb: 'bg-gad-thumbnail.jpg' },
-    { img: 'bg-issachar.png', thumb: 'bg-issachar-thumbnail.jpg' },
-    { img: 'bg-joseph.png', thumb: 'bg-josepth-thumbnail.jpg' },
-    { img: 'bg-judah.png', thumb: 'bg-judah-thumbnail.jpg' },
-    { img: 'bg-manasseh.png', thumb: 'bg-manasseh-thumbnail.jpg' },
-    { img: 'bg-naftali.png', thumb: 'bg-naftali-thumbnail.jpg' },
-    { img: 'bg-reuben.png', thumb: 'bg-reuben-thumbnail.jpg' },
-    { img: 'bg-simeon.png', thumb: 'bg-simeon-thumbnail.jpg' },
-    { img: 'bg-zebulun.png', thumb: 'bg-zebulun-thumbnail.jpg' },
+    { img: 'bg-benjamin.jpg', thumb: 'bg-benjamin-thumbnail.jpg' },
+    { img: 'bg-dan.jpg', thumb: 'bg-dan-thumbnail.jpg' },
+    { img: 'bg-ephraim.jpg', thumb: 'bg-ephram-thumbnail.jpg' },
+    { img: 'bg-gad.jpg', thumb: 'bg-gad-thumbnail.jpg' },
+    { img: 'bg-issachar.jpg', thumb: 'bg-issachar-thumbnail.jpg' },
+    { img: 'bg-joseph.jpg', thumb: 'bg-josepth-thumbnail.jpg' },
+    { img: 'bg-judah.jpg', thumb: 'bg-judah-thumbnail.jpg' },
+    { img: 'bg-manasseh.jpg', thumb: 'bg-manasseh-thumbnail.jpg' },
+    { img: 'bg-naftali.jpg', thumb: 'bg-naftali-thumbnail.jpg' },
+    { img: 'bg-reuben.jpg', thumb: 'bg-reuben-thumbnail.jpg' },
+    { img: 'bg-simeon.jpg', thumb: 'bg-simeon-thumbnail.jpg' },
+    { img: 'bg-zebulun.jpg', thumb: 'bg-zebulun-thumbnail.jpg' },
     { img: 'bg-0.jpg', thumb: 'bg-thumbnail-0.jpg' },
     { img: 'bg-1.jpg', thumb: 'bg-thumbnail-1.jpg' },
     { img: 'bg-2.jpg', thumb: 'bg-thumbnail-2.jpg' },
@@ -71,7 +71,7 @@ const bgImages = [
     { img: 'bg-43.jpg', thumb: 'bg-thumbnail-43.jpg' },
     { img: 'bg-44.jpg', thumb: 'bg-thumbnail-44.jpg' },
     { img: 'bg-45.jpg', thumb: 'bg-thumbnail-45.jpg' },
-    { img: 'bg-46.jpg', thumb: 'bg-thumbnail-47.jpg' },
+    { img: 'bg-46.jpg', thumb: 'bg-thumbnail-46.jpg' },
     { img: 'bg-47.jpg', thumb: 'bg-thumbnail-47.jpg' },
     { img: 'bg-48.jpg', thumb: 'bg-thumbnail-48.jpg' },
     { img: 'bg-49.jpg', thumb: 'bg-thumbnail-49.jpg' },
@@ -84,6 +84,16 @@ const bgImages = [
     { img: "thumb-38.jpg", thumb: "thumb-38.jpg" },
     { img: "thumb-39.jpg", thumb: "thumb-39.jpg" },
     { img: "thumb-40.jpg", thumb: "thumb-40.jpg" },
+    { img: 'bg-51.jpg', thumb: 'bg-thumbnail-51.jpg' },
+    { img: 'bg-52.jpg', thumb: 'bg-thumbnail-52.jpg' },
+    { img: 'bg-53.jpg', thumb: 'bg-thumbnail-53.jpg' },
+    { img: 'bg-54.jpg', thumb: 'bg-thumbnail-54.jpg' },
+    { img: 'bg-55.jpg', thumb: 'bg-thumbnail-55.jpg' },
+    { img: 'bg-56.jpg', thumb: 'bg-thumbnail-56.jpg' },
+    { img: 'bg-59.jpg', thumb: 'bg-thumbnail-57.jpg' },
+    { img: 'bg-58.jpg', thumb: 'bg-thumbnail-58.jpg' },
+    { img: 'bg-68.jpg', thumb: 'bg-thumbnail-60.jpg' },
+
 ]
 
 // Should be Props
@@ -139,6 +149,16 @@ const bgRandomImages = [
     { img: 'bg-48.jpg', thumb: 'bg-thumbnail-48.jpg' },
     { img: 'bg-49.jpg', thumb: 'bg-thumbnail-49.jpg' },
     { img: 'bg-50.jpg', thumb: 'bg-thumbnail-50.jpg' },
+    { img: 'bg-51.jpg', thumb: 'bg-thumbnail-51.jpg' },
+    { img: 'bg-52.jpg', thumb: 'bg-thumbnail-52.jpg' },
+    { img: 'bg-53.jpg', thumb: 'bg-thumbnail-53.jpg' },
+    { img: 'bg-54.jpg', thumb: 'bg-thumbnail-54.jpg' },
+    { img: 'bg-55.jpg', thumb: 'bg-thumbnail-55.jpg' },
+    { img: 'bg-56.jpg', thumb: 'bg-thumbnail-56.jpg' },
+    { img: 'bg-57.jpg', thumb: 'bg-thumbnail-57.jpg' },
+    { img: 'bg-58.jpg', thumb: 'bg-thumbnail-58.jpg' },
+    { img: 'bg-59.jpg', thumb: 'bg-thumbnail-59.jpg' },
+    { img: 'bg-60.jpg', thumb: 'bg-thumbnail-60.jpg' },
 ]
 
 const puzzleColorGradient = [
@@ -247,6 +267,7 @@ export default function Puzzle() {
         <div className="min-h-full">
 
             <Header />
+
             <CrosswordPuzzle background={background} color={color} color1={color1} />
 
             <Transition.Root show={open} as={Fragment}>
