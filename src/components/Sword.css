@@ -228,10 +228,6 @@
     font-size: 32px;
 }
 
-.show {
-    display: block;
-}
-
 .homeBtnSword {
     font-size: 20px;
     color: #3d1152;
@@ -274,6 +270,10 @@
 
 .swordSub>p {
     text-align: center;
+}
+
+.show {
+    display: block;
 }
 
 @media screen and (max-width: 800px) {

@@ -23,16 +23,16 @@ const Select = () => {
     const soundOffLocation = "img/soundOff.png"
 
 
-    useEffect (()=>{
+    useEffect(() => {
 
         let settings = localStorage.getItem("Settings")
 
-        if(settings == undefined) {
+        if (settings == undefined) {
             const settings = {
-                sound:true
+                sound: true
             }
             localStorage.setItem("Settings", JSON.stringify(settings))
-        }else{
+        } else {
             const localStorageSettings = localStorage.getItem("Settings")
             let settings = JSON.parse(localStorageSettings)
 
@@ -40,7 +40,7 @@ const Select = () => {
         }
 
 
-    },[])
+    }, [])
 
 
     useEffect(() => {
@@ -77,7 +77,7 @@ const Select = () => {
     }, [id])
 
     const showModal = (id) => {
-        document.getElementById(id).classList.toggle("show")
+        document.getElementById(id).classList.toggle("selectShow")
     }
 
     const navBible = () => {
@@ -118,7 +118,7 @@ const Select = () => {
     }
 
     const playSound = async (val) => {
-        if(soundOn) {
+        if (soundOn) {
             switch (val) {
                 case "word":
                     new Audio(require("../sound/hit-low-gravity.mp3")).play()
@@ -140,6 +140,9 @@ const Select = () => {
                     break;
                 case "shield":
                     new Audio(require("../sound/shield-guard.mp3")).play()
+                    break;
+                case "hebrew":
+                    new Audio(require("../sound/sheath.mp3")).play()
                     break;
                 default:
                     break;
@@ -195,14 +198,14 @@ const Select = () => {
                     user.username ? (
                         <>
                             <p>Shalom {user.username} <span onClick={logOut}>Logout</span></p>
-                            <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
+                            <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
                         </>
 
                     ) : (
                         <>
                             <p onClick={() => navigate("/register")}>Register</p>
                             <p onClick={() => navigate("/login")}>Login</p>
-                            <p  onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"}/></p>
+                            <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
 
 
                         </>
@@ -234,6 +237,10 @@ const Select = () => {
                     <img src={hang} alt="" />
                     <p>Hangman</p>
                 </div>
+                <div onMouseEnter={() => playSound("hebrew")} onClick={() => showModal("comingSoon")}>
+                    <img src={bible} alt="" />
+                    <p>Hebrew language game</p>
+                </div>
                 <div onMouseEnter={() => playSound("sword")} onClick={() => navigate("/shield")}>
                     <img src={shield} alt="" />
                     <p>Watchman Sword & Shield</p>
@@ -244,10 +251,14 @@ const Select = () => {
                     <p>My Sword & Shield</p>
                 </div>
             </div>
-            <div id="swordSub" className="swordSub">
+            <div id="swordSub" className="selectSub">
                 <p>You have use your free daily pass, kindly subscribe to have unlimited access</p>
-                <button>Subscribe</button>
+                <button onClick={() => navigate("/subscription")}>Subscribe</button>
                 <button onClick={() => showModal("swordSub")}>Cancel</button>
+            </div>
+            <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
+                <p style={{ fontWeight: "600" }}>Coming soon...</p>
+                <button onClick={() => showModal("comingSoon")}>Cancel</button>
             </div>
         </div>
     )

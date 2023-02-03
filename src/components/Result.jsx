@@ -62,7 +62,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
                 }
             })
         }
-        if (num >= 7 && !user.paid) {
+        if (!user.paid) {
             hideModal()
             showModal("swordSub")
         }
@@ -81,7 +81,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
                 <button onClick={() => navigate("/")}>Cancel</button>
             </div>
             <div id="resultDiv" className="resultDiv">
-                <img onClick={() => { hideModal(); navigate(0) }} src={cancel} alt="cancel" className="cancel" />
+                <img onClick={nextRound} src={cancel} alt="cancel" className="cancel" />
                 <h2>You Win</h2>
                 <p>You completed {num !== 1 ? `stage ${noOfTry[1]}` : "it"} using {(noOfTry[1] + 1) - (noOfTry[0] / noOfTry[1])} trials in {time} seconds</p>
                 <p className="score">and your total score is {((noOfTry[0] / noOfTry[1]) / time).toFixed(2)}</p>

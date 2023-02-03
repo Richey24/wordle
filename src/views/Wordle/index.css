@@ -263,7 +263,8 @@
 
 .theHint {
     position: absolute;
-    left: 42.5%;
+    left: 41.5%;
+    margin: 20px 0px;
     height: 25px;
     color: white;
     display: none;
@@ -293,12 +294,16 @@
 }
 
 .startBtn {
-    width: 30%;
+    width: 20%;
     height: 10%;
     position: fixed;
     top: 50%;
-    left: 42.5%;
+    left: 40%;
     cursor: pointer;
+    border-radius: 12px;
+    background-color: black;
+    color: white;
+    font-weight: 600;
 }
 
 .startBtnLandscape {
@@ -330,34 +335,42 @@
     position: absolute;
     bottom: 30px;
     right: 10px;
-  }
-  .fab-container:hover {
+}
+
+.fab-container:hover {
     height: 100%;
-  }
-  .fab-container:hover .sub-button:nth-child(2) {
+}
+
+.fab-container:hover .sub-button:nth-child(2) {
     transform: translateY(-80px);
-  }
-  .fab-container:hover .sub-button:nth-child(3) {
+}
+
+.fab-container:hover .sub-button:nth-child(3) {
     transform: translateY(-140px);
-  }
-  .fab-container:hover .sub-button:nth-child(4) {
+}
+
+.fab-container:hover .sub-button:nth-child(4) {
     transform: translateY(-200px);
-  }
-  .fab-container:hover .sub-button:nth-child(5) {
+}
+
+.fab-container:hover .sub-button:nth-child(5) {
     transform: translateY(-260px);
-  }
-  .fab-container:hover .sub-button:nth-child(6) {
+}
+
+.fab-container:hover .sub-button:nth-child(6) {
     transform: translateY(-320px);
-  }
-  .fab-container .fab {
+}
+
+.fab-container .fab {
     position: relative;
     height: 70px;
     width: 70px;
     background-color: #4ba2ff;
     border-radius: 50%;
     z-index: 2;
-  }
-  .fab-container .fab::before {
+}
+
+.fab-container .fab::before {
     content: " ";
     position: absolute;
     bottom: 0;
@@ -367,20 +380,23 @@
     background-color: inherit;
     border-radius: 0 0 0px 0;
     z-index: -1;
-  }
-  .fab-container .fab .fab-content {
+}
+
+.fab-container .fab .fab-content {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
     border-radius: 50%;
-  }
-  .fab-container .fab .fab-content .material-icons {
+}
+
+.fab-container .fab .fab-content .material-icons {
     color: white;
     font-size: 48px;
-  }
-  .fab-container .sub-button {
+}
+
+.fab-container .sub-button {
     position: absolute;
     display: flex;
     align-items: center;
@@ -392,16 +408,18 @@
     background-color: #4ba2ff;
     border-radius: 50%;
     transition: all 0.3s ease;
-  }
-  .fab-container .sub-button:hover {
+}
+
+.fab-container .sub-button:hover {
     cursor: pointer;
-  }
-  .fab-container .sub-button .material-icons {
+}
+
+.fab-container .sub-button .material-icons {
     color: white;
     padding-top: 6px;
-  }
+}
 
-  .btn-keyboard {
+.btn-keyboard {
     font-size: inherit;
     border: none;
     padding: 0;
@@ -413,9 +431,9 @@
     border-radius: .25em;
     cursor: pointer;
     user-select: none;
-  }
+}
 
-  .h-100-vh {
+.h-100-vh {
     min-height: 100vh !important;
     /* height: 100vh !important; */
-  }
+}
