@@ -1,51 +1,36 @@
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import url from "../url"
 import "./Sub.css"
 
-const CARD_OPTIONS = {
-    iconStyle: "solid",
-    style: {
-        base: {
-            iconColor: "#3d1152",
-            color: "#3d1152",
-            fontWeight: 700,
-            fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-            fontSize: "16px",
-            fontSmoothing: "antialiased",
-            ":-webkit-autofill": { color: "#3d1152" },
-            "::placeholder": { color: "#3d1152" }
-        },
-        invalid: {
-            iconColor: "#3d1152",
-            color: "#3d1152"
-        }
-    }
-}
-
 const SubscriptionForm = () => {
-    const stripe = useStripe()
-    const elements = useElements()
     const id = localStorage.getItem("id")
     const token = localStorage.getItem("token")
     const [user, setUser] = useState({})
+    const [success, setSuccess] = useState(false)
+    const [plan, setPlan] = useState("monthly")
+    const [query, setQuery] = useSearchParams()
     const navigate = useNavigate()
 
+
     const getUser = async () => {
-        const res = await axios.get(`${url}/user/get/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            validateStatus: () => true
-        })
-        const rep = await res.data
-        if (res.status !== 200) {
+        try {
+            const res = await axios.get(`${url}/user/get/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+                validateStatus: () => true
+            })
+            const rep = await res.data
+            if (res.status !== 200) {
+                navigate("/login")
+            } else {
+                setUser(rep)
+            }
+        } catch (error) {
             navigate("/login")
-        } else {
-            setUser(rep)
         }
     }
 
@@ -55,50 +40,57 @@ const SubscriptionForm = () => {
         } else {
             getUser()
         }
+        if (query.get("success") !== null || query.get("cancelled") !== null) {
+            if (query.get("success") === "true") {
+                setSuccess(true)
+                toggleModal()
+            } else if (query.get("cancelled") === "true") {
+                setSuccess(false)
+                toggleModal()
+            }
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        if (!stripe || !elements) {
-            return
-        }
-        const plan = e.target.plan.value
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: "card",
-            card: elements.getElement(CardElement)
-        })
-        if (error) {
-            console.log(error);
-        } else {
-            console.log(paymentMethod);
-            const res = await axios.post(`${url}/sub/new`, { paymentMethod: paymentMethod, email: user.email, name: user.name, plan: plan })
-            const rep = await res.data
-            const { clientSecret, status } = rep
-            if (status === "requires_action") {
-                stripe.confirmCardPayment(clientSecret).then((result) => {
-                    if (result.error) {
-                        console.log(result.error);
-                    } else {
-                        console.log("payment successful");
-                    }
-                })
-            } else {
-                console.log("payment successful");
-            }
-        }
+    const toggleModal = () => {
+        document.getElementById("successDiv").classList.toggle("show")
+    }
+
+    const changePlan = (e) => {
+        const val = e.target.value
+        setPlan(val)
     }
 
     return (
-        <div className="payDiv">
-            <form onSubmit={handleSubmit}>
-                <select name="plan" id="plan">
-                    <option value="monthly">Monthly $2.99</option>
-                    <option value="yearly">Yearly $29.99</option>
-                </select>
-                <CardElement options={CARD_OPTIONS} />
-                <button>Pay</button>
-            </form>
+        <div>
+            <div className="payDiv">
+                <form action={`http://localhost:5000/create-checkout-session?email=${user.email}&plan=${plan}&id=${user._id}`} method="POST">
+                    <select onChange={changePlan} name="plan" id="plan">
+                        <option value="monthly">Monthly $2.99</option>
+                        <option value="yearly">Yearly $29.99</option>
+                    </select>
+                    <button>Pay</button>
+                </form>
+            </div>
+
+            <div className="successDiv" id="successDiv">
+                {
+                    success ? (
+                        <div>
+                            <p>You subscription was successful</p>
+                            <p>You now have access to all the premium feature that we offer</p>
+                            <button onClick={() => navigate("/")} className="tryButton">Go home</button>
+                        </div>
+                    ) : (
+                        <div>
+                            <p>Your payment was unsuccessful</p>
+                            <p>Check your card details and try again</p>
+                            <button onClick={toggleModal} className="tryButton">Try again</button>
+                            <button onClick={() => navigate("/")} className="cancelButton">Cancel</button>
+                        </div>
+                    )
+                }
+            </div>
         </div>
     )
 }
