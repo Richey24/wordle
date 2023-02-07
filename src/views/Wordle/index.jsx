@@ -536,7 +536,12 @@ const Wordle = () => {
                     <p id="sec">0</p>
                     <p>s</p>
                 </div>
-                {num === 1 && <p className="bible">Bible version</p>}
+                <div className="wordleHome">
+                    <div onClick={() => navigate("/")}>
+                        <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+                    </div>
+                    {num === 1 && <p>Bible version</p>}
+                </div>
                 <p id="hint" className="theHint">{hint}</p>
                 <div class="alert-container" data-alert-container></div>
 

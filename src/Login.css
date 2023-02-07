@@ -89,6 +89,10 @@
     cursor: pointer;
 }
 
+.goHome {
+    display: none;
+}
+
 .lockImage {
     width: 100%;
     display: flex;
@@ -167,6 +171,10 @@
 @media (max-width: 700px) {
     .homeBtnLog {
         display: none;
+    }
+
+    .goHome {
+        display: block;
     }
 }
 

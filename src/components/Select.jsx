@@ -83,6 +83,7 @@ const Select = () => {
     const navBible = () => {
         if (Object.keys(user).length === 0) {
             navigate("/login")
+            return
         }
         if (user.playedBible) {
             showModal("swordSub")
@@ -94,6 +95,7 @@ const Select = () => {
     const navHang = () => {
         if (Object.keys(user).length === 0) {
             navigate("/login")
+            return
         }
         if (user.playedHang) {
             showModal("swordSub")
@@ -105,6 +107,7 @@ const Select = () => {
     const navTrivial = () => {
         if (Object.keys(user).length === 0) {
             navigate("/login")
+            return
         }
         if (user.playedTrivial) {
             showModal("swordSub")
@@ -114,6 +117,14 @@ const Select = () => {
     }
 
     const navCross = () => {
+        if (Object.keys(user).length === 0) {
+            navigate("/login")
+            return
+        }
+        if (user.playedCross) {
+            showModal("swordSub")
+            return
+        }
         navigate("/crossword")
     }
 
@@ -197,7 +208,7 @@ const Select = () => {
                 {
                     user.username ? (
                         <>
-                            <p>Shalom {user.username} <span onClick={logOut}>Logout</span></p>
+                            <p>Shalom {user.username}. <span onClick={logOut}>Logout</span></p>
                             <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
                         </>
 
@@ -257,7 +268,7 @@ const Select = () => {
                 <button onClick={() => showModal("swordSub")}>Cancel</button>
             </div>
             <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
-                <p style={{ fontWeight: "600" }}>Coming soon...</p>
+                <p style={{ fontWeight: "600" }}>Will be added soon...</p>
                 <button onClick={() => showModal("comingSoon")}>Cancel</button>
             </div>
         </div>
