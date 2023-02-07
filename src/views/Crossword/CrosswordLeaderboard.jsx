@@ -127,7 +127,7 @@ export default function CrosswordLeaderboard() {
                                                         {
                                                             video.map((vid, index) => (
                                                                 <div key={index}>
-                                                                    <video onClick={() => selectVideoBg(vid)} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop>
+                                                                    <video onClick={() => selectVideoBg(vid.vid)} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop>
                                                                         <source src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid}.mp4`} type="" />
                                                                     </video>
                                                                 </div>
