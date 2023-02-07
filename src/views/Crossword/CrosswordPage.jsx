@@ -93,6 +93,10 @@ const bgImages = [
     { img: 'bg-59.jpg', thumb: 'bg-thumbnail-57.jpg' },
     { img: 'bg-58.jpg', thumb: 'bg-thumbnail-58.jpg' },
     { img: 'bg-68.jpg', thumb: 'bg-thumbnail-60.jpg' },
+    { img: 'bg-71.jpg', thumb: 'bg-71.jpg' },
+    { img: 'bg-72.jpg', thumb: 'bg-72.jpg' },
+    { img: 'bg-73.jpg', thumb: 'bg-73.jpg' },
+    { img: 'bg-74.jpg', thumb: 'bg-74.jpg' },
 
 ]
 

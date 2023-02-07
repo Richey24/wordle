@@ -254,6 +254,7 @@
     position: absolute;
     display: flex;
     right: 11%;
+    top: 10px;
 }
 
 .myTimer p {
@@ -271,15 +272,6 @@
     text-transform: capitalize;
 }
 
-.bible {
-    position: absolute;
-    left: 1%;
-    top: 1px;
-    height: 25px;
-    color: white;
-    font-size: 30px;
-    text-transform: capitalize;
-}
 
 .leader {
     width: 50px;
@@ -436,4 +428,26 @@
 .h-100-vh {
     min-height: 100vh !important;
     /* height: 100vh !important; */
+}
+
+.wordleHome {
+    display: flex;
+    gap: 30px;
+    align-items: baseline;
+    padding-top: 10px;
+    position: relative;
+}
+
+.wordleHome>p {
+    color: white;
+    font-size: 30px;
+    text-transform: capitalize;
+    margin-left: 60px;
+}
+
+.wordleHome>div {
+    cursor: pointer;
+    position: absolute;
+    z-index: 3;
+    top: 13px;
 }

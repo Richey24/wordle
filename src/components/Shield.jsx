@@ -3,6 +3,7 @@ import cancel from "../img/cancel.svg"
 import edit from "../img/Edit.svg"
 import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
+import empty from "../img/empty.svg"
 import { useEffect } from "react"
 import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -124,7 +125,10 @@ const Shield = () => {
             </div>
             {
                 studies.length < 1 ? (
-                    <p className="empty">No study yet</p>
+                    <div className="empty">
+                        <img src={empty} alt="" />
+                        <p>No study yet</p>
+                    </div>
                 ) : (
                     <div className="swordMain">
                         {

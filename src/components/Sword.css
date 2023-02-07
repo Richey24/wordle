@@ -224,8 +224,13 @@
 
 .empty {
     text-align: center;
-    margin-top: 200px;
-    font-size: 32px;
+    margin-top: 20px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .homeBtnSword {

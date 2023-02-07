@@ -33,6 +33,9 @@ const Login = () => {
             email: e.target.email?.value,
             password: e.target.password?.value,
         }
+        if (!user.email.includes("@")) {
+            user.username = user.email
+        }
 
         if (reg === "login") {
             const res = await axios.post(`${url}/user/login`, user, { validateStatus: () => true })
@@ -151,9 +154,9 @@ const Login = () => {
                 {showErr && <Alert variant="danger">{err}</Alert>}
                 <form onSubmit={submitForm}>
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Email/Username</label>
                         <br />
-                        <input required type="text" id="email" placeholder="Enter your email" name="email" />
+                        <input required type="text" id="email" placeholder="Enter your email or username" name="email" />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
@@ -171,7 +174,7 @@ const Login = () => {
                 </form>
                 <p>Don't have an account? <span onClick={() => { setShowErr(false); navigate("/register") }}>Register</span></p>
                 <p onClick={() => { setShowErr(false); setReg("forgot") }} className="forgotPass"><span>Forgot password</span></p>
-                <p onClick={() => navigate("/")} className="forgotPass"><span>Home</span></p>
+                <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
                 <div className="homeBtnLog" onClick={() => navigate("/")}>
                     <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
                 </div>

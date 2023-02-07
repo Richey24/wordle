@@ -141,7 +141,7 @@ const LeaderQuiz = () => {
                                         users.map((user, i) => (
                                             <tr key={i}>
                                                 <td>{user?.playerName}</td>
-                                                <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe?.toLowerCase()]} alt="" style={{ width: 100, height: 100 }} /></td>
+                                                <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe?.toLowerCase()]} alt="" style={{ width: 160, height: 160 }} /></td>
                                                 <td>{user?.score}</td>
                                             </tr>
                                         ))

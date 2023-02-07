@@ -84,7 +84,12 @@ const AddShield = () => {
             })
             const date = new Date().toLocaleString()
             const text = `${user.username} edited ${body.topic} on ${date}`
-            await axios.post(`${url}/audit/add`, { audit: text })
+            await axios.post(`${url}/audit/add`, { audit: text }, {
+                validateStatus: () => true,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
             switch (res.status) {
                 case 500:
                     setErr(true)
@@ -108,7 +113,12 @@ const AddShield = () => {
         })
         const date = new Date().toLocaleString()
         const text = `${user.username} added ${body.topic} on ${date}`
-        await axios.post(`${url}/audit/add`, { audit: text })
+        await axios.post(`${url}/audit/add`, { audit: text }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
         switch (res.status) {
             case 500:
                 setErr(true)

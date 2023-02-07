@@ -210,7 +210,7 @@ function Hangman() {
                 </div>
             </div>
             <div id="hangBigDiv" className="hangBigDiv"></div>
-            <button onClick={startGame} id="hangStart" className="hangBtn">Start game</button>
+            <button onClick={startGame} id="hangStart" className="hangBtn">Press to start</button>
         </div>
     )
 }

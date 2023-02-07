@@ -222,6 +222,7 @@ const Register = () => {
                                         <li onClick={() => getChurch("1WEST (Messianic, Harlem-School Influenced) CAMPS")}>1WEST1 (Messianic, Harlem-School Influenced) CAMPS </li>
                                         <li onClick={() => getChurch("Ambassadors of Christ (AOC)")}>Ambassadors of Christ (AOC)</li>
                                         <li onClick={() => getChurch("Army of Israel (AOI) ")}>Army of Israel (AOI) </li>
+                                        <li onClick={() => getChurch("Believers of The Way")}>Believers of The Way</li>
                                         <li onClick={() => getChurch("Church of God and Saints of Christ (COGASOC)")}>Church of God and Saints of Christ (COGASOC)</li>
                                         <li onClick={() => getChurch("Future World of Israel (FWOI)")}>Future World of Israel (FWOI)</li>
                                         <li onClick={() => getChurch("Gathering of Christ Church (GOCC)")}>Gathering of Christ Church (GOCC)</li>
@@ -234,6 +235,7 @@ const Register = () => {
                                         <li onClick={() => getChurch("Israelite School of Universal Practical Knowledge (ISUPK)")}>Israelite School of Universal Practical Knowledge (ISUPK)</li>
                                         <li onClick={() => getChurch("Lions of Israel / We Got Next (LOI)")}>Lions of Israel / We Got Next (LOI)</li>
                                         <li onClick={() => getChurch("Nation of Yahweh (NOY)")}>Nation of Yahweh (NOY)</li>
+                                        <li onClick={() => getChurch("Onebody Israelites)")}>Onebody Israelites)</li>
                                         <li onClick={() => getChurch("Sons of Thunder (SOT)")}>Sons of Thunder (SOT)</li>
                                         <li onClick={() => getChurch("Shut ‘Em Down Crew / RAM Squad (RAM)")}>Shut ‘Em Down Crew / RAM Squad (RAM)</li>
                                         <li onClick={() => getChurch("Sicarii")}>Sicarii</li>
@@ -282,7 +284,7 @@ const Register = () => {
 
                 <p>Already have an account? <span onClick={() => { setShowErr(false); navigate("/login") }}>Login</span></p>
                 {num === 2 && <p onClick={() => setNum(1)}><span>Back</span></p>}
-                <p onClick={() => navigate("/")} className="forgotPass"><span>Home</span></p>
+                <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
             </div>
         </div>
     )

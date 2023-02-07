@@ -161,7 +161,7 @@ const Leader = () => {
                                             user.dailyWQS !== 0 &&
                                             <tr key={i}>
                                                 <td>{user?.username}</td>
-                                                <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe[0]?.toLowerCase()]} alt="" style={{ width: 100, height: 100 }} /></td>
+                                                <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe[0]?.toLowerCase()]} alt="" style={{ width: 160, height: 160 }} /></td>
                                                 <td>{user?.dailyWQS}</td>
                                             </tr>
                                         ))
