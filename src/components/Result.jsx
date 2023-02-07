@@ -13,7 +13,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
         document.getElementById("resultDiv").style.display = "none"
     }
     const showModal = (id) => {
-        document.getElementById(id).classList.toggle("show")
+        document.getElementById(id).classList.toggle("showBlock")
     }
     const nextRound = async () => {
 
@@ -77,7 +77,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
         <div>
             <div id="swordSub" className="swordSub">
                 <p>You can only play up to stage 7 for the free plan, subscribe to play up to 15 stages</p>
-                <button>Subscribe</button>
+                <button onClick={() => navigate("/subscription")}>Subscribe</button>
                 <button onClick={() => navigate("/")}>Cancel</button>
             </div>
             <div id="resultDiv" className="resultDiv">

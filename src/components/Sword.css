@@ -73,6 +73,7 @@
     position: absolute;
     right: 20px;
     z-index: 2;
+    display: flex;
 }
 
 .verses {
@@ -277,7 +278,7 @@
     text-align: center;
 }
 
-.show {
+.showBlock {
     display: block;
 }
 

@@ -70,7 +70,7 @@ const Shield = () => {
     const showModal = (id, value) => {
         setContent(value)
         setDelId(value)
-        document.getElementById(id).classList.toggle("show")
+        document.getElementById(id).classList.toggle("showBlock")
     }
 
     const filterItem = (e) => {
