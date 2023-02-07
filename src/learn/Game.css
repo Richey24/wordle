@@ -144,9 +144,9 @@
     cursor: pointer;
 }
 
-.learnModal>p {
+.learnModal>pre {
     margin-top: 20px;
-    line-height: 45px;
+    line-height: 25px;
 }
 
 .quizScoreModal {

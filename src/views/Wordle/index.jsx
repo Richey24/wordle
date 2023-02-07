@@ -531,7 +531,7 @@ const Wordle = () => {
 
         <Container fluid style={{ backgroundColor: user.tribe ? user.tribe[1] : "#3d1152" }} className="h-100-vh">
             <div>
-                {/* {!hide && <p onClick={showHint} className="hint">Hint</p>} */}
+                {!hide && <p onClick={showHint} className="hint">Hint</p>}
                 <div className="myTimer">
                     <p id="sec">0</p>
                     <p>s</p>

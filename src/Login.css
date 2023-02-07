@@ -117,51 +117,6 @@
     font-style: normal;
 }
 
-.tribeList {
-    width: 100%;
-    box-shadow: 0 0 4px 4px rgba(17, 17, 17, 0.11);
-    height: 200px;
-    overflow-y: scroll;
-    scrollbar-width: none;
-    font-family: 'Switzer';
-    font-style: normal;
-    padding-left: 0px;
-    position: absolute;
-    background: #F3F4F6;
-    display: none;
-    top: 100px;
-    z-index: 1;
-}
-
-.tribeList::-webkit-scrollbar {
-    display: none;
-}
-
-.tribeList>li {
-    list-style-type: none;
-    font-size: 20px;
-    cursor: pointer;
-    width: 100%;
-    padding: 20px;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.tribeList>li>img {
-    width: 60px;
-}
-
-.tribeList>li:hover {
-    background-color: #3d1152;
-    color: white;
-}
-
-.tribeDiv {
-    position: relative;
-}
-
 .homeBtnLog {
     position: absolute;
     top: 20px;

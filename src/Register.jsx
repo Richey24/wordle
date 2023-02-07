@@ -130,14 +130,14 @@ const Register = () => {
     }
 
     const selectTribe = () => {
-        document.getElementById("tribe").classList.toggle("show")
+        document.getElementById("tribe").classList.toggle("showDrop")
     }
 
     const selectChurch = () => {
-        document.getElementById("church").classList.toggle("show")
+        document.getElementById("church").classList.toggle("showDrop")
     }
     const selectCountry = () => {
-        document.getElementById("country").classList.toggle("show")
+        document.getElementById("country").classList.toggle("showDrop")
     }
 
     const getTribe = (value) => {
@@ -235,7 +235,7 @@ const Register = () => {
                                         <li onClick={() => getChurch("Israelite School of Universal Practical Knowledge (ISUPK)")}>Israelite School of Universal Practical Knowledge (ISUPK)</li>
                                         <li onClick={() => getChurch("Lions of Israel / We Got Next (LOI)")}>Lions of Israel / We Got Next (LOI)</li>
                                         <li onClick={() => getChurch("Nation of Yahweh (NOY)")}>Nation of Yahweh (NOY)</li>
-                                        <li onClick={() => getChurch("Onebody Israelites)")}>Onebody Israelites)</li>
+                                        <li onClick={() => getChurch("Onebody Israelites)")}>Onebody Israelites</li>
                                         <li onClick={() => getChurch("Sons of Thunder (SOT)")}>Sons of Thunder (SOT)</li>
                                         <li onClick={() => getChurch("Shut ‘Em Down Crew / RAM Squad (RAM)")}>Shut ‘Em Down Crew / RAM Squad (RAM)</li>
                                         <li onClick={() => getChurch("Sicarii")}>Sicarii</li>

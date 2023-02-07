@@ -151,7 +151,9 @@ const Leader = () => {
                                 <thead className="border-bottom">
                                     <tr className="text-white">
                                         <th>Username</th>
+                                        <th>Country</th>
                                         <th>Tribe</th>
+                                        <th>School</th>
                                         <th>Score</th>
                                     </tr>
                                 </thead>
@@ -160,8 +162,10 @@ const Leader = () => {
                                         users.map((user, i) => (
                                             user.dailyWQS !== 0 &&
                                             <tr key={i}>
-                                                <td>{user?.username}</td>
+                                                <td style={{ textTransform: "uppercase" }}>{user?.username}</td>
+                                                <td style={{ width: "160px", height: "160px" }}><img src={user?.country[1]} alt="" /></td>
                                                 <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe[0]?.toLowerCase()]} alt="" style={{ width: 160, height: 160 }} /></td>
+                                                <td>{user?.church}</td>
                                                 <td>{user?.dailyWQS}</td>
                                             </tr>
                                         ))
