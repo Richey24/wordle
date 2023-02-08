@@ -196,10 +196,10 @@ const Select = () => {
 
 
     return (
-
-        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain" id="selectMain">
+        <div>
             <Header soundClick={soundClick} soundOn={soundOn} />
-            {/* <div className="firstDiv">
+            <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain" id="selectMain">
+                {/* <div className="firstDiv">
                 {
                     user.username ? (
                         <>
@@ -216,53 +216,54 @@ const Select = () => {
                     )
                 }
             </div> */}
-            <div className="innerMain">
-                <div onMouseEnter={() => playSound("word")} onClick={() => navigate("/select")}>
-                    <img src={word} alt="" />
-                    <p>Word quest</p>
-                </div>
+                <div className="innerMain">
+                    <div onMouseEnter={() => playSound("word")} onClick={() => navigate("/select")}>
+                        <img src={word} alt="" />
+                        <p>Word quest</p>
+                    </div>
 
-                <div onMouseEnter={() => playSound("quest")} onClick={navBible}>
-                    <img src={biblequest} alt="" />
-                    <p>Bible quest</p>
-                </div>
+                    <div onMouseEnter={() => playSound("quest")} onClick={navBible}>
+                        <img src={biblequest} alt="" />
+                        <p>Bible quest</p>
+                    </div>
 
-                <div onMouseEnter={() => playSound("cross")} onClick={navCross}>
-                    <img src={word} alt="" />
-                    <p>Bible Crossword</p>
-                </div>
+                    <div onMouseEnter={() => playSound("cross")} onClick={navCross}>
+                        <img src={word} alt="" />
+                        <p>Bible Crossword</p>
+                    </div>
 
-                <div onMouseEnter={() => playSound("learn")} onClick={navTrivial}>
-                    <img src={bible} alt="" />
-                    <p>Bible learning game</p>
-                </div>
+                    <div onMouseEnter={() => playSound("learn")} onClick={navTrivial}>
+                        <img src={bible} alt="" />
+                        <p>Bible learning game</p>
+                    </div>
 
-                <div onMouseEnter={() => playSound("hang")} onClick={navHang}>
-                    <img src={hang} alt="" />
-                    <p>Hangman</p>
-                </div>
-                <div onMouseEnter={() => playSound("hebrew")} onClick={() => showModal("comingSoon")}>
-                    <img src={bible} alt="" />
-                    <p>Hebrew language game</p>
-                </div>
-                <div onMouseEnter={() => playSound("sword")} onClick={() => navigate("/shield")}>
-                    <img src={shield} alt="" />
-                    <p>Watchman Sword & Shield</p>
-                </div>
+                    <div onMouseEnter={() => playSound("hang")} onClick={navHang}>
+                        <img src={hang} alt="" />
+                        <p>Hangman</p>
+                    </div>
+                    <div onMouseEnter={() => playSound("hebrew")} onClick={() => showModal("comingSoon")}>
+                        <img src={bible} alt="" />
+                        <p>Hebrew language game</p>
+                    </div>
+                    <div onMouseEnter={() => playSound("sword")} onClick={() => navigate("/shield")}>
+                        <img src={shield} alt="" />
+                        <p>Watchman Sword & Shield</p>
+                    </div>
 
-                <div onMouseEnter={() => playSound("shield")} onClick={() => navigate("/watchman")}>
-                    <img src={shield} alt="" />
-                    <p>My Sword & Shield</p>
+                    <div onMouseEnter={() => playSound("shield")} onClick={() => navigate("/watchman")}>
+                        <img src={shield} alt="" />
+                        <p>My Sword & Shield</p>
+                    </div>
                 </div>
-            </div>
-            <div id="swordSub" className="selectSub">
-                <p>You have use your free daily pass, kindly subscribe to have unlimited access</p>
-                <button onClick={() => navigate("/subscription")}>Subscribe</button>
-                <button onClick={() => showModal("swordSub")}>Cancel</button>
-            </div>
-            <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
-                <p style={{ fontWeight: "600" }}>Will be added soon...</p>
-                <button onClick={() => showModal("comingSoon")}>Cancel</button>
+                <div id="swordSub" className="selectSub">
+                    <p>You have use your free daily pass, kindly subscribe to have unlimited access</p>
+                    <button onClick={() => navigate("/subscription")}>Subscribe</button>
+                    <button onClick={() => showModal("swordSub")}>Cancel</button>
+                </div>
+                <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
+                    <p style={{ fontWeight: "600" }}>Will be added soon...</p>
+                    <button onClick={() => showModal("comingSoon")}>Cancel</button>
+                </div>
             </div>
         </div>
     )

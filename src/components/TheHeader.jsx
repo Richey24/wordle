@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom"
 import url from "../url"
 import axios from 'axios'
 import "./TheHeader.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHome } from '@fortawesome/fontawesome-free-solid'
 
 
 
@@ -26,9 +28,9 @@ export default function THeHeader({ soundClick, soundOn }) {
 
   const navigation = [
     { name: 'Home', path: '/', current: pathname === "/" ? true : false },
-    { name: 'Wordle', path: '/select', current: pathname === "/select" ? true : false },
-    { name: 'Crossword', path: '/crossword', current: pathname === "/crossword" ? true : false },
-    { name: 'Hangman', path: '/hangman', current: pathname === "/hangman" ? true : false },
+    // { name: 'Wordle', path: '/select', current: pathname === "/select" ? true : false },
+    // { name: 'Crossword', path: '/crossword', current: pathname === "/crossword" ? true : false },
+    // { name: 'Hangman', path: '/hangman', current: pathname === "/hangman" ? true : false },
   ]
 
 
@@ -89,19 +91,19 @@ export default function THeHeader({ soundClick, soundOn }) {
                   {
                     user?.username ? (
                       <>
-                        <p style={{ marginRight: "15px", textTransform: "uppercase" }} className='text-gray-300'>shalom {user.username}.</p>
+                        <p style={{ marginRight: "40px", textTransform: "uppercase" }} className='text-gray-300'>shalom {user.username}.</p>
                         {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
                       </>
                     ) : (
                       <>
-                        <p className='text-gray-300' style={{ marginRight: "15px", cursor: "pointer" }} onClick={() => navigate("/register")}>Register</p>
-                        <p className='text-gray-300' style={{ marginRight: "15px", cursor: "pointer" }} onClick={() => navigate("/login")}>Login</p>
+                        <p className='text-gray-300' style={{ marginRight: "40px", cursor: "pointer" }} onClick={() => navigate("/register")}>Register</p>
+                        <p className='text-gray-300' style={{ marginRight: "40px", cursor: "pointer" }} onClick={() => navigate("/login")}>Login</p>
                         {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
                       </>
                     )
                   }
                 </div>
-                <div className="flex flex-shrink-0 items-center">
+                <div style={{ marginLeft: "10px" }} className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src="/img/bible.png"
@@ -114,20 +116,12 @@ export default function THeHeader({ soundClick, soundOn }) {
                   />
                 </div>
 
-                <div className="hidden sm:ml-6 sm:block">
+                <div style={{ marginLeft: "40px" }} className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.path}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
+                      <div style={{ cursor: "pointer" }} onClick={() => navigate(item.path)}>
+                        <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -193,6 +187,15 @@ export default function THeHeader({ soundClick, soundOn }) {
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
+                          </p>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <p
+                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            About Us
                           </p>
                         )}
                       </Menu.Item>
