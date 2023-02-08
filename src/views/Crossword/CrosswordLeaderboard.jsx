@@ -27,6 +27,35 @@ const testdatabase = [
     { name: 'Mario Read', score: 50 }
 ]
 
+const bgVideos = [
+    { vid: 'vid-0.mp4' },
+    { vid: 'vid-1.mp4' },
+    { vid: 'vid-2.mp4' },
+    { vid: 'vid-3.mp4' },
+    { vid: 'vid-4.mp4' },
+    { vid: 'vid-5.mp4' },
+    { vid: 'vid-6.mp4' },
+    { vid: 'vid-7.mp4' },
+    { vid: 'vid-8.mp4' },
+    { vid: 'vid-9.mp4' },
+    { vid: 'vid-10.mp4' },
+    { vid: 'vid-11.mp4' },
+    { vid: 'vid-12.mp4' },
+    { vid: 'vid-13.mp4' },
+    { vid: 'vid-14.mp4' },
+    { vid: 'vid-15.mp4' },
+    { vid: 'vid-16.mp4' },
+    { vid: 'vid-17.mp4' },
+    { vid: 'vid-18.mp4' },
+    { vid: 'vid-19.mp4' },
+    { vid: 'vid-20.mp4' },
+    { vid: 'vid-21.mp4' },
+    { vid: 'vid-22.mp4' },
+    { vid: 'vid-23.mp4' },
+    { vid: 'vid-24.mp4' },
+    { vid: 'vid-25.mp4' },
+]
+
 export default function CrosswordLeaderboard() {
 
     const [open, setOpen] = useState(false)
@@ -116,7 +145,7 @@ export default function CrosswordLeaderboard() {
                                                     <div class="mx-auto max-w-7xl">
                                                         <div class="relative isolate overflow-hidden bg-gray-900 shadow-2xl">
                                                             <div class="relative mt-10 h-30 lg:mt-8">
-                                                                <video className="" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${bground}.mp4`} autoPlay muted loop />
+                                                                <video className="" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${bground}`} autoPlay muted loop />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -125,11 +154,9 @@ export default function CrosswordLeaderboard() {
                                                 <div className="">
                                                     <div class="grid grid-cols-6 gap-1">
                                                         {
-                                                            video.map((vid, index) => (
+                                                            bgVideos.map((vid, index) => (
                                                                 <div key={index}>
-                                                                    <video onClick={() => selectVideoBg(vid)} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop>
-                                                                        <source src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid}.mp4`} type="" />
-                                                                    </video>
+                                                                    <video onClick={() => selectVideoBg(vid.vid)} src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid.vid}`} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop />
                                                                 </div>
                                                             ))
                                                         }

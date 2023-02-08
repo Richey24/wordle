@@ -84,31 +84,38 @@ const Register = () => {
             setSpin(false)
             return
         }
-        const res = await axios.post(`${url}/user/register`, user, { validateStatus: () => true })
-        switch (res.status) {
-            case 400:
-                setErr("Fill all required filled and try again")
-                setShowErr(true)
-                break;
-            case 419:
-                setErr("This email is already registered, login or recover your password")
-                setShowErr(true)
-                break;
-            case 203:
-                setErr("This username is already taken, try another username")
-                setShowErr(true)
-                break;
-            case 500:
-                setErr("Something went wrong, try again")
-                setShowErr(true)
-                break;
-            case 200:
-                const rep = await res.data
-                navigate('/verify', { state: { email: rep.email } })
-                break;
-            default:
-                break;
-        }
+
+        await axios.post(`${url}/user/register`, user, { validateStatus: () => true })
+        .then (response => {
+            console.log( response)
+        })
+        .catch( err => {
+            console.log( err.response )
+        })
+        // switch (res.status) {
+        //     case 400:
+        //         setErr("Fill all required filled and try again")
+        //         setShowErr(true)
+        //         break;
+        //     case 419:
+        //         setErr("This email is already registered, login or recover your password")
+        //         setShowErr(true)
+        //         break;
+        //     case 203:
+        //         setErr("This username is already taken, try another username")
+        //         setShowErr(true)
+        //         break;
+        //     case 500:
+        //         setErr("Something went wrong, try again")
+        //         setShowErr(true)
+        //         break;
+        //     case 200:
+        //         const rep = await res.data
+        //         navigate('/verify', { state: { email: rep.email } })
+        //         break;
+        //     default:
+        //         break;
+        // }
         setSpin(false)
     }
 
