@@ -285,7 +285,7 @@ const Game = () => {
             </div>
             <div id="learnModal" className="learnModal">
                 <img onClick={() => showModal("learnModal")} src={cancel} alt="" />
-                <p>{question[num]?.learnMore}</p>
+                <pre style={{ whiteSpace: "pre-wrap" }}>{question[num]?.learnMore}</pre>
             </div>
             <div className="quizScoreModal" id="quizScoreModal">
                 <img onClick={() => { showModal("quizScoreModal"); navigate(0) }} src={cancel} alt="" />

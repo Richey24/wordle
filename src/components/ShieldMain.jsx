@@ -62,7 +62,7 @@ const ShieldMain = () => {
 
     const showModal = (id, value) => {
         setContent(value)
-        document.getElementById(id).classList.toggle("show")
+        document.getElementById(id).classList.toggle("showBlock")
     }
 
     const deleteStudy = async () => {
@@ -122,7 +122,7 @@ const ShieldMain = () => {
             </div>
             <div className="mainThird">
                 <h3>Note</h3>
-                <p>{study?.note}</p>
+                <pre style={{ whiteSpace: "pre-wrap" }}>{study?.note}</pre>
             </div>
             <div id="chapterx" className="chapterx">
                 <div>

@@ -47,7 +47,7 @@ import { faQuestion, faUserGraduate, faPlus, faHome } from '@fortawesome/fontawe
 let timer = null
 
 const Wordle = () => {
-  
+
     const [cookie] = useCookies(["playedBible", "playedWord"])
     const [trials, setTry] = useState([])
     const [time, setTime] = useState(0)
@@ -130,7 +130,7 @@ const Wordle = () => {
             setNum(5)
         }
 
-    
+
 
         let dictionary = [...fiveDict, ...fiveLetters].map((letter) => letter.toLowerCase().trim())
         const FLIP_ANIMATION_DURATION = 500
@@ -278,7 +278,7 @@ const Wordle = () => {
                 dictionary = [...fifteenDict, ...fifteenLetters].map((letter) => letter.toLowerCase().trim())
                 reset()
                 startInteraction()
-               
+
                 break;
 
             default:
@@ -446,7 +446,7 @@ const Wordle = () => {
                     { once: true }
                 )
             })
-        } 
+        }
 
         function checkWinLose(guess, tiles) {
             const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
@@ -528,138 +528,143 @@ const Wordle = () => {
     }
 
     return (
-       
-            <Container fluid style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="h-100-vh">
-                <div>
-                    {/* {!hide && <p onClick={showHint} className="hint">Hint</p>} */}
-                        <div className="myTimer">
-                            <p id="sec">0</p>
-                            <p>s</p>
-                        </div>
-                    {num === 1 && <p className="bible">Bible version</p>}
-                    {/* <p id="hint" className="theHint">{hint}</p> */}
-                    <div class="alert-container" data-alert-container></div>
-                
-                    <Container> 
-                        <Row>
-                            <Col className="d-flex justify-content-center mx-auto">
-                                <div>
-                                    <div id="guessGrid" data-guess-grid className="guess-grid" >
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                        <div class="tile"></div>
-                                    </div>
+
+        <Container fluid style={{ backgroundColor: user.tribe ? user.tribe[1] : "#3d1152" }} className="h-100-vh">
+            <div>
+                {!hide && <p onClick={showHint} className="hint">Hint</p>}
+                <div className="myTimer">
+                    <p id="sec">0</p>
+                    <p>s</p>
+                </div>
+                <div className="wordleHome">
+                    <div onClick={() => navigate("/")}>
+                        <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
+                    </div>
+                    {num === 1 && <p>Bible version</p>}
+                </div>
+                <p id="hint" className="theHint">{hint}</p>
+                <div class="alert-container" data-alert-container></div>
+
+                <Container>
+                    <Row>
+                        <Col className="d-flex justify-content-center mx-auto">
+                            <div>
+                                <div id="guessGrid" data-guess-grid className="guess-grid" >
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
+                                    <div class="tile"></div>
                                 </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <div class="d-flex justify-content-center mt-5">
-                                    <div data-keyboard class="keyboard">
-                                        <button class="key" data-key="Q">Q</button>
-                                        <button class="key" data-key="W">W</button>
-                                        <button class="key" data-key="E">E</button>
-                                        <button class="key" data-key="R">R</button>
-                                        <button class="key" data-key="T">T</button>
-                                        <button class="key" data-key="Y">Y</button>
-                                        <button class="key" data-key="U">U</button>
-                                        <button class="key" data-key="I">I</button>
-                                        <button class="key" data-key="O">O</button>
-                                        <button class="key" data-key="P">P</button>
-                                        <div class="space"></div>
-                                        <button class="key" data-key="A">A</button>
-                                        <button class="key" data-key="S">S</button>
-                                        <button class="key" data-key="D">D</button>
-                                        <button class="key" data-key="F">F</button>
-                                        <button class="key" data-key="G">G</button>
-                                        <button class="key" data-key="H">H</button>
-                                        <button class="key" data-key="J">J</button>
-                                        <button class="key" data-key="K">K</button>
-                                        <button class="key" data-key="L">L</button>
-                                        <div class="space"></div>
-                                        <button data-enter class="key large">Enter</button>
-                                        <button class="key" data-key="Z">Z</button>
-                                        <button class="key" data-key="X">X</button>
-                                        <button class="key" data-key="C">C</button>
-                                        <button class="key" data-key="V">V</button>
-                                        <button class="key" data-key="B">B</button>
-                                        <button class="key" data-key="N">N</button>
-                                        <button class="key" data-key="M">M</button>
-                                        <button data-delete class="key large">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                                                <path fill="var(--color-tone-1)"
-                                                    d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z">
-                                                </path>
-                                            </svg>
-                                        </button>
-                                    </div>
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <div class="d-flex justify-content-center mt-5">
+                                <div data-keyboard class="keyboard">
+                                    <button class="key" data-key="Q">Q</button>
+                                    <button class="key" data-key="W">W</button>
+                                    <button class="key" data-key="E">E</button>
+                                    <button class="key" data-key="R">R</button>
+                                    <button class="key" data-key="T">T</button>
+                                    <button class="key" data-key="Y">Y</button>
+                                    <button class="key" data-key="U">U</button>
+                                    <button class="key" data-key="I">I</button>
+                                    <button class="key" data-key="O">O</button>
+                                    <button class="key" data-key="P">P</button>
+                                    <div class="space"></div>
+                                    <button class="key" data-key="A">A</button>
+                                    <button class="key" data-key="S">S</button>
+                                    <button class="key" data-key="D">D</button>
+                                    <button class="key" data-key="F">F</button>
+                                    <button class="key" data-key="G">G</button>
+                                    <button class="key" data-key="H">H</button>
+                                    <button class="key" data-key="J">J</button>
+                                    <button class="key" data-key="K">K</button>
+                                    <button class="key" data-key="L">L</button>
+                                    <div class="space"></div>
+                                    <button data-enter class="key large">Enter</button>
+                                    <button class="key" data-key="Z">Z</button>
+                                    <button class="key" data-key="X">X</button>
+                                    <button class="key" data-key="C">C</button>
+                                    <button class="key" data-key="V">V</button>
+                                    <button class="key" data-key="B">B</button>
+                                    <button class="key" data-key="N">N</button>
+                                    <button class="key" data-key="M">M</button>
+                                    <button data-delete class="key large">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                            <path fill="var(--color-tone-1)"
+                                                d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z">
+                                            </path>
+                                        </svg>
+                                    </button>
                                 </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                    <div id="bigDiv" className="bigDiv"> </div>
-                     <DeviceOrientation lockOrientation={orientation}>
-                            <Orientation orientation="portrait" alwaysRender={false}>
-                            {  orientation === 'portrait' ? 
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+                <div id="bigDiv" className="bigDiv"> </div>
+                <DeviceOrientation lockOrientation={orientation}>
+                    <Orientation orientation="portrait" alwaysRender={false}>
+                        {orientation === 'portrait' ?
                             <button onClick={startGame} id="startGame" className="startBtn">Press to start</button>
                             :
                             <button className="startBtn">Change Orientation</button>
-                            }
-                            </Orientation>
-                            <Orientation orientation="landscape" alwaysRender={false}>
-                                 <button onClick={startGame} id="startGame" className="startBtn">Press to start</button>
-                            </Orientation>
-                      </DeviceOrientation>
+                        }
+                    </Orientation>
+                    <Orientation orientation="landscape" alwaysRender={false}>
+                        <button onClick={startGame} id="startGame" className="startBtn">Press to start</button>
+                    </Orientation>
+                </DeviceOrientation>
 
-                    < Result num={num} setNum={setNum} time={time} noOfTry={trials} />
-                    <div className="fab-container">
-                            <div className="fab shadow">
-                                <div className="fab-content">
-                                <FontAwesomeIcon icon={faPlus} className="text-white" />
-                                </div>
-                            </div>
-                            <div className="sub-button shadow" onClick={() => navigate(num === 1 ? "/bible/leader" : "/word/leader")}>
-                                <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
-                            </div>
-                            
-                            <div className="sub-button shadow" onClick={showHint}>
-                                <FontAwesomeIcon  icon={faQuestion} className="text-white" />
-                            </div>
-                            <div className="sub-button shadow">
-                            <Link to="/">
-                                <FontAwesomeIcon icon={faHome} className="text-white" />
-                            </Link>
-                            </div>
+                < Result num={num} setNum={setNum} time={time} noOfTry={trials} user={user} />
+                <div className="fab-container">
+                    <div className="fab shadow">
+                        <div className="fab-content">
+                            <FontAwesomeIcon icon={faPlus} className="text-white" />
+                        </div>
+                    </div>
+                    <div className="sub-button shadow" onClick={() => navigate(num === 1 ? "/bible/leader" : "/word/leader")}>
+                        <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
+                    </div>
+
+                    <div className="sub-button shadow" onClick={showHint}>
+                        <FontAwesomeIcon icon={faQuestion} className="text-white" />
+                    </div>
+                    <div className="sub-button shadow">
+                        <Link to="/">
+                            <FontAwesomeIcon icon={faHome} className="text-white" />
+                        </Link>
                     </div>
                 </div>
-            </Container>
+            </div>
+        </Container>
     )
 }
 

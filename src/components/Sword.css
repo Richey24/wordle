@@ -73,6 +73,7 @@
     position: absolute;
     right: 20px;
     z-index: 2;
+    display: flex;
 }
 
 .verses {
@@ -224,12 +225,13 @@
 
 .empty {
     text-align: center;
-    margin-top: 200px;
-    font-size: 32px;
-}
-
-.show {
-    display: block;
+    margin-top: 20px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .homeBtnSword {
@@ -274,6 +276,10 @@
 
 .swordSub>p {
     text-align: center;
+}
+
+.showBlock {
+    display: block;
 }
 
 @media screen and (max-width: 800px) {

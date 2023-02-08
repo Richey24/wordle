@@ -39,6 +39,7 @@ import StripeContainer from './stripe/StripeContainer';
 import Verify from './components/Verify';
 import VerifyUser from './components/VerifyUser';
 import ProfilePage from './views/Profile/PofilePage';
+import Privacy from './views/Privacy/Privacy';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -76,6 +77,7 @@ root.render(
       <Route path='/verify' element={<Verify />} />
       <Route path='/verify/:id' element={<VerifyUser />} />
       <Route path="/user-account" element={<ProfilePage />} />
+      <Route path="/privacy" element={<Privacy />} />
     </Routes>
   </BrowserRouter>
 );

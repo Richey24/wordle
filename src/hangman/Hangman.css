@@ -18,13 +18,15 @@
 }
 
 .hangBtn {
-    width: 18%;
-    height: 60px;
+    width: 20%;
+    height: 10%;
     position: fixed;
     top: 50%;
-    left: 42.5%;
+    left: 40%;
     cursor: pointer;
-    font-size: 24px;
+    border-radius: 12px;
+    background-color: black;
+    color: white;
     font-weight: 600;
 }
 

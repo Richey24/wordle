@@ -525,20 +525,6 @@ const Wordle = () => {
             {num === 1 && <p className="bible">Bible version</p>}
             <p id="hint" className="theHint">{hint}</p>
             <img onClick={() => navigate(num === 1 ? "/bible/leader" : "/word/leader")} className="leader" src={leader} alt="" />
-            {/* <label class="wordLabel" htmlFor="noOfWord">Select Difficulty</label>
-            <select name="noOfWord" id="noOfWord" class="noOfWord">
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-            </select> */}
             <div class="alert-container" data-alert-container></div>
             <div class="boxWrapper">
                 <div id="guessGrid" data-guess-grid class="guess-grid">
@@ -614,7 +600,7 @@ const Wordle = () => {
             </div>
             <div id="bigDiv" className="bigDiv">
             </div>
-            <button onClick={startGame} id="startGame" className="startBtn">Press to start</button>
+            {/* <button onClick={startGame} id="startGame" className="startWordle">Press to start</button> */}
             <Result num={num} setNum={setNum} time={time} noOfTry={trials} user={user} />
         </div>
     )
