@@ -35,7 +35,24 @@ const bgVideos = [
     { vid: 'vid-5.mp4' },
     { vid: 'vid-6.mp4' },
     { vid: 'vid-7.mp4' },
-    { vid: 'vid-8.mp4' }
+    { vid: 'vid-8.mp4' },
+    { vid: 'vid-9.mp4' },
+    { vid: 'vid-10.mp4' },
+    { vid: 'vid-11.mp4' },
+    { vid: 'vid-12.mp4' },
+    { vid: 'vid-13.mp4' },
+    { vid: 'vid-14.mp4' },
+    { vid: 'vid-15.mp4' },
+    { vid: 'vid-16.mp4' },
+    { vid: 'vid-17.mp4' },
+    { vid: 'vid-18.mp4' },
+    { vid: 'vid-19.mp4' },
+    { vid: 'vid-20.mp4' },
+    { vid: 'vid-21.mp4' },
+    { vid: 'vid-22.mp4' },
+    { vid: 'vid-23.mp4' },
+    { vid: 'vid-24.mp4' },
+    { vid: 'vid-25.mp4' },
 ]
 
 export default function CrosswordLeaderboard() {

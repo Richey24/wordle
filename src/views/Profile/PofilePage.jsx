@@ -1,5 +1,31 @@
+import axios from 'axios';
 import Header from '../../components/TheHeader.jsx';
+import {useEffect, useState } from 'react';
+import url from "../../url"
+const id = localStorage.getItem("id")
+
 export default function ProfilePage() {
+
+    const token = localStorage.getItem("token")
+
+    const [user, setUser] = useState({})
+    const [loading, setLoader] = useState();
+    
+    const fetchUserInfromation = async () => {
+        await axios.get(`${url}/user/get/${id}`, { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
+        .then( response => {
+            console.log( response);
+            setUser(response.data)
+        })
+        .catch( err => {
+            console.log(err);
+        })
+    }
+
+    useEffect(() => {
+        fetchUserInfromation();
+    }, [id])
+
     return (
      <div className="absolute w-auto min-w-full min-h-full max-w-none">
       <Header />
@@ -8,9 +34,6 @@ export default function ProfilePage() {
                    
                     <div className="lg:flex lg:items-center lg:justify-between">
                         <div className="min-w-0 flex-1">
-                            <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                            Profile  Settings
-                            </h2>
                         </div>
                         <ol class="inline-flex items-center space-x-1 md:space-x-3">
                             <li class="inline-flex items-center">
@@ -30,36 +53,62 @@ export default function ProfilePage() {
                     </div>
 
                    <div className="grid grid-cols-4 gap-4">
-                        <div className="overflow-hidden shadow sm:rounded-md">
-                            <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                                <fieldset>
-                                <legend className="sr-only">Settings</legend>
-                                <div className="text-base font-medium text-dark" aria-hidden="true">
-                                    Settings
-                                </div>
-                                <div className="mt-4 space-y-4">
-                                    <dl class="max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                                      
-                                        <div class="flex flex-col pb-3">
-                                            <dt class="mb-1 md:text-lg text-dark">Profile Informations</dt>
-                                        </div>
-                                        
-                                        <div class="flex flex-col py-3">
-                                            <dt class="mb-1 md:text-lg text-dark">Security </dt>
-                                        </div>
-                                      
-                                        <div class="flex flex-col py-3">
-                                            <dt class="mb-1 text-dark md:text-lg">Notifications</dt>
-                                        </div>
+                   <aside class="w-64" aria-label="Sidebar">
+                        <div class="px-3 py-4 overflow-y-auto">
+                            <ul class="space-y-2">
+                             
+                           
+                                <li>
+                                    <a href="#"
+                                        class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="flex-1 ml-3 whitespace-nowrap">Profile Informations</span>
+                                    </a>
+                                </li>
 
-                                        <div class="flex flex-col py-3">
-                                            <dt class="mb-1 text-dark md:text-lg">Billings & Payments</dt>
-                                        </div>
-                                    </dl>
-                                </div>
-                                </fieldset>
-                            </div>
+                                <li>
+                                    <a href="#"
+                                        class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="flex-1 ml-3 whitespace-nowrap">Security </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#"
+                                        class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="flex-1 ml-3 whitespace-nowrap">Notifications</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#"
+                                        class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
+                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="flex-1 ml-3 whitespace-nowrap">Billings & Payments</span>
+                                    </a>
+                                </li>
+                            
+                            </ul>
                         </div>
+                    </aside>
                         <div className="col-span-3">
                             <div className="md:grid md:grid-cols-6">
                                 <div className="md:col-span-12 md:mt-0">
@@ -77,6 +126,7 @@ export default function ProfilePage() {
                                                 <input
                                                 type="text"
                                                 name="first-name"
+                                                value={user.name}
                                                 id="first-name"
                                                 autoComplete="given-name"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
@@ -102,6 +152,7 @@ export default function ProfilePage() {
                                                 </label>
                                                 <input
                                                 type="text"
+                                                value={user.email}
                                                 name="email-address"
                                                 id="email-address"
                                                 autoComplete="email"
@@ -115,6 +166,7 @@ export default function ProfilePage() {
                                                 </label>
                                                 <select
                                                 id="country"
+                                                value={user.country}
                                                 name="country"
                                                 autoComplete="country-name"
                                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -131,6 +183,7 @@ export default function ProfilePage() {
                                                 </label>
                                                 <input
                                                 type="text"
+                                                value={user.name}
                                                 name="city"
                                                 id="city"
                                                 autoComplete="address-level2"
@@ -169,22 +222,9 @@ export default function ProfilePage() {
                                     </form> 
                                     {/* Profile Infromation */}
 
-                                    {/* Security  */}
-                                    <form action="#">
-                                       <div className="shadow sm:overflow-hidden sm:rounded-md">
-                                            <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
-                                                <div className="bg-white px-4 py-5 sm:p-6">
-                                                    <div className="grid grid-cols-6 gap-6">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    {/* End Security */}
                                 </div>
                             </div>
                         <div>
-                     
                    </div>       
 
                         </div>
