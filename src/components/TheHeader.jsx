@@ -3,10 +3,11 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useLocation, useNavigate } from "react-router-dom"
 
+import logo from '../img/white-bible.png';
+
 import url from "../url"
 import axios from 'axios'
 import "./TheHeader.css"
-
 
 
 function classNames(...classes) {
@@ -104,12 +105,12 @@ export default function THeHeader({ soundClick, soundOn }) {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="/img/bible.png"
+                    src={logo}
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="/img/bible.png"
+                    src={logo}
                     alt="Your Company"
                   />
                 </div>
@@ -240,5 +241,5 @@ export default function THeHeader({ soundClick, soundOn }) {
         </>
       )}
     </Disclosure>
-  )
+  ) 
 }

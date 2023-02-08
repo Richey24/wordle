@@ -145,7 +145,7 @@ export default function CrosswordLeaderboard() {
                                                     <div class="mx-auto max-w-7xl">
                                                         <div class="relative isolate overflow-hidden bg-gray-900 shadow-2xl">
                                                             <div class="relative mt-10 h-30 lg:mt-8">
-                                                                <video className="" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${bground}.mp4`} autoPlay muted loop />
+                                                                <video className="" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${bground}`} autoPlay muted loop />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -156,9 +156,7 @@ export default function CrosswordLeaderboard() {
                                                         {
                                                             bgVideos.map((vid, index) => (
                                                                 <div key={index}>
-                                                                    <video onClick={() => selectVideoBg(vid.vid)} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop>
-                                                                        <source src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid.vid}.mp4`} type="" />
-                                                                    </video>
+                                                                    <video onClick={() => selectVideoBg(vid.vid)} src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid.vid}`} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop />
                                                                 </div>
                                                             ))
                                                         }
