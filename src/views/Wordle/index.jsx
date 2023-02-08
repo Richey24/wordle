@@ -42,6 +42,7 @@ import Col from 'react-bootstrap/Col';
 // Icons Components
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuestion, faUserGraduate, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
+import THeHeader from "../../components/TheHeader"
 
 
 let timer = null
@@ -530,16 +531,14 @@ const Wordle = () => {
     return (
 
         <Container fluid style={{ backgroundColor: user.tribe ? user.tribe[1] : "#3d1152" }} className="h-100-vh">
-            <div>
+            <div style={{ paddingTop: "10px" }}>
+                <THeHeader />
                 {!hide && <p onClick={showHint} className="hint">Hint</p>}
                 <div className="myTimer">
                     <p id="sec">0</p>
                     <p>s</p>
                 </div>
                 <div className="wordleHome">
-                    <div onClick={() => navigate("/")}>
-                        <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
-                    </div>
                     {num === 1 && <p>Bible version</p>}
                 </div>
                 <p id="hint" className="theHint">{hint}</p>

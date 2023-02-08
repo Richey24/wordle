@@ -20,9 +20,9 @@
     color: black;
 }
 
-.cancel {
+.cancelHang {
     margin-left: 90%;
-    margin-top: 2%;
+    margin-top: 25px;
     cursor: pointer;
 }
 
@@ -39,6 +39,13 @@
     outline: none;
     border-radius: 24px;
     font-size: 18px;
+    color: #3d1152;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    font-weight: 600;
 }
 
 .next:hover {
@@ -69,6 +76,8 @@
     border-radius: 24px;
     font-weight: 600;
     font-size: 18px;
+    color: #3d1152;
+    font-weight: 600;
 }
 
 .authDiv button:hover {

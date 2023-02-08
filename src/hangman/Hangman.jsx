@@ -11,7 +11,10 @@ import leader from "../img/leader.webp"
 import { useNavigate } from "react-router-dom"
 import { Spinner } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHome } from "@fortawesome/fontawesome-free-solid"
+import { faQuestion, faUserGraduate, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
+import { Link } from "react-router-dom";
+import THeHeader from "../components/TheHeader"
+
 
 
 let timer = null
@@ -169,9 +172,7 @@ function Hangman() {
         <div style={{
             backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
         }}>
-            <div className="homeBtn" onClick={() => navigate("/")}>
-                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
-            </div>
+            <THeHeader />
             <div
                 style={{
                     maxWidth: "800px",
@@ -191,7 +192,6 @@ function Hangman() {
                     <p id="hangSec">0</p>
                     <p>s</p>
                 </div>
-                <img onClick={() => navigate("/hangman/leader")} className="leader" src={leader} alt="" />
                 <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
                 <HangmanWord
                     reveal={isLoser}
@@ -211,6 +211,21 @@ function Hangman() {
             </div>
             <div id="hangBigDiv" className="hangBigDiv"></div>
             <button onClick={startGame} id="hangStart" className="hangBtn">Press to start</button>
+            <div className="fab-container">
+                <div className="fab shadow">
+                    <div className="fab-content">
+                        <FontAwesomeIcon icon={faPlus} className="text-white" />
+                    </div>
+                </div>
+                <div className="sub-button shadow" onClick={() => navigate("/hangman/leader")}>
+                    <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
+                </div>
+                <div className="sub-button shadow">
+                    <Link to="/">
+                        <FontAwesomeIcon icon={faHome} className="text-white" />
+                    </Link>
+                </div>
+            </div>
         </div>
     )
 }

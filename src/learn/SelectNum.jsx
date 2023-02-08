@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { Spinner } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import THeHeader from "../components/TheHeader"
 import url from "../url"
 import "./SelectNum.css"
 
@@ -86,9 +87,7 @@ const SelectNum = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNum">
-            <div className="homeBtnNum" onClick={() => navigate("/")}>
-                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
-            </div>
+            <THeHeader />
             <p className="chooseNum">Choose the number of players</p>
             <div>
                 <div onMouseEnter={() => playSound("1")} onClick={() => navigate("/bible/names", { state: { count: [1] } })}>

@@ -38,7 +38,7 @@ const bgImages = [
     { img: 'bg-10.jpg', thumb: 'bg-thumbnail-10.jpg' },
     { img: 'bg-11.jpg', thumb: 'bg-thumbnail-11.jpg' },
     { img: 'bg-12.jpg', thumb: 'bg-thumbnail-12.jpg' },
-    { img: 'bg-13.jpg', thumb: 'bg-thumbnail-13.jpg' },
+    { img: 'bg-13.jpeg', thumb: 'bg-thumbnail-13.jpg' },
     { img: 'bg-14.jpg', thumb: 'bg-thumbnail-14.jpg' },
     { img: 'bg-15.jpg', thumb: 'bg-thumbnail-15.jpg' },
     { img: 'bg-16.jpg', thumb: 'bg-thumbnail-16.jpg' },

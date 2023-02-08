@@ -8,6 +8,7 @@ import url from "../url"
 import { Spinner } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/fontawesome-free-solid'
+import THeHeader from "./TheHeader"
 
 const Difficult = () => {
     const navigate = useNavigate()
@@ -106,21 +107,7 @@ const Difficult = () => {
 
     return (
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain">
-            <div className="firstDiv">
-                {
-                    user.username ? (
-                        <p>Welcome back {user.username} <span onClick={logOut}>Logout</span></p>
-                    ) : (
-                        <>
-                            <p onClick={() => navigate("/register")}>Register</p>
-                            <p onClick={() => navigate("/login")}>Login</p>
-                        </>
-                    )
-                }
-                <div onClick={() => navigate("/")}>
-                    <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
-                </div>
-            </div>
+            <THeHeader />
             <div style={{ columnGap: "300px" }} className="innerMain">
                 <button onMouseEnter={() => playSound("easy")} className="normal" onClick={() => navi(5)}>
                     Easy
