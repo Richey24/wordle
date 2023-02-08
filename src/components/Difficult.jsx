@@ -106,29 +106,31 @@ const Difficult = () => {
     }
 
     return (
-        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain">
+        <div>
             <THeHeader />
-            <div style={{ columnGap: "300px" }} className="innerMain">
-                <button onMouseEnter={() => playSound("easy")} className="normal" onClick={() => navi(5)}>
-                    Easy
-                </button>
+            <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain">
+                <div style={{ columnGap: "300px" }} className="innerMain">
+                    <button onMouseEnter={() => playSound("easy")} className="normal" onClick={() => navi(5)}>
+                        Easy
+                    </button>
 
-                <button onMouseEnter={() => playSound("normal")} className="hard" onClick={() => navi(8)}>
-                    Normal
-                </button>
+                    <button onMouseEnter={() => playSound("normal")} className="hard" onClick={() => navi(8)}>
+                        Normal
+                    </button>
 
-                <button onMouseEnter={() => playSound("hard")} className="veryHard" onClick={() => navi(11)}>
-                    Hard
-                </button>
+                    <button onMouseEnter={() => playSound("hard")} className="veryHard" onClick={() => navi(11)}>
+                        Hard
+                    </button>
 
-                <button onMouseEnter={() => playSound("very")} className="impossible" onClick={() => navi(14)}>
-                    Very Hard
-                </button>
-            </div>
-            <div id="swordSub" className="swordSub">
-                <p>You have to subscribe to gain premium access to all difficulty level in the game</p>
-                <button>Subscribe</button>
-                <button onClick={() => showModal("swordSub")}>Cancel</button>
+                    <button onMouseEnter={() => playSound("very")} className="impossible" onClick={() => navi(14)}>
+                        Very Hard
+                    </button>
+                </div>
+                <div id="swordSub" className="swordSub">
+                    <p>You have to subscribe to gain premium access to all difficulty level in the game</p>
+                    <button>Subscribe</button>
+                    <button onClick={() => showModal("swordSub")}>Cancel</button>
+                </div>
             </div>
         </div>
     )
