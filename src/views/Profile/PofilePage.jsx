@@ -111,6 +111,7 @@ export default function ProfilePage() {
                     </aside>
                         <div className="col-span-3">
                             <div className="md:grid md:grid-cols-6">
+                                
                                 <div className="md:col-span-12 md:mt-0">
                                     {/* Profile information  */}
                                     <form action="#" method="POST">
@@ -126,7 +127,7 @@ export default function ProfilePage() {
                                                 <input
                                                 type="text"
                                                 name="first-name"
-                                                value={user.name}
+                                                value={user.first}
                                                 id="first-name"
                                                 autoComplete="given-name"
                                                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
