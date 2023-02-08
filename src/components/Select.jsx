@@ -19,8 +19,7 @@ const Select = () => {
     const [user, setUser] = useState({})
     const [soundOn, setSoundOn] = useState(true)
     const [spin, setSpin] = useState(true)
-    const soundOnLocation = "img/soundOn.png"
-    const soundOffLocation = "img/soundOff.png"
+
 
 
     useEffect(() => {
@@ -162,10 +161,6 @@ const Select = () => {
 
     }
 
-    const logOut = () => {
-        localStorage.clear()
-        navigate(0)
-    }
     const soundClick = () => {
 
 
@@ -203,8 +198,8 @@ const Select = () => {
     return (
 
         <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain" id="selectMain">
-            {/* <Header /> */}
-            <div className="firstDiv">
+            <Header soundClick={soundClick} soundOn={soundOn} />
+            {/* <div className="firstDiv">
                 {
                     user.username ? (
                         <>
@@ -217,12 +212,10 @@ const Select = () => {
                             <p onClick={() => navigate("/register")}>Register</p>
                             <p onClick={() => navigate("/login")}>Login</p>
                             <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
-
-
                         </>
                     )
                 }
-            </div>
+            </div> */}
             <div className="innerMain">
                 <div onMouseEnter={() => playSound("word")} onClick={() => navigate("/select")}>
                     <img src={word} alt="" />

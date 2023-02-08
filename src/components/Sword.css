@@ -3,7 +3,7 @@
     font-family: 'Switzer';
     font-style: normal;
     text-transform: capitalize;
-    padding: 20px 0px;
+    padding-bottom: 20px;
 }
 
 .swordDiv>h1 {
@@ -12,6 +12,7 @@
     font-weight: 600;
     color: #3d1152;
     font-style: italic;
+    margin-top: 20px;
 }
 
 .swordSearch {

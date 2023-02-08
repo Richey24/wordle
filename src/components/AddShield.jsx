@@ -5,6 +5,7 @@ import { Spinner } from "react-bootstrap"
 import { useLocation, useNavigate } from "react-router-dom"
 import url from "../url"
 import "./AddSword.css"
+import THeHeader from "./TheHeader"
 
 const AddShield = () => {
     const id = localStorage.getItem("id")
@@ -138,42 +139,45 @@ const AddShield = () => {
     }
 
     return (
-        <div className="addMain">
-            <h2>{study ? "Edit your study" : "Create a new study"}</h2>
-            <form className="addForm" onSubmit={submitSword}>
-                <label htmlFor="topic">Topic</label>
-                <br />
-                <input defaultValue={study?.topic} placeholder="Enter the topic of your new study" required className="topic" type="text" id="topic" name="topic" />
-                <h6 htmlFor="">Precepts</h6>
-                {
-                    arr.map((ar, i) => (
-                        <div key={i} className="theVerse">
-                            <hr />
-                            <label htmlFor="">Precept</label>
-                            <br />
-                            <input defaultValue={study ? ar?.verse : ''} placeholder="Enter a bible precept" className="topic" type="text" name="verse" />
-                            <br />
-                            <br />
-                            <label htmlFor="">Precept content</label>
-                            <br />
-                            <textarea defaultValue={study ? ar?.verseContent : ''} placeholder="Enter the precept content" className="verseContent" name="verseContent"></textarea>
-                        </div>
-                    ))
-                }
-                <p onClick={addAnother} className="another">Add another precept</p>
-                <br />
-                <br />
-                <label htmlFor="">Note</label>
-                <br />
-                <textarea defaultValue={study?.note} placeholder="Enter study note" className="note" name="note"></textarea>
-                <br />
-                <div className="theCancelDiv">
-                    <button className="createStudy">{spin ? (<Spinner animation="border" color="#3d1152" />
-                    ) : study ? "Edit study" : "Create study"}</button>
-                    <button className="cancelBtn" onClick={() => navigate("/shield")}>Cancel</button>
-                </div>
-                {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
-            </form>
+        <div>
+            <THeHeader />
+            <div className="addMain">
+                <h2>{study ? "Edit your study" : "Create a new study"}</h2>
+                <form className="addForm" onSubmit={submitSword}>
+                    <label htmlFor="topic">Topic</label>
+                    <br />
+                    <input defaultValue={study?.topic} placeholder="Enter the topic of your new study" required className="topic" type="text" id="topic" name="topic" />
+                    <h6 htmlFor="">Precepts</h6>
+                    {
+                        arr.map((ar, i) => (
+                            <div key={i} className="theVerse">
+                                <hr />
+                                <label htmlFor="">Precept</label>
+                                <br />
+                                <input defaultValue={study ? ar?.verse : ''} placeholder="Enter a bible precept" className="topic" type="text" name="verse" />
+                                <br />
+                                <br />
+                                <label htmlFor="">Precept content</label>
+                                <br />
+                                <textarea defaultValue={study ? ar?.verseContent : ''} placeholder="Enter the precept content" className="verseContent" name="verseContent"></textarea>
+                            </div>
+                        ))
+                    }
+                    <p onClick={addAnother} className="another">Add another precept</p>
+                    <br />
+                    <br />
+                    <label htmlFor="">Note</label>
+                    <br />
+                    <textarea defaultValue={study?.note} placeholder="Enter study note" className="note" name="note"></textarea>
+                    <br />
+                    <div className="theCancelDiv">
+                        <button className="createStudy">{spin ? (<Spinner animation="border" color="#3d1152" />
+                        ) : study ? "Edit study" : "Create study"}</button>
+                        <button className="cancelBtn" onClick={() => navigate("/shield")}>Cancel</button>
+                    </div>
+                    {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
+                </form>
+            </div>
         </div>
     )
 }

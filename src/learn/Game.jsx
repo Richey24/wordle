@@ -21,6 +21,7 @@ import url from "../url"
 import { Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/fontawesome-free-solid";
+import THeHeader from "../components/TheHeader";
 
 let timer;
 const images = {
@@ -261,9 +262,7 @@ const Game = () => {
 
     return (
         <div>
-            <div className="homeBtnGame" onClick={() => navigate("/")}>
-                <FontAwesomeIcon size="2x" icon={faHome} className="text-primary" />
-            </div>
+            <THeHeader />
             <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainGame">
                 <div>
                     <p>Timer:  <span id="quizTimer">60</span></p>

@@ -11,7 +11,15 @@
 }
 
 .mainFirst>p {
-    font-size: 30px;
+    background: #3d1152;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 44px;
+    font-weight: 600;
+    color: white;
     cursor: pointer;
 }
 
