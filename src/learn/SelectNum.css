@@ -1,5 +1,5 @@
 .mainNum {
-    padding: 30px;
+    padding-bottom: 30px;
     background-color: #3d1152;
     min-height: 100vh;
 }
@@ -10,6 +10,7 @@
     font-weight: 600;
     color: #FFFFFF;
     padding: 0px;
+    margin-top: 30px;
 }
 
 .mainNum>div {
@@ -58,7 +59,7 @@
 
 @media screen and (max-width: 800px) {
     .mainNum>div>div {
-        width: 100%;
+        width: 90%;
     }
 
     .chooseNum {

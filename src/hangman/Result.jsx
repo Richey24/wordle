@@ -62,15 +62,15 @@ const Result = ({ time, trial, user }) => {
     }
     return (
         <div id="hangResultDiv" className="hangResultDiv">
-            <img onClick={hideModal} src={cancel} alt="cancel" className="cancel" />
+            <img onClick={hideModal} src={cancel} alt="cancel" className="cancelHang" />
             <h2>You Win</h2>
             <p>You completed this round within {time} seconds</p>
             <p className="score">and your total score is {((6 - trial.length) / time).toFixed(2)}</p>
             <button onClick={nextRound} className="next">Play again <img className="arrow" src={arrow} alt="" /></button>
-            <div className="authDiv">
-                <p>Link your stats to all your devices and compete with others on the leaderboard</p>
-                <button onClick={() => navigate("/login")}>Log in or create a free account</button>
-            </div>
+            {!user.paid && <div className="authDiv">
+                <p>Subscribe to gain access to all the premium features we offer</p>
+                <button onClick={() => navigate("/subscription")}>Subscribe</button>
+            </div>}
             <div style={{ paddingTop: "40px" }} className="authDiv">
                 <button>Play bible trivial</button>
             </div>

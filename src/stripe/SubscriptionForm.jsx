@@ -64,7 +64,7 @@ const SubscriptionForm = () => {
     return (
         <div>
             <div className="payDiv">
-                <form action={`https://wordle-back.azurewebsites.net/create-checkout-session?email=${user.email}&plan=${plan}&id=${user._id}`} method="POST">
+                <form action={`http://localhost:5000/create-checkout-session?email=${user.email}&plan=${plan}&id=${user._id}`} method="POST">
                     <select onChange={changePlan} name="plan" id="plan">
                         <option value="monthly">Monthly $2.99</option>
                         <option value="yearly">Yearly $29.99</option>

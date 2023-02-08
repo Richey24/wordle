@@ -7,6 +7,7 @@ import { useState } from "react"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
+import THeHeader from "./TheHeader"
 
 const ShieldMain = () => {
     const id = localStorage.getItem("id")
@@ -100,48 +101,51 @@ const ShieldMain = () => {
 
 
     return (
-        <div className="theMain">
-            <div className="mainFirst">
-                <p onClick={() => navigate("/shield")}>{"<<"}</p>
-                <h4>Topic: {study?.topic}</h4>
-                {user?.admin && <div>
-                    <p onClick={() => navigate("/shield/create", { state: { study: study } })} className="mainEdit">Edit</p>
-                    <p onClick={() => showModal("delDivX")} className="mainDel">Delete</p>
-                </div>}
-            </div>
-            <h4 className="vers">Verses</h4>
-            <div className="mainSecond">
-                {
-                    study?.scripture?.map((script, i) => (
-                        <div key={i}>
-                            <p className="mainVerse">{script?.verse}</p>
-                            <div className="verseContentX"><p>{script?.verseContent}</p><span onClick={() => showModal("chapterx", script)}>see all{">>"}</span></div>
-                        </div>
-                    ))
-                }
-            </div>
-            <div className="mainThird">
-                <h3>Note</h3>
-                <pre style={{ whiteSpace: "pre-wrap" }}>{study?.note}</pre>
-            </div>
-            <div id="chapterx" className="chapterx">
-                <div>
-                    <h5>{content?.verse}</h5>
-                    <img onClick={() => showModal("chapterx")} src={cancel} alt="" />
+        <div>
+            <THeHeader />
+            <div className="theMain">
+                <div className="mainFirst">
+                    <p onClick={() => navigate("/shield")}>Go back</p>
+                    <h4>Topic: {study?.topic}</h4>
+                    {user?.admin && <div>
+                        <p onClick={() => navigate("/shield/create", { state: { study: study } })} className="mainEdit">Edit</p>
+                        <p onClick={() => showModal("delDivX")} className="mainDel">Delete</p>
+                    </div>}
                 </div>
-                <p>{content?.verseContent}</p>
-            </div>
-            <div id="delDivX" className="delDivX">
-                <div className="firstDel">
-                    <img src={bigdel} alt="" />
+                <h4 className="vers">Verses</h4>
+                <div className="mainSecond">
+                    {
+                        study?.scripture?.map((script, i) => (
+                            <div key={i}>
+                                <p className="mainVerse">{script?.verse}</p>
+                                <div className="verseContentX"><p>{script?.verseContent}</p><span onClick={() => showModal("chapterx", script)}>see all{">>"}</span></div>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div className="mainThird">
+                    <h3>Note</h3>
+                    <pre style={{ whiteSpace: "pre-wrap" }}>{study?.note}</pre>
+                </div>
+                <div id="chapterx" className="chapterx">
                     <div>
-                        <h5>Delete study</h5>
-                        <p>Are you sure you want to delete this study? This action cannot be undone.</p>
+                        <h5>{content?.verse}</h5>
+                        <img onClick={() => showModal("chapterx")} src={cancel} alt="" />
                     </div>
+                    <p>{content?.verseContent}</p>
                 </div>
-                <div className="secondDel">
-                    <p onClick={() => showModal("delDivX")} className="delCan">Cancel</p>
-                    <p onClick={deleteStudy} className="delDel">Delete</p>
+                <div id="delDivX" className="delDivX">
+                    <div className="firstDel">
+                        <img src={bigdel} alt="" />
+                        <div>
+                            <h5>Delete study</h5>
+                            <p>Are you sure you want to delete this study? This action cannot be undone.</p>
+                        </div>
+                    </div>
+                    <div className="secondDel">
+                        <p onClick={() => showModal("delDivX")} className="delCan">Cancel</p>
+                        <p onClick={deleteStudy} className="delDel">Delete</p>
+                    </div>
                 </div>
             </div>
         </div>

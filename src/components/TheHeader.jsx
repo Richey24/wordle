@@ -1,33 +1,41 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import url from "../url"
 import axios from 'axios'
+import "./TheHeader.css"
 
 
-const navigation = [
-  { name: 'Home', href: '#', current: true },
-  // { name: 'Wordle', href: '#', current: false },
-  // { name: 'Crossword', href: '#', current: false },
-  // { name: 'Hangman', href: '#', current: false },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function THeHeader() {
+export default function THeHeader({ soundClick, soundOn }) {
   const navigate = useNavigate()
   const id = localStorage.getItem("id")
   const token = localStorage.getItem("token")
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(true)
+  const soundOnLocation = "img/soundOn.png"
+  const soundOffLocation = "img/soundOff.png"
 
-  useEffect(() => {
-    getUserData()
-  }, [id])
+  const { pathname } = useLocation()
+
+  const navigation = [
+    { name: 'Home', path: '/', current: pathname === "/" ? true : false },
+    { name: 'Wordle', path: '/select', current: pathname === "/select" ? true : false },
+    { name: 'Crossword', path: '/crossword', current: pathname === "/crossword" ? true : false },
+    { name: 'Hangman', path: '/hangman', current: pathname === "/hangman" ? true : false },
+  ]
+
+
+  const logOut = () => {
+    localStorage.clear()
+    navigate(0)
+  }
 
   const getUserData = async () => {
     try {
@@ -38,7 +46,7 @@ export default function THeHeader() {
         validateStatus: () => true
       })
       const response = await res.data
-      if ( response.status !== 200) {
+      if (res.status !== 200) {
         setLoader(false)
         return
       }
@@ -48,13 +56,16 @@ export default function THeHeader() {
         setLoader(false)
         return
       }
-
       setUser(response)
       setLoader(false)
     } catch (err) {
       setLoader(false)
     }
   }
+
+  useEffect(() => {
+    getUserData()
+  }, [id])
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -73,7 +84,23 @@ export default function THeHeader() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div style={{ alignItems: "flex-start", paddingTop: "8px" }} className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div id='theHeadBlock' style={{ marginLeft: "-50px", marginRight: "30px" }} className="flex flex-shrink-0 items-center">
+                  {
+                    user?.username ? (
+                      <>
+                        <p style={{ marginRight: "15px", textTransform: "uppercase" }} className='text-gray-300'>shalom {user.username}.</p>
+                        {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
+                      </>
+                    ) : (
+                      <>
+                        <p className='text-gray-300' style={{ marginRight: "15px", cursor: "pointer" }} onClick={() => navigate("/register")}>Register</p>
+                        <p className='text-gray-300' style={{ marginRight: "15px", cursor: "pointer" }} onClick={() => navigate("/login")}>Login</p>
+                        {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
+                      </>
+                    )
+                  }
+                </div>
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
@@ -86,12 +113,13 @@ export default function THeHeader() {
                     alt="Your Company"
                   />
                 </div>
+
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
-                        href={item.href}
+                        href={item.path}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'
@@ -138,11 +166,11 @@ export default function THeHeader() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                             onClick={() => navigate("/user-account")}
+                            onClick={() => navigate("/user-account")}
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Your Profile 
+                            Your Profile
                           </a>
                         )}
                       </Menu.Item>
@@ -158,12 +186,14 @@ export default function THeHeader() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
+                          <p
+                            onClick={logOut}
+                            style={{ cursor: "pointer", display: user?.username ? "block" : "none" }}
                             href="#"
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
-                          </a>
+                          </p>
                         )}
                       </Menu.Item>
                     </Menu.Items>
@@ -179,7 +209,7 @@ export default function THeHeader() {
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  href={item.path}
                   className={classNames(
                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
@@ -190,9 +220,25 @@ export default function THeHeader() {
                 </Disclosure.Button>
               ))}
             </div>
+            <div id='theHeadBlockMobile' style={{ marginLeft: "23px" }} className="flex flex-shrink-0 items-center">
+              {
+                user?.username ? (
+                  <>
+                    <p style={{ marginRight: "15px", textTransform: "uppercase" }} className='text-gray-300'>shalom {user.username}.</p>
+                    {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
+                  </>
+                ) : (
+                  <>
+                    <p className='text-gray-300' style={{ marginRight: "15px", cursor: "pointer" }} onClick={() => navigate("/register")}>Register</p>
+                    <p className='text-gray-300' style={{ marginRight: "15px", cursor: "pointer" }} onClick={() => navigate("/login")}>Login</p>
+                    {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
+                  </>
+                )
+              }
+            </div>
           </Disclosure.Panel>
         </>
       )}
     </Disclosure>
-  ) 
+  )
 }
