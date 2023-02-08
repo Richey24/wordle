@@ -16,7 +16,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function THeHeader({ soundClick, soundOn }) {
+export default function THeHeader({ soundClick, soundOn, showAbout }) {
   const navigate = useNavigate()
   const id = localStorage.getItem("id")
   const token = localStorage.getItem("token")
@@ -120,7 +120,7 @@ export default function THeHeader({ soundClick, soundOn }) {
                 <div style={{ marginLeft: "40px" }} className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <div style={{ cursor: "pointer" }} onClick={() => navigate(item.path)}>
+                      pathname !== "/" && <div style={{ cursor: "pointer" }} onClick={() => navigate(item.path)}>
                         <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
                       </div>
                     ))}
@@ -133,20 +133,20 @@ export default function THeHeader({ soundClick, soundOn }) {
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  {user?.username && <BellIcon className="h-6 w-6" aria-hidden="true" />}
                 </button>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    {user?.username && <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
                         src="/img/profile.png"
                         alt="User Name"
                       />
-                    </Menu.Button>
+                    </Menu.Button>}
                   </div>
                   <Transition
                     as={Fragment}
@@ -194,6 +194,8 @@ export default function THeHeader({ soundClick, soundOn }) {
                       <Menu.Item>
                         {({ active }) => (
                           <p
+                            onClick={showAbout}
+                            style={{ cursor: "pointer" }}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             About Us
@@ -244,5 +246,5 @@ export default function THeHeader({ soundClick, soundOn }) {
         </>
       )}
     </Disclosure>
-  ) 
+  )
 }

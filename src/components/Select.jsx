@@ -79,6 +79,13 @@ const Select = () => {
         document.getElementById(id).classList.toggle("selectShow")
     }
 
+    const showAbout = () => {
+        showModal("aboutDiv")
+        setTimeout(() => {
+            showModal("aboutDiv")
+        }, 5000)
+    }
+
     const navBible = () => {
         if (Object.keys(user).length === 0) {
             navigate("/login")
@@ -197,25 +204,8 @@ const Select = () => {
 
     return (
         <div>
-            <Header soundClick={soundClick} soundOn={soundOn} />
+            <Header showAbout={showAbout} soundClick={soundClick} soundOn={soundOn} />
             <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain" id="selectMain">
-                {/* <div className="firstDiv">
-                {
-                    user.username ? (
-                        <>
-                            <p>Shalom {user.username}. <span onClick={logOut}>Logout</span></p>
-                            <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
-                        </>
-
-                    ) : (
-                        <>
-                            <p onClick={() => navigate("/register")}>Register</p>
-                            <p onClick={() => navigate("/login")}>Login</p>
-                            <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
-                        </>
-                    )
-                }
-            </div> */}
                 <div className="innerMain">
                     <div onMouseEnter={() => playSound("word")} onClick={() => navigate("/select")}>
                         <img src={word} alt="" />
@@ -263,6 +253,18 @@ const Select = () => {
                 <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
                     <p style={{ fontWeight: "600" }}>Will be added soon...</p>
                     <button onClick={() => showModal("comingSoon")}>Cancel</button>
+                </div>
+                <div style={{ height: "450px" }} id="aboutDiv" className="selectSub">
+                    <p>ISRAEL BIBLE CAMP  @ 2023 All Rights Reserved </p>
+                    <p>Special thanks to the following:</p>
+                    <p>Bishop Nathanyel of IUIC</p>
+                    <p>Naqam of WFI, thanks for the wake-up call.</p>
+                    <p>Our development team working from 3 continent</p>
+                    <p>Judah Logo - Country Flag - Isaiah Ben Israel</p>
+                    <p> Asher Logo - Country Flag - Lilian Lynch</p>
+                    <p>Benjamin Logo - Country Flag - Javon Ellis</p>
+                    <p>Gad - Logo - Country Flag - Rejoice Uahomo</p>
+                    <p>Benjamin Logo - Country Flag - Lionel Francis</p>
                 </div>
             </div>
         </div>
