@@ -17,8 +17,9 @@ const Admin = () => {
         const res = await axios.get(`${url}/user/find/all`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         if (res.status !== 200) {
             navigate("/admin/login")
         }
@@ -31,8 +32,9 @@ const Admin = () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         const rep = await res.data
         if (token !== rep.mainToken) {
             sessionStorage.clear()

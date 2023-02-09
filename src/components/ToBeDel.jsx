@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import url from "../url"
+import THeHeader from "./TheHeader"
 import "./ToBeDel.css"
 
 const ToBeDel = () => {
@@ -105,29 +106,32 @@ const ToBeDel = () => {
     }
 
     return (
-        <div className="adminDel">
-            {
-                items.map((item, i) => (
-                    <div key={i}>
-                        <p>{item?.topic}</p>
-                        <div>
-                            <p onClick={() => delItem(item?._id)}>Confirm delete</p>
-                            <p onClick={() => cancelDel(item?._id)}>Cancel</p>
+        <div>
+            <THeHeader admin={true} />
+            <div className="adminDel">
+                {
+                    items.map((item, i) => (
+                        <div key={i}>
+                            <p>{item?.topic}</p>
+                            <div>
+                                <p onClick={() => delItem(item?._id)}>Confirm delete</p>
+                                <p onClick={() => cancelDel(item?._id)}>Cancel</p>
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
-            {
-                questions.map((item, i) => (
-                    <div key={i}>
-                        <p>{item?.question}</p>
-                        <div>
-                            <p onClick={() => delQuest(item?._id)}>Confirm delete</p>
-                            <p onClick={() => cancelQuest(item?._id)}>Cancel</p>
+                    ))
+                }
+                {
+                    questions.map((item, i) => (
+                        <div key={i}>
+                            <p>{item?.question}</p>
+                            <div>
+                                <p onClick={() => delQuest(item?._id)}>Confirm delete</p>
+                                <p onClick={() => cancelQuest(item?._id)}>Cancel</p>
+                            </div>
                         </div>
-                    </div>
-                ))
-            }
+                    ))
+                }
+            </div>
         </div>
     )
 }

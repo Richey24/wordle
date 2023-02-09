@@ -16,10 +16,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function THeHeader({ soundClick, soundOn, showAbout }) {
+export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   const navigate = useNavigate()
-  const id = localStorage.getItem("id")
-  const token = localStorage.getItem("token")
+  const id = admin ? sessionStorage.getItem("id") : localStorage.getItem("id")
+  const token = admin ? sessionStorage.getItem("token") : localStorage.getItem("token")
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(true)
   const soundOnLocation = "img/soundOn.png"
@@ -120,7 +120,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
                 <div style={{ marginLeft: "40px" }} className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      pathname !== "/" && <div style={{ cursor: "pointer" }} onClick={() => navigate(item.path)}>
+                      pathname !== "/" && <div style={{ cursor: "pointer" }} onClick={() => navigate(admin ? "/admin" : item.path)}>
                         <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
                       </div>
                     ))}

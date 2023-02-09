@@ -24,6 +24,7 @@ import fourDict from "../../utils/fourDict.js"
 import fifteenDict from "../../utils/fifteenDict"
 import bible from "../../utils/bible"
 import Result from "../../components/Result"
+import cancel from "../../img/cancel.svg"
 import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import url from "../../url"
@@ -514,6 +515,11 @@ const Wordle = () => {
         }
     }
 
+
+    const showHowToPlay = () => {
+        document.getElementById("howToPlay").classList.toggle("showHowToPlay")
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -653,17 +659,53 @@ const Wordle = () => {
                             <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
                         </div>
 
-                        <div className="sub-button shadow" onClick={showHint}>
+                        <div className="sub-button shadow" onClick={showHowToPlay}>
                             <FontAwesomeIcon icon={faQuestion} className="text-white" />
-                        </div>
-                        <div className="sub-button shadow">
-                            <Link to="/">
-                                <FontAwesomeIcon icon={faHome} className="text-white" />
-                            </Link>
                         </div>
                     </div>
                 </div>
             </Container>
+            <div className="howToPlay" id="howToPlay">
+                <img onClick={showHowToPlay} src={cancel} alt="" />
+                <h1>How to play</h1>
+                <h4>Guess the word in the given amount of tries.</h4>
+                <ul>
+                    <li>Each guess must be a valid word</li>
+                    <li>The length of the word depends on the level</li>
+                    <li>The color of the tiles will change to show how close your guess was to the word</li>
+                </ul>
+                <h6>Examples</h6>
+                <div className="example1">
+                    <div>
+                        <div>W</div>
+                        <div>E</div>
+                        <div>A</div>
+                        <div>R</div>
+                        <div>Y</div>
+                    </div>
+                    <p><span>W</span> is in the word and in the correct spot</p>
+                </div>
+                <div className="example2">
+                    <div>
+                        <div>P</div>
+                        <div>I</div>
+                        <div>L</div>
+                        <div>L</div>
+                        <div>S</div>
+                    </div>
+                    <p><span>I</span> is in the word but in the wrong spot</p>
+                </div>
+                <div className="example3">
+                    <div>
+                        <div>V</div>
+                        <div>A</div>
+                        <div>G</div>
+                        <div>U</div>
+                        <div>E</div>
+                    </div>
+                    <p><span>U</span> is not in the word in any spot</p>
+                </div>
+            </div>
         </div>
     )
 }

@@ -50,7 +50,7 @@ const Difficult = () => {
     }, [id])
 
     const showModal = (id) => {
-        document.getElementById(id).classList.toggle("show")
+        document.getElementById(id).classList.toggle("selectShow")
     }
 
     const navi = (num) => {
@@ -126,7 +126,7 @@ const Difficult = () => {
                         Very Hard
                     </button>
                 </div>
-                <div id="swordSub" className="swordSub">
+                <div id="swordSub" className="selectSub">
                     <p>You have to subscribe to gain premium access to all difficulty level in the game</p>
                     <button>Subscribe</button>
                     <button onClick={() => showModal("swordSub")}>Cancel</button>
