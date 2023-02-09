@@ -260,16 +260,16 @@ const Select = () => {
                     <button onClick={() => showModal("comingSoon")}>Cancel</button>
                 </div>
                 <div id="aboutDiv" className="aboutSub">
-                    <h6>ISRAEL BIBLE CAMP  © 2023 All Rights Reserved </h6>
+                    <h6 style={{ display: "flex", justifyContent: "center", columnGap: "10px", flexWrap: "wrap" }}><p>ISRAEL BIBLE CAMP</p>  © 2023 All Rights Reserved </h6>
                     <h6>Special thanks to the following:</h6>
                     <h6>Bishop Nathanyel of IUIC</h6>
                     <h6>Naqam of WFI, thanks for the wake-up call.</h6>
                     <h6>Our development team working from 3 continent</h6>
-                    <p><img src={judah} alt="" /> - I. B. Israel</p>
-                    <p><img src={asher} alt="" /> - L. Silva</p>
-                    <p><img src={benjamin} alt="" /> - J. Ellis</p>
-                    <p><img src={gad} alt="" /> - R. Uahomo</p>
-                    <p><img src={reuben} alt="" /> - L. Francis</p>
+                    <p><img src={judah} alt="" /> <span>I. B. Israel</span></p>
+                    <p><img src={asher} alt="" /> <span>L. Silva</span></p>
+                    <p><img src={benjamin} alt="" /> <span>J. Ellis</span></p>
+                    <p><img src={gad} alt="" /> <span>R. Uahomo</span></p>
+                    <p><img src={reuben} alt="" /> <span>L. Francis</span></p>
                 </div>
             </div>
         </div>
