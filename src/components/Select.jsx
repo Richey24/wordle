@@ -4,6 +4,11 @@ import bible from "../img/white-bible.png"
 import shield from "../img/white-shield.png"
 import biblequest from "../img/white-quiz.png"
 import hang from "../img/white-hang.png"
+import judah from "../img/judah.png"
+import asher from "../img/asher.png"
+import benjamin from "../img/benjamin.png"
+import gad from "../img/gad.png"
+import reuben from "../img/reuben.png"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
@@ -254,17 +259,17 @@ const Select = () => {
                     <p style={{ fontWeight: "600" }}>Will be added soon...</p>
                     <button onClick={() => showModal("comingSoon")}>Cancel</button>
                 </div>
-                <div style={{ height: "450px" }} id="aboutDiv" className="selectSub">
-                    <p>ISRAEL BIBLE CAMP  @ 2023 All Rights Reserved </p>
-                    <p>Special thanks to the following:</p>
-                    <p>Bishop Nathanyel of IUIC</p>
-                    <p>Naqam of WFI, thanks for the wake-up call.</p>
-                    <p>Our development team working from 3 continent</p>
-                    <p>Judah Logo - Country Flag - Isaiah Ben Israel</p>
-                    <p> Asher Logo - Country Flag - Lilian Lynch</p>
-                    <p>Benjamin Logo - Country Flag - Javon Ellis</p>
-                    <p>Gad - Logo - Country Flag - Rejoice Uahomo</p>
-                    <p>Benjamin Logo - Country Flag - Lionel Francis</p>
+                <div id="aboutDiv" className="aboutSub">
+                    <h6>ISRAEL BIBLE CAMP  © 2023 All Rights Reserved </h6>
+                    <h6>Special thanks to the following:</h6>
+                    <h6>Bishop Nathanyel of IUIC</h6>
+                    <h6>Naqam of WFI, thanks for the wake-up call.</h6>
+                    <h6>Our development team working from 3 continent</h6>
+                    <p><img src={judah} alt="" /> - I. B. Israel</p>
+                    <p><img src={asher} alt="" /> - L. Silva</p>
+                    <p><img src={benjamin} alt="" /> - J. Ellis</p>
+                    <p><img src={gad} alt="" /> - R. Uahomo</p>
+                    <p><img src={reuben} alt="" /> - L. Francis</p>
                 </div>
             </div>
         </div>

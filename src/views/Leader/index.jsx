@@ -34,6 +34,7 @@ import simeon from "../../img/simeon.png"
 import zebulun from "../../img/zebulun.png"
 import asher from "../../img/asher.png"
 import video from "../../utils/video";
+import THeHeader from "../../components/TheHeader";
 // end:Assets
 
 // Videos
@@ -138,6 +139,7 @@ const Leader = () => {
     }
     return (
         <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
+            <THeHeader />
             <video src={bground} autoPlay muted loop id='thevid' />
             <Container fluid id="videoMessage">
                 <Container>

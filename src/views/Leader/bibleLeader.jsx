@@ -33,6 +33,7 @@ import zebulun from "../../img/zebulun.png"
 import asher from "../../img/asher.png"
 import { useNavigate } from "react-router-dom"
 import video from "../../utils/video"
+import THeHeader from "../../components/TheHeader"
 
 
 const images = {
@@ -112,7 +113,7 @@ const BibleLeader = () => {
 
     return (
         <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
-
+            <THeHeader />
             <video src={bground} autoPlay muted loop id='thevid' />
             <Container fluid id="videoMessage">
                 <Container>
