@@ -22,6 +22,10 @@
     cursor: pointer;
 }
 
+.selectShow {
+    display: block;
+}
+
 @media (max-width: 700px) {
     .firstDiv div {
         right: 30px;

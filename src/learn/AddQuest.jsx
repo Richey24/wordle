@@ -4,6 +4,7 @@ import url from "../url"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useState } from "react"
 import { Spinner } from "react-bootstrap"
+import TheHeader from "../components/TheHeader"
 
 const AddQuest = () => {
 
@@ -80,34 +81,37 @@ const AddQuest = () => {
     }
 
     return (
-        <div className="questMain">
-            <h2>{list ? "Edit your question" : "Create a new question"}</h2>
-            <form onSubmit={submitForm} className="questForm">
-                <label htmlFor="question">Question</label>
-                <br />
-                <input defaultValue={list?.question} type="text" name="question" id="question" placeholder="Enter the question" />
-                <h6>Answers</h6>
-                <input defaultValue={list?.answer[0]?.value} type="text" name="correctAnswer" id="correctAnswer" placeholder="Enter the correct answer" />
-                <br />
-                <br />
-                <input defaultValue={list?.answer[1]?.value} type="text" name="wrongAnswer1" id="wrongAnswer1" placeholder="Enter a wrong answer" />
-                <br />
-                <br />
-                <input defaultValue={list?.answer[2]?.value} type="text" name="wrongAnswer2" id="wrongAnswer2" placeholder="Enter a wrong answer" />
-                <br />
-                <br />
-                <input defaultValue={list?.answer[3]?.value} type="text" name="wrongAnswer3" id="wrongAnswer3" placeholder="Enter a wrong answer" />
-                <br />
-                <br />
-                <br />
-                <label htmlFor="learnMore">Enter the learn more content</label>
-                <br />
-                <textarea defaultValue={list?.learnMore} className="learnMoreArea" name="learnMore" id="learnMore"></textarea>
-                <br />
-                <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
-                ) : list ? "Edit question" : "Create question"} </button>
-                {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
-            </form>
+        <div>
+            <TheHeader admin={true} />
+            <div className="questMain">
+                <h2>{list ? "Edit your question" : "Create a new question"}</h2>
+                <form onSubmit={submitForm} className="questForm">
+                    <label htmlFor="question">Question</label>
+                    <br />
+                    <input defaultValue={list?.question} type="text" name="question" id="question" placeholder="Enter the question" />
+                    <h6>Answers</h6>
+                    <input defaultValue={list?.answer[0]?.value} type="text" name="correctAnswer" id="correctAnswer" placeholder="Enter the correct answer" />
+                    <br />
+                    <br />
+                    <input defaultValue={list?.answer[1]?.value} type="text" name="wrongAnswer1" id="wrongAnswer1" placeholder="Enter a wrong answer" />
+                    <br />
+                    <br />
+                    <input defaultValue={list?.answer[2]?.value} type="text" name="wrongAnswer2" id="wrongAnswer2" placeholder="Enter a wrong answer" />
+                    <br />
+                    <br />
+                    <input defaultValue={list?.answer[3]?.value} type="text" name="wrongAnswer3" id="wrongAnswer3" placeholder="Enter a wrong answer" />
+                    <br />
+                    <br />
+                    <br />
+                    <label htmlFor="learnMore">Enter the learn more content</label>
+                    <br />
+                    <textarea defaultValue={list?.learnMore} className="learnMoreArea" name="learnMore" id="learnMore"></textarea>
+                    <br />
+                    <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
+                    ) : list ? "Edit question" : "Create question"} </button>
+                    {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
+                </form>
+            </div>
         </div>
     )
 }

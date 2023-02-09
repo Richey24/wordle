@@ -453,6 +453,87 @@
     top: 13px;
 }
 
+.howToPlay {
+    position: absolute;
+    width: 40%;
+    top: 10%;
+    left: 30%;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    display: none;
+}
+
+.howToPlay>h1 {
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.howToPlay>h4 {
+    font-size: 20px;
+}
+
+.howToPlay li {
+    list-style-type: disc;
+    font-size: 14px;
+}
+
+.howToPlay h6 {
+    font-weight: 600;
+}
+
+.example1>div,
+.example2>div,
+.example3>div {
+    display: flex;
+    gap: 5px;
+}
+
+.example1>div>div,
+.example2>div>div,
+.example3>div>div {
+    width: 30px;
+    height: 30px;
+    border: 2px solid grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+}
+
+.howToPlay span {
+    font-weight: 900;
+}
+
+.howToPlay img {
+    margin-left: 96%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.example1>div>div:first-child {
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.example2>div>div:nth-child(2) {
+    background-color: goldenrod;
+    color: white;
+    border: none;
+}
+
+.example3>div>div:nth-child(4) {
+    background-color: rgb(65, 62, 62);
+    color: white;
+    border: none;
+}
+
+.showHowToPlay {
+    display: block;
+}
+
 @media (max-width: 700px) {
     .startBtn {
         width: 50%;
