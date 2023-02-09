@@ -191,7 +191,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
                           </p>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {pathname === "/" && <Menu.Item>
                         {({ active }) => (
                           <p
                             onClick={showAbout}
@@ -201,7 +201,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
                             About Us
                           </p>
                         )}
-                      </Menu.Item>
+                      </Menu.Item>}
                     </Menu.Items>
                   </Transition>
                 </Menu>
