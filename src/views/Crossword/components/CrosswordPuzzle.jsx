@@ -58,7 +58,7 @@ export default function CrosswordPuzzle(props) {
                 })
                 window.solved.push(object.result)
 
-                if (window.solved.length === 7) {
+                if (window.solved.length === 8) {
                     // bgMusic.pause()
                     new Audio("audio/Celebration.mp3").play()
                     clearInterval(window.countdownID)
@@ -69,7 +69,7 @@ export default function CrosswordPuzzle(props) {
                         new Audio("audio/Celebration.mp3").stop()
                         setOpen(false);
                         // Update server
-                    }, 5000)
+                    }, 1000)
                 }
             }
         })
