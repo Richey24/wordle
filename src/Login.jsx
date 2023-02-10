@@ -38,7 +38,8 @@ const Login = () => {
         }
 
         if (reg === "login") {
-            const res = await axios.post(`${url}/user/login`, user, { validateStatus: () => true })
+            const res    = await axios.post(`${url}/user/login`, user, { validateStatus: () => true })
+        
             switch (res.status) {
                 case 400:
                     setErr("Fill all required filled and try again")
@@ -131,21 +132,21 @@ const Login = () => {
         )
     }
 
-    if (reg === "sent") {
-        return (
-            <div className="loginMainDiv">
-                <div style={{ position: "relative", height: "600px" }} className="loginDiv">
-                    <div className="lockImage">
-                        <img src={mail} alt="" />
-                    </div>
-                    <h1>Check your mail</h1>
-                    <p>We have sent an instructions to recover your password to your mail</p>
-                    <p style={{ position: "absolute", bottom: "45px", left: "7%" }}>Did not receive email? Check your spam folder or <span>resend verification link</span></p>
-                    <p style={{ position: "absolute", bottom: "10px", left: "40%" }} onClick={() => { setShowErr(false); setReg("login") }} className="forgotPass"><span>Back to login page</span></p>
-                </div>
-            </div>
-        )
-    }
+    // if (reg === "sent") {
+    //     return (
+    //         <div className="loginMainDiv">
+    //             <div style={{ position: "relative", height: "600px" }} className="loginDiv">
+    //                 <div className="lockImage">
+    //                     <img src={mail} alt="" />
+    //                 </div>
+    //                 <h1>Check your mail</h1>
+    //                 <p>We have sent an instructions to recover your password to your mail</p>
+    //                 <p style={{ position: "absolute", bottom: "45px", left: "7%" }}>Did not receive email? Check your spam folder or <span>resend verification link</span></p>
+    //                 <p style={{ position: "absolute", bottom: "10px", left: "40%" }} onClick={() => { setShowErr(false); setReg("login") }} className="forgotPass"><span>Back to login page</span></p>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div className="loginMainDiv">

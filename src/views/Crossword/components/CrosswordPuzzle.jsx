@@ -7,14 +7,47 @@ import './crossword.js';
 import Congratulation from '../../../components/Congratulation/CongratulationView';
 import Failed from '../../../components/Congratulation/Failed'
 
+
+import axios from 'axios';
+import url from "../../../url"
+
+
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
-    const style = { background: `linear-gradient(to left,  ${props.color} 0%,${props.color1} 100%)`, };
+    const  style = { background: `linear-gradient(to left,  ${props.color} 0%,${props.color1} 100%)`, };
     const [failed, setFailed] = useState(false);
 
     const handleFailed = () => {
         setFailed(true)
+    }
+
+    const saveGameResults = async (status, score, timeRemain) => {
+
+        const token = localStorage.getItem("token");
+        
+        let params = {
+            levels: props.level,
+            score: score,
+            status: status,
+            game: 'Crossword Puzzle',
+            time: timeRemain,
+        }
+
+        await axios.post(`${url}/api/activities/crossword`, params,  { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
+        .then(res => {
+            console.log(res)
+            const data = res.data
+            if ( data ) {
+            } else {
+
+            }
+           
+        })
+        .catch(err => {
+            console.log(err)
+            alert('Something went wrong')
+        })
     }
 
     useEffect(() => {
@@ -58,13 +91,15 @@ export default function CrosswordPuzzle(props) {
                 })
                 window.solved.push(object.result)
 
-                if (window.solved.length === 8) {
+                if (window.solved.length === 10) {
                     // bgMusic.pause()
                     new Audio("audio/Celebration.mp3").play()
                     clearInterval(window.countdownID)
                     scoreValue.innerHTML = Number(scoreValue.innerHTML) + Number(countdown.innerHTML) + 1000
                     setOpen(true);
 
+                    saveGameResults(1, scoreValue.innerHTML, countdown.innerHTML)
+                    
                     setTimeout(() => {
                         new Audio("audio/Celebration.mp3").stop()
                         setOpen(false);
@@ -652,7 +687,7 @@ export default function CrosswordPuzzle(props) {
                         </div>
 
                         <div id="levels">
-                            <div id="level" style={style} >Level 1</div>
+                            <div id="level" style={style} >Level {props.level}</div>
                         </div>
 
                         <div id="score">
