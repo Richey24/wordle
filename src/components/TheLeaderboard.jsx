@@ -21,16 +21,16 @@ export default function TheLeaderboard(props) {
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                 <tr>
                                     <th class="p-2 whitespace-nowrap">
-                                        <div style={{ fontSize: "25px" }} class="font-semibold text-left">Name</div>
+                                        <div style={{ fontSize: "25px" }} class="font-semibold text-left">Username</div>
+                                    </th>
+                                    <th class="p-2 whitespace-nowrap">
+                                        <div style={{ fontSize: "25px" }} class="font-semibold text-left">Tribes</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
                                         <div style={{ fontSize: "25px" }} class="font-semibold text-left">School Affiliation</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
                                         <div style={{ fontSize: "25px" }} class="font-semibold text-left">Country</div>
-                                    </th>
-                                    <th class="p-2 whitespace-nowrap">
-                                        <div style={{ fontSize: "25px" }} class="font-semibold text-left">Tribes</div>
                                     </th>
                                     <th class="p-2 whitespace-nowrap">
                                         <div style={{ fontSize: "25px" }} class="font-semibold text-left">Levels</div>
@@ -44,8 +44,11 @@ export default function TheLeaderboard(props) {
                                 <tr>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div style={{ fontSize: "25px" }} class="text-secondary font-bold ">Alex Shatov</div>
+                                            <div style={{ fontSize: "25px" }} class="text-secondary font-bold ">Alex123</div>
                                         </div>
+                                    </td>
+                                    <td class="p-2 whitespace-nowrap">
+                                        <img class="rounded-full" src={tribe} width="100" height="100" alt="Asher" />
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div style={{ fontSize: "25px" }} class="text-left text-secondary font-bold ">School Name</div>
@@ -53,9 +56,6 @@ export default function TheLeaderboard(props) {
 
                                     <td class="p-2 whitespace-nowrap">
                                         <img class="w-20 h-20 rounded" src={flagUrl} alt="Large avatar" />
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <img class="rounded-full" src={tribe} width="100" height="100" alt="Asher" />
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="text-left text-red-500 font-bold">1</div>
