@@ -16,7 +16,7 @@ export default function TheLeaderboard(props) {
                     <h2 class="font-semibold text-white	 ">Bible Crossword Puzzle Daily Leaderboard</h2>
                 </header>
                 <div class="p-3">
-                    <div style={{ width: "97vw", margin: "0px", border: "1px solid red" }} class="overflow-x-auto">
+                    <div style={{ width: "97vw", margin: "0px" }} class="overflow-x-auto">
                         <table class="table-auto w-full">
                             <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                                 <tr>
@@ -44,11 +44,11 @@ export default function TheLeaderboard(props) {
                                 <tr>
                                     <td class="p-2 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div class="font-medium text-white font-bold ">Alex Shatov</div>
+                                            <div style={{ fontSize: "25px" }} class="text-secondary font-bold ">Alex Shatov</div>
                                         </div>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left text-white font-bold ">Schoole Name</div>
+                                        <div style={{ fontSize: "25px" }} class="text-left text-secondary font-bold ">School Name</div>
                                     </td>
 
                                     <td class="p-2 whitespace-nowrap">
