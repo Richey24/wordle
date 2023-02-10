@@ -107,8 +107,11 @@ const AddQuest = () => {
                     <br />
                     <textarea defaultValue={list?.learnMore} className="learnMoreArea" name="learnMore" id="learnMore"></textarea>
                     <br />
-                    <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
-                    ) : list ? "Edit question" : "Create question"} </button>
+                    <div className="addQuestBtn">
+                        <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
+                        ) : list ? "Edit question" : "Create question"} </button>
+                        <button onClick={() => navigate("/question/list")}>Cancel</button>
+                    </div>
                     {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
                 </form>
             </div>

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import url from "../url"
+import empty from "../img/empty.svg"
 import THeHeader from "./TheHeader"
 import "./ToBeDel.css"
 
@@ -17,14 +18,16 @@ const ToBeDel = () => {
         const res = await axios.get(`${url}/sword/get/all/deleted/${true}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         const rep = await res.data
         const res1 = await axios.get(`${url}/quiz/get/all`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         if (res.status !== 200 || res1.status !== 200) {
             navigate("/admin/login")
         }
@@ -34,13 +37,23 @@ const ToBeDel = () => {
         setQuestions(newArr)
     }
 
-    const getUsers = async () => {
+    const getUser = async () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
+        if (res.status !== 200) {
+            navigate("/admin/login")
+            return
+        }
         const rep = await res.data
+        if (token !== rep.mainToken) {
+            sessionStorage.clear()
+            navigate("/admin/login")
+            return
+        }
         if (!rep.superAdmin) {
             navigate("/admin")
         }
@@ -48,7 +61,7 @@ const ToBeDel = () => {
 
     useEffect(() => {
         getItems()
-        getUsers()
+        getUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -92,8 +105,9 @@ const ToBeDel = () => {
         const res = await axios.delete(`${url}/quiz/delete/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
-            }
-        }, { validateStatus: () => true })
+            },
+            validateStatus: () => true
+        })
         if (res.status === 200) {
             getItems()
         }
@@ -101,7 +115,13 @@ const ToBeDel = () => {
 
     if (items.length < 1 && questions.length < 1) {
         return (
-            <p style={{ textAlign: "center" }}>No study to be deleted</p>
+            <div>
+                <THeHeader admin={true} />
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px" }}>
+                    <img style={{ width: "500px", height: "500px" }} src={empty} alt="" />
+                    <h3 style={{ textAlign: "center" }}>No study to be deleted</h3>
+                </div>
+            </div>
         )
     }
 
@@ -109,6 +129,7 @@ const ToBeDel = () => {
         <div>
             <THeHeader admin={true} />
             <div className="adminDel">
+                <h3>Studies and questions marked to be deleted</h3>
                 {
                     items.map((item, i) => (
                         <div key={i}>
