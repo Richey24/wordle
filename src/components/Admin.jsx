@@ -115,6 +115,7 @@ const Admin = () => {
                 <input onChange={filterUser} type="text" placeholder="Search user" />
                 <p onClick={() => navigate("/audit")}>Audit</p>
                 <p onClick={() => navigate("/question/list")}>Bible trivial</p>
+                <p>Hebrew game</p>
                 {use?.superAdmin && <p onClick={() => navigate("/delete")}>To Be Deleted</p>}
             </div>
             <div>
