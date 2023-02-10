@@ -7,7 +7,6 @@
 
 .adminDiv>h2 {
     font-weight: 600;
-    font-style: italic;
     color: #3d1152;
 }
 
@@ -19,7 +18,63 @@
     flex-wrap: wrap;
 }
 
-.inputDiv>input {
+.inputDiv>div {
+    width: 80%;
+    display: flex;
+    gap: 30px;
+    align-items: baseline;
+}
+
+.inputDiv>div>div {
+    position: relative;
+}
+
+.inputDiv>div>div>p {
+    width: 100px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background-color: #3d1152;
+    color: white;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.inputDiv>div>div>ul {
+    width: 200px;
+    height: 106px;
+    background-color: whitesmoke;
+    border: 1px solid #3d1152;
+    position: absolute;
+    top: 80%;
+    padding: 10px 0px;
+    border-radius: 12px;
+    display: none;
+}
+
+.inputDiv>div>div>ul>li {
+    margin-top: 5px;
+    width: 100%;
+    background-color: white;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.inputDiv>div>div>ul>li:first-child {
+    margin-top: 0px;
+}
+
+.filterActive {
+    background-color: gray !important;
+}
+
+.showFilter {
+    display: block !important;
+}
+
+.inputDiv input {
     margin-top: 30px;
     width: 80%;
     border-radius: 12px;
