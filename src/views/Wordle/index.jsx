@@ -677,33 +677,33 @@ const Wordle = () => {
                 <h6>Examples</h6>
                 <div className="example1">
                     <div>
-                        <div>W</div>
+                        <div>{num === 1 ? "B" : "G"}</div>
+                        <div>{num === 1 ? "I" : "U"}</div>
+                        <div>{num === 1 ? "B" : "I"}</div>
+                        <div>{num === 1 ? "L" : "D"}</div>
                         <div>E</div>
-                        <div>A</div>
-                        <div>R</div>
-                        <div>Y</div>
                     </div>
-                    <p><span>W</span> is in the word and in the correct spot</p>
+                    <p><span>{num === 1 ? "B" : "G"}</span> is in the word and in the correct spot</p>
                 </div>
                 <div className="example2">
                     <div>
-                        <div>P</div>
-                        <div>I</div>
-                        <div>L</div>
-                        <div>L</div>
-                        <div>S</div>
+                        <div>{num === 1 ? "P" : "V"}</div>
+                        <div>{num === 1 ? "E" : "A"}</div>
+                        <div>{num === 1 ? "A" : "U"}</div>
+                        <div>{num === 1 ? "C" : "N"}</div>
+                        <div>{num === 1 ? "E" : "T"}</div>
                     </div>
-                    <p><span>I</span> is in the word but in the wrong spot</p>
+                    <p><span>{num === 1 ? "E" : "A"}</span> is in the word but in the wrong spot</p>
                 </div>
                 <div className="example3">
                     <div>
-                        <div>V</div>
-                        <div>A</div>
-                        <div>G</div>
-                        <div>U</div>
-                        <div>E</div>
+                        <div>{num === 1 ? "J" : "L"}</div>
+                        <div>{num === 1 ? "U" : "A"}</div>
+                        <div>{num === 1 ? "D" : "B"}</div>
+                        <div>{num === 1 ? "A" : "O"}</div>
+                        <div>{num === 1 ? "H" : "R"}</div>
                     </div>
-                    <p><span>U</span> is not in the word in any spot</p>
+                    <p><span>{num === 1 ? "A" : "O"}</span> is not in the word in any spot</p>
                 </div>
             </div>
         </div>

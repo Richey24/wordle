@@ -388,11 +388,6 @@ export default function Puzzle() {
                 <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
                     <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
                 </div>
-                <div className="sub-button shadow">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faHome} className="text-white" />
-                    </Link>
-                </div>
             </div>
 
         </div>
