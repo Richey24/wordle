@@ -264,7 +264,7 @@ const Select = () => {
                     <h6>Special thanks to the following:</h6>
                     <h6>Bishop Nathanyel of IUIC</h6>
                     <h6>Naqam of WFI, thanks for the wake-up call.</h6>
-                    <h6>Our development team working from 3 continent</h6>
+                    <h6>Our development team working from 3 continents.</h6>
                     <p><img src={judah} alt="" /> <span>I. B. Israel</span></p>
                     <p><img src={asher} alt="" /> <span>L. Silva</span></p>
                     <p><img src={benjamin} alt="" /> <span>J. Ellis</span></p>
