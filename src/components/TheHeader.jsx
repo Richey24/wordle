@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useLocation, useNavigate } from "react-router-dom"
 
 import logo from '../img/white-bible.png';
+import mail from "../img/Artwork.svg"
 
 import url from "../url"
 import axios from 'axios'
@@ -100,6 +101,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                         <p className='text-gray-300' style={{ marginRight: "40px", cursor: "pointer" }} onClick={() => navigate("/register")}>Register</p>
                         <p className='text-gray-300' style={{ marginRight: "40px", cursor: "pointer" }} onClick={() => navigate("/login")}>Login</p>
                         {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
+                        <a href="mailto:?body=www.israelbiblecamp.world"><img style={{ marginLeft: "40px", marginBottom: "15px", width: "35px", height: "35px" }} src={mail} alt="" /></a>
                       </>
                     )
                   }

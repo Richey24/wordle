@@ -12,6 +12,7 @@ const Admin = () => {
     const [users, setUsers] = useState([])
     const [use, setUser] = useState({})
     const [fil, setFil] = useState([])
+    const [active, setActive] = useState("none")
 
     const getUsers = async () => {
         const res = await axios.get(`${url}/user/find/all`, {
@@ -108,11 +109,63 @@ const Admin = () => {
         getUsers()
     }
 
+    const showFilter = () => {
+        document.getElementById("filterList").classList.toggle("showFilter")
+    }
+
+    const theFilter = (val) => {
+        switch (val) {
+            case "user":
+                if (active === "user") {
+                    setActive("")
+                    setUsers(fil)
+                } else {
+                    const arr = fil.filter((fi) => !fi.admin && !fi.superAdmin)
+                    setUsers(arr)
+                    setActive("user")
+                }
+                break;
+            case "admin":
+                if (active === "admin") {
+                    setActive("")
+                    setUsers(fil)
+                } else {
+                    const arr = fil.filter((fi) => fi.admin && !fi.superAdmin)
+                    setUsers(arr)
+                    setActive("admin")
+                }
+                break;
+            case "superAdmin":
+                if (active === "superAdmin") {
+                    setActive("")
+                    setUsers(fil)
+                } else {
+                    const arr = fil.filter((fi) => fi.superAdmin)
+                    setUsers(arr)
+                    setActive("superAdmin")
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
     return (
         <div className="adminDiv">
             <h2>{use?.superAdmin ? "Super admin" : "Admin"} dashboard</h2>
             <div className="inputDiv">
-                <input onChange={filterUser} type="text" placeholder="Search user" />
+                <div>
+                    <input onChange={filterUser} type="text" placeholder="Search user" />
+                    <div>
+                        <p onClick={showFilter}>Filter</p>
+                        <ul id="filterList">
+                            <li onClick={() => theFilter("user")} className={active === "user" ? "filterActive" : ""}>User</li>
+                            <li onClick={() => theFilter("admin")} className={active === "admin" ? "filterActive" : ""}>Admin</li>
+                            <li onClick={() => theFilter("superAdmin")} className={active === "superAdmin" ? "filterActive" : ""}>Super admin</li>
+                        </ul>
+                    </div>
+                </div>
                 <p onClick={() => navigate("/audit")}>Audit</p>
                 <p onClick={() => navigate("/question/list")}>Bible trivial</p>
                 <p>Hebrew game</p>
