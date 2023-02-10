@@ -24,7 +24,9 @@ import Shield from './components/Shield';
 import ShieldMain from './components/ShieldMain';
 import AddShield from './components/AddShield';
 import AdminLogin from './AdminLogin';
-import Admin from './components/Admin';
+import Admin from './views/Admin/index';
+import AdminHome from './views/Admin/AdminHome';
+import AdminGameActivity from './views/Admin/AdminGameActivity';
 import Audit from './components/Audit';
 import ToBeDel from './components/ToBeDel';
 import SelectNum from './learn/SelectNum';
@@ -62,7 +64,6 @@ root.render(
       <Route path='/shield/:idd' element={<ShieldMain />} />
       <Route path='/shield/create' element={<AddShield />} />
       <Route path='/admin/login' element={<AdminLogin />} />
-      <Route path='/admin' element={<Admin />} />
       <Route path='/audit' element={<Audit />} />
       <Route path='/delete' element={<ToBeDel />} />
       <Route path='/bible/select' element={<SelectNum />} />
@@ -78,6 +79,10 @@ root.render(
       <Route path='/verify/:id' element={<VerifyUser />} />
       <Route path="/user-account" element={<ProfilePage />} />
       <Route path="/privacy" element={<Privacy />} />
+      <Route path='/admin' element={<Admin />}>
+          <Route path="" element={<AdminHome />} />
+          <Route path="activities" element={<AdminGameActivity />} />
+      </Route>
     </Routes>
   </BrowserRouter>
 );

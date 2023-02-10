@@ -16,7 +16,7 @@ export default function CongratulationView(props)  {
                 <br />
                 <h1>{props.title}</h1>  
                 <h2>{props.message}</h2>
-                <button className={style.submitBtn} type="submit" >Continue</button>
+                <button onClick={() => window.location.reload(true)} className={style.submitBtn} type="submit" >Continue</button>
             </div>   
     </div>
 }
