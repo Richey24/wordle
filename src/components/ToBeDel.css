@@ -38,9 +38,25 @@
     width: 150px;
 }
 
+.adminDel>div>div>p:first-child {
+    background-color: red;
+}
+
+.adminDel>div>div>p:first-child:hover {
+    background-color: white;
+    color: red;
+    border: red 1px solid;
+    font-weight: 600;
+}
+
 .adminDel>div>div>p:hover {
     background-color: white;
     color: #3d1152;
     border: #3d1152 1px solid;
     font-weight: 600;
+}
+
+.adminDel>h3 {
+    margin-bottom: 30px;
+    text-decoration: underline;
 }
