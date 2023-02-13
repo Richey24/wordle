@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import url from "../url"
-import empty from "../img/empty.svg"
+import empty from "../img/empty.png"
 import THeHeader from "./TheHeader"
 import "./ToBeDel.css"
 

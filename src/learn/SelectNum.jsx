@@ -1,5 +1,3 @@
-import { faHome } from "@fortawesome/fontawesome-free-solid"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
@@ -71,6 +69,18 @@ const SelectNum = () => {
         }
     }
 
+    const showTheNum = () => {
+        document.getElementById("theSelectNumDiv").classList.toggle("theNumShow")
+    }
+
+    const theNav = (arr) => {
+        if (arr.length > 1 && !user.paid) {
+            showTheNum()
+            return
+        }
+        navigate("/bible/names", { state: { count: arr } })
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -86,26 +96,33 @@ const SelectNum = () => {
     }
 
     return (
-        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNum">
-            <THeHeader />
-            <p className="chooseNum">Choose the number of players</p>
-            <div>
-                <div onMouseEnter={() => playSound("1")} onClick={() => navigate("/bible/names", { state: { count: [1] } })}>
-                    <h2>1</h2>
-                    <p>player</p>
+        <div>
+            <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNum">
+                <THeHeader />
+                <p className="chooseNum">Choose the number of players</p>
+                <div>
+                    <div onMouseEnter={() => playSound("1")} onClick={() => theNav([1])}>
+                        <h2>1</h2>
+                        <p>player</p>
+                    </div>
+                    <div onMouseEnter={() => playSound("2")} onClick={() => theNav([1, 2])}>
+                        <h2>2</h2>
+                        <p>players</p>
+                    </div>
+                    <div onMouseEnter={() => playSound("3")} onClick={() => theNav([1, 2, 3])}>
+                        <h2>3</h2>
+                        <p>players</p>
+                    </div>
+                    <div onMouseEnter={() => playSound("4")} onClick={() => theNav([1, 2, 3, 4])}>
+                        <h2>4</h2>
+                        <p>players</p>
+                    </div>
                 </div>
-                <div onMouseEnter={() => playSound("2")} onClick={() => navigate("/bible/names", { state: { count: [1, 2] } })}>
-                    <h2>2</h2>
-                    <p>players</p>
-                </div>
-                <div onMouseEnter={() => playSound("3")} onClick={() => navigate("/bible/names", { state: { count: [1, 2, 3] } })}>
-                    <h2>3</h2>
-                    <p>players</p>
-                </div>
-                <div onMouseEnter={() => playSound("4")} onClick={() => navigate("/bible/names", { state: { count: [1, 2, 3, 4] } })}>
-                    <h2>4</h2>
-                    <p>players</p>
-                </div>
+            </div>
+            <div id="theSelectNumDiv" className="theSelectNumDiv">
+                <p>You need to subscribe to access more than one player</p>
+                <button onClick={() => navigate("/subscribe")}>Subscribe</button>
+                <button onClick={showTheNum}>Cancel</button>
             </div>
         </div>
     )
