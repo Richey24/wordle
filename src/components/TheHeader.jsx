@@ -11,6 +11,7 @@ import axios from 'axios'
 import "./TheHeader.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/fontawesome-free-solid'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 
 function classNames(...classes) {
@@ -95,13 +96,22 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                       <>
                         <p style={{ marginRight: "40px", textTransform: "uppercase" }} className='text-gray-300'>shalom {user.username}.</p>
                         {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
+                        <a href="mailto:?body=Shalom [enter friends name here],%0A%0AI wanted to share these links with you of a new Bible gaming site. It contain Bible trivia, word games, and study tools for your entertainment and learning.%0A%0AClick here to see the promo: https://www.youtube.com/watch?v=uBrwlGHz2_k">
+                          <OverlayTrigger placement='bottom' overlay={<Tooltip id='share'>Share</Tooltip>}>
+                            <img style={{ marginLeft: "40px", marginBottom: "15px", width: "35px", height: "35px" }} src={mail} alt="" />
+                          </OverlayTrigger>
+                        </a>
                       </>
                     ) : (
                       <>
                         <p className='text-gray-300' style={{ marginRight: "40px", cursor: "pointer" }} onClick={() => navigate("/register")}>Register</p>
                         <p className='text-gray-300' style={{ marginRight: "40px", cursor: "pointer" }} onClick={() => navigate("/login")}>Login</p>
                         {pathname === "/" && <p style={{ cursor: "pointer" }} onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>}
-                        <a href="mailto:?body=www.israelbiblecamp.world"><img style={{ marginLeft: "40px", marginBottom: "15px", width: "35px", height: "35px" }} src={mail} alt="" /></a>
+                        <a href="mailto:?body=Shalom [enter friends name here],%0A%0AI wanted to share these links with you of a new Bible gaming site. It contain Bible trivia, word games, and study tools for your entertainment and learning.%0A%0AClick here to see the promo: https://www.youtube.com/watch?v=uBrwlGHz2_k">
+                          <OverlayTrigger placement='bottom' overlay={<Tooltip id='share'>Share</Tooltip>}>
+                            <img style={{ marginLeft: "40px", marginBottom: "15px", width: "35px", height: "35px" }} src={mail} alt="" />
+                          </OverlayTrigger>
+                        </a>
                       </>
                     )
                   }
@@ -171,7 +181,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
@@ -180,7 +190,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                             Settings
                           </a>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <p

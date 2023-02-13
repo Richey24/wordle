@@ -3,7 +3,7 @@ import cancel from "../img/cancel.svg"
 import edit from "../img/Edit.svg"
 import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
-import empty from "../img/empty.svg"
+import empty from "../img/empty.png"
 import { useEffect } from "react"
 import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -28,14 +28,8 @@ const Shield = () => {
     const getItems = async () => {
         try {
             const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
                 validateStatus: () => true
             })
-            if (res.status !== 200) {
-                navigate("/login")
-            }
             const rep = await res.data
             setStudies(rep)
             setFit(rep)
@@ -59,9 +53,6 @@ const Shield = () => {
     }
 
     useEffect(() => {
-        if (!id) {
-            navigate("/login")
-        }
         window.scrollTo(0, 0)
         getUser()
         getItems()

@@ -114,6 +114,7 @@ const Admin = () => {
     }
 
     const theFilter = (val) => {
+        showFilter()
         switch (val) {
             case "user":
                 if (active === "user") {
@@ -175,7 +176,7 @@ const Admin = () => {
                 {
                     users.map((user, i) => (
                         <div key={i} className="adminInner">
-                            <p>{user?.name}</p>
+                            <p>{user?.name} ~ {user?.username}</p>
                             <form onSubmit={(e) => submitForm(e, user)}>
 
                                 <select name="role" id="role">
