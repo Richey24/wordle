@@ -76,7 +76,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
     return (
         <div>
             <div id="swordSub" className="swordSub">
-                <p>You can only play up to stage 7 for the free plan, subscribe to play up to 15 stages</p>
+                <p>You can only play up to stage 5 for the free plan, subscribe to play up to 15 stages</p>
                 <button onClick={() => navigate("/subscription")}>Subscribe</button>
                 <button onClick={() => navigate("/")}>Cancel</button>
             </div>

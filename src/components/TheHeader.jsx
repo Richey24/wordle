@@ -18,7 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
+export default function THeHeader({ soundClick, soundOn, showAbout }) {
   const navigate = useNavigate()
   const id = localStorage.getItem("id")
   const token = localStorage.getItem("token")

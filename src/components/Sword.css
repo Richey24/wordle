@@ -283,6 +283,46 @@
     display: block;
 }
 
+.howToPlayShield {
+    position: fixed;
+    width: 40%;
+    top: 10%;
+    left: 30%;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: -0.4px 0px 3px #000000;
+    display: none;
+    z-index: 300;
+}
+
+.howToPlayShield>h1 {
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.howToPlayShield>h4 {
+    font-size: 20px;
+}
+
+.howToPlayHangImg {
+    margin-left: 96%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.swordHowImg {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+}
+
+.showHowToPlay {
+    display: block;
+}
+
 @media screen and (max-width: 800px) {
     .swordSub {
         width: 90%;

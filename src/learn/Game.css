@@ -235,6 +235,42 @@
     z-index: 2;
 }
 
+.howToPlayTrivial {
+    position: fixed;
+    width: 40%;
+    top: 10%;
+    left: 30%;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: -0.4px 0px 3px #000000;
+    display: none;
+}
+
+.howToPlayTrivial>h1 {
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.howToPlayTrivial>h4 {
+    font-size: 20px;
+}
+
+.howToPlayHangImg {
+    margin-left: 96%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.gameHowImg {
+    margin: 0 auto;
+}
+
+.showHowToPlay {
+    display: block;
+}
+
 @media screen and (max-width: 800px) {
     .mainGame {
         padding: 10px;

@@ -55,6 +55,18 @@
     color: white;
 }
 
+.addQuestBtn>button:last-child {
+    margin-top: 20px;
+    width: 164px;
+    height: 46px;
+    background: red;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    color: white;
+    margin-left: 10px;
+}
+
 @media screen and (max-width: 800px) {
     .questForm {
         padding: 30px 20px;

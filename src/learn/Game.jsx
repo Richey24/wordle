@@ -16,11 +16,12 @@ import reuben from "../img/reuben.png"
 import simeon from "../img/simeon.png"
 import zebulun from "../img/zebulun.png"
 import asher from "../img/asher.png"
+import bible from "../img/Bible-Trivia.png"
 import axios from "axios";
 import url from "../url"
 import { Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/fontawesome-free-solid";
+import { faPlus, faQuestion, faUserGraduate } from "@fortawesome/fontawesome-free-solid";
 import THeHeader from "../components/TheHeader";
 
 let timer;
@@ -201,6 +202,10 @@ const Game = () => {
         document.getElementById(id).classList.toggle("showLearn")
     }
 
+    const showHowToPlay = () => {
+        document.getElementById("howToPlayTrivial").classList.toggle("showHowToPlay")
+    }
+
     const nextQuest = async () => {
         document.getElementById("learnModal").classList.remove("showLearn")
         document.getElementById("true").style.border = "none"
@@ -300,6 +305,27 @@ const Game = () => {
                     <p>Subscribe to play multiple times a day and gain premium access to all other games and features</p>
                     <button>Subscribe</button>
                 </div>
+            </div>
+            <div style={{ position: "fixed" }} className="fab-container">
+                <div className="fab shadow">
+                    <div className="fab-content">
+                        <FontAwesomeIcon icon={faPlus} className="text-white" />
+                    </div>
+                </div>
+                <div className="sub-button shadow" onClick={() => navigate("/quiz/leader")}>
+                    <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
+                </div>
+                <div onClick={showHowToPlay} className="sub-button shadow">
+                    <FontAwesomeIcon icon={faQuestion} className="text-white" />
+                </div>
+            </div>
+            <div id="howToPlayTrivial" className="howToPlayTrivial">
+                <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
+                <h1>How to play</h1>
+                <h4>
+                    Bible Learning game is a fun and entertaining way to increase your knowledge of the Truth of the Bible.  It provides for play from 1 to 4 players where each player is asked 10 questions and receives scores based upon how quickly each answers correctly.
+                </h4>
+                <img className="gameHowImg" src={bible} alt="" />
             </div>
         </div>
 

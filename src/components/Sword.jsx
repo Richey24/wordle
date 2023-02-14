@@ -3,7 +3,7 @@ import cancel from "../img/cancel.svg"
 import edit from "../img/Edit.svg"
 import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
-import empty from "../img/empty.svg"
+import empty from "../img/empty.png"
 import { useEffect } from "react"
 import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -11,8 +11,10 @@ import { useState } from "react"
 import axios from "axios"
 import url from "../url"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHome } from "@fortawesome/fontawesome-free-solid"
+import { faPlus, faQuestion } from "@fortawesome/fontawesome-free-solid"
 import THeHeader from "./TheHeader"
+import shield from "../img/SwordNShield.png"
+
 
 const Sword = () => {
     const id = localStorage.getItem("id")
@@ -102,6 +104,10 @@ const Sword = () => {
         navigate("/watchman/create")
     }
 
+    const showHowToPlay = () => {
+        document.getElementById("howToPlaySword").classList.toggle("showHowToPlay")
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -186,6 +192,26 @@ const Sword = () => {
                 <p>You have reach the maximum amount of study for the free plan, kindly subscribe to create more study</p>
                 <button>Subscribe</button>
                 <button onClick={() => showModal("swordSub")}>Cancel</button>
+            </div>
+
+            <div style={{ position: "fixed" }} className="fab-container">
+                <div className="fab shadow">
+                    <div className="fab-content">
+                        <FontAwesomeIcon icon={faPlus} className="text-white" />
+                    </div>
+                </div>
+                <div onClick={showHowToPlay} className="sub-button shadow">
+                    <FontAwesomeIcon icon={faQuestion} className="text-white" />
+                </div>
+            </div>
+
+            <div id="howToPlaySword" className="howToPlayShield">
+                <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
+                <h1>How to use</h1>
+                <h4>
+                    The My Sword & Shield is a teaching and study aid that allows for the search of Bible topics and resulting precepts and notes.  It provides a means for you to enter your topics, related precepts, and notes, so that you can quickly access them later during a camp or teaching session.
+                </h4>
+                <img className="swordHowImg" src={shield} alt="" />
             </div>
         </div>
     )

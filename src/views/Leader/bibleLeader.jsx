@@ -33,6 +33,7 @@ import zebulun from "../../img/zebulun.png"
 import asher from "../../img/asher.png"
 import { useNavigate } from "react-router-dom"
 import video from "../../utils/video"
+import THeHeader from "../../components/TheHeader"
 
 
 const images = {
@@ -112,7 +113,7 @@ const BibleLeader = () => {
 
     return (
         <Container fluid id="videowrapper" className="bg-purple  min-vh-100 video-container">
-
+            <THeHeader />
             <video src={bground} autoPlay muted loop id='thevid' />
             <Container fluid id="videoMessage">
                 <Container>
@@ -129,9 +130,9 @@ const BibleLeader = () => {
                                 <thead className="border-bottom">
                                     <tr className="text-white">
                                         <th>Username</th>
-                                        <th>Country</th>
                                         <th>Tribe</th>
                                         <th>School</th>
+                                        <th>Country</th>
                                         <th>Score</th>
                                     </tr>
                                 </thead>
@@ -141,9 +142,9 @@ const BibleLeader = () => {
                                             user?.dailyBQS !== 0 &&
                                             <tr key={i}>
                                                 <td style={{ textTransform: "uppercase" }}>{user?.username}</td>
-                                                <td style={{ width: "160px", height: "160px" }}><img src={user?.country[1]} alt="" /></td>
                                                 <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe[0]?.toLowerCase()]} alt="" style={{ width: 160, height: 160 }} /></td>
                                                 <td>{user?.church}</td>
+                                                <td style={{ width: "160px", height: "160px" }}><img src={user?.country[1]} alt="" /></td>
                                                 <td>{user?.dailyBQS}</td>
                                             </tr>
                                         ))
@@ -174,8 +175,8 @@ const BibleLeader = () => {
                                 </Col>
                             ))
                         }
-
                     </Row>
+                    <button onClick={() => setShow(false)} style={{ marginLeft: "85%" }} className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Close</button>
                 </Modal.Body>
             </Modal>
 

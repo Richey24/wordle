@@ -3,7 +3,7 @@ import cancel from "../img/cancel.svg"
 import edit from "../img/Edit.svg"
 import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
-import empty from "../img/empty.svg"
+import empty from "../img/empty.png"
 import { useEffect } from "react"
 import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
@@ -11,8 +11,9 @@ import { useState } from "react"
 import axios from "axios"
 import url from "../url"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHome } from "@fortawesome/fontawesome-free-solid"
+import { faPlus, faQuestion } from "@fortawesome/fontawesome-free-solid"
 import THeHeader from "./TheHeader"
+import shield from "../img/SwordNShield.png"
 
 const Shield = () => {
     const id = localStorage.getItem("id")
@@ -28,14 +29,8 @@ const Shield = () => {
     const getItems = async () => {
         try {
             const res = await axios.get(`${url}/sword/get/all/deleted/${false}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
                 validateStatus: () => true
             })
-            if (res.status !== 200) {
-                navigate("/login")
-            }
             const rep = await res.data
             setStudies(rep)
             setFit(rep)
@@ -59,9 +54,6 @@ const Shield = () => {
     }
 
     useEffect(() => {
-        if (!id) {
-            navigate("/login")
-        }
         window.scrollTo(0, 0)
         getUser()
         getItems()
@@ -98,6 +90,10 @@ const Shield = () => {
             showModal("delDiv")
             getItems()
         }
+    }
+
+    const showHowToPlay = () => {
+        document.getElementById("howToPlayShield").classList.toggle("showHowToPlay")
     }
 
     if (spin) {
@@ -178,6 +174,26 @@ const Shield = () => {
                     <p onClick={() => showModal("delDiv")} className="delCan">Cancel</p>
                     <p onClick={deleteStudy} className="delDel">Delete</p>
                 </div>
+            </div>
+
+            <div style={{ position: "fixed" }} className="fab-container">
+                <div className="fab shadow">
+                    <div className="fab-content">
+                        <FontAwesomeIcon icon={faPlus} className="text-white" />
+                    </div>
+                </div>
+                <div onClick={showHowToPlay} className="sub-button shadow">
+                    <FontAwesomeIcon icon={faQuestion} className="text-white" />
+                </div>
+            </div>
+
+            <div id="howToPlayShield" className="howToPlayShield">
+                <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
+                <h1>How to use</h1>
+                <h4>
+                    The Watchman Sword & Shield is a teaching and study aid that allows for the search of Bible topics and resulting precepts and notes.  It provides a means to quickly search and access Bible topic, precepts, and notes during a camp or teaching session.
+                </h4>
+                <img className="swordHowImg" src={shield} alt="" />
             </div>
         </div>
     )
