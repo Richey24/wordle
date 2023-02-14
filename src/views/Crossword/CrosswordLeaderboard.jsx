@@ -5,10 +5,8 @@ import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faToolbox, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
-import { Link } from "react-router-dom";
-import video from '../../utils/video.js';
-
+import { faToolbox, faPlus } from '@fortawesome/fontawesome-free-solid'
+import cancel from "../../img/cancel.svg"
 
 const testdatabase = [
     { name: 'Lionel Francis', score: 10000 },
@@ -112,11 +110,6 @@ export default function CrosswordLeaderboard() {
                         <FontAwesomeIcon icon={faToolbox} className="text-white" />
                     </a>
                 </div>
-                <div className="sub-button shadow">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faHome} className="text-white" />
-                    </Link>
-                </div>
             </div>
             {/* End Fab Component */}
 
@@ -150,6 +143,7 @@ export default function CrosswordLeaderboard() {
                                         <div className="">
                                             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                                 <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                                    <img style={{ marginLeft: "95%", cursor: "pointer" }} onClick={() => setOpen(false)} src={cancel} alt="" />
                                                     Background Setting
                                                 </Dialog.Title>
 

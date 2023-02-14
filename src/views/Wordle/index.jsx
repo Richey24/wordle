@@ -24,6 +24,7 @@ import fourDict from "../../utils/fourDict.js"
 import fifteenDict from "../../utils/fifteenDict"
 import bible from "../../utils/bible"
 import Result from "../../components/Result"
+import cancel from "../../img/cancel.svg"
 import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
 import url from "../../url"
@@ -514,6 +515,11 @@ const Wordle = () => {
         }
     }
 
+
+    const showHowToPlay = () => {
+        document.getElementById("howToPlay").classList.toggle("showHowToPlay")
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -617,8 +623,8 @@ const Wordle = () => {
                                         <button class="key" data-key="N">N</button>
                                         <button class="key" data-key="M">M</button>
                                         <button data-delete class="key large">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
-                                                <path fill="var(--color-tone-1)"
+                                            <svg data-delete xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                                <path data-delete fill="var(--color-tone-1)"
                                                     d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z">
                                                 </path>
                                             </svg>
@@ -653,17 +659,53 @@ const Wordle = () => {
                             <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
                         </div>
 
-                        <div className="sub-button shadow" onClick={showHint}>
+                        <div className="sub-button shadow" onClick={showHowToPlay}>
                             <FontAwesomeIcon icon={faQuestion} className="text-white" />
-                        </div>
-                        <div className="sub-button shadow">
-                            <Link to="/">
-                                <FontAwesomeIcon icon={faHome} className="text-white" />
-                            </Link>
                         </div>
                     </div>
                 </div>
             </Container>
+            <div className="howToPlay" id="howToPlay">
+                <img onClick={showHowToPlay} src={cancel} alt="" />
+                <h1>How to play</h1>
+                <h4>Guess the word in the given amount of tries.</h4>
+                <ul>
+                    <li>Each guess must be a valid word</li>
+                    <li>The length of the word depends on the level</li>
+                    <li>The color of the tiles will change to show how close your guess was to the word</li>
+                </ul>
+                <h6>Examples</h6>
+                <div className="example1">
+                    <div>
+                        <div>{num === 1 ? "B" : "G"}</div>
+                        <div>{num === 1 ? "I" : "U"}</div>
+                        <div>{num === 1 ? "B" : "I"}</div>
+                        <div>{num === 1 ? "L" : "D"}</div>
+                        <div>E</div>
+                    </div>
+                    <p><span>{num === 1 ? "B" : "G"}</span> is in the word and in the correct spot</p>
+                </div>
+                <div className="example2">
+                    <div>
+                        <div>{num === 1 ? "P" : "V"}</div>
+                        <div>{num === 1 ? "E" : "A"}</div>
+                        <div>{num === 1 ? "A" : "U"}</div>
+                        <div>{num === 1 ? "C" : "N"}</div>
+                        <div>{num === 1 ? "E" : "T"}</div>
+                    </div>
+                    <p><span>{num === 1 ? "E" : "A"}</span> is in the word but in the wrong spot</p>
+                </div>
+                <div className="example3">
+                    <div>
+                        <div>{num === 1 ? "J" : "L"}</div>
+                        <div>{num === 1 ? "U" : "A"}</div>
+                        <div>{num === 1 ? "D" : "B"}</div>
+                        <div>{num === 1 ? "A" : "O"}</div>
+                        <div>{num === 1 ? "H" : "R"}</div>
+                    </div>
+                    <p><span>{num === 1 ? "A" : "O"}</span> is not in the word in any spot</p>
+                </div>
+            </div>
         </div>
     )
 }

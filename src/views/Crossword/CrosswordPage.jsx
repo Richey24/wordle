@@ -7,8 +7,13 @@ import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
+
 import axios from 'axios';
 import url from "../../url"
+
+import cancel from "../../img/cancel.svg"
+
+
 
 // Should be Props
 const bgImages = [
@@ -331,6 +336,7 @@ export default function Puzzle() {
                                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <div className="">
                                             <div className="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
+                                                <img onClick={() => setOpen(false)} style={{ marginLeft: "90%", cursor: "pointer" }} src={cancel} alt="" />
                                                 <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                                                     Game Settings
                                                 </Dialog.Title>
@@ -412,11 +418,6 @@ export default function Puzzle() {
                 </div>
                 <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
                     <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
-                </div>
-                <div className="sub-button shadow">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faHome} className="text-white" />
-                    </Link>
                 </div>
             </div>
 

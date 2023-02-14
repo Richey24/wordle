@@ -224,16 +224,29 @@ export default function THeHeader({ soundClick, soundOn }) {
                           <button onClick={() => navigate("/register")} type="button" className="rounded-md ml-1 bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Register
                           </button>
+
+                          {soundOn ? 
+                                       <button
+                                       onClick={() => soundClick()}
+                                       type="button"
+                                       className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                     >
+                                       <span className="sr-only">Sound Control</span>
+                                       <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
+                                     </button>
+                                  :
+                                  <button
+                                  onClick={() => soundClick()}
+                                  type="button"
+                                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                >
+                                  <span className="sr-only">Sound Control</span>
+                                  <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                </button>
+                                  }
                       </>
                     )
                }
-
-
-         
-              
-
-         
-
             </div>
           </div>
         </div>

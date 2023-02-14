@@ -4,6 +4,11 @@ import bible from "../img/white-bible.png"
 import shield from "../img/white-shield.png"
 import biblequest from "../img/white-quiz.png"
 import hang from "../img/white-hang.png"
+import judah from "../img/judah.png"
+import asher from "../img/asher.png"
+import benjamin from "../img/benjamin.png"
+import gad from "../img/gad.png"
+import reuben from "../img/reuben.png"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
@@ -77,6 +82,13 @@ const Select = () => {
 
     const showModal = (id) => {
         document.getElementById(id).classList.toggle("selectShow")
+    }
+
+    const showAbout = () => {
+        showModal("aboutDiv")
+        setTimeout(() => {
+            showModal("aboutDiv")
+        }, 5000)
     }
 
     const navBible = () => {
@@ -197,25 +209,8 @@ const Select = () => {
 
     return (
         <div>
-            <Header soundClick={soundClick} soundOn={soundOn} />
+            <Header showAbout={showAbout} soundClick={soundClick} soundOn={soundOn} />
             <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="selectMain" id="selectMain">
-                {/* <div className="firstDiv">
-                {
-                    user.username ? (
-                        <>
-                            <p>Shalom {user.username}. <span onClick={logOut}>Logout</span></p>
-                            <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
-                        </>
-
-                    ) : (
-                        <>
-                            <p onClick={() => navigate("/register")}>Register</p>
-                            <p onClick={() => navigate("/login")}>Login</p>
-                            <p onClick={() => soundClick()}><img src={soundOn ? soundOnLocation : soundOffLocation} alt="Sound On" width={"30px"} /></p>
-                        </>
-                    )
-                }
-            </div> */}
                 <div className="innerMain">
                     <div onMouseEnter={() => playSound("word")} onClick={() => navigate("/select")}>
                         <img src={word} alt="" />
@@ -263,6 +258,18 @@ const Select = () => {
                 <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
                     <p style={{ fontWeight: "600" }}>Will be added soon...</p>
                     <button onClick={() => showModal("comingSoon")}>Cancel</button>
+                </div>
+                <div id="aboutDiv" className="aboutSub">
+                    <h6 style={{ display: "flex", justifyContent: "center", columnGap: "10px", flexWrap: "wrap" }}><p>ISRAEL BIBLE CAMP</p>  © 2023 All Rights Reserved </h6>
+                    <h6>Special thanks to the following:</h6>
+                    <h6>Bishop Nathanyel of IUIC</h6>
+                    <h6>Naqam of WFI, thanks for the wake-up call.</h6>
+                    <h6>Our development team working from 3 continents.</h6>
+                    <p><img src={judah} alt="" /> <span>I. B. Israel</span></p>
+                    <p><img src={asher} alt="" /> <span>L. Silva</span></p>
+                    <p><img src={benjamin} alt="" /> <span>J. Ellis</span></p>
+                    <p><img src={gad} alt="" /> <span>R. Uahomo</span></p>
+                    <p><img src={reuben} alt="" /> <span>L. Francis</span></p>
                 </div>
             </div>
         </div>

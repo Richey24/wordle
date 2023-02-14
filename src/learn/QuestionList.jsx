@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import url from "../url"
+import THeHeader from "../components/TheHeader"
 
 
 const QuestionList = () => {
@@ -102,6 +103,7 @@ const QuestionList = () => {
 
     return (
         <div className="swordDiv">
+            <THeHeader admin={true} />
             <h1>Questions list</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
