@@ -44,6 +44,37 @@
     z-index: 2;
 }
 
+.howToPlayHang {
+    position: absolute;
+    width: 40%;
+    top: 10%;
+    left: 30%;
+    height: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    display: none;
+}
+
+.howToPlayHang>h1 {
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.howToPlayHang>h4 {
+    font-size: 20px;
+}
+
+.howToPlayHangImg {
+    margin-left: 96%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.showHowToPlay {
+    display: block;
+}
+
 @media (max-width: 700px) {
     .hangBtn {
         width: 50%;
