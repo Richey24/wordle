@@ -1,13 +1,15 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, SpeakerWaveIcon, SpeakerXMarkIcon, EnvelopeOpenIcon } from '@heroicons/react/24/outline'
 import { useLocation, useNavigate } from "react-router-dom"
 
 import logo from '../img/white-bible.png';
+import mail from "../img/Artwork.svg"
 
 import url from "../url"
 import axios from 'axios'
 import "./TheHeader.css"
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/fontawesome-free-solid'
 
@@ -16,7 +18,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function THeHeader({ soundClick, soundOn }) {
+export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   const navigate = useNavigate()
   const id = localStorage.getItem("id")
   const token = localStorage.getItem("token")
@@ -87,8 +89,8 @@ export default function THeHeader({ soundClick, soundOn }) {
                 )}
               </Disclosure.Button>
             </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer"  onClick={() => navigate('/')}>
-              <div className="flex flex-shrink-0 items-center">
+            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer"  >
+              <div className="flex flex-shrink-0 items-center" onClick={() => navigate('/')}>
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
@@ -104,39 +106,47 @@ export default function THeHeader({ soundClick, soundOn }) {
             </div>
 
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            
-            {
-                     user?.username ? (
-                            <>
 
+
+                            <a
+                              type="button"
+                              href="mailto:?body=Shalom [enter friends name here],%0A%0AI wanted to share these links with you of a new Bible gaming site. It contain Bible trivia, word games, and study tools for your entertainment and learning.%0A%0AClick here to see the promo: https://www.youtube.com/watch?v=uBrwlGHz2_k"
+                              className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                              <OverlayTrigger placement='bottom' overlay={<Tooltip id='share'>Share</Tooltip>}>
+                                  <EnvelopeOpenIcon className="h-6 w-6" aria-hidden="true" />
+                              </OverlayTrigger>
+                            </a>
+  
+                         { user?.username ? (
+                               <>
                                   {soundOn ? 
-                                       <button
-                                       onClick={() => soundClick()}
-                                       type="button"
-                                       className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                     >
-                                       <span className="sr-only">Sound Control</span>
-                                       <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
-                                     </button>
+                                  <button
+                                    onClick={() => soundClick()}
+                                    type="button"
+                                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                  >
+                                    <span className="sr-only">Sound Control</span>
+                                    <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
+                                </button>
                                   :
                                   <button
                                   onClick={() => soundClick()}
                                   type="button"
-                                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                  className="rounded-full bg-gray-800 p-1 ml-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                                 >
                                   <span className="sr-only">Sound Control</span>
                                   <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
                                 </button>
                                   }
-                          
 
-                              <button
-                                type="button"
-                                className="rounded-full ml-3 bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                              >
-                                <span className="sr-only">View notifications</span>
-                                <BellIcon className="h-6 w-6" aria-hidden="true" />
-                              </button>
+
+                                <button
+                                  type="button"
+                                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                >
+                                  <span className="sr-only">View notifications</span>
+                                  {user?.username && <BellIcon className="h-6 w-6" aria-hidden="true" />}
+                                </button>
 
                               {/* Profile dropdown */}
                               <Menu as="div" className="relative ml-3">
@@ -180,19 +190,10 @@ export default function THeHeader({ soundClick, soundOn }) {
                                         </a>
                                       )}
                                     </Menu.Item>
-                                  <Menu.Item>
-                                    {({ active }) => (
-                                      <a
-                                        href="#"
-                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
-                                      >
-                                        Settings
-                                      </a>
-                                    )}
-                                  </Menu.Item>
                                     <Menu.Item>
                                       {({ active }) => (
                                         <a
+                                          onClick={showAbout}
                                           href="#"
                                           className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
                                         >
@@ -218,42 +219,38 @@ export default function THeHeader({ soundClick, soundOn }) {
                             </>
                     ) : (
                       <>
-                           <button onClick={() => navigate("/login")} type="button" className="rounded-md bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                             Login
-                          </button>
-                          <button onClick={() => navigate("/register")} type="button" className="rounded-md ml-1 bg-indigo-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            Register
-                          </button>
-
-                          {soundOn ? 
-                                       <button
-                                       onClick={() => soundClick()}
-                                       type="button"
-                                       className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                     >
-                                       <span className="sr-only">Sound Control</span>
-                                       <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
-                                     </button>
-                                  :
-                                  <button
-                                  onClick={() => soundClick()}
-                                  type="button"
-                                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                >
-                                  <span className="sr-only">Sound Control</span>
-                                  <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
+                  
+                   
+                                 {soundOn ? 
+                                      <button
+                                          onClick={() => soundClick()}
+                                          type="button"
+                                          className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                          >
+                                          <span className="sr-only">Sound Control</span>
+                                          <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
+                                        </button>
+                                      :
+                                      <button
+                                      onClick={() => soundClick()}
+                                      type="button"
+                                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                                    >
+                                      <span className="sr-only">Sound Control</span>
+                                      <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
+                                    </button>
                                   }
+                         
+                                <button onClick={() => navigate("/login")} type="button" className="rounded-md bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                  Login
+                                </button>
+
+                                <button onClick={() => navigate("/register")} type="button" className="rounded-md ml-1 bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                  Register
+                                </button>
                       </>
                     )
                }
-
-
-         
-              
-
-         
-
             </div>
           </div>
         </div>
