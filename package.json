@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@ideasio/add-to-homescreen-react": "^1.0.10",
+    "@material-tailwind/react": "^1.2.5",
     "@react-hook/window-size": "^3.1.1",
     "@stripe/react-stripe-js": "^1.16.4",
     "@stripe/stripe-js": "^1.46.0",

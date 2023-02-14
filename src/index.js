@@ -24,7 +24,10 @@ import Shield from './components/Shield';
 import ShieldMain from './components/ShieldMain';
 import AddShield from './components/AddShield';
 import AdminLogin from './AdminLogin';
-import Admin from './components/Admin';
+import AdminDashboard from './layouts/dashboard';
+// import AdminHome from './views/Admin/AdminHome';
+import { Activity, AdminUser, Home } from './pages/dashboard';
+import AdminLeaderboard from './views/Admin/AdminLeaderboard'
 import Audit from './components/Audit';
 import ToBeDel from './components/ToBeDel';
 import SelectNum from './learn/SelectNum';
@@ -40,46 +43,61 @@ import Verify from './components/Verify';
 import VerifyUser from './components/VerifyUser';
 import ProfilePage from './views/Profile/PofilePage';
 import Privacy from './views/Privacy/Privacy';
+import { ThemeProvider } from "@material-tailwind/react";
+import { MaterialTailwindControllerProvider } from "./context"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Select />} />
-      <Route path='/word' element={<App />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/select' element={<Difficult />} />
-      <Route path='/hangman' element={<Hangman />} />
-      <Route path='/reset/:id' element={<Reset />} />
-      <Route path='/word/leader' element={<Leader />} />
-      <Route path='/bible/leader' element={<BibleLeader />} />
-      <Route path='/hangman/leader' element={<HangLeader />} />
-      <Route path='/watchman' element={<Sword />} />
-      <Route path='/watchman/:idd' element={<SwordMain />} />
-      <Route path='/watchman/create' element={<AddSword />} />
-      <Route path='/shield' element={<Shield />} />
-      <Route path='/shield/:idd' element={<ShieldMain />} />
-      <Route path='/shield/create' element={<AddShield />} />
-      <Route path='/admin/login' element={<AdminLogin />} />
-      <Route path='/admin' element={<Admin />} />
-      <Route path='/audit' element={<Audit />} />
-      <Route path='/delete' element={<ToBeDel />} />
-      <Route path='/bible/select' element={<SelectNum />} />
-      <Route path='/bible/names' element={<Names />} />
-      <Route path='/bible/game' element={<Game />} />
-      <Route path='/quiz/leader' element={<LeaderQuiz />} />
-      <Route path='/question/list' element={<QuestionList />} />
-      <Route path='/question/add' element={<AddQuest />} />
-      <Route path="/crossword" element={<Crossword />} />
-      <Route path="/crossword/leader" element={<CrosswordLeader />} />
-      <Route path='/subscription' element={<StripeContainer />} />
-      <Route path='/verify' element={<Verify />} />
-      <Route path='/verify/:id' element={<VerifyUser />} />
-      <Route path="/user-account" element={<ProfilePage />} />
-      <Route path="/privacy" element={<Privacy />} />
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+      <BrowserRouter>
+        <MaterialTailwindControllerProvider>
+             <ThemeProvider>
+              <Routes>
+                <Route path='/' element={<Select />} />
+                <Route path='/word' element={<App />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/select' element={<Difficult />} />
+                <Route path='/hangman' element={<Hangman />} />
+                <Route path='/reset/:id' element={<Reset />} />
+                <Route path='/word/leader' element={<Leader />} />
+                <Route path='/bible/leader' element={<BibleLeader />} />
+                <Route path='/hangman/leader' element={<HangLeader />} />
+                <Route path='/watchman' element={<Sword />} />
+                <Route path='/watchman/:idd' element={<SwordMain />} />
+                <Route path='/watchman/create' element={<AddSword />} />
+                <Route path='/shield' element={<Shield />} />
+                <Route path='/shield/:idd' element={<ShieldMain />} />
+                <Route path='/shield/create' element={<AddShield />} />
+                <Route path='/admin/login' element={<AdminLogin />} />
+                <Route path='/audit' element={<Audit />} />
+                <Route path='/delete' element={<ToBeDel />} />
+                <Route path='/bible/select' element={<SelectNum />} />
+                <Route path='/bible/names' element={<Names />} />
+                <Route path='/bible/game' element={<Game />} />
+                <Route path='/quiz/leader' element={<LeaderQuiz />} />
+                <Route path='/question/list' element={<QuestionList />} />
+                <Route path='/question/add' element={<AddQuest />} />
+                <Route path="/crossword" element={<Crossword />} />
+                <Route path="/crossword/leader" element={<CrosswordLeader />} />
+                <Route path='/subscription' element={<StripeContainer />} />
+                <Route path='/verify' element={<Verify />} />
+                <Route path='/verify/:id' element={<VerifyUser />} />
+                <Route path="/user-account" element={<ProfilePage />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path='/admin' element={<AdminDashboard />}>
+                    <Route path="" element={<Home />} />
+                    <Route path="activities" element={<Activity  />} />
+                    <Route path="users" element={<AdminUser />} />
+                    {/* <Route path="games" element={<AdminGame />} />
+                    <Route path="leaderboards" element={<AdminLeaderboard />} /> */}
+                </Route>
+              
+              </Routes> 
+            </ThemeProvider>
+         </MaterialTailwindControllerProvider>
+      </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
