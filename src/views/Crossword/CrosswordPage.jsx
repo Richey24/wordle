@@ -1,13 +1,14 @@
 import CrosswordPuzzle from "./components/CrosswordPuzzle.jsx"
 import Header from '../../components/TheHeader.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faToolbox, faPlus, faHome, faUserGraduate } from '@fortawesome/fontawesome-free-solid'
-import { Link } from "react-router-dom";
+import { faToolbox, faPlus, faUserGraduate, faQuestion } from '@fortawesome/fontawesome-free-solid'
 import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
 import cancel from "../../img/cancel.svg"
+import cross from "../../img/crossword.png"
+
 
 
 // Should be Props
@@ -270,6 +271,10 @@ export default function Puzzle() {
         setOpen(true);
     }
 
+    const showHowToPlay = () => {
+        document.getElementById("howToPlayCross").classList.toggle("showHowToPlay")
+    }
+
     return <div>
         <div className="min-h-full">
 
@@ -388,8 +393,18 @@ export default function Puzzle() {
                 <div className="sub-button shadow" onClick={() => navigate("/crossword/leader")}>
                     <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
                 </div>
+                <div className="sub-button shadow" onClick={showHowToPlay}>
+                    <FontAwesomeIcon icon={faQuestion} className="text-white" />
+                </div>
             </div>
-
+        </div>
+        <div id="howToPlayCross" className="howToPlayCross">
+            <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
+            <h1>How to play crossword game</h1>
+            <h4>
+                Crossword puzzles are enjoyable and relaxing and can increase vocabulary and enhance problem solving skills. The goal of the crossword puzzle is to find and enter words using only the letters provided. Game play is timed so faster completion result in a higher final score.
+            </h4>
+            <img className="crossImg" src={cross} alt="" />
         </div>
     </div>
 }

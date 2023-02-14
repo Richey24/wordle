@@ -7,15 +7,13 @@ import { Keyboard } from "./Keyboard"
 import words from "./wordList.json"
 import "./Hangman.css"
 import Result from "./Result"
-import leader from "../img/leader.webp"
 import { useNavigate } from "react-router-dom"
 import { Spinner } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faQuestion, faUserGraduate, faPlus, faHome } from '@fortawesome/fontawesome-free-solid'
-import { Link } from "react-router-dom";
+import { faQuestion, faUserGraduate, faPlus } from '@fortawesome/fontawesome-free-solid'
 import THeHeader from "../components/TheHeader"
-
-
+import cancel from "../img/cancel.svg"
+import hang from "../img/hangman.gif"
 
 let timer = null
 
@@ -153,6 +151,10 @@ function Hangman() {
         }
     }, [])
 
+    const showHowToPlay = () => {
+        document.getElementById("howToPlayHang").classList.toggle("showHowToPlay")
+    }
+
     if (spin) {
         return (
             <div style={{
@@ -220,11 +222,18 @@ function Hangman() {
                 <div className="sub-button shadow" onClick={() => navigate("/hangman/leader")}>
                     <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
                 </div>
-                <div className="sub-button shadow">
-                    <Link to="/">
-                        <FontAwesomeIcon icon={faHome} className="text-white" />
-                    </Link>
+                <div onClick={showHowToPlay} className="sub-button shadow">
+                    <FontAwesomeIcon icon={faQuestion} className="text-white" />
                 </div>
+            </div>
+
+            <div id="howToPlayHang" className="howToPlayHang">
+                <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
+                <h1>How to play hangman game</h1>
+                <h4>
+                    Hangman is a simple word guessing game. Player try to figure out an unknown word by guessing letters. If too many letters which do not appear in the word are guessed, the player is hanged (and loses).
+                </h4>
+                <img src={hang} alt="" />
             </div>
         </div>
     )
