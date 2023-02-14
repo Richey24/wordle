@@ -6,8 +6,13 @@ import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { useNavigate } from "react-router-dom";
+
+import axios from 'axios';
+import url from "../../url"
+
 import cancel from "../../img/cancel.svg"
 import cross from "../../img/crossword.png"
+
 
 
 
@@ -207,6 +212,8 @@ const puzzleColorGradient = [
 
 export default function Puzzle() {
 
+    const [gamelevels, setGameLevels] = useState(false);
+
     const randomSelectImage = () => {
         const random = Math.floor(Math.random() * bgRandomImages.length);
         return bgRandomImages[random].img;
@@ -251,6 +258,30 @@ export default function Puzzle() {
         setColor1(c2)
     }
 
+    const getUserLevels = async () => {
+        const token = localStorage.getItem("token")
+
+        await axios.get(`${url}/api/user/gamedata`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+            .then(res => {
+                console.log(res)
+                const data = res.data
+                if (data) {
+                    setGameLevels(data.level)
+                } else {
+
+                }
+
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Something went wrong')
+            })
+
+    }
+
+    useEffect(() => {
+        getUserLevels()
+    }, [gamelevels])
 
 
     useEffect(() => {
@@ -280,7 +311,7 @@ export default function Puzzle() {
 
             <Header />
 
-            <CrosswordPuzzle background={background} color={color} color1={color1} />
+            <CrosswordPuzzle background={background} color={color} color1={color1} level={gamelevels} />
 
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -400,7 +431,7 @@ export default function Puzzle() {
         </div>
         <div id="howToPlayCross" className="howToPlayCross">
             <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
-            <h1>How to play crossword game</h1>
+            <h1>How to play</h1>
             <h4>
                 Crossword puzzles are enjoyable and relaxing and can increase vocabulary and enhance problem solving skills. The goal of the crossword puzzle is to find and enter words using only the letters provided. Game play is timed so faster completion result in a higher final score.
             </h4>

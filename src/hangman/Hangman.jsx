@@ -229,7 +229,7 @@ function Hangman() {
 
             <div id="howToPlayHang" className="howToPlayHang">
                 <img className="howToPlayHangImg" onClick={showHowToPlay} src={cancel} alt="" />
-                <h1>How to play hangman game</h1>
+                <h1>How to play </h1>
                 <h4>
                     Hangman is a simple word guessing game. Player try to figure out an unknown word by guessing letters. If too many letters which do not appear in the word are guessed, the player is hanged (and loses).
                 </h4>
