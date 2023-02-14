@@ -74,23 +74,23 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
-    {({ open }) => (
-      <>
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button*/}
-              <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                <span className="sr-only">Open main menu</span>
-                {open ? (
-                  <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </Disclosure.Button>
-            </div>
-            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer"  >
-              <div className="flex flex-shrink-0 items-center" onClick={() => navigate('/')}>
+      {({ open }) => (
+        <>
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
+              </div>
+              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer"  >
+                <div className="flex flex-shrink-0 items-center" onClick={() => navigate('/')}>
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}
@@ -101,180 +101,180 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
                     src={logo}
                     alt="Your Company"
                   />
+                </div>
+
               </div>
-             
-            </div>
 
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 
 
-                            <a
-                              type="button"
-                              href="mailto:?body=Shalom [enter friends name here],%0A%0AI wanted to share these links with you of a new Bible gaming site. It contain Bible trivia, word games, and study tools for your entertainment and learning.%0A%0AClick here to see the promo: https://www.youtube.com/watch?v=uBrwlGHz2_k"
-                              className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                              <OverlayTrigger placement='bottom' overlay={<Tooltip id='share'>Share</Tooltip>}>
-                                  <EnvelopeOpenIcon className="h-6 w-6" aria-hidden="true" />
-                              </OverlayTrigger>
-                            </a>
-  
-                         { user?.username ? (
-                               <>
-                                  {soundOn ? 
-                                  <button
-                                    onClick={() => soundClick()}
-                                    type="button"
-                                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                  >
-                                    <span className="sr-only">Sound Control</span>
-                                    <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
-                                  :
-                                  <button
-                                  onClick={() => soundClick()}
-                                  type="button"
-                                  className="rounded-full bg-gray-800 p-1 ml-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                >
-                                  <span className="sr-only">Sound Control</span>
-                                  <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
-                                  }
+                <a
+                  type="button"
+                  href="mailto:?body=Shalom [enter friends name here],%0A%0AI wanted to share these links with you of a new Bible gaming site. It contain Bible trivia, word games, and study tools for your entertainment and learning.%0A%0AClick here to see the promo: https://www.youtube.com/watch?v=uBrwlGHz2_k%0A%0AClick https://www.israelbiblecamp.world to register for FREE"
+                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                  <OverlayTrigger placement='bottom' overlay={<Tooltip id='share'>Share</Tooltip>}>
+                    <EnvelopeOpenIcon className="h-6 w-6" aria-hidden="true" />
+                  </OverlayTrigger>
+                </a>
+
+                {user?.username ? (
+                  <>
+                    {soundOn ?
+                      <button
+                        onClick={() => soundClick()}
+                        type="button"
+                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">Sound Control</span>
+                        <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                      :
+                      <button
+                        onClick={() => soundClick()}
+                        type="button"
+                        className="rounded-full bg-gray-800 p-1 ml-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">Sound Control</span>
+                        <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    }
 
 
-                                <button
-                                  type="button"
-                                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                >
-                                  <span className="sr-only">View notifications</span>
-                                  {user?.username && <BellIcon className="h-6 w-6" aria-hidden="true" />}
-                                </button>
+                    <button
+                      type="button"
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      {user?.username && <BellIcon className="h-6 w-6" aria-hidden="true" />}
+                    </button>
 
-                              {/* Profile dropdown */}
-                              <Menu as="div" className="relative ml-3">
-                          <div>
-                            <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                              <span className="sr-only">Open user menu</span>
-                              <img
-                                className="h-8 w-8 rounded-full"
-                                src="/img/profile.png"
-                                alt=""
-                              />
-                            </Menu.Button>
-                          </div>
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                          >
+                    {/* Profile dropdown */}
+                    <Menu as="div" className="relative ml-3">
+                      <div>
+                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src="/img/profile.png"
+                            alt=""
+                          />
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
 
-                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <Menu.Item>
-                                  <h2
-                                    href="#"
-                                    className="block px-4 mt-2 text-sm text-gray-700"
-                                  >
-                                    SHALOM, {user?.username}
-                                  </h2>
-                              </Menu.Item>
-                                  <Menu.Item>
-                                      {({ active }) => (
-                                        <a
-                                          onClick={() => navigate("/user-account")}
-                                          href="#"
-                                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm pointer text-gray-700')}
-                                        >
-                                          Your Profile
-                                        </a>
-                                      )}
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <a
-                                          onClick={showAbout}
-                                          href="#"
-                                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
-                                        >
-                                          About Us
-                                        </a>
-                                      )}
-                                    </Menu.Item>
-                                    <hr />
-                                    <Menu.Item>
-                                      {({ active }) => (
-                                        <p
-                                          onClick={logOut}
-                                          href="#"
-                                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
-                                        >
-                                          Sign out
-                                        </p>
-                                      )}
-                                    </Menu.Item>
-                                </Menu.Items>
-                              </Transition>
-                              </Menu>
-                            </>
-                    ) : (
-                      <>
-                  
-                   
-                                 {soundOn ? 
-                                      <button
-                                          onClick={() => soundClick()}
-                                          type="button"
-                                          className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                          >
-                                          <span className="sr-only">Sound Control</span>
-                                          <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
-                                        </button>
-                                      :
-                                      <button
-                                      onClick={() => soundClick()}
-                                      type="button"
-                                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                    >
-                                      <span className="sr-only">Sound Control</span>
-                                      <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
-                                    </button>
-                                  }
-                         
-                                <button onClick={() => navigate("/login")} type="button" className="rounded-md bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                  Login
-                                </button>
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Item>
+                            <h2
+                              href="#"
+                              className="block px-4 mt-2 text-sm text-gray-700"
+                            >
+                              SHALOM, {user?.username}
+                            </h2>
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                onClick={() => navigate("/user-account")}
+                                href="#"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm pointer text-gray-700')}
+                              >
+                                Your Profile
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                onClick={showAbout}
+                                href="#"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
+                              >
+                                About Us
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <hr />
+                          <Menu.Item>
+                            {({ active }) => (
+                              <p
+                                onClick={logOut}
+                                href="#"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
+                              >
+                                Sign out
+                              </p>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </>
+                ) : (
+                  <>
 
-                                <button onClick={() => navigate("/register")} type="button" className="rounded-md ml-1 bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                  Register
-                                </button>
-                      </>
-                    )
-               }
+
+                    {soundOn ?
+                      <button
+                        onClick={() => soundClick()}
+                        type="button"
+                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">Sound Control</span>
+                        <SpeakerWaveIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                      :
+                      <button
+                        onClick={() => soundClick()}
+                        type="button"
+                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">Sound Control</span>
+                        <SpeakerXMarkIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
+                    }
+
+                    <button onClick={() => navigate("/login")} type="button" className="rounded-md bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                      Login
+                    </button>
+
+                    <button onClick={() => navigate("/register")} type="button" className="rounded-md ml-1 bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                      Register
+                    </button>
+                  </>
+                )
+                }
+              </div>
             </div>
           </div>
-        </div>
 
-        <Disclosure.Panel className="sm:hidden">
-          <div className="space-y-1 px-2 pt-2 pb-3">
-            {navigation.map((item) => (
-              <Disclosure.Button
-                key={item.name}
-                as="a"
-                href={item.href}
-                className={classNames(
-                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                  'block px-3 py-2 rounded-md text-base font-medium'
-                )}
-                aria-current={item.current ? 'page' : undefined}
-              >
-                {item.name}
-              </Disclosure.Button>
-            ))}
-          </div>
-        </Disclosure.Panel>
-      </>
-    )}
-  </Disclosure>
-)
+          <Disclosure.Panel className="sm:hidden">
+            <div className="space-y-1 px-2 pt-2 pb-3">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  as="a"
+                  href={item.href}
+                  className={classNames(
+                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block px-3 py-2 rounded-md text-base font-medium'
+                  )}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  {item.name}
+                </Disclosure.Button>
+              ))}
+            </div>
+          </Disclosure.Panel>
+        </>
+      )}
+    </Disclosure>
+  )
 }
