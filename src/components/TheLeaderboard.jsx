@@ -2,12 +2,14 @@ import gold from '../img/gold-medal.png';
 import tribe from '../img/asher.png';
 import silver from '../img/silver-medal.png'
 import bronze from '../img/bronze-medal.png'
-import { findFlagUrlByNationality } from "country-flags-svg";
+import { findFlagUrlByCountryName} from "country-flags-svg";
 
-const flagUrl = findFlagUrlByNationality("Jamaican");
+const flagUrl = findFlagUrlByCountryName("jamaica");
 
 
 export default function TheLeaderboard(props) {
+    const  style = { background: `linear-gradient(to left, #F55507 0%, #EB3E12 100%)`, };
+
     return <div className="min-h-screen">
         <video style={{ zIndex: -1 }} className="absolute w-auto min-w-full min-h-full max-w-none" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.bground}`} autoPlay muted loop id='thevid' />
         <section class=" text-center"  >
@@ -41,29 +43,37 @@ export default function TheLeaderboard(props) {
                                 </tr>
                             </thead>
                             <tbody class="text-sm divide-y divide-gray-100">
-                                <tr>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div style={{ fontSize: "25px" }} class="text-secondary font-bold ">Alex123</div>
-                                        </div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <img class="rounded-full" src={tribe} width="100" height="100" alt="Asher" />
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div style={{ fontSize: "25px" }} class="text-left text-secondary font-bold ">School Name</div>
-                                    </td>
-
-                                    <td class="p-2 whitespace-nowrap">
-                                        <img class="w-20 h-20 rounded" src={flagUrl} alt="Large avatar" />
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left text-red-500 font-bold">1</div>
-                                    </td>
-                                    <td class="p-2 whitespace-nowrap">
-                                        <div class="text-left text-green-500 font-bold">1000</div>
-                                    </td>
-                                </tr>
+                                
+                            { props.users.map(
+                                (data, key) => {
+                                    return (
+                                        <tr>
+                                            <td class="p-2 whitespace-nowrap">
+                                                <div class="flex items-center">
+                                                    <div style={{ fontSize: "25px" }} class="text-secondary font-bold ">{data.user.username}</div>
+                                                </div>
+                                            </td>
+                                            <td class="p-2 whitespace-nowrap">
+                                                <img class="rounded-full" src={tribe} width="100" height="100" alt="Asher" />
+                                            </td>
+                                            <td class="p-2 whitespace-nowrap">
+                                                <div style={{ fontSize: "25px" }} class="text-left text-secondary font-bold ">{data.user.church}</div>
+                                            </td>
+        
+                                            <td class="p-2 whitespace-nowrap">
+                                                <img class="w-20 h-20 rounded" src={data.user.country[1]} alt="Large avatar" />
+                                            </td>
+                                            <td class="p-2 whitespace-nowrap">
+                                                <div id="level" style={style} >Level {data.game_level}</div>
+                                                {/* <div class="text-left text-red-500 font-bold">{data.game_level}</div> */}
+                                            </td>
+                                            <td class="p-2 whitespace-nowrap">
+                                                <div id="level" style={style} >{data.score}</div>
+                                            </td>
+                                        </tr>
+                                    );
+                                }
+                              )}
                             </tbody>
                         </table>
                     </div>
@@ -72,3 +82,4 @@ export default function TheLeaderboard(props) {
         </section>
     </div>
 }
+
