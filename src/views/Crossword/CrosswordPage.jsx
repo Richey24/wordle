@@ -11,7 +11,7 @@ import axios from 'axios';
 import url from "../../url"
 
 import cancel from "../../img/cancel.svg"
-import cross from "../../img/crossword.png"
+import cross from "../../img/crossword.jpg"
 
 
 

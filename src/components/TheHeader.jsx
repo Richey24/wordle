@@ -181,24 +181,24 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
+                              <p
                                 onClick={() => navigate("/user-account")}
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm pointer text-gray-700')}
+                                style={{ cursor: "pointer" }}
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm pointer text-gray-700')}
                               >
                                 Your Profile
-                              </a>
+                              </p>
                             )}
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
+                              <p
                                 onClick={showAbout}
-                                href="#"
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
+                                style={{ cursor: "pointer" }}
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
                                 About Us
-                              </a>
+                              </p>
                             )}
                           </Menu.Item>
                           <hr />

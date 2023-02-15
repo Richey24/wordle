@@ -172,7 +172,8 @@ function Hangman() {
 
     return (
         <div style={{
-            backgroundColor: user.tribe ? user.tribe[1] : "#3d1152"
+            backgroundColor: user.tribe ? user.tribe[1] : "#3d1152",
+            minHeight: "100%"
         }}>
             <THeHeader />
             <div
