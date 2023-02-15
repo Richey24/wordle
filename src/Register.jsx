@@ -20,10 +20,9 @@ import reuben from "./img/reuben.png"
 import simeon from "./img/simeon.png"
 import zebulun from "./img/zebulun.png"
 import asher from "./img/asher.png"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/fontawesome-free-solid'
 import { useEffect } from 'react'
 import churches from './utils/church'
+import THeHeader from './components/TheHeader'
 
 const tribes = [
     ["Asher", asher, "rgb(111, 111, 21)"],
@@ -183,102 +182,102 @@ const Register = () => {
     }
 
     return (
-        <div className="loginMainDiv">
-            <div className="homeBtnLog" onClick={() => navigate("/")}>
-                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
-            </div>
-            <div className="loginDiv">
-                <h1>Register your account</h1>
-                {showErr && <Alert variant="danger">{err}</Alert>}
-                {num === 1 && (<>
-                    <form onSubmit={firstStage}>
-                        <div>
-                            <label htmlFor="name">First Name</label>
-                            <br />
-                            <input required type="text" id="name" placeholder="Enter your name" name="firstName" />
-                        </div>
-                        <div>
-                            <label htmlFor="name">Last Name</label>
-                            <br />
-                            <input required type="text" id="name" placeholder="Enter your name" name="lastName" />
-                        </div>
-                        <div>
-                            <label htmlFor="username">Username</label>
-                            <br />
-                            <input required type="text" id="username" placeholder="Pick a username" name="username" />
-                        </div>
-                        <div>
-                            <label htmlFor="email">Email</label>
-                            <br />
-                            <input required type="text" id="email" placeholder="Enter your email" name="email" />
-                        </div>
-                        <div className='tribeDiv'>
-                            <label>Select your country</label>
-                            <p id='countryMain' onClick={selectCountry} className='tribeMain'><img className='countryMainImg' src={country[count]?.flags.svg} alt="" /> {country[count]?.name?.common} <img src={drop} alt="" /></p>
-                            <ul id='country' className='tribeList'>
-                                <input onChange={filterCountry} placeholder='Search country' type="text" />
-                                {
-                                    country.map((county, i) => (
-                                        <li onClick={() => getCountry(i)}><img src={county?.flags.svg} alt="" /> {county?.name.common}</li>
-                                    ))
-                                }
-                            </ul>
-                        </div>
-                        <button type='submit'>Next</button>
-                    </form>
-                </>)}
-                {
-                    num === 2 && (
-                        <>
-                            <form onSubmit={submitForm}>
-                                <div>
-                                    <label htmlFor="password">Password</label>
-                                    <br />
-                                    <input required type="password" id="password" placeholder="Enter your password" name="password" />
-                                </div>
-                                <div>
-                                    <label htmlFor="confirmPassword">Confirm Password</label>
-                                    <br />
-                                    <input required type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword" />
-                                </div>
-                                <div className='tribeDiv'>
-                                    <label>Select your school / church affiliation</label>
-                                    <p id='churchMain' onClick={selectChurch} className='tribeMain'>{church} <img src={drop} alt="" /></p>
-                                    <ul id='church' className='tribeList'>
-                                        {
-                                            churches.map((church, i) => (
-                                                <li key={i} onClick={() => getChurch(church)}>{church}</li>
-                                            ))
-                                        }
-                                    </ul>
-                                </div>
-                                <div className='tribeDiv'>
-                                    <label>Select your tribe</label>
-                                    <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
-                                    <ul id='tribe' className='tribeList'>
-                                        {
-                                            tribes.map((tribe) => (
-                                                <li onClick={() => getTribe([tribe[0], tribe[2]])}>{tribe[0]} <img src={tribe[1]} alt="" /></li>
-                                            ))
-                                        }
-                                    </ul>
-                                </div>
-                                {
-                                    spin ? (
-                                        <button><Spinner animation="border" color="white" /></button>
-                                    ) :
-                                        (
-                                            <button type="submit">Register</button>
-                                        )
-                                }
-                            </form>
-                        </>
-                    )
-                }
+        <div>
+            <THeHeader />
+            <div className="loginMainDiv">
+                <div className="loginDiv">
+                    <h1>Register your account</h1>
+                    {showErr && <Alert variant="danger">{err}</Alert>}
+                    {num === 1 && (<>
+                        <form onSubmit={firstStage}>
+                            <div>
+                                <label htmlFor="name">First Name</label>
+                                <br />
+                                <input required type="text" id="name" placeholder="Enter your name" name="firstName" />
+                            </div>
+                            <div>
+                                <label htmlFor="name">Last Name</label>
+                                <br />
+                                <input required type="text" id="name" placeholder="Enter your name" name="lastName" />
+                            </div>
+                            <div>
+                                <label htmlFor="username">Username</label>
+                                <br />
+                                <input required type="text" id="username" placeholder="Pick a username" name="username" />
+                            </div>
+                            <div>
+                                <label htmlFor="email">Email</label>
+                                <br />
+                                <input required type="text" id="email" placeholder="Enter your email" name="email" />
+                            </div>
+                            <div className='tribeDiv'>
+                                <label>Select your country</label>
+                                <p id='countryMain' onClick={selectCountry} className='tribeMain'><img className='countryMainImg' src={country[count]?.flags.svg} alt="" /> {country[count]?.name?.common} <img src={drop} alt="" /></p>
+                                <ul id='country' className='tribeList'>
+                                    <input onChange={filterCountry} placeholder='Search country' type="text" />
+                                    {
+                                        country.map((county, i) => (
+                                            <li onClick={() => getCountry(i)}><img src={county?.flags.svg} alt="" /> {county?.name.common}</li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                            <button type='submit'>Next</button>
+                        </form>
+                    </>)}
+                    {
+                        num === 2 && (
+                            <>
+                                <form onSubmit={submitForm}>
+                                    <div>
+                                        <label htmlFor="password">Password</label>
+                                        <br />
+                                        <input required type="password" id="password" placeholder="Enter your password" name="password" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="confirmPassword">Confirm Password</label>
+                                        <br />
+                                        <input required type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword" />
+                                    </div>
+                                    <div className='tribeDiv'>
+                                        <label>Select your school / church affiliation</label>
+                                        <p id='churchMain' onClick={selectChurch} className='tribeMain'>{church} <img src={drop} alt="" /></p>
+                                        <ul id='church' className='tribeList'>
+                                            {
+                                                churches.map((church, i) => (
+                                                    <li key={i} onClick={() => getChurch(church)}>{church}</li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div className='tribeDiv'>
+                                        <label>Select your tribe</label>
+                                        <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
+                                        <ul id='tribe' className='tribeList'>
+                                            {
+                                                tribes.map((tribe) => (
+                                                    <li onClick={() => getTribe([tribe[0], tribe[2]])}>{tribe[0]} <img src={tribe[1]} alt="" /></li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    {
+                                        spin ? (
+                                            <button><Spinner animation="border" color="white" /></button>
+                                        ) :
+                                            (
+                                                <button type="submit">Register</button>
+                                            )
+                                    }
+                                </form>
+                            </>
+                        )
+                    }
 
-                <p>Already have an account? <span onClick={() => { setShowErr(false); navigate("/login") }}>Login</span></p>
-                {num === 2 && <p onClick={() => setNum(1)}><span>Back</span></p>}
-                <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
+                    <p>Already have an account? <span onClick={() => { setShowErr(false); navigate("/login") }}>Login</span></p>
+                    {num === 2 && <p onClick={() => setNum(1)}><span>Back</span></p>}
+                    <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
+                </div>
             </div>
         </div>
     )

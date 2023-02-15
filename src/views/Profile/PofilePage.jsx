@@ -5,6 +5,7 @@ import url from "../../url"
 import ProfileInfo from './ProfileInfo.jsx';
 import ChangePass from './ChangePass.jsx';
 import { useNavigate } from 'react-router-dom';
+import Notification from './Notification.jsx';
 const id = localStorage.getItem("id")
 
 export default function ProfilePage() {
@@ -28,7 +29,8 @@ export default function ProfilePage() {
 
     useEffect(() => {
         fetchUserInformation();
-    }, [id])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="absolute w-auto min-w-full min-h-full max-w-none">
@@ -86,7 +88,7 @@ export default function ProfilePage() {
                                         </p>
                                     </li>
 
-                                    <li style={{ cursor: "pointer" }}>
+                                    <li style={{ cursor: "pointer" }} onClick={() => setActive("notification")}>
                                         <p href="#"
                                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -117,6 +119,7 @@ export default function ProfilePage() {
                         </aside>
                         {active === "info" && <ProfileInfo />}
                         {active === "pass" && <ChangePass />}
+                        {active === "notification" && <Notification user={user} />}
                     </div>
 
                 </div>
