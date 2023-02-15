@@ -26,8 +26,15 @@ import AddShield from './components/AddShield';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './layouts/dashboard';
 // import AdminHome from './views/Admin/AdminHome';
-import { Activity, AdminUser, Home } from './pages/dashboard';
-import AdminLeaderboard from './views/Admin/AdminLeaderboard'
+import { Activity, 
+  AdminUser,
+  Home,
+  AdminLeaderboard,
+  Games,
+  Incentives, 
+  Notification  } 
+from './pages/dashboard';
+
 import Audit from './components/Audit';
 import ToBeDel from './components/ToBeDel';
 import SelectNum from './learn/SelectNum';
@@ -89,8 +96,10 @@ root.render(
                     <Route path="" element={<Home />} />
                     <Route path="activities" element={<Activity  />} />
                     <Route path="users" element={<AdminUser />} />
-                    {/* <Route path="games" element={<AdminGame />} />
-                    <Route path="leaderboards" element={<AdminLeaderboard />} /> */}
+                    {/* <Route path="leaderboard" element={<AdminLeaderboard />} /> */}
+                    <Route path="games" element={<Games />} />
+                    <Route path="incentives" element={<Incentives />} />
+                    <Route path="notification" element={<Notification />} /> 
                 </Route>
               
               </Routes> 
