@@ -266,7 +266,7 @@ export default function Puzzle() {
                 console.log(res)
                 const data = res.data
                 if (data) {
-                    setGameLevels(data.level)
+                    setGameLevels(data.game_level)
                 } else {
 
                 }

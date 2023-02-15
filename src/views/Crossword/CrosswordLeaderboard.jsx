@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Header from '../../components/TheHeader.jsx';
 import Leader from '../../components/TheLeaderboard.jsx';
 
@@ -7,6 +8,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToolbox, faPlus } from '@fortawesome/fontawesome-free-solid'
 import cancel from "../../img/cancel.svg"
+import url from "../../url"
+
 
 const testdatabase = [
     { name: 'Lionel Francis', score: 10000 },
@@ -69,8 +72,8 @@ const bgVideos = [
 export default function CrosswordLeaderboard() {
 
     const [open, setOpen] = useState(false)
-    const cancelButtonRef = useRef(null)
-
+    const  cancelButtonRef = useRef(null)
+    const [leaderboardData, setLeaderboardData] = useState([]);
     const [bground, setBackground] = useState(() => {
         // getting stored value
         return localStorage.getItem("video-backround");
@@ -84,6 +87,11 @@ export default function CrosswordLeaderboard() {
     const selectVideoBg = (param) => {
         setBackground(param)
     }
+    const token = localStorage.getItem("token")
+
+    useEffect(() => {
+       fetchLeaderboardInformation()
+    }, [])
 
     useEffect(() => {
         // storing input name
@@ -91,12 +99,18 @@ export default function CrosswordLeaderboard() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [bground]);
 
+    const fetchLeaderboardInformation = async () => {
+        await axios.get(`${url}/api/leaderboard`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        .then( res => {
+            let leaderData = res.data
+            setLeaderboardData(leaderData.leadboard)
+        })
+    }
 
     return <div>
         <div className="min-h-full">
             <Header />
-
-            <Leader user={testdatabase} bground={bground} />
+            <Leader users={leaderboardData} bground={bground} />
 
             {/*Fab Component  */}
             <div className="fab-container">

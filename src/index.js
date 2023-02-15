@@ -26,8 +26,17 @@ import AddShield from './components/AddShield';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './layouts/dashboard';
 // import AdminHome from './views/Admin/AdminHome';
-import { Activity, AdminUser, Home } from './pages/dashboard';
-import AdminLeaderboard from './views/Admin/AdminLeaderboard'
+import {
+  Activity,
+  AdminUser,
+  Home,
+  AdminLeaderboard,
+  Games,
+  Incentives,
+  Notification
+}
+  from './pages/dashboard';
+
 import Audit from './components/Audit';
 import ToBeDel from './components/ToBeDel';
 import SelectNum from './learn/SelectNum';

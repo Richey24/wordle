@@ -40,7 +40,7 @@ import {
    }, [])
 
     return (
-        <div className="mt-12 mb-8 flex flex-col gap-12">
+       <div className="mt-12 mb-8 flex flex-col gap-12">
         <Card>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <table className="w-full min-w-[640px] table-auto">
