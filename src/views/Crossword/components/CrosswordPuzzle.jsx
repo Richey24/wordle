@@ -17,6 +17,7 @@ export default function CrosswordPuzzle(props) {
     const [gameStarted, setGameStarted] = useState(false);
     const  style = { background: `linear-gradient(to left,  ${props.color} 0%,${props.color1} 100%)`, };
     const [failed, setFailed] = useState(false);
+    const [biblewords, setbibleWords] = useState(false)
 
     const handleFailed = () => {
         setFailed(true)
@@ -49,6 +50,17 @@ export default function CrosswordPuzzle(props) {
             alert('Something went wrong')
         })
     }
+
+    // const fetchBibleWords = async () => {
+    //     await axios.get(`${url}/api/activities/crossword`, { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
+    //     .then(res => {
+    //         let words = res.data;
+    //         setbibleWords(words.bibleWords)
+    //     })
+    //     .catch( err => {
+    //         console.log(err)
+    //     })
+    // }
 
     useEffect(() => {
         placeResults()
