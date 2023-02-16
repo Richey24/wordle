@@ -17,10 +17,20 @@ export default function CrosswordPuzzle(props) {
     const [gameStarted, setGameStarted] = useState(false);
     const  style = { background: `linear-gradient(to left,  ${props.color} 0%,${props.color1} 100%)`, };
     const [failed, setFailed] = useState(false);
-    const [biblewords, setbibleWords] = useState(false)
+    const [bibleWords, setBibleWords] = useState(false);
 
     const handleFailed = () => {
         setFailed(true)
+    }
+
+    const fetchBibleWords = async () => {
+        const token = localStorage.getItem("token")
+        await axios.get(`${url}/word/get/all`,  { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
+        .then(async(res) => {
+            console.log(res.data)
+            const ward = await setBibleWords(res.data)
+            placeResults(res.data)
+        })
     }
 
     const saveGameResults = async (status, score, timeRemain) => {
@@ -51,19 +61,9 @@ export default function CrosswordPuzzle(props) {
         })
     }
 
-    // const fetchBibleWords = async () => {
-    //     await axios.get(`${url}/api/activities/crossword`, { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
-    //     .then(res => {
-    //         let words = res.data;
-    //         setbibleWords(words.bibleWords)
-    //     })
-    //     .catch( err => {
-    //         console.log(err)
-    //     })
-    // }
-
     useEffect(() => {
-        placeResults()
+        fetchBibleWords()
+        // placeResults()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -256,13 +256,13 @@ export default function CrosswordPuzzle(props) {
         setFailed(true)
     }
 
-    const placeResults = () => {
+    const placeResults = async (params) => {
         window.data = []
         blocks().forEach(block => block.remove())
 
         const cells = document.querySelectorAll('.cell')
         cells.forEach(cell => cell.style.opacity = "1")
-        let results = getResults()
+        let results = await getResults(params)
         console.log(results)
         placeFirstResult(results)
 
@@ -288,6 +288,7 @@ export default function CrosswordPuzzle(props) {
             })
 
             let validPlacement = false
+           
             for (let i = 0; i < placements.length; i++) {
                 let X = cellNoToX(placements[i].firstAlphabetCellNo)
                 let Y = cellNoToY(placements[i].firstAlphabetCellNo)
@@ -326,6 +327,7 @@ export default function CrosswordPuzzle(props) {
                     }
                 }
             }
+
             if (!validPlacement) {
                 results.push(results.splice(results.indexOf(remaining[0]), 1)[0])
                 remaining.push(remaining.shift())
@@ -340,7 +342,7 @@ export default function CrosswordPuzzle(props) {
         })
     }
 
-    const getResults = () => {
+    const getResults = async (data) => {
 
         const alphaKeys = document.querySelectorAll('.alphabetickey')
 
@@ -365,7 +367,7 @@ export default function CrosswordPuzzle(props) {
                 elem.querySelector("b").innerHTML = window.sample[i].toUpperCase()
             })
 
-            window.dictionary.forEach((word) => {
+            data.forEach((word) => {
                 let test = true
 
                 alphabets.forEach((alphabet) => {
@@ -537,6 +539,7 @@ export default function CrosswordPuzzle(props) {
 
     return <div className="min-h-screen crosswordBackground bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.background}')` }}>
         {/* <button onClick={handleShow}>test</button> */}
+        {/* {bibleWords} */}
         <div className="grid h-screen place-items-center overflow-auto" >
             <div>
                 <div id="container">
