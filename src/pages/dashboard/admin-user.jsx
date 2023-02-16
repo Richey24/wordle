@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import url from "../../url"
-import profileImage from '../../assets/img/profile.png'
+import del from "../../img/bigdel.svg"
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import {
   Card,
@@ -26,11 +26,10 @@ export function AdminUser() {
   const navigate = useNavigate()
 
   const fetchUser = async () => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     await axios.get(`${url}/api/user/all`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
       .then(res => {
         let data = res.data
-        console.log(data.users);
         setUsers(data.users)
         setFil(data.users)
 
@@ -42,8 +41,8 @@ export function AdminUser() {
   }
 
   const getUser = async () => {
-    const token = localStorage.getItem("token");
-    const id = localStorage.getItem("id");
+    const token = sessionStorage.getItem("token");
+    const id = sessionStorage.getItem("id");
     const res = await axios.get(`${url}/user/get/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
@@ -64,14 +63,12 @@ export function AdminUser() {
 
   const filterUser = (e) => {
     const word = e.target.value.toLowerCase()
-    console.log(word);
-    console.log(user);
     const arr = fil.filter((fi) => `${fi.username.toLowerCase()} ${fi.email}`.includes(word))
     setUsers(arr)
   }
 
   const changeRole = async (e, id) => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     const role = e.target.value
     switch (role) {
       case "user":
@@ -101,16 +98,29 @@ export function AdminUser() {
     }
   }
 
+  const deleteUser = async (id) => {
+    const token = sessionStorage.getItem("token");
+    if (!user.superAdmin) {
+      return
+    }
+    await axios.delete(`${url}/user/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    fetchUser()
+  }
+
   return (
     <div>
-      <DashboardNavbar filterUser={filterUser} />
+      <DashboardNavbar username={user.username} filterUser={filterUser} />
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <Card>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Name", "Status", "Tribe", "Country", "actions"].map((el) => (
+                  {["Name", "Status", "Tribe", "Country", "Change Role", "Delete"].map((el) => (
                     <th
                       key={el} x
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -137,7 +147,6 @@ export function AdminUser() {
                       <tr key={data.username}>
                         <td className={className}>
                           <div className="flex items-center gap-4">
-                            <Avatar src={profileImage} size="sm" />
                             <div>
                               <Typography
                                 variant="small"
@@ -189,6 +198,9 @@ export function AdminUser() {
                             </select>
                           </Typography>
                         </td>
+                        {user.superAdmin && <td className={className}>
+                          <img onClick={() => deleteUser(data?._id)} style={{ cursor: "pointer" }} src={del} alt="" />
+                        </td>}
                       </tr>
                     );
                   }
