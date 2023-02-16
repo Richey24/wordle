@@ -103,7 +103,6 @@ const QuestionList = () => {
 
     return (
         <div className="swordDiv">
-            <THeHeader admin={true} />
             <h1>Questions list</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />

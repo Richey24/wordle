@@ -97,8 +97,8 @@ root.render(
             <Route path="" element={<Home />} />
             <Route path="activities" element={<Activity />} />
             <Route path="users" element={<AdminUser />} />
-            {/* <Route path="games" element={<AdminGame />} />
-                    <Route path="leaderboards" element={<AdminLeaderboard />} /> */}
+            <Route path="trivial" element={<QuestionList />} />
+            <Route path="leaderboards" element={<AdminLeaderboard />} />
           </Route>
 
         </Routes>
