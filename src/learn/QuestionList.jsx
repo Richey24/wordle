@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import url from "../url"
-import THeHeader from "../components/TheHeader"
+import empty from "../img/empty.png"
+import { DashboardNavbar } from "../widgets/layout"
 
 
 const QuestionList = () => {
@@ -56,7 +57,7 @@ const QuestionList = () => {
     }, [])
 
     const showModal = (id, value) => {
-        document.getElementById(id).classList.toggle("show")
+        document.getElementById(id).classList.toggle("showDelModal")
         setDelId(value)
     }
 
@@ -103,7 +104,7 @@ const QuestionList = () => {
 
     return (
         <div className="swordDiv">
-            <THeHeader admin={true} />
+            <DashboardNavbar username={user.username} />
             <h1>Questions list</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
@@ -111,12 +112,15 @@ const QuestionList = () => {
             </div>
             {
                 lists.length < 1 ? (
-                    <p className="empty">You have no question yet, create one</p>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", marginTop: "20px" }}>
+                        <img src={empty} alt="" />
+                        <p className="empty">You have no question yet, create one</p>
+                    </div>
                 ) : (
                     <div className="swordMain">
                         {
                             lists.reverse().map((list, i) => (
-                                <div key={i}>
+                                <div style={{ height: "200px" }} key={i}>
                                     <div className="swordBtn" id="swordBtn">
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
                                             <img onClick={() => navigate("/question/add", { state: { list: list } })} style={{ marginRight: "20px" }} src={edit} alt="" />
@@ -135,7 +139,7 @@ const QuestionList = () => {
                                             ))
                                         }
                                     </div>
-                                    <p className="theNote">{list.learnMore}</p>
+                                    <p style={{ marginTop: "15px" }} className="theNote">{list.learnMore}</p>
                                 </div>
                             ))
                         }
