@@ -4,30 +4,33 @@ import { useEffect, useState } from 'react';
 import url from "../../url"
 import ProfileInfo from './ProfileInfo.jsx';
 import ChangePass from './ChangePass.jsx';
+import { useNavigate } from 'react-router-dom';
+import Notification from './Notification.jsx';
 const id = localStorage.getItem("id")
 
 export default function ProfilePage() {
 
     const token = localStorage.getItem("token")
-
+    const navigate = useNavigate()
     const [user, setUser] = useState({})
     const [active, setActive] = useState("info")
-    const [loading, setLoader] = useState();
+    // const [loading, setLoader] = useState();
 
-    const fetchUserInfromation = async () => {
+    const fetchUserInformation = async () => {
         await axios.get(`${url}/user/get/${id}`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
             .then(response => {
-                console.log(response);
                 setUser(response.data)
             })
             .catch(err => {
                 console.log(err);
+                navigate("/login")
             })
     }
 
     useEffect(() => {
-        fetchUserInfromation();
-    }, [id])
+        fetchUserInformation();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="absolute w-auto min-w-full min-h-full max-w-none">
@@ -49,7 +52,7 @@ export default function ProfilePage() {
                             <li>
                                 <div class="flex items-center">
                                     <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                                    <a href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Profile Settings</a>
+                                    <p href="#" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Profile Settings</p>
                                 </div>
                             </li>
                         </ol>
@@ -85,7 +88,7 @@ export default function ProfilePage() {
                                         </p>
                                     </li>
 
-                                    <li style={{ cursor: "pointer" }}>
+                                    <li style={{ cursor: "pointer" }} onClick={() => setActive("notification")}>
                                         <p href="#"
                                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700">
                                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -116,6 +119,7 @@ export default function ProfilePage() {
                         </aside>
                         {active === "info" && <ProfileInfo />}
                         {active === "pass" && <ChangePass />}
+                        {active === "notification" && <Notification user={user} />}
                     </div>
 
                 </div>

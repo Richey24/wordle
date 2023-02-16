@@ -28,6 +28,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { StatisticsCard } from "../../widgets/cards";
 import { StatisticsChart } from "../../widgets/charts";
+import { DashboardNavbar } from "../../widgets/layout";
 // import {
 //   statisticsCardsData,
 //   statisticsChartsData,
@@ -37,8 +38,10 @@ import { StatisticsChart } from "../../widgets/charts";
 
 export function Home() {
   return (
-    <div className="mt-12">
-      <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+    <div>
+      <DashboardNavbar />
+      <div className="mt-12">
+        <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
           <StatisticsCard
             value="1"
             color="pink"
@@ -53,7 +56,7 @@ export function Home() {
               </Typography>
             }
           />
-            <StatisticsCard
+          <StatisticsCard
             value="4"
             color="blue"
             title="Gameplay Count"
@@ -67,7 +70,7 @@ export function Home() {
               </Typography>
             }
           />
-            <StatisticsCard
+          <StatisticsCard
             value="1"
             color="green"
             title="Country"
@@ -81,7 +84,7 @@ export function Home() {
               </Typography>
             }
           />
-               <StatisticsCard
+          <StatisticsCard
             value="1"
             color="orange"
             title="Incentives Available"
@@ -95,70 +98,70 @@ export function Home() {
               </Typography>
             }
           />
-      </div>
-      <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
-  
-      </div>
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <Card className="overflow-hidden xl:col-span-2">
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 flex items-center justify-between p-6"
-          >
-            <div>
-              <Typography variant="h6" color="blue-gray" className="mb-1">
-                Leaderboard top 10
-              </Typography>
-              <Typography
-                variant="small"
-                className="flex items-center gap-1 font-normal text-blue-gray-600"
-              >
-                <CheckIcon strokeWidth={3} className="h-4 w-4 text-blue-500" />
-                <strong>30 done</strong> this month
-              </Typography>
-            </div>
-            <Menu placement="left-start">
-              <MenuHandler>
-                <IconButton size="sm" variant="text" color="blue-gray">
-                  <EllipsisVerticalIcon
-                    strokeWidth={3}
-                    fill="currenColor"
-                    className="h-6 w-6"
-                  />
-                </IconButton>
-              </MenuHandler>
-              <MenuList>
-                <MenuItem>Action</MenuItem>
-                <MenuItem>Another Action</MenuItem>
-                <MenuItem>Something else here</MenuItem>
-              </MenuList>
-            </Menu>
-          </CardHeader>
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
-            <table className="w-full min-w-[640px] table-auto">
-              <thead>
-                <tr>
-                  {["companies", "members", "budget", "completion"].map(
-                    (el) => (
-                      <th
-                        key={el}
-                        className="border-b border-blue-gray-50 py-3 px-6 text-left"
-                      >
-                        <Typography
-                          variant="small"
-                          className="text-[11px] font-medium uppercase text-blue-gray-400"
+        </div>
+        <div className="mb-6 grid grid-cols-1 gap-y-12 gap-x-6 md:grid-cols-2 xl:grid-cols-3">
+
+        </div>
+        <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+          <Card className="overflow-hidden xl:col-span-2">
+            <CardHeader
+              floated={false}
+              shadow={false}
+              color="transparent"
+              className="m-0 flex items-center justify-between p-6"
+            >
+              <div>
+                <Typography variant="h6" color="blue-gray" className="mb-1">
+                  Leaderboard top 10
+                </Typography>
+                <Typography
+                  variant="small"
+                  className="flex items-center gap-1 font-normal text-blue-gray-600"
+                >
+                  <CheckIcon strokeWidth={3} className="h-4 w-4 text-blue-500" />
+                  <strong>30 done</strong> this month
+                </Typography>
+              </div>
+              <Menu placement="left-start">
+                <MenuHandler>
+                  <IconButton size="sm" variant="text" color="blue-gray">
+                    <EllipsisVerticalIcon
+                      strokeWidth={3}
+                      fill="currenColor"
+                      className="h-6 w-6"
+                    />
+                  </IconButton>
+                </MenuHandler>
+                <MenuList>
+                  <MenuItem>Action</MenuItem>
+                  <MenuItem>Another Action</MenuItem>
+                  <MenuItem>Something else here</MenuItem>
+                </MenuList>
+              </Menu>
+            </CardHeader>
+            <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+              <table className="w-full min-w-[640px] table-auto">
+                <thead>
+                  <tr>
+                    {["companies", "members", "budget", "completion"].map(
+                      (el) => (
+                        <th
+                          key={el}
+                          className="border-b border-blue-gray-50 py-3 px-6 text-left"
                         >
-                          {el}
-                        </Typography>
-                      </th>
-                    )
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {/* {projectsTableData.map(
+                          <Typography
+                            variant="small"
+                            className="text-[11px] font-medium uppercase text-blue-gray-400"
+                          >
+                            {el}
+                          </Typography>
+                        </th>
+                      )
+                    )}
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* {projectsTableData.map(
                   ({ img, name, members, budget, completion }, key) => {
                     const className = `py-3 px-5 ${
                       key === projectsTableData.length - 1
@@ -223,33 +226,33 @@ export function Home() {
                     );
                   }
                 )} */}
-              </tbody>
-            </table>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardHeader
-            floated={false}
-            shadow={false}
-            color="transparent"
-            className="m-0 p-6"
-          >
-            <Typography variant="h6" color="blue-gray" className="mb-2">
-              Billing Overview
-            </Typography>
-            <Typography
-              variant="small"
-              className="flex items-center gap-1 font-normal text-blue-gray-600"
+                </tbody>
+              </table>
+            </CardBody>
+          </Card>
+          <Card>
+            <CardHeader
+              floated={false}
+              shadow={false}
+              color="transparent"
+              className="m-0 p-6"
             >
-              <ArrowUpIcon
-                strokeWidth={3}
-                className="h-3.5 w-3.5 text-green-500"
-              />
-              <strong>24%</strong> this month
-            </Typography>
-          </CardHeader>
-          <CardBody className="pt-0">
-            {/* {ordersOverviewData.map(
+              <Typography variant="h6" color="blue-gray" className="mb-2">
+                Billing Overview
+              </Typography>
+              <Typography
+                variant="small"
+                className="flex items-center gap-1 font-normal text-blue-gray-600"
+              >
+                <ArrowUpIcon
+                  strokeWidth={3}
+                  className="h-3.5 w-3.5 text-green-500"
+                />
+                <strong>24%</strong> this month
+              </Typography>
+            </CardHeader>
+            <CardBody className="pt-0">
+              {/* {ordersOverviewData.map(
               ({ icon, color, title, description }, key) => (
                 <div key={title} className="flex items-start gap-4 py-3">
                   <div
@@ -282,10 +285,12 @@ export function Home() {
                 </div>
               )
             )} */}
-          </CardBody>
-        </Card>
+            </CardBody>
+          </Card>
+        </div>
       </div>
     </div>
+
   );
 }
 

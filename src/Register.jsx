@@ -20,9 +20,27 @@ import reuben from "./img/reuben.png"
 import simeon from "./img/simeon.png"
 import zebulun from "./img/zebulun.png"
 import asher from "./img/asher.png"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome } from '@fortawesome/fontawesome-free-solid'
 import { useEffect } from 'react'
+import churches from './utils/church'
+import THeHeader from './components/TheHeader'
+
+const tribes = [
+    ["Asher", asher, "rgb(111, 111, 21)"],
+    ["Dan", dan, "rgb(250, 100, 125)"],
+    ["Ephraim", ephraim, "rgb(58, 58, 241)"],
+    ["Gad", gad, "rgb(142, 200, 239)"],
+    ["Issachar", issachar, "rgb(12, 57, 11)"],
+    ["Joseph", joseph, "rgb(12, 571, 31)"],
+    ["Manasseh", manasseh, "rgb(237, 31, 237)"],
+    ["Naphtali", naftali, "lightgreen"],
+    ["Reuben", reuben, "orangered"],
+    ["Simeon", simeon, "black"],
+    ["Zebulun", zebulun, "rgb(79, 7, 7)"],
+    ["Levi", levi, "rgb(79, 7, 7)"],
+    ["Judah", judah, "purple"],
+    ["Benjamin", benjamin, "rgb(249, 213, 115)"],
+]
+
 
 const Register = () => {
     const [spin, setSpin] = useState(false)
@@ -54,7 +72,8 @@ const Register = () => {
         e.preventDefault()
         setShowErr(false)
         const user = {
-            name: first.name,
+            firstName: first.firstName,
+            lastName: first.lastName,
             username: first.username,
             email: first.email,
             tribe: tribe,
@@ -85,44 +104,39 @@ const Register = () => {
             return
         }
 
-        await axios.post(`${url}/user/register`, user, { validateStatus: () => true })
-        .then (response => {
-            console.log( response)
-        })
-        .catch( err => {
-            console.log( err.response )
-        })
-        // switch (res.status) {
-        //     case 400:
-        //         setErr("Fill all required filled and try again")
-        //         setShowErr(true)
-        //         break;
-        //     case 419:
-        //         setErr("This email is already registered, login or recover your password")
-        //         setShowErr(true)
-        //         break;
-        //     case 203:
-        //         setErr("This username is already taken, try another username")
-        //         setShowErr(true)
-        //         break;
-        //     case 500:
-        //         setErr("Something went wrong, try again")
-        //         setShowErr(true)
-        //         break;
-        //     case 200:
-        //         const rep = await res.data
-        //         navigate('/verify', { state: { email: rep.email } })
-        //         break;
-        //     default:
-        //         break;
-        // }
+        const res = await axios.post(`${url}/user/register`, user, { validateStatus: () => true })
+        switch (res.status) {
+            case 400:
+                setErr("Fill all required filled and try again")
+                setShowErr(true)
+                break;
+            case 419:
+                setErr("This email is already registered, login or recover your password")
+                setShowErr(true)
+                break;
+            case 203:
+                setErr("This username is already taken, try another username")
+                setShowErr(true)
+                break;
+            case 500:
+                setErr("Something went wrong, try again")
+                setShowErr(true)
+                break;
+            case 200:
+                const rep = await res.data
+                navigate('/verify', { state: { email: rep.email } })
+                break;
+            default:
+                break;
+        }
         setSpin(false)
     }
 
     const firstStage = (e) => {
         e.preventDefault()
         const user = {
-            name: e.target.name?.value || "",
+            firstName: e.target.firstName?.value || "",
+            lastName: e.target.lastName?.value || "",
             username: e.target.username?.value || "",
             email: e.target.email?.value,
         }
@@ -168,130 +182,102 @@ const Register = () => {
     }
 
     return (
-        <div className="loginMainDiv">
-            <div className="homeBtnLog" onClick={() => navigate("/")}>
-                <FontAwesomeIcon size="2x" icon={faHome} className="text-white" />
-            </div>
-            <div className="loginDiv">
-                <h1>Register your account</h1>
-                {showErr && <Alert variant="danger">{err}</Alert>}
-                {num === 1 && (<>
-                    <form onSubmit={firstStage}>
-                        <div>
-                            <label htmlFor="name">Full Name</label>
-                            <br />
-                            <input required type="text" id="name" placeholder="Enter your name" name="name" />
-                        </div>
-                        <div>
-                            <label htmlFor="username">Username</label>
-                            <br />
-                            <input required type="text" id="username" placeholder="Pick a username" name="username" />
-                        </div>
-                        <div>
-                            <label htmlFor="email">Email</label>
-                            <br />
-                            <input required type="text" id="email" placeholder="Enter your email" name="email" />
-                        </div>
-                        <div className='tribeDiv'>
-                            <label>Select your country</label>
-                            <p id='countryMain' onClick={selectCountry} className='tribeMain'><img className='countryMainImg' src={country[count]?.flags.svg} alt="" /> {country[count]?.name?.common} <img src={drop} alt="" /></p>
-                            <ul id='country' className='tribeList'>
-                                <input onChange={filterCountry} placeholder='Search country' type="text" />
-                                {
-                                    country.map((county, i) => (
-                                        <li onClick={() => getCountry(i)}><img src={county?.flags.svg} alt="" /> {county?.name.common}</li>
-                                    ))
-                                }
-                            </ul>
-                        </div>
-                        <button type='submit'>Next</button>
-                    </form>
-                </>)}
-                {
-                    num === 2 && (
-                        <>
-                            <form onSubmit={submitForm}>
-                                <div>
-                                    <label htmlFor="password">Password</label>
-                                    <br />
-                                    <input required type="password" id="password" placeholder="Enter your password" name="password" />
-                                </div>
-                                <div>
-                                    <label htmlFor="confirmPassword">Confirm Password</label>
-                                    <br />
-                                    <input required type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword" />
-                                </div>
-                                <div className='tribeDiv'>
-                                    <label>Select your school / church affiliation</label>
-                                    <p id='churchMain' onClick={selectChurch} className='tribeMain'>{church} <img src={drop} alt="" /></p>
-                                    <ul id='church' className='tribeList'>
-                                        <li onClick={() => getChurch("Non-Affiliated (NA)")}>Non-Affiliated (NA) </li>
-                                        <li onClick={() => getChurch("1WEST (Messianic, Harlem-School Influenced) CAMPS")}>1WEST1 (Messianic, Harlem-School Influenced) CAMPS </li>
-                                        <li onClick={() => getChurch("Ambassadors of Christ (AOC)")}>Ambassadors of Christ (AOC)</li>
-                                        <li onClick={() => getChurch("Army of Israel (AOI) ")}>Army of Israel (AOI) </li>
-                                        <li onClick={() => getChurch("Believers of The Way")}>Believers of The Way</li>
-                                        <li onClick={() => getChurch("Church of God and Saints of Christ (COGASOC)")}>Church of God and Saints of Christ (COGASOC)</li>
-                                        <li onClick={() => getChurch("Future World of Israel (FWOI)")}>Future World of Israel (FWOI)</li>
-                                        <li onClick={() => getChurch("Gathering of Christ Church (GOCC)")}>Gathering of Christ Church (GOCC)</li>
-                                        <li onClick={() => getChurch("Great MillStone Israelites (GMS)")}>Great MillStone Israelites (GMS)</li>
-                                        <li onClick={() => getChurch("House of Israel (HOI)")}>House of Israel (HOI)</li>
-                                        <li onClick={() => getChurch("Israel United in Christ (IUIC)")}>Israel United in Christ (IUIC)</li>
-                                        <li onClick={() => getChurch("Israelite Church of God in Jesus Christ (ICGJC)")}>Israelite Church of God in Jesus Christ (ICGJC)</li>
-                                        <li onClick={() => getChurch("Israelite School of Biblical & Practical Knowledge (ISBPK)")}>Israelite School of Biblical & Practical Knowledge (ISBPK)</li>
-                                        <li onClick={() => getChurch("Israelite School of Knowledge (ISOK)")}>Israelite School of Knowledge (ISOK)</li>
-                                        <li onClick={() => getChurch("Israelite School of Universal Practical Knowledge (ISUPK)")}>Israelite School of Universal Practical Knowledge (ISUPK)</li>
-                                        <li onClick={() => getChurch("Lions of Israel / We Got Next (LOI)")}>Lions of Israel / We Got Next (LOI)</li>
-                                        <li onClick={() => getChurch("Nation of Yahweh (NOY)")}>Nation of Yahweh (NOY)</li>
-                                        <li onClick={() => getChurch("Onebody Israelites)")}>Onebody Israelites</li>
-                                        <li onClick={() => getChurch("Sons of Thunder (SOT)")}>Sons of Thunder (SOT)</li>
-                                        <li onClick={() => getChurch("Shut ‘Em Down Crew / RAM Squad (RAM)")}>Shut ‘Em Down Crew / RAM Squad (RAM)</li>
-                                        <li onClick={() => getChurch("Sicarii")}>Sicarii</li>
-                                        <li onClick={() => getChurch("TANAKH-Only (TO)")}>TANAKH-Only (TO)</li>
-                                        <li onClick={() => getChurch("Thee Light of Zion (TLOZ)")}>Thee Light of Zion (TLOZ)</li>
-                                        <li onClick={() => getChurch("True Nation Israelite (TNI)")}>True Nation Israelite (TNI)</li>
-                                        <li onClick={() => getChurch("United Kingdom of Israel (UKIOC)")}>United Kingdom of Israel (UKIOC)</li>
-                                        <li onClick={() => getChurch("We Got Next (WGN )")}>We Got Next (WGN )</li>
-                                        <li onClick={() => getChurch("Watchmen For Israel (WFI)")}>Watchmen For Israel (WFI)</li>
-                                        <li onClick={() => getChurch("Yahawashi’s Servants in Y’Sharael (YSIY)")}>Yahawashi’s Servants in Y’Sharael (YSIY)</li>
-                                        <li onClick={() => getChurch("Others")}>Others</li>
-                                    </ul>
-                                </div>
-                                <div className='tribeDiv'>
-                                    <label>Select your tribe</label>
-                                    <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
-                                    <ul id='tribe' className='tribeList'>
-                                        <li onClick={() => getTribe(["Asher", "rgb(111, 111, 21)"])}>Asher <img src={asher} alt="" /></li>
-                                        <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"])}>Dan <img src={dan} alt="" /></li>
-                                        <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"])}>Ephraim <img src={ephraim} alt="" /></li>
-                                        <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"])}>Gad <img src={gad} alt="" /></li>
-                                        <li onClick={() => getTribe(["Issachar", "rgb(12, 57, 11)"])}>Issachar <img src={issachar} alt="" /></li>
-                                        <li onClick={() => getTribe(["Joseph", "rgb(12, 571, 31)"])}>Joseph <img src={joseph} alt="" /></li>
-                                        <li onClick={() => getTribe(["Manasseh", "rgb(237, 31, 237)"])}>Manasseh <img src={manasseh} alt="" /></li>
-                                        <li onClick={() => getTribe(["Naphtali", "lightgreen"])}>Naphtali <img src={naftali} alt="" /></li>
-                                        <li onClick={() => getTribe(["Reuben", "orangered"])}>Reuben <img src={reuben} alt="" /></li>
-                                        <li onClick={() => getTribe(["Simeon", "black"])}>Simeon <img src={simeon} alt="" /></li>
-                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"])}>Zebulun <img src={zebulun} alt="" /></li>
-                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"])}>Levi <img src={levi} alt="" /></li>
-                                        <li onClick={() => getTribe(["Judah", "purple"])}>Judah <img src={judah} alt="" /></li>
-                                        <li onClick={() => getTribe(["Benjamin", "rgb(249, 213, 115)"])}>Benjamin <img src={benjamin} alt="" /></li>
-                                    </ul>
-                                </div>
-                                {
-                                    spin ? (
-                                        <button><Spinner animation="border" color="white" /></button>
-                                    ) :
-                                        (
-                                            <button type="submit">Register</button>
-                                        )
-                                }
-                            </form>
-                        </>
-                    )
-                }
+        <div>
+            <THeHeader />
+            <div className="loginMainDiv">
+                <div className="loginDiv">
+                    <h1>Register your account</h1>
+                    {showErr && <Alert variant="danger">{err}</Alert>}
+                    {num === 1 && (<>
+                        <form onSubmit={firstStage}>
+                            <div>
+                                <label htmlFor="name">First Name</label>
+                                <br />
+                                <input required type="text" id="name" placeholder="Enter your name" name="firstName" />
+                            </div>
+                            <div>
+                                <label htmlFor="name">Last Name</label>
+                                <br />
+                                <input required type="text" id="name" placeholder="Enter your name" name="lastName" />
+                            </div>
+                            <div>
+                                <label htmlFor="username">Username</label>
+                                <br />
+                                <input required type="text" id="username" placeholder="Pick a username" name="username" />
+                            </div>
+                            <div>
+                                <label htmlFor="email">Email</label>
+                                <br />
+                                <input required type="text" id="email" placeholder="Enter your email" name="email" />
+                            </div>
+                            <div className='tribeDiv'>
+                                <label>Select your country</label>
+                                <p id='countryMain' onClick={selectCountry} className='tribeMain'><img className='countryMainImg' src={country[count]?.flags.svg} alt="" /> {country[count]?.name?.common} <img src={drop} alt="" /></p>
+                                <ul id='country' className='tribeList'>
+                                    <input onChange={filterCountry} placeholder='Search country' type="text" />
+                                    {
+                                        country.map((county, i) => (
+                                            <li onClick={() => getCountry(i)}><img src={county?.flags.svg} alt="" /> {county?.name.common}</li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
+                            <button type='submit'>Next</button>
+                        </form>
+                    </>)}
+                    {
+                        num === 2 && (
+                            <>
+                                <form onSubmit={submitForm}>
+                                    <div>
+                                        <label htmlFor="password">Password</label>
+                                        <br />
+                                        <input required type="password" id="password" placeholder="Enter your password" name="password" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="confirmPassword">Confirm Password</label>
+                                        <br />
+                                        <input required type="password" id="confirmPassword" placeholder="Confirm your password" name="confirmPassword" />
+                                    </div>
+                                    <div className='tribeDiv'>
+                                        <label>Select your school / church affiliation</label>
+                                        <p id='churchMain' onClick={selectChurch} className='tribeMain'>{church} <img src={drop} alt="" /></p>
+                                        <ul id='church' className='tribeList'>
+                                            {
+                                                churches.map((church, i) => (
+                                                    <li key={i} onClick={() => getChurch(church)}>{church}</li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div className='tribeDiv'>
+                                        <label>Select your tribe</label>
+                                        <p onClick={selectTribe} className='tribeMain'>{tribe[0]} <img src={drop} alt="" /></p>
+                                        <ul id='tribe' className='tribeList'>
+                                            {
+                                                tribes.map((tribe) => (
+                                                    <li onClick={() => getTribe([tribe[0], tribe[2]])}>{tribe[0]} <img src={tribe[1]} alt="" /></li>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    {
+                                        spin ? (
+                                            <button><Spinner animation="border" color="white" /></button>
+                                        ) :
+                                            (
+                                                <button type="submit">Register</button>
+                                            )
+                                    }
+                                </form>
+                            </>
+                        )
+                    }
 
-                <p>Already have an account? <span onClick={() => { setShowErr(false); navigate("/login") }}>Login</span></p>
-                {num === 2 && <p onClick={() => setNum(1)}><span>Back</span></p>}
-                <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
+                    <p>Already have an account? <span onClick={() => { setShowErr(false); navigate("/login") }}>Login</span></p>
+                    {num === 2 && <p onClick={() => setNum(1)}><span>Back</span></p>}
+                    <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
+                </div>
             </div>
         </div>
     )
