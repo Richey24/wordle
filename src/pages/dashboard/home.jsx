@@ -1,9 +1,9 @@
 import React from "react";
+import axios from "axios"
+import url from "../../url"
 import {
   BanknotesIcon,
-  UserPlusIcon,
   UserIcon,
-  ChartBarIcon,
 } from "@heroicons/react/24/solid";
 
 import {
@@ -17,18 +17,18 @@ import {
   MenuList,
   MenuItem,
   Avatar,
-  Tooltip,
-  Progress,
 } from "@material-tailwind/react";
 import {
-  ClockIcon,
   CheckIcon,
   EllipsisVerticalIcon,
   ArrowUpIcon,
 } from "@heroicons/react/24/outline";
 import { StatisticsCard } from "../../widgets/cards";
-import { StatisticsChart } from "../../widgets/charts";
 import { DashboardNavbar } from "../../widgets/layout";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+
+
 // import {
 //   statisticsCardsData,
 //   statisticsChartsData,
@@ -37,13 +37,85 @@ import { DashboardNavbar } from "../../widgets/layout";
 // } from "@/data";
 
 export function Home() {
+  const navigate = useNavigate()
+  const [users, setUsers] = useState([])
+  const [country, setCountry] = useState(new Set())
+  const [leaders, setLeaders] = useState([])
+  const [active, setActive] = useState("word")
+  const [title, setTitle] = useState("Word Quest")
+  const fetchUser = async () => {
+    const token = sessionStorage.getItem("token");
+    await axios.get(`${url}/api/user/all`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+      .then(res => {
+        let data = res.data
+        setUsers(data.users)
+        let coun = data.users.map((co) => co.country[0]).filter((co) => co !== undefined)
+        const set = new Set(coun)
+        setCountry(set)
+        const arr = data.users.sort((a, b) => b.dailyWQS - a.dailyWQS)
+        setLeaders(arr)
+      })
+      .catch(err => {
+        console.log(err.response)
+        navigate("/admin/login")
+      })
+  }
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
+
+  const getLeaders = async (val) => {
+    switch (val) {
+      case "word":
+        const wordArr = users.sort((a, b) => b.dailyWQS - a.dailyWQS)
+        setLeaders(wordArr)
+        setActive("word")
+        setTitle("Word Quest")
+        break;
+      case "bible":
+        const bibleArr = users.sort((a, b) => b.dailyBQS - a.dailyBQS)
+        setLeaders(bibleArr)
+        setActive("bible")
+        setTitle("Bible Quest")
+        break;
+      case "hang":
+        const hangArr = users.sort((a, b) => b.dailyHS - a.dailyHS)
+        setLeaders(hangArr)
+        setActive("hang")
+        setTitle("Hangman")
+        break;
+      case "trivial":
+        const token = sessionStorage.getItem("token");
+        const res = await axios.get(`${url}/score/get/all`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          validateStatus: () => true
+        })
+        const rep = await res.data
+        const arr = rep.sort((a, b) => b.score - a.score)
+        setLeaders(arr)
+        setActive("trivial")
+        setTitle("Bible Trivial")
+        break;
+      case "cross":
+        setActive("cross")
+        setTitle("Crossword")
+        break;
+
+      default:
+        break;
+    }
+  }
+
   return (
     <div>
       <DashboardNavbar />
       <div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
           <StatisticsCard
-            value="1"
+            value={users.length}
             color="pink"
             title="User"
             icon={React.createElement(UserIcon, {
@@ -71,7 +143,7 @@ export function Home() {
             }
           />
           <StatisticsCard
-            value="1"
+            value={country.size}
             color="green"
             title="Country"
             icon={React.createElement(BanknotesIcon, {
@@ -112,14 +184,7 @@ export function Home() {
             >
               <div>
                 <Typography variant="h6" color="blue-gray" className="mb-1">
-                  Leaderboard top 10
-                </Typography>
-                <Typography
-                  variant="small"
-                  className="flex items-center gap-1 font-normal text-blue-gray-600"
-                >
-                  <CheckIcon strokeWidth={3} className="h-4 w-4 text-blue-500" />
-                  <strong>30 done</strong> this month
+                  {title} LeaderBoard top 10
                 </Typography>
               </div>
               <Menu placement="left-start">
@@ -133,9 +198,11 @@ export function Home() {
                   </IconButton>
                 </MenuHandler>
                 <MenuList>
-                  <MenuItem>Action</MenuItem>
-                  <MenuItem>Another Action</MenuItem>
-                  <MenuItem>Something else here</MenuItem>
+                  <MenuItem onClick={() => getLeaders("word")} style={active === "word" ? { backgroundColor: "grey", color: "white" } : {}}>Word Quest LeaderBoard</MenuItem>
+                  <MenuItem onClick={() => getLeaders("bible")} style={active === "bible" ? { backgroundColor: "grey", color: "white" } : {}}>Bible Quest LeaderBoard</MenuItem>
+                  <MenuItem onClick={() => getLeaders("hang")} style={active === "hang" ? { backgroundColor: "grey", color: "white" } : {}}>Hangman LeaderBoard</MenuItem>
+                  <MenuItem onClick={() => getLeaders("trivial")} style={active === "trivial" ? { backgroundColor: "grey", color: "white" } : {}}>Bible Trivial LeaderBoard</MenuItem>
+                  <MenuItem onClick={() => getLeaders("cross")} style={active === "cross" ? { backgroundColor: "grey", color: "white" } : {}}>Crossword LeaderBoard</MenuItem>
                 </MenuList>
               </Menu>
             </CardHeader>
@@ -143,7 +210,7 @@ export function Home() {
               <table className="w-full min-w-[640px] table-auto">
                 <thead>
                   <tr>
-                    {["companies", "members", "budget", "completion"].map(
+                    {["Username", "Tribe", "School", "Country", "Score"].map(
                       (el) => (
                         <th
                           key={el}
@@ -160,6 +227,48 @@ export function Home() {
                     )}
                   </tr>
                 </thead>
+                <tbody>
+                  {
+                    leaders.slice(0, 10).map((leader, i) => (
+                      <tr key={i}>
+                        <td className="py-3 px-3 border-b border-blue-gray-50">
+                          <div className="flex items-center gap-4">
+                            <div>
+                              <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-semibold"
+                              >
+                                {leader?.username}
+                              </Typography>
+                              <Typography className="text-xs font-normal text-blue-gray-500">
+                                {leader?.email}
+                              </Typography>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="py-3 px-4 border-b border-blue-gray-50">
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {leader?.tribe[0]}
+                          </Typography>
+                        </td>
+                        <td className="py-3 px-4 border-b border-blue-gray-50">
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {leader?.church}
+                          </Typography>
+                        </td>
+                        <td className="py-3 px-4 border-b border-blue-gray-50">
+                          <img style={{ width: "30px", height: "30px" }} src={leader?.country[1]} alt="" />
+                        </td>
+                        <td className="py-3 px-4 border-b border-blue-gray-50">
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {leader?.dailyWQS}
+                          </Typography>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
                 <tbody>
                   {/* {projectsTableData.map(
                   ({ img, name, members, budget, completion }, key) => {
