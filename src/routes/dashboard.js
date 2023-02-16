@@ -36,28 +36,28 @@ export const routes = [
       },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "activities",
-        path: "/activities",
+        name: "Audit",
+        path: "/audit",
         element: <Activity />,
       },
+      // {
+      //   icon: <TableCellsIcon {...icon} />,
+      //   name: "Hebrew Game",
+      //   path: "/hebrew",
+      //   element: <Home />,
+      // },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "leaderboard",
-        path: "/leaderboard",
+        name: "Trash",
+        path: "/trash",
         element: <Home />,
       },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: "incentives",
-        path: "/incentives",
-        element: <Home />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: "notifactions",
-        path: "/notifactions",
-        element: <Home />,
-      },
+      // {
+      //   icon: <BellIcon {...icon} />,
+      //   name: "notifactions",
+      //   path: "/notifactions",
+      //   element: <Home />,
+      // },
     ],
   }
 ];

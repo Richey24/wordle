@@ -18,10 +18,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function THeHeader({ soundClick, soundOn, showAbout }) {
+export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   const navigate = useNavigate()
-  const id = localStorage.getItem("id")
-  const token = localStorage.getItem("token")
+  const id = admin ? sessionStorage.getItem("id") : localStorage.getItem("id")
+  const token = admin ? sessionStorage.getItem("token") : localStorage.getItem("token")
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(true)
   const soundOnLocation = "img/soundOn.png"
@@ -90,7 +90,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout }) {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start cursor-pointer"  >
-                <div className="flex flex-shrink-0 items-center" onClick={() => navigate('/')}>
+                <div className="flex flex-shrink-0 items-center" onClick={() => navigate(admin ? "/admin" : '/')}>
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src={logo}

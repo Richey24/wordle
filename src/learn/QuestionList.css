@@ -10,3 +10,7 @@
     width: 25%;
     margin-left: 10px;
 }
+
+.showDelModal {
+    display: block;
+}

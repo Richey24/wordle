@@ -95,9 +95,10 @@ root.render(
           <Route path="/privacy" element={<Privacy />} />
           <Route path='/admin' element={<AdminDashboard />}>
             <Route path="" element={<Home />} />
-            <Route path="activities" element={<Activity />} />
+            <Route path="audit" element={<Audit />} />
             <Route path="users" element={<AdminUser />} />
             <Route path="trivial" element={<QuestionList />} />
+            <Route path="trash" element={<ToBeDel />} />
             <Route path="leaderboards" element={<AdminLeaderboard />} />
           </Route>
 

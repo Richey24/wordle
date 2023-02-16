@@ -95,12 +95,13 @@ export function Home() {
         })
         const rep = await res.data
         const arr = rep.sort((a, b) => b.score - a.score)
+        console.log(arr);
         setLeaders(arr)
         setActive("trivial")
         setTitle("Bible Trivial")
         break;
       case "cross":
-        setActive("cross")
+        // setActive("cross")
         setTitle("Crossword")
         break;
 
@@ -233,13 +234,14 @@ export function Home() {
                       <tr key={i}>
                         <td className="py-3 px-3 border-b border-blue-gray-50">
                           <div className="flex items-center gap-4">
-                            <div>
+                            <div style={active === "trivial" ? { textTransform: "capitalize" } : {}}>
                               <Typography
                                 variant="small"
                                 color="blue-gray"
                                 className="font-semibold"
                               >
-                                {leader?.username}
+                                {active !== "trivial" && leader?.username}
+                                {active === "trivial" && leader?.playerName}
                               </Typography>
                               <Typography className="text-xs font-normal text-blue-gray-500">
                                 {leader?.email}
@@ -249,7 +251,8 @@ export function Home() {
                         </td>
                         <td className="py-3 px-4 border-b border-blue-gray-50">
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {leader?.tribe[0]}
+                            {active !== "trivial" && leader?.tribe[0]}
+                            {active === "trivial" && leader?.tribe}
                           </Typography>
                         </td>
                         <td className="py-3 px-4 border-b border-blue-gray-50">
@@ -258,13 +261,14 @@ export function Home() {
                           </Typography>
                         </td>
                         <td className="py-3 px-4 border-b border-blue-gray-50">
-                          <img style={{ width: "30px", height: "30px" }} src={leader?.country[1]} alt="" />
+                          {active !== "trivial" && <img style={{ width: "30px", height: "30px" }} src={leader?.country[1]} alt="" />}
                         </td>
                         <td className="py-3 px-4 border-b border-blue-gray-50">
                           <Typography className="text-xs font-semibold text-blue-gray-600">
                             {active === "word" && leader?.dailyWQS}
                             {active === "bible" && leader?.dailyBQS}
                             {active === "hang" && leader?.dailyHS}
+                            {active === "trivial" && leader?.score}
                           </Typography>
                         </td>
                       </tr>
