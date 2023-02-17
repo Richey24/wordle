@@ -2,6 +2,8 @@ import { Fragment, useState, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, SpeakerWaveIcon, SpeakerXMarkIcon, EnvelopeOpenIcon } from '@heroicons/react/24/outline'
 import { useLocation, useNavigate } from "react-router-dom"
+import Loading from 'react-fullscreen-loading';
+
 
 import logo from '../img/white-bible.png';
 import mail from "../img/Artwork.svg"
@@ -24,17 +26,6 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   const token = admin ? sessionStorage.getItem("token") : localStorage.getItem("token")
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(true)
-  const soundOnLocation = "img/soundOn.png"
-  const soundOffLocation = "img/soundOff.png"
-
-  const { pathname } = useLocation()
-
-  const navigation = [
-    { name: 'Home', path: '/', current: pathname === "/" ? true : false },
-    // { name: 'Wordle', path: '/select', current: pathname === "/select" ? true : false },
-    // { name: 'Crossword', path: '/crossword', current: pathname === "/crossword" ? true : false },
-    // { name: 'Hangman', path: '/hangman', current: pathname === "/hangman" ? true : false },
-  ]
 
 
   const logOut = () => {
@@ -43,7 +34,9 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   }
 
   const getUserData = async () => {
+    setLoader(true)
     try {
+      
       const res = await axios.get(`${url}/user/get/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -52,17 +45,23 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
       })
       const response = await res.data
       if (res.status !== 200) {
-        setLoader(false)
+        setTimeout(() => {
+          setLoader(false)
+        }, 1000)
         return
       }
 
       if (token !== response.mainToken) {
         localStorage.clear()
-        setLoader(false)
+        setTimeout(() => {
+          setLoader(false)
+        }, 1000)
         return
       }
       setUser(response)
-      setLoader(false)
+      setTimeout(() => {
+        setLoader(false)
+      }, 1000)
     } catch (err) {
       setLoader(false)
     }
@@ -70,9 +69,10 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
 
   useEffect(() => {
     getUserData()
-  }, [id])
+  }, [])
 
-  return (
+  return (<>
+    <Loading loading={loader} background="#673AB7" loaderColor="#FFBA15" />
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
@@ -254,27 +254,9 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
               </div>
             </div>
           </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
-                  )}
-                  aria-current={item.current ? 'page' : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
-          </Disclosure.Panel>
         </>
       )}
     </Disclosure>
+    </>
   )
 }

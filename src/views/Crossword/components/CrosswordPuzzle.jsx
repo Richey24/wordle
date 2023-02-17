@@ -6,26 +6,32 @@ import './crossword.js';
 
 import Congratulation from '../../../components/Congratulation/CongratulationView';
 import Failed from '../../../components/Congratulation/Failed'
-
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import url from "../../../url"
-
+import { DialogLeavingPage } from '../../../components/DialogLeavingPage';
+import { useNavigatingAway } from '../../../hooks/useNavigatingAway';
 
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
-    const  style = { background: `linear-gradient(to left,  ${props.color} 0%,${props.color1} 100%)`, };
+    const  style = { background: `linear-gradient(to left, ${props.color} 0%,${props.color1} 100%)`, };
     const [failed, setFailed] = useState(false);
     const [bibleWords, setBibleWords] = useState(false);
+    const [message, setMessage] = useState("Are you sure you want to quit without saving your changes?")
+    // PROMPT USER BEFORE LEAVING THE GAME: INCOMPLETE
+    const [canShowDialogLeavingPage, setCanShowDialogLeavingPage] = useState(false);
+    const [ showDialogLeavingPage, confirmNavigation, cancelNavigation] = useNavigatingAway(canShowDialogLeavingPage);
 
-    const handleFailed = () => {
-        setFailed(true)
-    }
+
+
+    // TODO: Nice have functionality 
+    const randomSetGradientPosition = async ()  => { }
 
     const fetchBibleWords = async () => {
         const token = localStorage.getItem("token")
-        await axios.get(`${url}/word/get/all`,  { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
+        await axios.get(`${url}/word/get/all`,{ headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
         .then(async(res) => {
             console.log(res.data)
             const ward = await setBibleWords(res.data)
@@ -49,11 +55,6 @@ export default function CrosswordPuzzle(props) {
         .then(res => {
             console.log(res)
             const data = res.data
-            if ( data ) {
-            } else {
-
-            }
-           
         })
         .catch(err => {
             console.log(err)
@@ -540,6 +541,14 @@ export default function CrosswordPuzzle(props) {
     return <div className="min-h-screen crosswordBackground bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.background}')` }}>
         {/* <button onClick={handleShow}>test</button> */}
         {/* {bibleWords} */}
+
+        <DialogLeavingPage
+            showDialog={showDialogLeavingPage}
+            setShowDialog={setCanShowDialogLeavingPage}
+            confirmNavigation={confirmNavigation}
+            cancelNavigation={cancelNavigation}
+       />
+        
         <div className="grid h-screen place-items-center overflow-auto" >
             <div>
                 <div id="container">
@@ -712,7 +721,6 @@ export default function CrosswordPuzzle(props) {
                 </div>
             </div>
         </div>
-
 
         <Transition.Root show={open} as={Fragment}>
             <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
