@@ -16,33 +16,33 @@ import { useNavigatingAway } from '../../../hooks/useNavigatingAway';
 export default function CrosswordPuzzle(props) {
 
     const [gameStarted, setGameStarted] = useState(false);
-    const  style = { background: `linear-gradient(to left, ${props.color} 0%,${props.color1} 100%)`, };
+    const style = { background: `linear-gradient(to left, ${props.color} 0%,${props.color1} 100%)`, };
     const [failed, setFailed] = useState(false);
     const [bibleWords, setBibleWords] = useState(false);
     const [message, setMessage] = useState("Are you sure you want to quit without saving your changes?")
     // PROMPT USER BEFORE LEAVING THE GAME: INCOMPLETE
     const [canShowDialogLeavingPage, setCanShowDialogLeavingPage] = useState(false);
-    const [ showDialogLeavingPage, confirmNavigation, cancelNavigation] = useNavigatingAway(canShowDialogLeavingPage);
-
+    const [showDialogLeavingPage, confirmNavigation, cancelNavigation] = useNavigatingAway(canShowDialogLeavingPage);
+    const id = localStorage.getItem("id")
 
 
     // TODO: Nice have functionality 
-    const randomSetGradientPosition = async ()  => { }
+    const randomSetGradientPosition = async () => { }
 
     const fetchBibleWords = async () => {
         const token = localStorage.getItem("token")
-        await axios.get(`${url}/word/get/all`,{ headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
-        .then(async(res) => {
-            console.log(res.data)
-            const ward = await setBibleWords(res.data)
-            placeResults(res.data)
-        })
+        await axios.get(`${url}/word/get/all`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+            .then(async (res) => {
+                console.log(res.data)
+                const ward = await setBibleWords(res.data)
+                placeResults(res.data)
+            })
     }
 
     const saveGameResults = async (status, score, timeRemain) => {
 
         const token = localStorage.getItem("token");
-        
+
         let params = {
             levels: props.level,
             score: score,
@@ -51,14 +51,19 @@ export default function CrosswordPuzzle(props) {
             time: timeRemain,
         }
 
-        await axios.post(`${url}/api/activities/crossword`, params,  { headers: { Authorization: `Bearer ${token}` },validateStatus: () => true })
-        .then(res => {
-            console.log(res)
-            const data = res.data
-        })
-        .catch(err => {
-            console.log(err)
-            alert('Something went wrong')
+        await axios.post(`${url}/api/activities/crossword`, params, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+            .then(res => {
+                console.log(res)
+                const data = res.data
+            })
+            .catch(err => {
+                console.log(err)
+                alert('Something went wrong')
+            })
+        await axios.put(`${url}/user/update/${id}`, { playedCross: true }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         })
     }
 
@@ -112,7 +117,7 @@ export default function CrosswordPuzzle(props) {
                     setOpen(true);
 
                     saveGameResults(1, scoreValue.innerHTML, countdown.innerHTML)
-                    
+
                     setTimeout(() => {
                         new Audio("audio/Celebration.mp3").stop()
                         setOpen(false);
@@ -289,7 +294,7 @@ export default function CrosswordPuzzle(props) {
             })
 
             let validPlacement = false
-           
+
             for (let i = 0; i < placements.length; i++) {
                 let X = cellNoToX(placements[i].firstAlphabetCellNo)
                 let Y = cellNoToY(placements[i].firstAlphabetCellNo)
@@ -547,8 +552,8 @@ export default function CrosswordPuzzle(props) {
             setShowDialog={setCanShowDialogLeavingPage}
             confirmNavigation={confirmNavigation}
             cancelNavigation={cancelNavigation}
-       />
-        
+        />
+
         <div className="grid h-screen place-items-center overflow-auto" >
             <div>
                 <div id="container">

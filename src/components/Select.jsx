@@ -67,6 +67,7 @@ const Select = () => {
                         setSpin(false)
                         return
                     }
+                    console.log(rep);
                     setUser(rep)
                     setSpin(false)
                 } catch (error) {
@@ -97,8 +98,13 @@ const Select = () => {
             return
         }
         if (user.playedBible) {
-            showModal("swordSub")
-            return
+            if (!user.paid) {
+                showModal("swordSub")
+                return
+            } else if (Date.now() > new Date(user.expiryDate).getTime()) {
+                showModal("swordSub")
+                return
+            }
         }
         navigate("/word", { state: { numb: 1 } })
     }
@@ -109,8 +115,13 @@ const Select = () => {
             return
         }
         if (user.playedHang) {
-            showModal("swordSub")
-            return
+            if (!user.paid) {
+                showModal("swordSub")
+                return
+            } else if (Date.now() > new Date(user.expiryDate).getTime()) {
+                showModal("swordSub")
+                return
+            }
         }
         navigate("/hangman")
     }
@@ -121,8 +132,13 @@ const Select = () => {
             return
         }
         if (user.playedTrivial) {
-            showModal("swordSub")
-            return
+            if (!user.paid) {
+                showModal("swordSub")
+                return
+            } else if (Date.now() > new Date(user.expiryDate).getTime()) {
+                showModal("swordSub")
+                return
+            }
         }
         navigate("/bible/select")
     }
@@ -133,8 +149,13 @@ const Select = () => {
             return
         }
         if (user.playedCross) {
-            showModal("swordSub")
-            return
+            if (!user.paid) {
+                showModal("swordSub")
+                return
+            } else if (Date.now() > new Date(user.expiryDate).getTime()) {
+                showModal("swordSub")
+                return
+            }
         }
         navigate("/crossword")
     }
