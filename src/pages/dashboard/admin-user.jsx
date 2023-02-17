@@ -67,26 +67,32 @@ export function AdminUser() {
     setUsers(arr)
   }
 
-  const changeRole = async (e, id) => {
+  const changeRole = async (e, user) => {
     const token = sessionStorage.getItem("token");
     const role = e.target.value
     switch (role) {
       case "user":
-        await axios.put(`${url}/user/update/${id}`, { superAdmin: false, admin: false }, {
+        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: false, admin: false }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         break;
       case "admin":
-        await axios.put(`${url}/user/update/${id}`, { superAdmin: false, admin: true }, {
+        if (!user.paid) {
+          return
+        }
+        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: false, admin: true }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         break;
       case "super admin":
-        await axios.put(`${url}/user/update/${id}`, { superAdmin: true, admin: true }, {
+        if (!user.paid) {
+          return
+        }
+        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: true, admin: true }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -191,7 +197,7 @@ export function AdminUser() {
                             href="#"
                             className="text-xs font-semibold text-blue-gray-600"
                           >
-                            <select onChange={(e) => changeRole(e, data?._id)} style={{ outline: "none", cursor: "pointer" }} name="role" id="role">
+                            <select onChange={(e) => changeRole(e, data)} style={{ outline: "none", cursor: "pointer" }} name="role" id="role">
                               <option value="user">User</option>
                               <option selected={!data?.superAdmin && data?.admin && true} value="admin">Admin</option>
                               {user?.superAdmin && <option selected={data?.superAdmin && true} value="super admin">Super admin</option>}

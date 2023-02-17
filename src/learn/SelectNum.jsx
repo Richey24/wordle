@@ -78,6 +78,10 @@ const SelectNum = () => {
             showTheNum()
             return
         }
+        if (arr.length > 1 && Date.now() > new Date(user.expiryDate).getTime()) {
+            showTheNum()
+            return
+        }
         navigate("/bible/names", { state: { count: arr } })
     }
 

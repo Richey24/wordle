@@ -62,6 +62,10 @@ const Difficult = () => {
             showModal("swordSub")
             return
         }
+        if (Date.now() > new Date(user.expiryDate).getTime()) {
+            showModal("swordSub")
+            return
+        }
         navigate("/word", { state: { numb: num } })
     }
 
@@ -84,11 +88,6 @@ const Difficult = () => {
             default:
                 break;
         }
-    }
-
-    const logOut = () => {
-        localStorage.clear()
-        navigate(0)
     }
 
     if (spin) {
