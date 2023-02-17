@@ -5,7 +5,7 @@ import { faToolbox, faPlus, faUserGraduate, faQuestion } from '@fortawesome/font
 import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { useNavigate } from "react-router-dom";
+import { useNavigate,  Prompt } from "react-router-dom";
 
 import axios from 'axios';
 import url from "../../url"
@@ -221,41 +221,44 @@ export default function Puzzle() {
 
     const navigate = useNavigate()
     const [background, setBackground] = useState(() => {
-        const saved = localStorage.getItem("image-backround");
+        const initialValue  = localStorage.getItem("image-backround");
 
         const transition = localStorage.getItem("transition-mode");
+        
         if (transition === 'true') {
             return randomSelectImage()
         }
         // return randomSelectImage()
-        const initialValue = saved;
-        return initialValue || "";
+        return initialValue
     });
+
 
     const [transition, setTransition] = useState(() => {
         const initialValue = localStorage.getItem("transition-mode");
-        return initialValue || "";
+        return initialValue
     });
 
     const handleChange = () => {
         setTransition(!transition);
     };
 
-    const [color, setColor] = useState(() => {
-        const saved = localStorage.getItem("crossword-color");
-        const initialValue = saved;
+    const [colorOne, setColorOne] = useState(() => {
+         // getting stored value
+        const saved = localStorage.getItem("colorOne");
+        const initialValue = JSON.parse(saved);
         return initialValue || "";
     });
 
-    const [color1, setColor1] = useState(() => {
-        const saved = localStorage.getItem("crossword-color2");
-        const initialValue = saved;
-        return initialValue || "";
-    });
+    const [colorTwo, setColorTwo] = useState(() => {
+           // getting stored value
+           const saved = localStorage.getItem("colorTwo");
+           const initialValue = JSON.parse(saved);
+           return initialValue || "";
+    })
 
-    const handleColor = (c1, c2) => {
-        setColor(c1)
-        setColor1(c2)
+    const handleColor = async (c1, c2) => {
+         let params = [c1, c2]
+         setColorOne(params)
     }
 
     const getUserLevels = async () => {
@@ -267,10 +270,7 @@ export default function Puzzle() {
                 const data = res.data
                 if (data) {
                     setGameLevels(data.game_level)
-                } else {
-
-                }
-
+                } 
             })
             .catch(err => {
                 console.log(err)
@@ -278,6 +278,11 @@ export default function Puzzle() {
             })
 
     }
+
+    useEffect(() => {
+        localStorage.setItem("colorOne", JSON.stringify(colorOne));
+    }, [colorOne])
+
 
     useEffect(() => {
         getUserLevels()
@@ -308,11 +313,8 @@ export default function Puzzle() {
 
     return <div>
         <div className="min-h-full">
-
             <Header />
-
-            <CrosswordPuzzle background={background} color={color} color1={color1} level={gamelevels} />
-
+            <CrosswordPuzzle background={background} color={colorOne[0]} color1={colorOne[1]} level={gamelevels} />
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                     <Transition.Child
