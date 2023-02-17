@@ -6,4 +6,18 @@
     border: 1px solid purple;
     padding: 30px;
     border-radius: 12px;
+    margin-top: 10px;
+}
+
+.clearAudit {
+    width: 100px;
+    height: 35px;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-weight: 600;
 }

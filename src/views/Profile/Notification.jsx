@@ -15,15 +15,30 @@ const Notification = ({ user }) => {
     }
 
     return (
-        <div style={{ width: "60vw", padding: "20px" }} className="shadow sm:rounded-md">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <label style={{ fontSize: "22px", fontWeight: "500" }} htmlFor="email">Email Notification</label>
-                <input defaultChecked={user?.emailNotification ? true : false} onChange={saveChanges} style={{ width: "25px", height: "25px", cursor: "pointer" }} id="email" type="checkbox" />
-            </div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "30px" }}>
-                <label style={{ fontSize: "22px", fontWeight: "500" }} htmlFor="news">Newsletter</label>
-                <input defaultChecked={user?.newsletter ? true : false} onChange={saveChanges} style={{ width: "25px", height: "25px", cursor: "pointer" }} id="news" type="checkbox" />
-            </div>
+        <div style={{ width: "30vw", padding: "20px", display: "flex", justifyContent: "center", alignItems: "flex-start", flexDirection: "column" }} className="shadow sm:rounded-md">
+            <label class="relative inline-flex cursor-pointer">
+                <input
+                    type="checkbox"
+                    class="sr-only peer"
+                    defaultChecked={user?.emailNotification ? true : false}
+                    onChange={saveChanges}
+                    id="email"
+                />
+                <div class="w-12 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span style={{ fontSize: "22px", fontWeight: "500" }} class="ml-3 text-sm font-medium">Email Notification</span>
+            </label>
+            <br />
+            <label style={{ marginTop: "50px" }} class="relative inline-flex cursor-pointer">
+                <input
+                    type="checkbox"
+                    class="sr-only peer"
+                    defaultChecked={user?.emailNotification ? true : false}
+                    onChange={saveChanges}
+                    id="news"
+                />
+                <div class="w-12 h-6 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span style={{ fontSize: "22px", fontWeight: "500" }} class="ml-3 text-sm font-medium">Newsletter</span>
+            </label>
         </div>
     )
 }
