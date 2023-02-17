@@ -30,7 +30,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
                 })
                 const rep = await res.data
                 const body = {
-                    dailyBQS: Number(rep.dailyBQS) + Number(((noOfTry[0] / noOfTry[1]) / time).toFixed(2)),
+                    dailyBQS: Number(rep.dailyBQS) + Number((((noOfTry[0] / noOfTry[1]) / time) * 300).toFixed(2)),
                     playedBible: true
                 }
                 await axios.put(`${url}/user/update/${id}`, body, {
@@ -54,7 +54,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
             })
             const rep = await res.data
             const body = {
-                dailyWQS: Number(rep.dailyWQS) + Number(((noOfTry[0] / noOfTry[1]) / time).toFixed(2))
+                dailyWQS: Number(rep.dailyWQS) + Number((((noOfTry[0] / noOfTry[1]) / time) * 300).toFixed(2))
             }
             await axios.put(`${url}/user/update/${id}`, body, {
                 headers: {
@@ -84,7 +84,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
                 <img onClick={nextRound} src={cancel} alt="cancel" className="cancel" />
                 <h2>You Win</h2>
                 <p>You completed {num !== 1 ? `stage ${noOfTry[1]}` : "it"} using {(noOfTry[1] + 1) - (noOfTry[0] / noOfTry[1])} trials in {time} seconds</p>
-                <p className="score">and your total score is {((noOfTry[0] / noOfTry[1]) / time).toFixed(2)}</p>
+                <p className="score">and your total score is {(((noOfTry[0] / noOfTry[1]) / time) * 300).toFixed(2)}</p>
                 <button onClick={nextRound} className="nextX">{num === 1 ? "Play again " : "Next stage "}<img className="arrow" src={arrow} alt="" /></button>
                 <div className="authDiv">
                     <p>Link your stats to all your devices and compete with others on the leaderboard</p>

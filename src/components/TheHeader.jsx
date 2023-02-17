@@ -241,7 +241,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                       </button>
                     }
 
-                    <button onClick={() => navigate("/login")} type="button" className="rounded-md bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <button onClick={() => navigate(admin ? "/admin/login" : "/login")} type="button" className="rounded-md bg-amber-600 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-amber-500  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                       Login
                     </button>
 
