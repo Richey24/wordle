@@ -461,6 +461,7 @@
     height: auto;
     background-color: white;
     padding: 20px;
+    padding-bottom: 40px;
     border-radius: 16px;
     display: none;
 }

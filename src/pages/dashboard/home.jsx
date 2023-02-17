@@ -95,13 +95,22 @@ export function Home() {
         })
         const rep = await res.data
         const arr = rep.sort((a, b) => b.score - a.score)
-        console.log(arr);
         setLeaders(arr)
         setActive("trivial")
         setTitle("Bible Trivial")
         break;
       case "cross":
-        // setActive("cross")
+        const crossRes = await axios.get(`${url}/api/leaderboard`)
+        const crossRep = await crossRes.data
+        const newArr = crossRep.leadboard.map((lead) => {
+          const user = lead.user
+          delete lead.user
+          const newObj = { ...lead, ...user }
+          return newObj
+        })
+        const crossArr = newArr.sort((a, b) => b.score - a.score)
+        setLeaders(crossArr)
+        setActive("cross")
         setTitle("Crossword")
         break;
 
@@ -265,10 +274,11 @@ export function Home() {
                         </td>
                         <td className="py-3 px-4 border-b border-blue-gray-50">
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {active === "word" && leader?.dailyWQS}
-                            {active === "bible" && leader?.dailyBQS}
-                            {active === "hang" && leader?.dailyHS}
+                            {active === "word" && leader?.dailyWQS.toFixed(2)}
+                            {active === "bible" && leader?.dailyBQS.toFixed(2)}
+                            {active === "hang" && leader?.dailyHS.toFixed(2)}
                             {active === "trivial" && leader?.score}
+                            {active === "cross" && leader?.score}
                           </Typography>
                         </td>
                       </tr>
