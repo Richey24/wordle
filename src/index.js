@@ -91,15 +91,15 @@ root.render(
             <Route path='/verify/:id' element={<VerifyUser />} />
             <Route path="/user-account" element={<ProfilePage />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path='/admin' element={<AdminDashboard />}>ad,in/privacy
+            <Route path='/admin' element={<AdminDashboard />}>
                 <Route path="" element={<Home />} />
                 <Route path="privacy" element={<Privacy />} />
                 <Route path="activities" element={<Activity  />} />
                 <Route path="users" element={<AdminUser />} />
-                {/* <Route path="leaderboard" element={<AdminLeaderboard />} /> */}
-                <Route path="games" element={<Games />} />
-                <Route path="incentives" element={<Incentives />} />
-                <Route path="notification" element={<Notification />} /> 
+                <Route path="leaderboard" element={<AdminLeaderboard />} />
+                {/* <Route path="games" element={<Games />} /> */}
+                {/* <Route path="incentives" element={<Incentives />} /> */}
+                {/* <Route path="notification" element={<Notification />} />  */}
             </Route>
           </Routes> 
         </ThemeProvider>

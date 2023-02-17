@@ -11,23 +11,6 @@ import cancel from "../../img/cancel.svg"
 import url from "../../url"
 
 
-const testdatabase = [
-    { name: 'Lionel Francis', score: 10000 },
-    { name: 'James Gardon', score: 1010 },
-    { name: 'Phil Anderson', score: 800 },
-    { name: 'Lara Wells', score: 1032 },
-    { name: 'Ralstan Smith', score: 500 },
-    { name: 'Annie Simpson', score: 600 },
-    { name: 'Joanne Henry', score: 700 },
-    { name: 'Mike Thompson', score: 110 },
-    { name: 'Barret Ferguson', score: 200 },
-    { name: 'Abbie Aims', score: 230 },
-    { name: 'Selfy Hanes', score: 500 },
-    { name: 'Micheal Jackson', score: 730 },
-    { name: 'Rober Holns', score: 230 },
-    { name: 'Mario Read', score: 50 }
-]
-
 const bgVideos = [
     { vid: 'vid-0.mp4' },
     { vid: 'vid-1.mp4' },
@@ -161,7 +144,7 @@ export default function CrosswordLeaderboard() {
                                                     Background Setting
                                                 </Dialog.Title>
 
-                                                <div className="mt-5">
+                                                {/* <div className="mt-5">
                                                     <div class="mx-auto max-w-7xl">
                                                         <div class="relative isolate overflow-hidden bg-gray-900 shadow-2xl">
                                                             <div class="relative mt-10 h-30 lg:mt-8">
@@ -169,14 +152,14 @@ export default function CrosswordLeaderboard() {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> */}
 
                                                 <div className="">
                                                     <div class="grid grid-cols-6 gap-1">
                                                         {
                                                             bgVideos.map((vid, index) => (
                                                                 <div key={index}>
-                                                                    <video onClick={() => selectVideoBg(vid.vid)} src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid.vid}`} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop />
+                                                                    <video  preload="none" onClick={() => selectVideoBg(vid.vid)} src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${vid.vid}`} className="cursor-pointer hover:bg-sky-700 squared-full h-20 w-20 shadow-lg" autoPlay muted loop />
                                                                 </div>
                                                             ))
                                                         }

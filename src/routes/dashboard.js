@@ -28,12 +28,12 @@ import {
           path: "/users",
           element: <Home />,
         },
-        {
-          icon: <TableCellsIcon {...icon} />,
-          name: "games",
-          path: "/games",
-          element: <Home />,
-        },
+        // {
+        //   icon: <TableCellsIcon {...icon} />,
+        //   name: "games",
+        //   path: "/games",
+        //   element: <Home />,
+        // },
         {
             icon: <TableCellsIcon {...icon} />,
             name: "activities",
