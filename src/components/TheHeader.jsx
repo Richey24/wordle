@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react'
+import { Fragment, useState, useEffect, useRef } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon, SpeakerWaveIcon, SpeakerXMarkIcon, EnvelopeOpenIcon } from '@heroicons/react/24/outline'
 import { useLocation, useNavigate } from "react-router-dom"
@@ -14,19 +14,23 @@ import "./TheHeader.css"
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/fontawesome-free-solid'
-
+import { io } from "socket.io-client";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
+
+  const socket = useRef();
   const navigate = useNavigate()
   const id = admin ? sessionStorage.getItem("id") : localStorage.getItem("id")
   const token = admin ? sessionStorage.getItem("token") : localStorage.getItem("token")
   const [user, setUser] = useState({});
   const [loader, setLoader] = useState(true)
 
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  
 
   const logOut = () => {
     localStorage.clear()
@@ -67,9 +71,20 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
     }
   }
 
+
+
   useEffect(() => {
     getUserData()
   }, [])
+
+
+    // Connect to Socket.io
+    useEffect(() => {
+      socket.current = io("http://localhost:5000");
+      socket.current.emit("login", user?._id);
+    }, [user]);
+  
+  
 
   return (<>
     <Loading loading={loader} background="#673AB7" loaderColor="#FFBA15" />
@@ -153,11 +168,14 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                       <div>
                         <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="sr-only">Open user menu</span>
-                          <img
+                          {/* <img
                             className="h-8 w-8 rounded-full"
                             src="/img/profile.png"
                             alt=""
-                          />
+                          /> */}
+                          <div className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-amber-500 text-xl text-white uppercase">
+                            {user?.username[0]}
+                          </div>
                         </Menu.Button>
                       </div>
                       <Transition

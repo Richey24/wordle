@@ -5,7 +5,8 @@ import { IconButton } from "@material-tailwind/react";
 
 
 import { Sidenav} from '../widgets/layout';
-import  DashboardNavbar  from '../widgets/layout/dashboard-navbar';
+import  DashboardHeader  from '../widgets/layout/dashboard-header';
+
 import routes from '../routes/dashboard';
 import { useMaterialTailwindController, setOpenConfigurator } from "../context";
 import { Button } from "@material-tailwind/react";
@@ -19,7 +20,7 @@ function Index() {
             <Sidenav routes={routes} />
             {/* <Button>Button</Button> */}
             <div className="p-4 xl:ml-80">
-             <DashboardNavbar /> 
+               <DashboardHeader /> 
                 
                 <IconButton
                 size="lg"
