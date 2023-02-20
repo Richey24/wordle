@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import THeHeader from "./components/TheHeader";
 import url from "./url";
 
 
@@ -55,30 +56,33 @@ const AdminLogin = () => {
     }
 
     return (
-        <div className="loginMainDiv">
-            <div className="loginDiv">
-                <h1>Admin login</h1>
-                {showErr && <Alert variant="danger">{err}</Alert>}
-                <form onSubmit={submitForm}>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <br />
-                        <input required type="text" id="email" placeholder="Enter your email" name="email" />
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <br />
-                        <input required type="password" id="password" placeholder="Enter your password" name="password" />
-                    </div>
-                    {
-                        spin ? (
-                            <button><Spinner animation="border" color="white" /></button>
-                        ) :
-                            (
-                                <button type="submit">Login</button>
-                            )
-                    }
-                </form>
+        <div>
+            <THeHeader />
+            <div className="loginMainDiv">
+                <div className="loginDiv">
+                    <h1>Admin login</h1>
+                    {showErr && <Alert variant="danger">{err}</Alert>}
+                    <form onSubmit={submitForm}>
+                        <div>
+                            <label htmlFor="email">Email</label>
+                            <br />
+                            <input required type="text" id="email" placeholder="Enter your email" name="email" />
+                        </div>
+                        <div>
+                            <label htmlFor="password">Password</label>
+                            <br />
+                            <input required type="password" id="password" placeholder="Enter your password" name="password" />
+                        </div>
+                        {
+                            spin ? (
+                                <button><Spinner animation="border" color="white" /></button>
+                            ) :
+                                (
+                                    <button type="submit">Login</button>
+                                )
+                        }
+                    </form>
+                </div>
             </div>
         </div>
     )

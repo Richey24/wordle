@@ -1,12 +1,17 @@
 import React from "react";
-import { Routes, Route, Outlet  } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { IconButton } from "@material-tailwind/react";
 
 
+<<<<<<< HEAD
 import { Sidenav} from '../widgets/layout';
 import  DashboardHeader  from '../widgets/layout/dashboard-header';
 
+=======
+import { Sidenav } from '../widgets/layout';
+import DashboardNavbar from '../widgets/layout/dashboard-navbar';
+>>>>>>> 3a90bf990816ef88018dd78b3781a5812cb44e3b
 import routes from '../routes/dashboard';
 import { useMaterialTailwindController, setOpenConfigurator } from "../context";
 import { Button } from "@material-tailwind/react";
@@ -20,23 +25,27 @@ function Index() {
             <Sidenav routes={routes} />
             {/* <Button>Button</Button> */}
             <div className="p-4 xl:ml-80">
+<<<<<<< HEAD
                <DashboardHeader /> 
                 
+=======
+
+>>>>>>> 3a90bf990816ef88018dd78b3781a5812cb44e3b
                 <IconButton
-                size="lg"
-                color="white"
-                className="fixed bottom-8 right-8 z-40 rounded-full shadow-blue-gray-900/10"
-                ripple={false}
-                onClick={() => setOpenConfigurator(dispatch, true)}
+                    size="lg"
+                    color="white"
+                    className="fixed bottom-8 right-8 z-40 rounded-full shadow-blue-gray-900/10"
+                    ripple={false}
+                    onClick={() => setOpenConfigurator(dispatch, true)}
                 >
-                <Cog6ToothIcon className="h-5 w-5" />
+                    <Cog6ToothIcon className="h-5 w-5" />
                 </IconButton>
-                
+
                 {/*  */}
                 <Outlet />
 
                 <div className="text-blue-gray-600">
-                {/* <Footer /> */}
+                    {/* <Footer /> */}
                 </div>
             </div>
         </div>

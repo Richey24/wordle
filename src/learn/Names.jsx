@@ -20,6 +20,7 @@ import asher from "../img/asher.png"
 import url from "../url"
 import axios from "axios"
 import { Spinner } from "react-bootstrap"
+import THeHeader from "../components/TheHeader"
 
 
 const Names = () => {
@@ -111,39 +112,42 @@ const Names = () => {
     }
 
     return (
-        <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNames">
-            <form onSubmit={submitForm}>
-                <h4>Enter player(s) name</h4>
-                {
-                    arr.map((ar, i) => (
-                        <div key={i} >
-                            <input required className="playerName" placeholder={`Enter player ${ar} name`} type="text" />
-                            <div className='tribeDiv'>
-                                <label>Select player {ar} tribe</label>
-                                <p style={{ textTransform: "capitalize" }} onClick={() => selectTribe(`tribe${ar}`)} className='tribeMain'>{tribe[i]} <img src={drop} alt="" /></p>
-                                <ul id={`tribe${ar}`} className='tribeList'>
-                                    <li onClick={() => getTribe(["Asher", "rgb(111, 111, 21)"], `tribe${ar}`, i)}>Asher <img src={asher} alt="" /></li>
-                                    <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"], `tribe${ar}`, i)}>Dan <img src={dan} alt="" /></li>
-                                    <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"], `tribe${ar}`, i)}>Ephraim <img src={ephraim} alt="" /></li>
-                                    <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"], `tribe${ar}`, i)}>Gad <img src={gad} alt="" /></li>
-                                    <li onClick={() => getTribe(["Issachar", "rgb(12, 57, 11)"], `tribe${ar}`, i)}>Issachar <img src={issachar} alt="" /></li>
-                                    <li onClick={() => getTribe(["Joseph", "rgb(12, 571, 31)"], `tribe${ar}`, i)}>Joseph <img src={joseph} alt="" /></li>
-                                    <li onClick={() => getTribe(["Manasseh", "rgb(237, 31, 237)"], `tribe${ar}`, i)}>Manasseh <img src={manasseh} alt="" /></li>
-                                    <li onClick={() => getTribe(["Naphtali", "lightgreen"], `tribe${ar}`, i)}>Naphtali <img src={naftali} alt="" /></li>
-                                    <li onClick={() => getTribe(["Reuben", "orangered"], `tribe${ar}`, i)}>Reuben <img src={reuben} alt="" /></li>
-                                    <li onClick={() => getTribe(["Simeon", "black"], `tribe${ar}`, i)}>Simeon <img src={simeon} alt="" /></li>
-                                    <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"], `tribe${ar}`, i)}>Zebulun <img src={zebulun} alt="" /></li>
-                                    <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"], `tribe${ar}`, i)}>Levi <img src={levi} alt="" /></li>
-                                    <li onClick={() => getTribe(["Judah", "purple"], `tribe${ar}`, i)}>Judah <img src={judah} alt="" /></li>
-                                    <li onClick={() => getTribe(["Benjamin", "rgb(249, 213, 115)"], `tribe${ar}`, i)}>Benjamin <img src={benjamin} alt="" /></li>
-                                </ul>
+        <div>
+            <THeHeader />
+            <div style={{ backgroundColor: user.tribe ? user.tribe[1] : "" }} className="mainNames">
+                <form onSubmit={submitForm}>
+                    <h4>Enter player(s) name</h4>
+                    {
+                        arr.map((ar, i) => (
+                            <div key={i} >
+                                <input required className="playerName" placeholder={`Enter player ${ar} name`} type="text" />
+                                <div className='tribeDiv'>
+                                    <label>Select player {ar} tribe</label>
+                                    <p style={{ textTransform: "capitalize" }} onClick={() => selectTribe(`tribe${ar}`)} className='tribeMain'>{tribe[i]} <img src={drop} alt="" /></p>
+                                    <ul id={`tribe${ar}`} className='tribeList'>
+                                        <li onClick={() => getTribe(["Asher", "rgb(111, 111, 21)"], `tribe${ar}`, i)}>Asher <img src={asher} alt="" /></li>
+                                        <li onClick={() => getTribe(["Dan", "rgb(250, 100, 125)"], `tribe${ar}`, i)}>Dan <img src={dan} alt="" /></li>
+                                        <li onClick={() => getTribe(["Ephraim", "rgb(58, 58, 241)"], `tribe${ar}`, i)}>Ephraim <img src={ephraim} alt="" /></li>
+                                        <li onClick={() => getTribe(["Gad", "rgb(142, 200, 239)"], `tribe${ar}`, i)}>Gad <img src={gad} alt="" /></li>
+                                        <li onClick={() => getTribe(["Issachar", "rgb(12, 57, 11)"], `tribe${ar}`, i)}>Issachar <img src={issachar} alt="" /></li>
+                                        <li onClick={() => getTribe(["Joseph", "rgb(12, 571, 31)"], `tribe${ar}`, i)}>Joseph <img src={joseph} alt="" /></li>
+                                        <li onClick={() => getTribe(["Manasseh", "rgb(237, 31, 237)"], `tribe${ar}`, i)}>Manasseh <img src={manasseh} alt="" /></li>
+                                        <li onClick={() => getTribe(["Naphtali", "lightgreen"], `tribe${ar}`, i)}>Naphtali <img src={naftali} alt="" /></li>
+                                        <li onClick={() => getTribe(["Reuben", "orangered"], `tribe${ar}`, i)}>Reuben <img src={reuben} alt="" /></li>
+                                        <li onClick={() => getTribe(["Simeon", "black"], `tribe${ar}`, i)}>Simeon <img src={simeon} alt="" /></li>
+                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"], `tribe${ar}`, i)}>Zebulun <img src={zebulun} alt="" /></li>
+                                        <li onClick={() => getTribe(["Zebulun", "rgb(79, 7, 7)"], `tribe${ar}`, i)}>Levi <img src={levi} alt="" /></li>
+                                        <li onClick={() => getTribe(["Judah", "purple"], `tribe${ar}`, i)}>Judah <img src={judah} alt="" /></li>
+                                        <li onClick={() => getTribe(["Benjamin", "rgb(249, 213, 115)"], `tribe${ar}`, i)}>Benjamin <img src={benjamin} alt="" /></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    ))
-                }
-                <button type="submit">Submit</button>
-                <button style={{ backgroundColor: "tomato" }} onClick={() => navigate("/bible/select")} type="submit">Cancel</button>
-            </form>
+                        ))
+                    }
+                    <button type="submit">Submit</button>
+                    <button style={{ backgroundColor: "tomato" }} onClick={() => navigate("/bible/select")} type="submit">Cancel</button>
+                </form>
+            </div>
         </div>
     )
 }

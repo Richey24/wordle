@@ -20,7 +20,7 @@ const Result = ({ time, trial, user }) => {
             })
             const rep = await res.data
             const body = {
-                hangmanScore: Number(rep.hangmanScore) + Number(((6 - trial.length) / time).toFixed(2)),
+                hangmanScore: Number(rep.hangmanScore) + Number((((6 - trial.length) / time) * 300).toFixed(2)),
                 playedHang: true
             }
             await axios.put(`${url}/user/update/${id}`, body, {
@@ -45,7 +45,7 @@ const Result = ({ time, trial, user }) => {
             })
             const rep = await res.data
             const body = {
-                dailyHS: Number(rep.dailyHS) + Number(((6 - trial.length) / time).toFixed(2)),
+                dailyHS: Number(rep.dailyHS) + Number((((6 - trial.length) / time) * 300).toFixed(2)),
                 playedHang: true
             }
             await axios.put(`${url}/user/update/${id}`, body, {
@@ -65,7 +65,7 @@ const Result = ({ time, trial, user }) => {
             <img onClick={hideModal} src={cancel} alt="cancel" className="cancelHang" />
             <h2>You Win</h2>
             <p>You completed this round within {time} seconds</p>
-            <p className="score">and your total score is {((6 - trial.length) / time).toFixed(2)}</p>
+            <p className="score">and your total score is {(((6 - trial.length) / time) * 300).toFixed(2)}</p>
             <button onClick={nextRound} className="next">Play again <img className="arrow" src={arrow} alt="" /></button>
             {!user.paid && <div className="authDiv">
                 <p>Subscribe to gain access to all the premium features we offer</p>
