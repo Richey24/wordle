@@ -43,6 +43,8 @@ export function Home() {
   const [leaders, setLeaders] = useState([])
   const [active, setActive] = useState("word")
   const [title, setTitle] = useState("Word Quest")
+  const [report, setReport] = useState([]);
+  
   const fetchUser = async () => {
     const token = sessionStorage.getItem("token");
     await axios.get(`${url}/api/user/all`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
@@ -61,8 +63,21 @@ export function Home() {
       })
   }
 
+  const fetchReport = async () => {
+    const token = sessionStorage.getItem("token");
+    await axios.get(`${url}/api/admin`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+      .then( res => {
+        console.log( res) 
+        setReport(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     fetchUser()
+    fetchReport()
   }, [])
 
   const getLeaders = async (val) => {
@@ -116,7 +131,7 @@ export function Home() {
       <div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
           <StatisticsCard
-            value={users.length}
+            value={report.onlineUsers}
             color="pink"
             title="User"
             icon={React.createElement(UserIcon, {
@@ -130,7 +145,7 @@ export function Home() {
             }
           />
           <StatisticsCard
-            value="4"
+            value={report.userCount}
             color="blue"
             title="Gameplay Count"
             icon={React.createElement(BanknotesIcon, {
@@ -144,7 +159,7 @@ export function Home() {
             }
           />
           <StatisticsCard
-            value={country.size}
+           value={report.countryCount}
             color="green"
             title="Country"
             icon={React.createElement(BanknotesIcon, {
@@ -158,7 +173,7 @@ export function Home() {
             }
           />
           <StatisticsCard
-            value="1"
+            value="0"
             color="orange"
             title="Incentives Available"
             icon={React.createElement(BanknotesIcon, {
