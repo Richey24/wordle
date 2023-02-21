@@ -34,13 +34,13 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
 
   const logOut = () => {
     localStorage.clear()
-    navigate(0)
+    navigate("/")
   }
 
   const getUserData = async () => {
     setLoader(true)
     try {
-      
+
       const res = await axios.get(`${url}/user/get/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -224,7 +224,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                             {({ active }) => (
                               <p
                                 onClick={logOut}
-                                href="#"
+                                style={{ cursor: "pointer" }}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
                               >
                                 Sign out
@@ -275,6 +275,6 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
         </>
       )}
     </Disclosure>
-    </>
+  </>
   )
 }

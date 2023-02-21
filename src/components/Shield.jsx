@@ -32,8 +32,9 @@ const Shield = () => {
                 validateStatus: () => true
             })
             const rep = await res.data
-            setStudies(rep)
-            setFit(rep)
+            const arr = rep.filter((re) => re.admin === true)
+            setStudies(arr)
+            setFit(arr)
             setSpin(false)
         } catch (error) {
             setSpin(false)

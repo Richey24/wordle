@@ -463,6 +463,7 @@ const Wordle = () => {
             }
 
             if (remainingTiles.length === 0) {
+                clearInterval(timer)
                 showAlert(targetWord.toUpperCase(), null)
                 stopInteraction()
             }

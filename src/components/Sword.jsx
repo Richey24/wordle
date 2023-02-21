@@ -97,7 +97,7 @@ const Sword = () => {
     }
 
     const createStudy = () => {
-        if (studies.length >= 5 && !user.paid) {
+        if (studies.length >= 5 && !user.paid && Date.now() > new Date(user.expiryDate).getTime()) {
             showModal("swordSub")
             return
         }
