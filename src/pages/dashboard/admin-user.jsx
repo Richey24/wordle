@@ -18,8 +18,6 @@ import { DashboardNavbar } from "../../widgets/layout";
 
 export function AdminUser() {
 
-  const online = false;
-
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [fil, setFil] = useState([])
