@@ -12,7 +12,7 @@ const CancelSub = () => {
     const navigate = useNavigate()
 
     const cancelSubscription = async () => {
-        const res = await axios.post(`http://localhost:5000/cancel/sub/${id}`)
+        const res = await axios.post(`${url}/cancel/sub/${id}`)
         console.log(res);
         if (res.status === 200) {
             setShow(true)

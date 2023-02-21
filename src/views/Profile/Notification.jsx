@@ -23,7 +23,7 @@ const Notification = ({ user }) => {
             id: user._id,
             firstName: user.firstName
         }
-        const res = await axios.post(`http://localhost:5000/user/cancel/sub/mail`, body, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        const res = await axios.post(`${url}/user/cancel/sub/mail`, body, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
         if (res.status === 200) {
             setCan(true)
         }
