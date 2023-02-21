@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import {
   Card,
   CardHeader,
+  Button,
   CardBody,
   Typography,
   Avatar,
@@ -12,6 +13,9 @@ import {
 import Moment from 'react-moment';
 import axios from "axios"
 import url from "../../url"
+import {
+    ChevronRightIcon,
+  } from "@heroicons/react/24/solid";
 
 import medal1 from '../../assets/medals/medal-1.png'
 import medal2 from '../../assets/medals/medal-2.png'
@@ -41,7 +45,22 @@ export function AdminLeaderboard() {
 
     return (
         <div>
-             {/* <DashboardNavbar username={user.username} filterUser={filterUser} /> */}
+              <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
+                <div className="capitalize">
+                </div>
+                <div className="flex items-center">
+                    <div className="mr-auto md:mr-4 md:w-56">
+                        </div>
+                        <Button
+                            variant="filled"
+                            color="blue"
+                            className="hidden items-center gap-1 px-4 xl:flex">
+                            Weekly Winners
+                            <ChevronRightIcon className="h-5 w-5" />
+                        </Button>
+                    
+                    </div>
+               </div>
              <div className="mt-12 mb-8 flex flex-col gap-12">
                 <Card>
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">

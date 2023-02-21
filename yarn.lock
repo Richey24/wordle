@@ -8162,9 +8162,7 @@ react-dev-utils@^12.0.1:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-<<<<<<< HEAD
-"react-dom@^0.14 || ^15.0.0-rc || ^15.0 || ^16.0.0 || ^16.0", "react-dom@^16 || ^17 || ^18", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", react-dom@^18.0.0, react-dom@^18.2.0, react-dom@>=15.0.0, react-dom@>=16.14.0, react-dom@>=16.6.0, react-dom@>=16.8, "react-dom@>=16.8 || ^17.0.0 || ^18.0.0", react-dom@>=16.8.0, "react-dom@~0.14.8 || ^15.0.0 || ^16.0.0", "react-dom@~0.14.8 || ^15.0.0 || ^16.0.0 || ^17.0.0", react-dom@16.13.1:
-=======
+
 react-dom@^16.4.1, react-dom@^16.8.6:
   version "16.14.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz"
@@ -8176,7 +8174,6 @@ react-dom@^16.4.1, react-dom@^16.8.6:
     scheduler "^0.19.1"
 
 react-dom@^18.2.0:
->>>>>>> 3a90bf990816ef88018dd78b3781a5812cb44e3b
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==

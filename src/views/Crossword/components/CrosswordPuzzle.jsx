@@ -261,7 +261,11 @@ export default function CrosswordPuzzle(props) {
         blocks().forEach(block => block.style.transform = "scale(1)")
         clearInterval(window.countdownID)
         window.keysAllowed = false
-        setFailed(true)
+
+        setTimeout(() => {
+            setFailed(true)
+        }, 5000)
+      
     }
 
     const placeResults = async (params) => {
