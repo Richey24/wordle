@@ -54,6 +54,7 @@ import ProfilePage from './views/Profile/PofilePage';
 import Privacy from './views/Privacy/Privacy';
 import { ThemeProvider } from "@material-tailwind/react";
 import { MaterialTailwindControllerProvider } from "./context"
+import CancelSub from './views/Profile/CancelSub';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -89,6 +90,7 @@ root.render(
           <Route path="/crossword" element={<Crossword />} />
           <Route path="/crossword/leader" element={<CrosswordLeader />} />
           <Route path='/subscription' element={<StripeContainer />} />
+          <Route path='/cancel/sub/:id' element={<CancelSub />} />
           <Route path='/verify' element={<Verify />} />
           <Route path='/verify/:id' element={<VerifyUser />} />
           <Route path="/user-account" element={<ProfilePage />} />
