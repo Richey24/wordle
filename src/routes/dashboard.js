@@ -29,6 +29,18 @@ export const routes = [
         element: <Home />,
       },
       {
+        icon: <UserCircleIcon {...icon} />,
+        name: "acitivity ",
+        path: "/activities",
+        element: <Home />,
+      },
+      {
+        icon: <UserCircleIcon {...icon} />,
+        name: "Leaderboard ",
+        path: "/leaderboard",
+        element: <Home />,
+      },
+      {
         icon: <TableCellsIcon {...icon} />,
         name: "Bible Trivial",
         path: "/trivial",

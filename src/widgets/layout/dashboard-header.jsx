@@ -39,26 +39,30 @@ export function DashboardNavbar({ filterUser, username }) {
     >
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
-        </div>
-        <div className="flex items-center">
-          <div className="mr-auto md:mr-4 md:w-56">
-            <Input onChange={filterUser} label="Type here" />
-          </div>
-          <Button
-            variant="text"
-            color="blue-gray"
-            className="hidden items-center gap-1 px-4 xl:flex"
+          <Breadcrumbs
+            className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""
+              }`}
           >
-            <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-            {username}
-          </Button>
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={logOut}
-          >
-            <img title="Logout" src={logImg} alt="" />
-          </IconButton>
+            <Link to={`/${layout}`}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100"
+              >
+                {layout}
+              </Typography>
+            </Link>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="font-normal"
+            >
+              {page}
+            </Typography>
+          </Breadcrumbs>
+          <Typography variant="h6" color="blue-gray">
+            {page}
+          </Typography>
         </div>
       </div>
     </Navbar>
