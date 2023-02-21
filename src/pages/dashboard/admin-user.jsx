@@ -18,7 +18,7 @@ import { DashboardNavbar } from "../../widgets/layout";
 
 export function AdminUser() {
 
-  const online = true;
+  const online = false;
 
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
@@ -64,6 +64,7 @@ export function AdminUser() {
   const filterUser = (e) => {
     const word = e.target.value.toLowerCase()
     const arr = fil.filter((fi) => `${fi.username.toLowerCase()} ${fi.email}`.includes(word))
+    console.log(arr)
     setUsers(arr)
   }
 
@@ -171,11 +172,10 @@ export function AdminUser() {
                         <td className={className}>
                           <Chip
                             variant="gradient"
-                            color={online ? "green" : "blue-gray"}
-                            value="online"
+                            color={data.onlineStatus ? "green" : "blue-gray"}
+                            value={data.onlineStatus ? "Online" : "Offline"}
                             className="py-0.5 px-2 text-[11px] font-medium"
                           />
-
                         </td>
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">

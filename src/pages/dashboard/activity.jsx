@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import url from "../../url"
+import Moment from 'react-moment';
 import profileImage from '../../assets/img/profile.png'
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import {
@@ -117,7 +118,7 @@ import {
                             href="#"
                             className="text-xs font-semibold text-blue-gray-600"
                           >
-                          {data.date}
+                          <Moment>{data.date}</Moment>
                           </Typography>
                         </td>
                         <td className={className}>

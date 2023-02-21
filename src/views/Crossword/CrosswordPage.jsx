@@ -238,6 +238,10 @@ export default function Puzzle() {
         return initialValue
     });
 
+    // useEffect(() => {
+    //     return 
+    // })
+
     const handleChange = () => {
         setTransition(!transition);
     };

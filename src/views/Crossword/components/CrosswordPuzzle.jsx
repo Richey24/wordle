@@ -20,8 +20,10 @@ export default function CrosswordPuzzle(props) {
     const [failed, setFailed] = useState(false);
     const [bibleWords, setBibleWords] = useState(false);
     const [message, setMessage] = useState("Are you sure you want to quit without saving your changes?")
+    
     // PROMPT USER BEFORE LEAVING THE GAME: INCOMPLETE
     const [canShowDialogLeavingPage, setCanShowDialogLeavingPage] = useState(false);
+
     const [showDialogLeavingPage, confirmNavigation, cancelNavigation] = useNavigatingAway(canShowDialogLeavingPage);
     const id = localStorage.getItem("id")
 
@@ -259,7 +261,11 @@ export default function CrosswordPuzzle(props) {
         blocks().forEach(block => block.style.transform = "scale(1)")
         clearInterval(window.countdownID)
         window.keysAllowed = false
-        setFailed(true)
+
+        setTimeout(() => {
+            setFailed(true)
+        }, 5000)
+      
     }
 
     const placeResults = async (params) => {
@@ -269,6 +275,7 @@ export default function CrosswordPuzzle(props) {
         const cells = document.querySelectorAll('.cell')
         cells.forEach(cell => cell.style.opacity = "1")
         let results = await getResults(params)
+        console.log(results.length)
         console.log(results)
         placeFirstResult(results)
 

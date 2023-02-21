@@ -101,9 +101,9 @@ root.render(
             <Route path="users" element={<AdminUser />} />
             <Route path="trivial" element={<QuestionList />} />
             <Route path="trash" element={<ToBeDel />} />
-            <Route path="leaderboards" element={<AdminLeaderboard />} />
+            <Route path="leaderboard" element={<AdminLeaderboard />} />
+            <Route path="activities" element={<Activity />} />
           </Route>
-
         </Routes>
       </ThemeProvider>
     </MaterialTailwindControllerProvider>
