@@ -272,7 +272,7 @@ const Select = () => {
                     </div>
                 </div>
                 <div id="swordSub" className="selectSub">
-                    <p>You have use your free daily pass, kindly subscribe to have unlimited access</p>
+                    <p>You have used your free daily pass, kindly subscribe to have unlimited access.</p>
                     <button onClick={() => navigate("/subscription")}>Subscribe</button>
                     <button onClick={() => showModal("swordSub")}>Cancel</button>
                 </div>
