@@ -13,7 +13,7 @@ const AddQuest = () => {
     const list = state?.list
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState(false)
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
 
     // document.addEventListener("keydown", (e) => {
     //     if (e.key === "Backspace") {
