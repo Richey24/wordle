@@ -105,6 +105,7 @@ const Register = () => {
         }
 
         const res = await axios.post(`${url}/user/register`, user, { validateStatus: () => true })
+        console.log( res)
         switch (res.status) {
             case 400:
                 setErr("Fill all required filled and try again")
