@@ -32,10 +32,10 @@ const Select = () => {
 
 
     const checkIfGamePlayed = async () => {
-        console.log('check ')
+       
         const token = localStorage.getItem("token")
         await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
-        .then(async (res) => {
+        .then((res) => {
             console.log(res.data)
             setGamePlayed(res.data)
         })
@@ -179,7 +179,9 @@ const Select = () => {
              navigate("/crossword")
         }
 
-       
+       if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === false) {
+          navigate("/crossword")
+       }
        
     }
 

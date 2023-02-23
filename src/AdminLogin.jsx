@@ -40,6 +40,8 @@ const AdminLogin = () => {
                 break;
             case 200:
                 const rep = await res.data
+
+            
                 if (rep.admin) {
                     sessionStorage.setItem('id', rep._id)
                     sessionStorage.setItem('token', rep.mainToken)
@@ -48,6 +50,7 @@ const AdminLogin = () => {
                     setErr("You are not an admin")
                     setShowErr(true)
                 }
+
                 break;
             default:
                 break;

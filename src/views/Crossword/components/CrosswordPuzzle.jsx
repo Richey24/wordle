@@ -751,7 +751,7 @@ export default function CrosswordPuzzle(props) {
         </div>
 
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={setOpen}>
+            <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -821,7 +821,7 @@ export default function CrosswordPuzzle(props) {
         </Transition.Root>
         
          <div >
-         (gamePlayed.paid === false && gamePlayed.gamePlay  === true ) && <LimitUserAccess /> 
+         {(gamePlayed.paid === false && gamePlayed.gamePlay === true ) && <LimitUserAccess /> }
          </div>
 
     </div>
