@@ -88,12 +88,16 @@ const Wordle = () => {
                     })
                     const rep = await res.data
                     if (res.status !== 200) {
+                        navigate("/login")
                         setSpin(false)
                         return
                     }
-                    if (token !== rep.mainToken) {
-                        localStorage.clear()
-                        setSpin(false)
+                    if (rep.playedBible && !rep.paid && num === 1) {
+                        navigate("/")
+                        return
+                    }
+                    if (num === 1 && rep.playedBible && Date.now() > new Date(user.expiryDate).getTime()) {
+                        navigate("/")
                         return
                     }
                     setUser(rep)
@@ -450,7 +454,7 @@ const Wordle = () => {
             })
         }
 
-        function checkWinLose(guess, tiles) {
+        async function checkWinLose(guess, tiles) {
             const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
             if (guess === targetWord) {
                 clearInterval(timer)
@@ -464,6 +468,13 @@ const Wordle = () => {
 
             if (remainingTiles.length === 0) {
                 clearInterval(timer)
+                if (num === 1) {
+                    await axios.put(`${url}/user/update/${id}`, { playedBible: true }, {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    })
+                }
                 showAlert(targetWord.toUpperCase(), null)
                 stopInteraction()
             }

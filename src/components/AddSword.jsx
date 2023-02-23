@@ -17,6 +17,34 @@ const AddSword = () => {
     const [err, setErr] = useState(false)
     const [arr, setArr] = useState(['a'])
 
+    const getUser = async () => {
+        const res = await axios.get(`${url}/user/get/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        const res1 = await axios.get(`${url}/sword/get/all/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        if (res.status !== 200 || res1.status !== 200) {
+            navigate("/login")
+        }
+        const rep = await res.data
+        const rep1 = await res1.data
+        if (rep1.length >= 5 && !rep.paid) {
+            navigate("/watchman")
+            return
+        }
+        if (rep1.length >= 5 && Date.now() > new Date(rep.expiryDate).getTime()) {
+            navigate("/watchman")
+            return
+        }
+    }
+
     useEffect(() => {
         if (!id) {
             navigate("/")
@@ -24,6 +52,7 @@ const AddSword = () => {
         if (study) {
             setArr(study.scripture)
         }
+        getUser()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
