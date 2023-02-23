@@ -40,7 +40,7 @@ const AdminLogin = () => {
                 break;
             case 200:
                 const rep = await res.data
-                if (rep.admin) {
+                if (rep.admin || rep.superAdmin) {
                     sessionStorage.setItem('id', rep._id)
                     sessionStorage.setItem('token', rep.mainToken)
                     navigate('/admin')
