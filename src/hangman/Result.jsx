@@ -69,7 +69,7 @@ const Result = ({ time, trial, user }) => {
             <button onClick={nextRound} className="next">Play again <img className="arrow" src={arrow} alt="" /></button>
             {!user.paid && <div className="authDiv">
                 <p>Subscribe to gain access to all the premium features we offer</p>
-                <button onClick={() => navigate("/subscription")}>Subscribe</button>
+                <button class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded" onClick={() => navigate("/subscription")}>Subscribe</button>
             </div>}
             <div style={{ paddingTop: "40px" }} className="authDiv">
                 <button>Play bible trivial</button>
