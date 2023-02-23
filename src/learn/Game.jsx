@@ -304,10 +304,10 @@ const Game = () => {
                     }
                     <button onClick={() => navigate("/quiz/leader")}>Leaderboard</button>
                 </div>
-                <div>
+                {!user.paid && <div>
                     <p>Subscribe to play multiple times a day and gain premium access to all other games and features</p>
-                    <button>Subscribe</button>
-                </div>
+                    <button class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">Subscribe</button>
+                </div>}
             </div>
             <div style={{ position: "fixed" }} className="fab-container">
                 <div className="fab shadow">

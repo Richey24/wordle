@@ -77,8 +77,8 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
         <div>
             <div id="swordSub" className="swordSub">
                 <p>You can only play up to stage 5 for the free plan, subscribe to play up to 15 stages</p>
-                <button onClick={() => navigate("/subscription")}>Subscribe</button>
-                <button onClick={() => navigate("/")}>Cancel</button>
+                <button class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded" onClick={() => navigate("/subscription")}>Subscribe</button>
+                <button class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded" onClick={() => navigate("/")}>Cancel</button>
             </div>
             <div id="resultDiv" className="resultDiv">
                 <img onClick={nextRound} src={cancel} alt="cancel" className="cancel" />
@@ -88,7 +88,7 @@ const Result = ({ noOfTry, time, num, setNum, user }) => {
                 <button onClick={nextRound} className="nextX">{num === 1 ? "Play again " : "Next stage "}<img className="arrow" src={arrow} alt="" /></button>
                 <div className="authDiv">
                     <p>Link your stats to all your devices and compete with others on the leaderboard</p>
-                    <button onClick={() => navigate("/login")}>Log in or create a free account</button>
+                    {!id && <button onClick={() => navigate("/login")}>Log in or create a free account</button>}
                 </div>
                 <div style={{ paddingTop: "40px" }} className="authDiv">
                     <button>Play bible trivial</button>

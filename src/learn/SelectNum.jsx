@@ -128,8 +128,8 @@ const SelectNum = () => {
             </div>
             <div id="theSelectNumDiv" className="theSelectNumDiv">
                 <p>You need to subscribe to access more than one player</p>
-                <button onClick={() => navigate("/subscribe")}>Subscribe</button>
-                <button onClick={showTheNum}>Cancel</button>
+                <button class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded" onClick={() => navigate("/subscribe")}>Subscribe</button>
+                <button class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded" onClick={showTheNum}>Cancel</button>
             </div>
         </div>
     )
