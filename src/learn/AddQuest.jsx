@@ -110,7 +110,7 @@ const AddQuest = () => {
                     <div className="addQuestBtn">
                         <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
                         ) : list ? "Edit question" : "Create question"} </button>
-                        <button onClick={() => navigate("/question/list")}>Cancel</button>
+                        <button onClick={() => navigate("/admin/trivial")}>Cancel</button>
                     </div>
                     {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
                 </form>
