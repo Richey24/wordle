@@ -12,6 +12,7 @@ import axios from 'axios';
 import url from "../../../url"
 import { DialogLeavingPage } from '../../../components/DialogLeavingPage';
 import { useNavigatingAway } from '../../../hooks/useNavigatingAway';
+import  LimitUserAccess     from '../../../components/LimitUserAccess';
 
 export default function CrosswordPuzzle(props) {
 
@@ -20,6 +21,7 @@ export default function CrosswordPuzzle(props) {
     const [failed, setFailed] = useState(false);
     const [bibleWords, setBibleWords] = useState(false);
     const [message, setMessage] = useState("Are you sure you want to quit without saving your changes?")
+    const [gamePlayed, setGamePlayed ]= useState(false)
     
     // PROMPT USER BEFORE LEAVING THE GAME: INCOMPLETE
     const [canShowDialogLeavingPage, setCanShowDialogLeavingPage] = useState(false);
@@ -27,6 +29,17 @@ export default function CrosswordPuzzle(props) {
     const [showDialogLeavingPage, confirmNavigation, cancelNavigation] = useNavigatingAway(canShowDialogLeavingPage);
     const id = localStorage.getItem("id")
 
+    const checkIfGamePlayed = async () => {
+        const token = localStorage.getItem("token")
+        await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        .then(async (res) => {
+            console.log(res.data)
+            setGamePlayed(res.data)
+        })
+        .catch( err => {
+            console.log(err.response)
+        })
+    }
 
     // TODO: Nice have functionality 
     const randomSetGradientPosition = async () => { }
@@ -70,6 +83,7 @@ export default function CrosswordPuzzle(props) {
     }
 
     useEffect(() => {
+        checkIfGamePlayed()
         fetchBibleWords()
         // placeResults()
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -545,10 +559,12 @@ export default function CrosswordPuzzle(props) {
     const [open, setOpen] = useState(false)
     const cancelButtonRef = useRef(null)
 
+
     const handleShow = (e) => {
         e.preventDefault();
         setOpen(true);
     }
+
 
     return <div className="min-h-screen crosswordBackground bg-no-repeat bg-fixed bg-center" style={{ backgroundImage: `url('https://absa7kzimnaf.blob.core.windows.net/newcontainer/${props.background}')` }}>
         {/* <button onClick={handleShow}>test</button> */}
@@ -735,7 +751,7 @@ export default function CrosswordPuzzle(props) {
         </div>
 
         <Transition.Root show={open} as={Fragment}>
-            <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+            <Dialog as="div" className="relative z-10" onClose={setOpen}>
                 <Transition.Child
                     as={Fragment}
                     enter="ease-out duration-300"
@@ -760,7 +776,7 @@ export default function CrosswordPuzzle(props) {
                         >
                             <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                    <Congratulation message={'Congratulations on your success!'} title={'Level Up!'} />
+                                    <Congratulation message={'Congratulations on your success!'} played={gamePlayed} title={'Level Up!'} />
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
@@ -803,5 +819,10 @@ export default function CrosswordPuzzle(props) {
                 </div>
             </Dialog>
         </Transition.Root>
+        
+         <div >
+         (gamePlayed.paid === false && gamePlayed.gamePlay  === true ) && <LimitUserAccess /> 
+         </div>
+
     </div>
 }

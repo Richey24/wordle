@@ -1,3 +1,5 @@
+import { Dialog, Transition } from '@headlessui/react'
+
 import "./Select.css"
 import word from "../img/white-wordle.png"
 import bible from "../img/white-bible.png"
@@ -10,8 +12,7 @@ import benjamin from "../img/benjamin.png"
 import gad from "../img/gad.png"
 import reuben from "../img/reuben.png"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-import { useEffect } from "react"
+import { Fragment, useEffect, useState, useRef } from "react"
 import axios from "axios"
 import url from "../url"
 import { Spinner } from "react-bootstrap"
@@ -24,11 +25,31 @@ const Select = () => {
     const [user, setUser] = useState({})
     const [soundOn, setSoundOn] = useState(true)
     const [spin, setSpin] = useState(true)
+    const [crossWordPlayed, setGamePlayed ]= useState(false)
+
+    const [subModal, setSubModal] = useState(false)
+    const cancelButtonRef = useRef(null)
 
 
+    const checkIfGamePlayed = async () => {
+        console.log('check ')
+        const token = localStorage.getItem("token")
+        await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        .then(async (res) => {
+            console.log(res.data)
+            setGamePlayed(res.data)
+        })
+        .catch( err => {
+            console.log(err.response)
+        })
+    }
 
     useEffect(() => {
+        checkIfGamePlayed()
+    },[])
 
+    useEffect(() => {
+        
         let settings = localStorage.getItem("Settings")
 
         if (settings == undefined) {
@@ -42,7 +63,6 @@ const Select = () => {
 
             setSoundOn(settings.sound)
         }
-
 
     }, [])
 
@@ -99,10 +119,10 @@ const Select = () => {
         }
         if (user.playedBible) {
             if (!user.paid) {
-                showModal("swordSub")
+                setSubModal(true)
                 return
             } else if (Date.now() > new Date(user.expiryDate).getTime()) {
-                showModal("swordSub")
+                setSubModal(true)
                 return
             }
         }
@@ -116,10 +136,10 @@ const Select = () => {
         }
         if (user.playedHang) {
             if (!user.paid) {
-                showModal("swordSub")
+                setSubModal(true)
                 return
             } else if (Date.now() > new Date(user.expiryDate).getTime()) {
-                showModal("swordSub")
+                setSubModal(true)
                 return
             }
         }
@@ -133,10 +153,10 @@ const Select = () => {
         }
         if (user.playedTrivial) {
             if (!user.paid) {
-                showModal("swordSub")
+                setSubModal(true)
                 return
             } else if (Date.now() > new Date(user.expiryDate).getTime()) {
-                showModal("swordSub")
+                setSubModal(true)
                 return
             }
         }
@@ -144,20 +164,23 @@ const Select = () => {
     }
 
     const navCross = () => {
+      
         if (Object.keys(user).length === 0) {
             navigate("/login")
             return
         }
-        if (user.playedCross) {
-            if (!user.paid) {
-                showModal("swordSub")
-                return
-            } else if (Date.now() > new Date(user.expiryDate).getTime()) {
-                showModal("swordSub")
-                return
-            }
+
+        console.log(crossWordPlayed);
+        if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === true) {
+            setSubModal(true)
+        } 
+
+        if (crossWordPlayed.paid === true) {
+             navigate("/crossword")
         }
-        navigate("/crossword")
+
+       
+       
     }
 
     const playSound = async (val) => {
@@ -271,11 +294,64 @@ const Select = () => {
                         <p>My Sword & Shield</p>
                     </div>
                 </div>
+                
+                {/* Subscription component goes here */}
                 <div id="swordSub" className="selectSub">
                     <p>You have used your free daily pass, kindly subscribe to have unlimited access.</p>
                     <button onClick={() => navigate("/subscription")}>Subscribe</button>
-                    <button onClick={() => showModal("swordSub")}>Cancel</button>
+                    <button onClick={() => setSubModal(true)}>Cancel</button>
                 </div>
+
+                <Transition.Root show={subModal} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setSubModal}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0">
+                            <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
+                        </Transition.Child>
+
+                        <div className="fixed inset-0 z-10 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                    enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                >
+                                    <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                        <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                <div>
+                                                    <p>You have used your free daily pass, kindly subscribe to have unlimited access.</p>
+                                                </div>
+                                                <div className="mt-2">
+                                                    <button onClick={() => navigate("/subscription")} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                         Subscribe
+                                                    </button>
+                                                    <button onClick={() => setSubModal(false)} class="mt-1 block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
+                        </div>
+                    </Dialog>
+                </Transition.Root>
+
+
+
+
                 <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
                     <p style={{ fontWeight: "600" }}>Will be added soon...</p>
                     <button onClick={() => showModal("comingSoon")}>Cancel</button>
