@@ -101,6 +101,10 @@ const Sword = () => {
             showModal("swordSub")
             return
         }
+        if (studies.length >= 5 && Date.now() > new Date(user.expiryDate).getTime()) {
+            showModal("swordSub")
+            return
+        }
         navigate("/watchman/create")
     }
 

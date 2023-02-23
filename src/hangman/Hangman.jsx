@@ -61,15 +61,15 @@ function Hangman() {
                         navigate("/login")
                         return
                     }
-                    if (token !== rep.mainToken) {
-                        localStorage.clear()
-                        setSpin(false)
-                        navigate("/login")
-                        return
-                    }
                     if (rep.playedHang && !rep.paid) {
                         navigate("/")
+                        return
                     }
+                    if (rep.playedHang && Date.now() > new Date(user.expiryDate).getTime()) {
+                        navigate("/")
+                        return
+                    }
+
                     setUser(rep)
                     setSpin(false)
                 } catch (error) {

@@ -28,9 +28,12 @@ const SelectNum = () => {
                 navigate("/login")
                 return
             }
-            if (token !== rep.mainToken) {
-                localStorage.clear()
-                setSpin(false)
+            if (rep.playedTrivial && !rep.paid) {
+                navigate("/")
+                return
+            }
+            if (rep.playedTrivial && Date.now() > new Date(user.expiryDate).getTime()) {
+                navigate("/")
                 return
             }
             setUser(rep)

@@ -333,10 +333,10 @@ const Select = () => {
                                                     <p>You have used your free daily pass, kindly subscribe to have unlimited access.</p>
                                                 </div>
                                                 <div className="mt-2">
-                                                    <button onClick={() => navigate("/subscription")} class="block w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                                                    <button onClick={() => navigate("/subscription")} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
                                                          Subscribe
                                                     </button>
-                                                    <button onClick={() => setSubModal(false)} class="mt-1 block w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                                                    <button onClick={() => setSubModal(false)} class="mt-1 block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
                                                         Cancel
                                                     </button>
                                                 </div>

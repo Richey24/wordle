@@ -13,7 +13,7 @@ const AddQuest = () => {
     const list = state?.list
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState(false)
-    const token = localStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
 
     // document.addEventListener("keydown", (e) => {
     //     if (e.key === "Backspace") {
@@ -60,7 +60,7 @@ const AddQuest = () => {
             })
             setSpin(false)
             if (res.status === 200) {
-                navigate("/question/list")
+                navigate("/admin/trivial")
             } else {
                 setErr(true)
             }
@@ -74,7 +74,7 @@ const AddQuest = () => {
         })
         setSpin(false)
         if (res.status === 200) {
-            navigate("/question/list")
+            navigate("/admin/trivial")
         } else {
             setErr(true)
         }
@@ -110,7 +110,7 @@ const AddQuest = () => {
                     <div className="addQuestBtn">
                         <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
                         ) : list ? "Edit question" : "Create question"} </button>
-                        <button onClick={() => navigate("/question/list")}>Cancel</button>
+                        <button onClick={() => navigate("/admin/trivial")}>Cancel</button>
                     </div>
                     {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
                 </form>

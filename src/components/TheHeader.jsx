@@ -30,17 +30,16 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   const [loader, setLoader] = useState(true)
 
   const [onlineUsers, setOnlineUsers] = useState([]);
-  
 
   const logOut = () => {
     localStorage.clear()
-    navigate(0)
+    navigate(window.location.pathname === "/" ? 0 : "/")
   }
 
   const getUserData = async () => {
     setLoader(true)
     try {
-      
+
       const res = await axios.get(`${url}/user/get/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -83,8 +82,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
       socket.current = io(url);
       socket.current.emit("login", user?._id);
     }, [user]);
-  
-  
+
 
   return (<>
     <Loading loading={loader} background="#673AB7" loaderColor="#FFBA15" />
@@ -224,7 +222,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                             {({ active }) => (
                               <p
                                 onClick={logOut}
-                                href="#"
+                                style={{ cursor: "pointer" }}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
                               >
                                 Sign out
@@ -275,6 +273,6 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
         </>
       )}
     </Disclosure>
-    </>
+  </>
   )
 }

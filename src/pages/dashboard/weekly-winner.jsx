@@ -51,9 +51,9 @@ export function WeeklyWinner() {
                 </tr>
               </thead>
               <tbody>
-                {users && users.map(
+                {winners && winners.map(
                   (data, key) => {
-                    const className = `py-3 px-5 ${key === users.length - 1
+                    const className = `py-3 px-5 ${key === winners.length - 1
                       ? ""
                       : "border-b border-blue-gray-50"
                       }`;

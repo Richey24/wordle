@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import THeHeader from "../components/TheHeader"
 import url from "../url"
 import "./Sub.css"
 
@@ -63,7 +64,10 @@ const SubscriptionForm = () => {
 
     return (
         <div>
+            <THeHeader />
             <div className="payDiv">
+                <p>A Israel Bible Camp subscription give you unlimited
+                    access to the site. Choose from the options below.</p>
                 <form action={`https://wordle-back.azurewebsites.net/create-checkout-session?email=${user.email}&plan=${plan}&id=${user._id}`} method="POST">
                     <select onChange={changePlan} name="plan" id="plan">
                         <option value="monthly">Monthly $2.99</option>
