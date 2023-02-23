@@ -30,11 +30,10 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   const [loader, setLoader] = useState(true)
 
   const [onlineUsers, setOnlineUsers] = useState([]);
-  
 
   const logOut = () => {
     localStorage.clear()
-    navigate("/")
+    navigate(window.location.pathname === "/" ? 0 : "/")
   }
 
   const getUserData = async () => {
@@ -78,13 +77,13 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
   }, [])
 
 
-    // Connect to Socket.io
-    useEffect(() => {
-      socket.current = io("http://localhost:5000");
-      socket.current.emit("login", user?._id);
-    }, [user]);
-  
-  
+  // Connect to Socket.io
+  useEffect(() => {
+    socket.current = io("http://localhost:5000");
+    socket.current.emit("login", user?._id);
+  }, [user]);
+
+
 
   return (<>
     <Loading loading={loader} background="#673AB7" loaderColor="#FFBA15" />
