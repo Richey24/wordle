@@ -60,7 +60,7 @@ const AddQuest = () => {
             })
             setSpin(false)
             if (res.status === 200) {
-                navigate("/question/list")
+                navigate("/admin/trivial")
             } else {
                 setErr(true)
             }
@@ -74,7 +74,7 @@ const AddQuest = () => {
         })
         setSpin(false)
         if (res.status === 200) {
-            navigate("/question/list")
+            navigate("/admin/trivial")
         } else {
             setErr(true)
         }
