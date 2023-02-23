@@ -80,7 +80,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
 
     // Connect to Socket.io
     useEffect(() => {
-      socket.current = io("http://localhost:5000");
+      socket.current = io(url);
       socket.current.emit("login", user?._id);
     }, [user]);
   
