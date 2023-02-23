@@ -30,7 +30,7 @@ const AddShield = () => {
         }
         const rep = await res.data
         setUser(rep)
-        if (!rep.admin) {
+        if (!rep.admin && !rep.superAdmin) {
             navigate("/shield")
         }
     }
