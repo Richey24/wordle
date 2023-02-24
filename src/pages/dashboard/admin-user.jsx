@@ -12,6 +12,7 @@ import {
   Chip,
   Tooltip,
   Progress,
+    Input,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { DashboardNavbar } from "../../widgets/layout";
@@ -118,10 +119,18 @@ export function AdminUser() {
 
   return (
     <div>
-      <DashboardNavbar username={user.username} filterUser={filterUser} />
-      <div className="mt-12 mb-8 flex flex-col gap-12">
+      <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
+        <div className="flex items-center">
+          <div className="mr-auto md:mr-4 md:w-56">
+            <Input onChange={filterUser} label="Type here" />
+          </div>
+        </div>
+      </div>
+      <div className="mt-3 mb-8 flex flex-col gap-12">
         <Card>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+
+            
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>

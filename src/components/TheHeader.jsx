@@ -152,86 +152,120 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                       </button>
                     }
 
+                           <Menu as="div" className="relative inline-block text-left mt-2">
+                            <div>
+                              <Menu.Button className="inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400" type="button">
+                                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path></svg>
+                                <div class="relative flex">
+                                  <div class="relative inline-flex w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-2 right-3 dark:border-gray-900"></div>
+                                </div>
+                              </Menu.Button>
+                            </div>
 
-                    <button
-                      type="button"
-                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      {user?.username && <BellIcon className="h-6 w-6" aria-hidden="true" />}
-                    </button>
+                            <Transition
+                              as={Fragment}
+                              enter="transition ease-out duration-100"
+                              enterFrom="transform opacity-0 scale-95"
+                              enterTo="transform opacity-100 scale-100"
+                              leave="transition ease-in duration-75"
+                              leaveFrom="transform opacity-100 scale-100"
+                              leaveTo="transform opacity-0 scale-95">
 
-                    {/* Profile dropdown */}
-                    <Menu as="div" className="relative ml-3">
-                      <div>
-                        <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                          <span className="sr-only">Open user menu</span>
-                          {/* <img
-                            className="h-8 w-8 rounded-full"
-                            src="/img/profile.png"
-                            alt=""
-                          /> */}
-                          <div className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-amber-500 text-xl text-white uppercase">
-                            {user?.username[0]}
-                          </div>
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
+                              <Menu.Items className="absolute right-0 z-10 mt-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="py-1">
 
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            <h2
-                              href="#"
-                              className="block px-4 mt-2 text-sm text-gray-700"
+                                <div class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
+                                    Notifications
+                                </div>
+
+                                <div class="divide-y divide-gray-100 dark:divide-gray-700">
+                                  <a href="#" class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                    <div class="w-full pl-3">
+                                        <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">New message from "Hey, what's up? All set for the presentation?"</div>
+                                        <div class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</div>
+                                    </div>
+                                  </a>
+                                </div>
+                                {/* <a href="#" class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white">
+                                  <div class="inline-flex items-center ">
+                                    <svg class="w-4 h-4 mr-2 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
+                                      View all
+                                  </div>
+                                </a> */}
+                             
+                                </div>
+                              </Menu.Items>
+                            </Transition>
+                          </Menu>
+                    
+                                     
+                          {/* Profile dropdown */}
+                          <Menu as="div" className="relative ml-3">
+                            <div>
+                              <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                <span className="sr-only">Open user menu</span>
+                              
+                                <div className="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-full bg-amber-500 text-xl text-white uppercase">
+                                  {user?.username[0]}
+                                </div>
+                              </Menu.Button>
+                            </div>
+                            <Transition
+                              as={Fragment}
+                              enter="transition ease-out duration-100"
+                              enterFrom="transform opacity-0 scale-95"
+                              enterTo="transform opacity-100 scale-100"
+                              leave="transition ease-in duration-75"
+                              leaveFrom="transform opacity-100 scale-100"
+                              leaveTo="transform opacity-0 scale-95"
                             >
-                              SHALOM, {user?.username}
-                            </h2>
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <p
-                                onClick={() => navigate("/user-account")}
-                                style={{ cursor: "pointer" }}
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm pointer text-gray-700')}
-                              >
-                                Your Profile
-                              </p>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <p
-                                onClick={showAbout}
-                                style={{ cursor: "pointer" }}
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                              >
-                                About Us
-                              </p>
-                            )}
-                          </Menu.Item>
-                          <hr />
-                          <Menu.Item>
-                            {({ active }) => (
-                              <p
-                                onClick={logOut}
-                                style={{ cursor: "pointer" }}
-                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
-                              >
-                                Sign out
-                              </p>
-                            )}
-                          </Menu.Item>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
+
+                              <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Item>
+                                  <h2
+                                    href="#"
+                                    className="block px-4 mt-2 text-sm text-gray-700"
+                                  >
+                                    SHALOM, {user?.username}
+                                  </h2>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <p
+                                      onClick={() => navigate("/user-account")}
+                                      style={{ cursor: "pointer" }}
+                                      className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm pointer text-gray-700')}
+                                    >
+                                      Your Profile
+                                    </p>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <p
+                                      onClick={showAbout}
+                                      style={{ cursor: "pointer" }}
+                                      className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                    >
+                                      About Us
+                                    </p>
+                                  )}
+                                </Menu.Item>
+                                <hr />
+                                <Menu.Item>
+                                  {({ active }) => (
+                                    <p
+                                      onClick={logOut}
+                                      style={{ cursor: "pointer" }}
+                                      className={classNames(active ? 'bg-gray-100' : '', 'block px-4 text-sm text-gray-700')}
+                                    >
+                                      Sign out
+                                    </p>
+                                  )}
+                                </Menu.Item>
+                              </Menu.Items>
+                            </Transition>
+                          </Menu>
                   </>
                 ) : (
                   <>

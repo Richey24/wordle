@@ -136,13 +136,12 @@ export function Home() {
 
   return (
     <div>
-      <DashboardNavbar />
       <div className="mt-12">
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
           <StatisticsCard
             value={report.onlineUsers}
             color="pink"
-            title="User"
+            title="Online Users"
             icon={React.createElement(UserIcon, {
               className: "w-6 h-6 text-white",
             })}
@@ -156,7 +155,7 @@ export function Home() {
           <StatisticsCard
             value={report.userCount}
             color="blue"
-            title="Gameplay Count"
+            title="Total User"
             icon={React.createElement(BanknotesIcon, {
               className: "w-6 h-6 text-white",
             })}

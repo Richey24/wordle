@@ -4,7 +4,7 @@ import { Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { IconButton } from "@material-tailwind/react";
 
 
-import { Sidenav} from '../widgets/layout';
+import { DashboardNavbar, Sidenav} from '../widgets/layout';
 import  DashboardHeader  from '../widgets/layout/dashboard-header';
 
 import routes from '../routes/dashboard';
@@ -18,11 +18,8 @@ function Index() {
     return (
         <div className="min-h-screen bg-blue-gray-50/50">
             <Sidenav routes={routes} />
-            {/* <Button>Button</Button> */}
             <div className="p-4 xl:ml-80">
-               <DashboardHeader /> 
-                
-
+               <DashboardNavbar />
                 <IconButton
                     size="lg"
                     color="white"
@@ -32,15 +29,12 @@ function Index() {
                 >
                     <Cog6ToothIcon className="h-5 w-5" />
                 </IconButton>
-
-                {/*  */}
                 <Outlet />
-
                 <div className="text-blue-gray-600">
                     {/* <Footer /> */}
                 </div>
             </div>
-        </div>
+        </div> 
     );
 }
 

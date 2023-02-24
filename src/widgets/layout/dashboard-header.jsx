@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import {
   Navbar,
@@ -15,17 +16,42 @@ import {
 } from "../../context";
 import logImg from "../../img/Logout.svg"
 
+import url from "../../url"
+import axios from 'axios'
+
 export function DashboardNavbar({ filterUser, username }) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
+  const [ user, setUser ] = useState();
+
   const navigate = useNavigate()
+
+  const id = sessionStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  const getUserData = async () => {
+    await axios.get(`${url}/user/get/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        validateStatus: () => true
+      })
+      .then( res => {
+        console.log(res.data)
+        setUser(res.data)
+      })
+  }
 
   const logOut = () => {
     sessionStorage.clear()
     navigate("/admin/login")
   }
+
+  useEffect(() => {
+    getUserData()
+  }, [])
 
   return (
     <Navbar
