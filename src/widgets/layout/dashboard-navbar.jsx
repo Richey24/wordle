@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef} from 'react';
 import { useLocation, Link, useNavigate} from "react-router-dom";
 import {
   Navbar,
@@ -27,6 +27,7 @@ import {
   setOpenSidenav,
 } from "../../context";
 
+import { io } from "socket.io-client";
 import url from "../../url"
 import axios from 'axios'
 import logImg from "../../img/Logout.svg"
@@ -37,7 +38,7 @@ export function DashboardNavbar() {
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   const [ user, setUser ] = useState([]);
   const navigate = useNavigate()
-  
+  const socket = useRef();
   const id = sessionStorage.getItem("id");
   const token = sessionStorage.getItem("token");
   
@@ -68,6 +69,11 @@ export function DashboardNavbar() {
     getUserData()
   }, [])
 
+  // Connect to Socket.io
+  useEffect(() => {
+    socket.current = io(url);
+    socket.current.emit("login", user?._id);
+  }, [user]);
   
   return (
     <Navbar

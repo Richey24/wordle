@@ -21,7 +21,7 @@ import {
 
    const [responseData, setActivity ] = useState("");
    const fetchActivity = async () => {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.get(`${url}/api/activities/crossword`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
        .then( res => {
 
@@ -74,7 +74,7 @@ import {
                 {responseData && responseData.map(
                   (data, key) => {
                     return (
-                      <tr key={data.user_id.username} key={key}>
+                      <tr key={data.user_id.username}>
                         <td className="border-b border-blue-gray-50 py-3 px-5">
                           <div className="flex items-center gap-4">
                             <Avatar src={ profileImage}  size="sm" />
