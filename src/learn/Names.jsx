@@ -86,7 +86,7 @@ const Names = () => {
     }
 
     const selectTribe = (value) => {
-        document.getElementById(value).classList.toggle("show")
+        document.getElementById(value).classList.toggle("showName")
     }
 
     const getTribe = (value, id, i) => {
