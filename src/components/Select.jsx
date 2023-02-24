@@ -175,8 +175,12 @@ const Select = () => {
             setSubModal(true)
         }
 
+       if (crossWordPlayed.paid === true ) {
+           navigate("/crossword")
+       }
+
        if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === false) {
-          navigate("/crossword")
+          setSubModal(true)
        }
        
 

@@ -26,6 +26,7 @@ import {
        .then( res => {
 
          let data = res.data
+         console.log(data)
          console.log(data.activities);
          setActivity(data.activities)
   
