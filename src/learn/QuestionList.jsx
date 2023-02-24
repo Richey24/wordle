@@ -151,8 +151,8 @@ const QuestionList = () => {
                 <div className="firstDel">
                     <img src={bigdel} alt="" />
                     <div>
-                        <h5>Delete study</h5>
-                        <p>Are you sure you want to delete this study? This action cannot be undone.</p>
+                        <h5>Delete question</h5>
+                        <p>Are you sure you want to delete this question? This action cannot be undone.</p>
                     </div>
                 </div>
                 <div className="secondDel">
