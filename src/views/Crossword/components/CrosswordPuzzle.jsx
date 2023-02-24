@@ -269,15 +269,19 @@ export default function CrosswordPuzzle(props) {
 
     const gameOver = () => {
         new Audio("game over.wav").play()
-        const inputString = document.querySelector('#inputstring')
+        const scoreValue = document.querySelector('#scoreValue')
+        const countdown = document.querySelector('#countdown')
 
-        inputString.innerHTML = ""
+        
         blocks().forEach(block => block.style.transform = "scale(1)")
         clearInterval(window.countdownID)
         window.keysAllowed = false
+        scoreValue.innerHTML = Number(scoreValue.innerHTML) + Number(countdown.innerHTML) + 1000
 
         setTimeout(() => {
             setFailed(true)
+            saveGameResults(0, scoreValue.innerHTML, countdown.innerHTML)
+            // inputString.innerHTML = ""
         }, 5000)
       
     }
