@@ -148,7 +148,7 @@ const HangLeader = () => {
                                                 <td style={{ display: "flex", justifyContent: "center" }}><Image fluid src={images[user?.tribe[0]?.toLowerCase()]} alt="" style={{ width: 160, height: 160 }} /></td>
                                                 <td>{user?.church}</td>
                                                 <td style={{ width: "160px", height: "160px" }}><img src={user?.country[1]} alt="" /></td>
-                                                <td>{user?.dailyHS.toFixed(2)}</td>
+                                                <td>{user?.dailyHS?.toFixed(2)}</td>
                                             </tr>
                                         ))
                                     }

@@ -118,7 +118,7 @@ import {
                             href="#"
                             className="text-xs font-semibold text-blue-gray-600"
                           >
-                          <Moment>{data.date}</Moment>
+                          <Moment fromNow>{data.date}</Moment>
                           </Typography>
                         </td>
                         <td className={className}>

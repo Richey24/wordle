@@ -25,31 +25,31 @@ const Select = () => {
     const [user, setUser] = useState({})
     const [soundOn, setSoundOn] = useState(true)
     const [spin, setSpin] = useState(true)
-    const [crossWordPlayed, setGamePlayed ]= useState(false)
+    const [crossWordPlayed, setGamePlayed] = useState(false)
 
     const [subModal, setSubModal] = useState(false)
+    const [heb, setHeb] = useState(false)
     const cancelButtonRef = useRef(null)
 
 
     const checkIfGamePlayed = async () => {
-       
         const token = localStorage.getItem("token")
         await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
-        .then((res) => {
+        .then(async (res) => {
             console.log(res.data)
             setGamePlayed(res.data)
         })
-        .catch( err => {
+        .catch(err => {
             console.log(err.response)
         })
     }
 
     useEffect(() => {
         checkIfGamePlayed()
-    },[])
+    }, [])
 
     useEffect(() => {
-        
+
         let settings = localStorage.getItem("Settings")
 
         if (settings == undefined) {
@@ -164,7 +164,7 @@ const Select = () => {
     }
 
     const navCross = () => {
-      
+
         if (Object.keys(user).length === 0) {
             navigate("/login")
             return
@@ -173,16 +173,13 @@ const Select = () => {
         console.log(crossWordPlayed);
         if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === true) {
             setSubModal(true)
-        } 
-
-        if (crossWordPlayed.paid === true) {
-             navigate("/crossword")
         }
 
        if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === false) {
           navigate("/crossword")
        }
        
+
     }
 
     const playSound = async (val) => {
@@ -282,7 +279,7 @@ const Select = () => {
                         <img src={hang} alt="" />
                         <p>Hangman</p>
                     </div>
-                    <div onMouseEnter={() => playSound("hebrew")} onClick={() => showModal("comingSoon")}>
+                    <div onMouseEnter={() => playSound("hebrew")} onClick={() => setHeb(true)}>
                         <img src={bible} alt="" />
                         <p>Hebrew language game</p>
                     </div>
@@ -296,7 +293,7 @@ const Select = () => {
                         <p>My Sword & Shield</p>
                     </div>
                 </div>
-                
+
                 {/* Subscription component goes here */}
                 <div id="swordSub" className="selectSub">
                     <p>You have used your free daily pass, kindly subscribe to have unlimited access.</p>
@@ -336,7 +333,7 @@ const Select = () => {
                                                 </div>
                                                 <div className="mt-2">
                                                     <button onClick={() => navigate("/subscription")} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
-                                                         Subscribe
+                                                        Subscribe
                                                     </button>
                                                     <button onClick={() => setSubModal(false)} class="mt-1 block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
                                                         Cancel
@@ -353,11 +350,51 @@ const Select = () => {
 
 
 
+                <Transition.Root show={heb} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setSubModal}>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0">
+                            <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
+                        </Transition.Child>
 
-                <div style={{ height: "170px" }} id="comingSoon" className="selectSub">
-                    <p style={{ fontWeight: "600" }}>Will be added soon...</p>
-                    <button onClick={() => showModal("comingSoon")}>Cancel</button>
-                </div>
+                        <div className="fixed inset-0 z-10 overflow-y-auto">
+                            <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                                <Transition.Child
+                                    as={Fragment}
+                                    enter="ease-out duration-300"
+                                    enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                    enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                    leave="ease-in duration-200"
+                                    leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                    leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                >
+                                    <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                        <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                                <div>
+                                                    <p>Will be added soon...</p>
+                                                </div>
+                                                <div className="mt-2">
+                                                    <button onClick={() => setHeb(false)} class="mt-1 block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Dialog.Panel>
+                                </Transition.Child>
+                            </div>
+                        </div>
+                    </Dialog>
+                </Transition.Root>
+
+
                 <div id="aboutDiv" className="aboutSub">
                     <h6 style={{ display: "flex", justifyContent: "center", columnGap: "10px", flexWrap: "wrap" }}><p>ISRAEL BIBLE CAMP</p>  © 2023 All Rights Reserved </h6>
                     <h6>Special thanks to the following:</h6>
