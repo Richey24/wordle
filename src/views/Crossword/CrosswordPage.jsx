@@ -210,7 +210,7 @@ const puzzleColorGradient = [
     { color1: '#E19D56', color2: '#A66A24' },
 ]
 
-export default function Puzzle() {
+export default function CrosswordPage() {
 
     const [gamelevels, setGameLevels] = useState(false);
 
@@ -234,13 +234,20 @@ export default function Puzzle() {
 
 
     const [transition, setTransition] = useState(() => {
+      
         const initialValue = localStorage.getItem("transition-mode");
-        return initialValue
+        console.log('initial value: '+initialValue)
+
+        const random = Math.floor(Math.random() * bgRandomImages.length);
+        console.log(random)
+
+        return initialValue ? true : '';
+        
     });
 
-    // useEffect(() => {
-    //     return 
-    // })
+    useEffect(() => {
+        return 
+    })
 
     const handleChange = () => {
         setTransition(!transition);
@@ -278,7 +285,7 @@ export default function Puzzle() {
             })
             .catch(err => {
                 console.log(err)
-                alert('Something went wrong')
+                navigate('/')
             })
 
     }

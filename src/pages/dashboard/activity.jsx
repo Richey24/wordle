@@ -21,11 +21,12 @@ import {
 
    const [responseData, setActivity ] = useState("");
    const fetchActivity = async () => {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       await axios.get(`${url}/api/activities/crossword`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
        .then( res => {
 
          let data = res.data
+         console.log(data)
          console.log(data.activities);
          setActivity(data.activities)
   
@@ -72,15 +73,9 @@ import {
               <tbody>
                 {responseData && responseData.map(
                   (data, key) => {
-                    const className = `py-3 px-5 ${
-                      key === responseData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
-  
                     return (
                       <tr key={data.user_id.username}>
-                        <td className={className}>
+                        <td className="border-b border-blue-gray-50 py-3 px-5">
                           <div className="flex items-center gap-4">
                             <Avatar src={ profileImage}  size="sm" />
                             <div>
@@ -98,13 +93,13 @@ import {
                           </div>
                         </td>
                 
-                        <td className={className}>
+                        <td className="border-b border-blue-gray-50 py-3 px-5">
                        
                             <Typography className="text-xs font-semibold text-blue-gray-600">
                             {data.game}
                           </Typography>
                         </td>
-                        <td className={className}>
+                        <td className="border-b border-blue-gray-50 py-3 px-5">
                            <Chip
                             variant="gradient"
                             color={online ? "green" : "blue-gray"}
@@ -112,7 +107,7 @@ import {
                             className="py-0.5 px-2 text-[11px] font-medium"
                           />
                         </td>
-                        <td className={className}>
+                        <td className="border-b border-blue-gray-50 py-3 px-5">
                           <Typography
                             as="a"
                             href="#"
@@ -121,7 +116,7 @@ import {
                           <Moment fromNow>{data.date}</Moment>
                           </Typography>
                         </td>
-                        <td className={className}>
+                        <td className="border-b border-blue-gray-50 py-3 px-5">
                           <Typography
                             as="a"
                             href="#"
@@ -130,7 +125,7 @@ import {
                           {data.time} Secounds
                           </Typography>
                         </td>
-                        <td className={className}>
+                        <td className="border-b border-blue-gray-50 py-3 px-5">
                           <Typography
                             as="a"
                             href="#"

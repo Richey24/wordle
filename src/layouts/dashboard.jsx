@@ -29,6 +29,7 @@ function Index() {
                 >
                     <Cog6ToothIcon className="h-5 w-5" />
                 </IconButton>
+
                 <Outlet />
                 <div className="text-blue-gray-600">
                     {/* <Footer /> */}
