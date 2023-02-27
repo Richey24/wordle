@@ -35,13 +35,13 @@ const Select = () => {
     const checkIfGamePlayed = async () => {
         const token = localStorage.getItem("token")
         await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
-        .then(async (res) => {
-            console.log(res.data)
-            setGamePlayed(res.data)
-        })
-        .catch(err => {
-            console.log(err.response)
-        })
+            .then(async (res) => {
+                console.log(res.data)
+                setGamePlayed(res.data)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
     }
 
     useEffect(() => {
@@ -175,14 +175,14 @@ const Select = () => {
             setSubModal(true)
         }
 
-       if (crossWordPlayed.paid === true ) {
-           navigate("/crossword")
-       }
+        if (crossWordPlayed.paid === true) {
+            navigate("/crossword")
+        }
 
-       if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === false) {
-          setSubModal(true)
-       }
-       
+        if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === false) {
+            setSubModal(true)
+        }
+
 
     }
 

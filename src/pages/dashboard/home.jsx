@@ -291,7 +291,7 @@ export function Home() {
                             {active === "word" && leader?.dailyWQS?.toFixed(2)}
                             {active === "bible" && leader?.dailyBQS?.toFixed(2)}
                             {active === "hang" && leader?.dailyHS?.toFixed(2)}
-                            {active === "trivial" && leader?.score?.toFixed(2)}
+                            {active === "trivial" && leader?.score}
                             {active === "cross" && leader?.score?.toFixed(2)}
                           </Typography>
                         </td>

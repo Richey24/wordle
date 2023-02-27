@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { Fragment, useRef, useState } from "react"
 import "./Login.css"
 import lock from "./img/Lock.svg"
 import mail from "./img/Artwork.svg"
@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { Alert, Spinner } from "react-bootstrap"
 import THeHeader from "./components/TheHeader"
+import { Dialog, Transition } from "@headlessui/react"
 
 const Login = () => {
     const [reg, setReg] = useState("login")
@@ -17,6 +18,11 @@ const Login = () => {
     const navigate = useNavigate()
     const loc = useLocation()
     const regi = loc.state?.reg
+
+    const [subModal, setSubModal] = useState(false)
+    const [freeModal, setFreeModal] = useState(false)
+    const cancelButtonRef = useRef(null)
+
 
     useEffect(() => {
         if (regi) {
@@ -61,6 +67,14 @@ const Login = () => {
                     if (rep.confirmed) {
                         localStorage.setItem('id', rep._id)
                         localStorage.setItem('token', rep.mainToken)
+                        if (rep.customerID && Date.now() > new Date(user.expiryDate).getTime()) {
+                            setSubModal(true)
+                            return
+                        }
+                        if (!rep.customerID && Date.now() > new Date(user.expiryDate).getTime()) {
+                            setFreeModal(true)
+                            return
+                        }
                         navigate('/')
                     } else {
                         navigate("/verify")
@@ -185,6 +199,99 @@ const Login = () => {
                     <p onClick={() => navigate("/")} className="forgotPass goHome"><span>Home</span></p>
                 </div>
             </div>
+
+            <Transition.Root show={subModal} as={Fragment}>
+                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setSubModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0">
+                        <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                            <div>
+                                                <p>Your subscription has expired, kindly renew your subscription to have unlimited access.</p>
+                                            </div>
+                                            <div className="mt-2">
+                                                <button onClick={() => navigate("/user-account")} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                    Manage Subscription
+                                                </button>
+                                                <button onClick={() => navigate("/")} class="mt-1 block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition.Root>
+            <Transition.Root show={freeModal} as={Fragment}>
+                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setSubModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0">
+                        <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                            <div>
+                                                <p>Your free subscription has expired, kindly subscribe to have unlimited access.</p>
+                                            </div>
+                                            <div className="mt-2">
+                                                <button onClick={() => navigate("/subscription")} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                    Subscribe
+                                                </button>
+                                                <button onClick={() => navigate("/")} class="mt-1 block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition.Root>
         </div>
     )
 }
