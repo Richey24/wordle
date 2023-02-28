@@ -172,6 +172,11 @@ const bgRandomImages = [
     { img: 'bg-58.jpg', thumb: 'bg-thumbnail-58.jpg' },
     { img: 'bg-59.jpg', thumb: 'bg-thumbnail-59.jpg' },
     { img: 'bg-60.jpg', thumb: 'bg-thumbnail-60.jpg' },
+    { img: 'bg-61.jpg', thumb: 'bg-thumbnail-61.jpg' },
+    { img: 'bg-62.jpg', thumb: 'bg-thumbnail-62.jpg' },
+    { img: 'bg-63.jpg', thumb: 'bg-thumbnail-63.jpg' },
+    { img: 'bg-63.jpg', thumb: 'bg-thumbnail-64.jpg' },
+
 ]
 
 const puzzleColorGradient = [

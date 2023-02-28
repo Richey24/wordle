@@ -33,20 +33,16 @@ const Select = () => {
 
 
     const checkIfGamePlayed = async () => {
-        const token = localStorage.getItem("token")
-        await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
-        .then(async (res) => {
-            console.log(res.data)
-            setGamePlayed(res.data)
-        })
-        .catch(err => {
-            console.log(err.response)
+        return new Promise((resolve, reject) => {
+            const token = localStorage.getItem("token")
+            axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+            .then(async (res) => {
+                resolve(res.data)
+            })
         })
     }
 
-    useEffect(() => {
-        checkIfGamePlayed()
-    }, [])
+  
 
     useEffect(() => {
 
@@ -56,6 +52,7 @@ const Select = () => {
             const settings = {
                 sound: true
             }
+
             localStorage.setItem("Settings", JSON.stringify(settings))
         } else {
             const localStorageSettings = localStorage.getItem("Settings")
@@ -170,20 +167,19 @@ const Select = () => {
             return
         }
 
-        console.log(crossWordPlayed);
-        if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === true) {
-            setSubModal(true)
-        }
+        let userPlayed = checkIfGamePlayed()
+        userPlayed.then(response => {
+             
+            let crossWordPlayed = response
 
-       if (crossWordPlayed.paid === true ) {
-           navigate("/crossword")
-       }
-
-       if (crossWordPlayed.paid === false && crossWordPlayed.gamePlay === false) {
-          setSubModal(true)
-       }
-       
-
+            console.log(crossWordPlayed)
+            if (crossWordPlayed.paid === true || crossWordPlayed.gamePlay === false ) {
+                navigate("/crossword")
+                return
+             }
+           
+             setSubModal(true)
+        })
     }
 
     const playSound = async (val) => {
