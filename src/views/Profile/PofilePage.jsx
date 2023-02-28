@@ -34,9 +34,9 @@ export default function ProfilePage() {
 
     return (
         <>
-        <Header />
-        <div className="absolute w-auto min-w-full min-h-full max-w-none">
-            <div className="container mx-auto px-6 py-16">
+            <Header />
+            <div className="absolute w-auto min-w-full min-h-full max-w-none">
+                <div className="container mx-auto px-6 py-16">
                     <div>
                         <div className="md:grid md:grid-cols-3 md:gap-6">
                             <div className="md:col-span-1">
@@ -54,7 +54,7 @@ export default function ProfilePage() {
 
                         <div className="hidden sm:block" aria-hidden="true">
                             <div className="py-5">
-                            <div className="border-t border-gray-200" />
+                                <div className="border-t border-gray-200" />
                             </div>
                         </div>
 
@@ -62,8 +62,8 @@ export default function ProfilePage() {
                             <div className="md:grid md:grid-cols-3 md:gap-6">
                                 <div className="md:col-span-1">
                                     <div className="px-4 sm:px-0">
-                                    <h3 className="text-base font-semibold leading-6 text-gray-900">Change Password</h3>
-                                    <p className="mt-1 text-sm text-gray-600">Use in order to change password if needed.</p>
+                                        <h3 className="text-base font-semibold leading-6 text-gray-900">Change Password</h3>
+                                        <p className="mt-1 text-sm text-gray-600">Use in order to change password if needed.</p>
                                     </div>
                                 </div>
                                 <div className="md:col-span-2 md:mt-0">
@@ -75,7 +75,7 @@ export default function ProfilePage() {
 
                         <div className="hidden sm:block" aria-hidden="true">
                             <div className="py-5">
-                            <div className="border-t border-gray-200" />
+                                <div className="border-t border-gray-200" />
                             </div>
                         </div>
 
@@ -83,18 +83,18 @@ export default function ProfilePage() {
                             <div className="md:grid md:grid-cols-3 md:gap-6">
                                 <div className="md:col-span-1">
                                     <div className="px-4 sm:px-0">
-                                    <h3 className="text-base font-semibold leading-6 text-gray-900">Notifications</h3>
-                                    <p className="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
+                                        <h3 className="text-base font-semibold leading-6 text-gray-900">Notifications</h3>
+                                        <p className="mt-1 text-sm text-gray-600">Use a permanent address where you can receive mail.</p>
                                     </div>
                                 </div>
                                 <div className="md:col-span-2 md:mt-0">
-                                    <Notification />
+                                    <Notification user={user} />
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-          </div>
         </>
     )
 }

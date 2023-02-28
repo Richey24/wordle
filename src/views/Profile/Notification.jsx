@@ -7,7 +7,6 @@ const Notification = ({ user }) => {
     const id = localStorage.getItem("id")
     const [can, setCan] = useState(false)
 
-
     const saveChanges = async (e) => {
         const target = e.target
         if (target.id === "email") {
