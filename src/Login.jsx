@@ -67,11 +67,11 @@ const Login = () => {
                     if (rep.confirmed) {
                         localStorage.setItem('id', rep._id)
                         localStorage.setItem('token', rep.mainToken)
-                        if (rep.customerID && Date.now() > new Date(user.expiryDate).getTime()) {
+                        if (rep.customerID && Date.now() > new Date(rep.expiryDate).getTime()) {
                             setSubModal(true)
                             return
                         }
-                        if (!rep.customerID && Date.now() > new Date(user.expiryDate).getTime()) {
+                        if (!rep.customerID && Date.now() > new Date(rep.expiryDate).getTime()) {
                             setFreeModal(true)
                             return
                         }
