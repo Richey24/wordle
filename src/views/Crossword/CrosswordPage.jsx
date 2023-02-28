@@ -5,7 +5,7 @@ import { faToolbox, faPlus, faUserGraduate, faQuestion } from '@fortawesome/font
 import '../../assets/css/fab.css';
 import { Fragment, useRef, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { useNavigate,  Prompt } from "react-router-dom";
+import { useNavigate, Prompt } from "react-router-dom";
 
 import axios from 'axios';
 import url from "../../url"
@@ -106,6 +106,10 @@ const bgImages = [
     { img: 'bg-73.jpg', thumb: 'bg-73.jpg' },
     { img: 'bg-74.jpg', thumb: 'bg-74.jpg' },
     { img: 'bg-75.jpg', thumb: 'bg-75.jpg' },
+    { img: 'bg-76.jpg', thumb: 'bg-76.jpg' },
+    { img: 'bg-77.jpg', thumb: 'bg-77.jpg' },
+    { img: 'bg-78.jpg', thumb: 'bg-78.jpg' },
+    { img: 'bg-79.jpg', thumb: 'bg-79.jpg' },
 
 ]
 
@@ -226,10 +230,10 @@ export default function CrosswordPage() {
 
     const navigate = useNavigate()
     const [background, setBackground] = useState(() => {
-        const initialValue  = localStorage.getItem("image-backround");
+        const initialValue = localStorage.getItem("image-backround");
 
         const transition = localStorage.getItem("transition-mode");
-        
+
         if (transition === 'true') {
             return randomSelectImage()
         }
@@ -239,19 +243,19 @@ export default function CrosswordPage() {
 
 
     const [transition, setTransition] = useState(() => {
-      
+
         const initialValue = localStorage.getItem("transition-mode");
-        console.log('initial value: '+initialValue)
+        console.log('initial value: ' + initialValue)
 
         const random = Math.floor(Math.random() * bgRandomImages.length);
         console.log(random)
 
         return initialValue ? true : '';
-        
+
     });
 
     useEffect(() => {
-        return 
+        return
     })
 
     const handleChange = () => {
@@ -259,22 +263,22 @@ export default function CrosswordPage() {
     };
 
     const [colorOne, setColorOne] = useState(() => {
-         // getting stored value
+        // getting stored value
         const saved = localStorage.getItem("colorOne");
         const initialValue = JSON.parse(saved);
         return initialValue || "";
     });
 
     const [colorTwo, setColorTwo] = useState(() => {
-           // getting stored value
-           const saved = localStorage.getItem("colorTwo");
-           const initialValue = JSON.parse(saved);
-           return initialValue || "";
+        // getting stored value
+        const saved = localStorage.getItem("colorTwo");
+        const initialValue = JSON.parse(saved);
+        return initialValue || "";
     })
 
     const handleColor = async (c1, c2) => {
-         let params = [c1, c2]
-         setColorOne(params)
+        let params = [c1, c2]
+        setColorOne(params)
     }
 
     const getUserLevels = async () => {
@@ -286,7 +290,7 @@ export default function CrosswordPage() {
                 const data = res.data
                 if (data) {
                     setGameLevels(data.game_level)
-                } 
+                }
             })
             .catch(err => {
                 console.log(err)

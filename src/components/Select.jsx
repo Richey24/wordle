@@ -33,6 +33,7 @@ const Select = () => {
 
 
     const checkIfGamePlayed = async () => {
+<<<<<<< HEAD
         return new Promise((resolve, reject) => {
             const token = localStorage.getItem("token")
             axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
@@ -40,6 +41,17 @@ const Select = () => {
                 resolve(res.data)
             })
         })
+=======
+        const token = localStorage.getItem("token")
+        await axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+            .then(async (res) => {
+                console.log(res.data)
+                setGamePlayed(res.data)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+>>>>>>> d85cd8dd74b6971070fc8eb90b4df1557b1877ab
     }
 
   
