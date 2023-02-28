@@ -30,7 +30,7 @@ export const routes = [
       },
       {
         icon: <UserCircleIcon {...icon} />,
-        name: "acitivity ",
+        name: "Acitivity ",
         path: "/activities",
         element: <Home />,
       },

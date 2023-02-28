@@ -61,7 +61,7 @@ export default function LimitUserAccess ( props ) {
                 </div>
             </div>
         </Dialog>
-    </Transition.Root>
+        </Transition.Root>
     </div>
     )
 }

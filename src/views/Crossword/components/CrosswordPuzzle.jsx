@@ -125,7 +125,7 @@ export default function CrosswordPuzzle(props) {
                 })
                 window.solved.push(object.result)
 
-                if (window.solved.length === 10) {
+                if (window.solved.length === window.data.length) {
                     // bgMusic.pause()
                     new Audio("audio/Celebration.mp3").play()
                     clearInterval(window.countdownID)
@@ -293,11 +293,11 @@ export default function CrosswordPuzzle(props) {
         const cells = document.querySelectorAll('.cell')
         cells.forEach(cell => cell.style.opacity = "1")
         let results = await getResults(params)
-        console.log(results.length)
         console.log(results)
         placeFirstResult(results)
 
         let remaining = results.slice(1)
+        console.log('remaining: '+remaining)
         for (let i = 0; i < 15; i++) {
 
             if (window.data.length === 10) {
@@ -346,6 +346,7 @@ export default function CrosswordPuzzle(props) {
                         test = false
                     }
                 }
+                
                 if (test && !outOfGrid) {
                     validPlacement = true
                     window.data.push(placements[i])
@@ -363,14 +364,18 @@ export default function CrosswordPuzzle(props) {
                 results.push(results.splice(results.indexOf(remaining[0]), 1)[0])
                 remaining.push(remaining.shift())
             }
-        }
 
+            console.log('placement: '+window.data.length)
+            
+        }
+        console.log(window.data)
         arrangeWords()
         cells.forEach((cell, cellNo) => {
             if (!window.data.find(object => object.occupied.includes(cellNo))) {
                 cell.style.opacity = "0"
             }
         })
+
     }
 
     const getResults = async (data) => {
@@ -430,6 +435,8 @@ export default function CrosswordPuzzle(props) {
             direction: direction,
             occupied: placeResult(results[0], direction, X, Y)
         })
+
+        console.log('result'+results)
     }
 
     const placeResult = (result, direction, X, Y) => {
