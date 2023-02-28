@@ -14,6 +14,7 @@ export default function ProfilePage() {
     const navigate = useNavigate()
     const [user, setUser] = useState({})
     const [active, setActive] = useState("info")
+    const [can, setCan] = useState(false)
     // const [loading, setLoader] = useState();
 
     const fetchUserInformation = async () => {
@@ -31,6 +32,18 @@ export default function ProfilePage() {
         fetchUserInformation();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    const cancelSub = async () => {
+        const body = {
+            email: user.email,
+            id: user._id,
+            firstName: user.firstName
+        }
+        const res = await axios.post(`${url}/user/cancel/sub/mail`, body, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        if (res.status === 200) {
+            setCan(true)
+        }
+    }
 
     return (
         <>
@@ -100,28 +113,34 @@ export default function ProfilePage() {
                         </div>
 
                         {user.paid ?
-                        <div className="mt-10 sm:mt-0">
-                            <div className="md:grid md:grid-cols-3 md:gap-6">
-                                <div className="md:col-span-1">
-                                    <div className="px-4 sm:px-0">
-                                        <h3 className="text-base font-semibold leading-6 text-gray-900">Subscription</h3>
-                                        <p className="mt-1 text-sm text-gray-600">Update your card or change your plan.</p>
+                            <div className="mt-10 sm:mt-0">
+                                <div className="md:grid md:grid-cols-3 md:gap-6">
+                                    <div className="md:col-span-1">
+                                        <div className="px-4 sm:px-0">
+                                            <h3 className="text-base font-semibold leading-6 text-gray-900">Subscription</h3>
+                                            <p className="mt-1 text-sm text-gray-600">Update your card or change your plan.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="md:col-span-2 md:mt-0">
-                                    <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                        <button
-                                            type="submit"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                                            onClick={() =>window.open('https://billing.stripe.com/p/login/bIY3gifgJ8Hb0ZW288', '_blank')}
+                                    <div className="md:col-span-2 md:mt-0">
+                                        {can && <p>An email has been sent to you, check your mail to confirm the cancellation request</p>}
+                                        <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                                            <p
+                                                onClick={cancelSub}
+                                                className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                                                style={{ cursor: "pointer", marginTop: "40px" }}
+                                            >Cancel Subscription</p>
+                                            <button
+                                                type="submit"
+                                                className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                                onClick={() => window.open('https://billing.stripe.com/p/login/bIY3gifgJ8Hb0ZW288', '_blank')}
 
-                                        >
-                                            Update Subscription Details
-                                        </button>
+                                            >
+                                                Update Subscription Details
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div> : "" }
+                            </div> : ""}
                     </div>
                 </div>
             </div>

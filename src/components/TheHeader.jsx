@@ -281,7 +281,7 @@ export default function THeHeader({ soundClick, soundOn, showAbout, admin }) {
                           {!user.customerID && <Menu.Item>
                             {({ active }) => (
                               <p
-                                onClick={() => navigate("/subscribe")}
+                                onClick={() => navigate("/subscription")}
                                 style={{ cursor: "pointer" }}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm pointer text-gray-700')}
                               >
