@@ -4,10 +4,10 @@ import { Cog6ToothIcon } from "@heroicons/react/24/solid";
 import { IconButton } from "@material-tailwind/react";
 
 
-import { DashboardNavbar, Sidenav} from '../widgets/layout';
+import { DashboardNavbar, SidenavAccount} from '../widgets/layout';
 import  DashboardHeader  from '../widgets/layout/dashboard-header';
 
-import routes from '../routes/dashboard';
+import routes from '../routes/account';
 import { useMaterialTailwindController, setOpenConfigurator } from "../context";
 import { Button } from "@material-tailwind/react";
 import { ThemeProvider } from "@material-tailwind/react";
@@ -17,9 +17,13 @@ function Index() {
 
     return (
         <div className="min-h-screen bg-blue-gray-50/50">
-            <Sidenav routes={routes} />
+             <SidenavAccount routes={routes}
+              brandImg={
+                sidenavType === "white" ? "/img/logo-ct.png" : "/img/logo-ct-dark.png"
+              }
+            />
             <div className="p-4 xl:ml-80">
-                <DashboardNavbar />
+               <DashboardNavbar />
                 <IconButton
                     size="lg"
                     color="white"

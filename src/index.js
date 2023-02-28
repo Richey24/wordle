@@ -25,6 +25,7 @@ import ShieldMain from './components/ShieldMain';
 import AddShield from './components/AddShield';
 import AdminLogin from './AdminLogin';
 import AdminDashboard from './layouts/dashboard';
+import AccountSettings from './layouts/profile';
 // import AdminHome from './views/Admin/AdminHome';
 import {
   Activity,
@@ -55,6 +56,8 @@ import Privacy from './views/Privacy/Privacy';
 import { ThemeProvider } from "@material-tailwind/react";
 import { MaterialTailwindControllerProvider } from "./context"
 import CancelSub from './views/Profile/CancelSub';
+
+import { UserProfile } from './pages/account/user-profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -104,6 +107,9 @@ root.render(
             <Route path="leaderboard" element={<AdminLeaderboard />} />
             <Route path="activities" element={<Activity />} />
           </Route>
+          {/* <Route path="/user-account" element={<AccountSettings />}>
+              <Route path="" element={<UserProfile />} />
+          </Route> */}
         </Routes>
       </ThemeProvider>
     </MaterialTailwindControllerProvider>
