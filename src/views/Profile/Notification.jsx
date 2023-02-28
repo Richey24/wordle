@@ -21,7 +21,7 @@ const Notification = ({ user }) => {
                 <input
                     type="checkbox"
                     class="sr-only peer"
-                    defaultChecked={user?.emailNotification ? true : false}
+                    defaultChecked={user?.emailNotification}
                     onChange={saveChanges}
                     id="email"
                 />
@@ -33,7 +33,7 @@ const Notification = ({ user }) => {
                 <input
                     type="checkbox"
                     class="sr-only peer"
-                    defaultChecked={user?.newsletter ? true : false}
+                    defaultChecked={user?.newsletter}
                     onChange={saveChanges}
                     id="news"
                 />
