@@ -125,7 +125,7 @@ export default function CrosswordPuzzle(props) {
                 })
                 window.solved.push(object.result)
 
-                if (window.solved.length === 10) {
+                if (window.solved.length === window.data.length) {
                     // bgMusic.pause()
                     new Audio("audio/Celebration.mp3").play()
                     clearInterval(window.countdownID)
@@ -364,9 +364,11 @@ export default function CrosswordPuzzle(props) {
                 results.push(results.splice(results.indexOf(remaining[0]), 1)[0])
                 remaining.push(remaining.shift())
             }
+
+            console.log('placement: '+window.data.length)
             
         }
-
+        console.log(window.data)
         arrangeWords()
         cells.forEach((cell, cellNo) => {
             if (!window.data.find(object => object.occupied.includes(cellNo))) {
