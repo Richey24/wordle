@@ -56,7 +56,7 @@ import Privacy from './views/Privacy/Privacy';
 import { ThemeProvider } from "@material-tailwind/react";
 import { MaterialTailwindControllerProvider } from "./context"
 import CancelSub from './views/Profile/CancelSub';
-import Hebrew from './hebrew/Hebrew';
+// import Hebrew from './hebrew/Hebrew';
 // import AddHebrew from './hebrew/AddHebrew';
 
 import { UserProfile } from './pages/account/user-profile';
@@ -108,7 +108,7 @@ root.render(
             <Route path="trash" element={<ToBeDel />} />
             <Route path="leaderboard" element={<AdminLeaderboard />} />
             <Route path="activities" element={<Activity />} />
-            <Route path="hebrew" element={<Hebrew />} />
+            {/* <Route path="hebrew" element={<Hebrew />} /> */}
             {/* <Route path="add/hebrew" element={<AddHebrew />} /> */}
           </Route>
           {/* <Route path="/user-account" element={<AccountSettings />}>
