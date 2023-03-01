@@ -106,8 +106,8 @@ const bgImages = [
     { img: 'bg-73.jpg', thumb: 'bg-73.jpg' },
     { img: 'bg-74.jpg', thumb: 'bg-74.jpg' },
     { img: 'bg-75.jpg', thumb: 'bg-75.jpg' },
-    { img: 'bg-76.jpg', thumb: 'bg-76.jpg' },
-    { img: 'bg-77.jpg', thumb: 'bg-77.jpg' },
+    { img: 'bg-76.jpg', thumb: 'bg-thumbnail-61.jpg' },
+    { img: 'bg-77.jpg', thumb: 'bg-thumbnail-62.jpg' },
     { img: 'bg-78.jpg', thumb: 'bg-78.jpg' },
     { img: 'bg-79.jpg', thumb: 'bg-79.jpg' },
 
@@ -179,7 +179,7 @@ const bgRandomImages = [
     { img: 'bg-61.jpg', thumb: 'bg-thumbnail-61.jpg' },
     { img: 'bg-62.jpg', thumb: 'bg-thumbnail-62.jpg' },
     { img: 'bg-63.jpg', thumb: 'bg-thumbnail-63.jpg' },
-    { img: 'bg-63.jpg', thumb: 'bg-thumbnail-64.jpg' },
+    { img: 'bg-64.jpg', thumb: 'bg-thumbnail-64.jpg' },
 
 ]
 
