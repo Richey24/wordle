@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import churches from "../../utils/church"
 import drop from "../../img/drop.svg"
 import "../../Register.css"
+import { useNavigate } from "react-router-dom"
 
 const tribes = [
     ["Asher", "rgb(111, 111, 21)"],
@@ -31,6 +32,7 @@ const ProfileInfo = () => {
     const [count, setCount] = useState(0)
     const [err, showErr] = useState(false)
     const [show, setShow] = useState(false)
+    const navigate = useNavigate()
 
     const fetchUserInfromation = async () => {
         await axios.get(`${url}/user/get/${id}`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
@@ -39,14 +41,18 @@ const ProfileInfo = () => {
                 const res = await axios.get("https://restcountries.com/v3.1/all")
                 const rep = await res.data
                 const arr = rep.sort((a, b) => a.name.common.localeCompare(b.name.common))
-                const countryIndex = arr.findIndex((ar) => ar.name.common === response.data.country[0])
-                setCount(countryIndex)
+                if (response.data.country) {
+                    const countryIndex = arr.findIndex((ar) => ar.name.common === response.data.country[0])
+                    setCount(countryIndex)
+                } else {
+                    navigate("/login")
+                }
                 setCountry(arr)
                 setFIl(arr)
-
             })
             .catch(err => {
                 console.log(err);
+                navigate("/login")
             })
     }
 
@@ -173,7 +179,7 @@ const ProfileInfo = () => {
                                             >
                                                 {
                                                     tribes.map((tribe) => (
-                                                        <option selected={tribe[0] === user?.tribe[0] ? true : false} value={`${tribe[0]}-${tribe[1]}`}>{tribe[0]}</option>
+                                                        user?.tribe && <option selected={tribe[0] === user?.tribe[0] ? true : false} value={`${tribe[0]}-${tribe[1]}`}>{tribe[0]}</option>
                                                     ))
                                                 }
                                             </select>
