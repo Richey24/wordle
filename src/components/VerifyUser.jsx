@@ -5,12 +5,17 @@ import { useEffect } from "react"
 import { useState } from "react"
 
 const VerifyUser = () => {
-    const { id } = useParams()
+    const { token } = useParams()
     const [err, setErr] = useState(false)
     const navigate = useNavigate()
 
     const verifyUser = async () => {
-        const res = await axios.post(`${url}/user/confirm/${id}`, {}, { validateStatus: () => true })
+        const res = await axios.post(`${url}/user/confirm`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
         if (res.status !== 200) {
             setErr(true)
             return

@@ -73,7 +73,7 @@ root.render(
           <Route path='/register' element={<Register />} />
           <Route path='/select' element={<Difficult />} />
           <Route path='/hangman' element={<Hangman />} />
-          <Route path='/reset/:id' element={<Reset />} />
+          <Route path='/reset/:token' element={<Reset />} />
           <Route path='/word/leader' element={<Leader />} />
           <Route path='/bible/leader' element={<BibleLeader />} />
           <Route path='/hangman/leader' element={<HangLeader />} />
@@ -95,9 +95,9 @@ root.render(
           <Route path="/crossword" element={<Crossword />} />
           <Route path="/crossword/leader" element={<CrosswordLeader />} />
           <Route path='/subscription' element={<StripeContainer />} />
-          <Route path='/cancel/sub/:id' element={<CancelSub />} />
+          <Route path='/cancel/sub/:token' element={<CancelSub />} />
           <Route path='/verify' element={<Verify />} />
-          <Route path='/verify/:id' element={<VerifyUser />} />
+          <Route path='/verify/:token' element={<VerifyUser />} />
           <Route path="/user-account" element={<ProfilePage />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path='/admin' element={<AdminDashboard />}>
