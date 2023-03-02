@@ -52,12 +52,12 @@ export const routes = [
         path: "/audit",
         element: <Activity />,
       },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: "Hebrew Game",
-        path: "/hebrew",
-        element: <Home />,
-      },
+      // {
+      //   icon: <TableCellsIcon {...icon} />,
+      //   name: "Hebrew Game",
+      //   path: "/deck",
+      //   element: <Home />,
+      // },
       {
         icon: <TableCellsIcon {...icon} />,
         name: "Trash",

@@ -60,6 +60,7 @@ import CancelSub from './views/Profile/CancelSub';
 // import AddHebrew from './hebrew/AddHebrew';
 
 import { UserProfile } from './pages/account/user-profile';
+import Deck from './hebrew/Deck';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -108,7 +109,8 @@ root.render(
             <Route path="trash" element={<ToBeDel />} />
             <Route path="leaderboard" element={<AdminLeaderboard />} />
             <Route path="activities" element={<Activity />} />
-            {/* <Route path="hebrew" element={<Hebrew />} /> */}
+            <Route path="deck" element={<Deck />} />
+            {/* <Route path="hebrew/:deck" element={<Hebrew />} /> */}
             {/* <Route path="add/hebrew" element={<AddHebrew />} /> */}
           </Route>
           {/* <Route path="/user-account" element={<AccountSettings />}>

@@ -18,7 +18,6 @@ const CancelSub = () => {
             },
             validateStatus: () => true
         })
-        console.log(res);
         if (res.status === 200) {
             setShow(true)
             setTimeout(() => {
