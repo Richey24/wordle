@@ -15,7 +15,7 @@ const Hebrew = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState({})
     const [spin, setSpin] = useState(false)
-    const [lists, setLists] = useState([{ correctImage: "1677114974728correctImage.jpeg" }, { correctImage: "bg-0.jpg" }, { correctImage: "bg-1.jpg" }, { correctImage: "bg-2.jpg" }, { correctImage: "bg-3.jpg" }, { correctImage: "bg-4.jpg" }, { correctImage: "bg-5.jpg" }, { correctImage: "bg-6.jpg" }, { correctImage: "bg-7.jpg" }, { correctImage: "bg-8.jpg" }])
+    const [lists, setLists] = useState([])
     const [fit, setFit] = useState([])
     const [delId, setDelId] = useState("")
     const token = sessionStorage.getItem("token")
@@ -33,13 +33,14 @@ const Hebrew = () => {
     }
 
     const getItems = async () => {
-        const res = await axios.get(`${url}/hebrew/get/all`, {
+        const res = await axios.get(`${url}/hebrew/get/deck/${deck}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
             validateStatus: () => true
         })
         const rep = await res.data
+        console.log(rep);
         const newArr = rep.filter((re) => re.toBeDeleted !== true)
         setFit(newArr)
         setLists(newArr)
@@ -48,6 +49,7 @@ const Hebrew = () => {
 
     useEffect(() => {
         // getUser()
+        getItems()
     }, [])
 
 
@@ -58,19 +60,19 @@ const Hebrew = () => {
 
     const filterItem = (e) => {
         const value = e.target.value
-        const newArr = fit.filter((fi) => fi.question.toLowerCase().includes(value.toLowerCase()))
+        const newArr = fit.filter((fi) => fi.english.toLowerCase().includes(value.toLowerCase()))
         setLists(newArr)
     }
 
     const deleteStudy = async () => {
-        const res = await axios.put(`${url}/quiz/update/${delId._id}`, { toBeDeleted: true }, {
+        const res = await axios.put(`${url}/hebrew/update/${delId._id}`, { toBeDeleted: true }, {
             validateStatus: () => true,
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         const date = new Date().toLocaleString()
-        const text = `${user.username} marked bible trivial question ${delId.question} to be deleted on ${date}`
+        const text = `${user.username} marked hebrew word ${delId.paleoHebrewText} to be deleted on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text }, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -101,7 +103,7 @@ const Hebrew = () => {
             <h1>Deck {deck} List</h1>
             <div id="hebrewSearch" className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
-                <p onClick={() => navigate("/admin/add/hebrew")}>Add new word</p>
+                <p onClick={() => navigate(`/admin/add/hebrew/${deck}`)}>Add new word</p>
             </div>
             {
                 lists.length < 1 ? (
@@ -116,7 +118,7 @@ const Hebrew = () => {
                                 <div key={i}>
                                     <div className="hebrewBtn" id="hebrewBtn">
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
-                                            <img onClick={() => navigate("/question/add", { state: { list: list } })} style={{ marginRight: "20px" }} src={edit} alt="" />
+                                            <img onClick={() => navigate(`/admin/add/hebrew/${deck}`, { state: { list: list } })} style={{ marginRight: "20px" }} src={edit} alt="" />
                                         </OverlayTrigger>
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
                                             <img onClick={() => showModal("delDiv", list)} src={del} alt="" />
