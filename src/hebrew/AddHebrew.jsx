@@ -5,26 +5,40 @@ import "./AddHebrew.css"
 import upload from "../img/upload.svg"
 import axios from "axios"
 import url from "../url"
+import { useEffect } from "react"
 
 const AddHebrew = () => {
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState(false)
-    const [theImg, setTheImg] = useState("")
     const { state } = useLocation()
+    const [theImg, setTheImg] = useState("")
     const list = state?.list
     const navigate = useNavigate()
     const { deck } = useParams()
 
+    useEffect(() => {
+        if (list) {
+            setTheImg(`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${list.correctImage}`)
+        }
+    }, [])
+
     const submitForm = async (e) => {
+        setSpin(true)
         e.preventDefault()
         const token = sessionStorage.getItem("token")
         const data = new FormData()
-        data.append("hebrew", e.target.correctImg.files[0], "hebrew")
+        if (e.target.correctImg.files[0]) {
+            data.append("hebrew", e.target.correctImg.files[0], "hebrew")
+        }
         data.append("paleoHebrewText", e.target.paleoHebrewText.value)
         data.append("english", e.target.english.value)
         data.append("deck", deck)
-        const res = await axios.post(`${url}/hebrew/create`, data, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
-        console.log(res);
+        if (list) {
+            await axios.put(`${url}/hebrew/update/${list._id}`, data, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        } else {
+            await axios.post(`${url}/hebrew/create`, data, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
+        }
+        navigate(`/admin/hebrew/${deck}`)
     }
 
     const uploadImage = (e) => {
@@ -53,7 +67,7 @@ const AddHebrew = () => {
                     <br /> */}
                     <h6>Upload the correct image</h6>
                     <label className="correctHebrewImg" htmlFor="correctImg"><img src={theImg ? theImg : upload} alt="" /></label>
-                    <input accept="image" required onChange={uploadImage} type="file" name="correctImg" id="correctImg" hidden />
+                    <input accept="image" required={list ? false : true} onChange={uploadImage} type="file" name="correctImg" id="correctImg" hidden />
                     <br />
                     <div className="addQuestBtn">
                         <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
