@@ -1,0 +1,75 @@
+.hebrewMain {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start !important;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hebrewMain>div {
+    height: auto;
+    width: 30%;
+    margin: 0 auto;
+    border-radius: 24px;
+    box-shadow: 2px 2px 4px #3d1152;
+    margin-top: 30px;
+    cursor: pointer;
+    padding: 25px;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+}
+
+.hebrewBtn {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.hebrewBtn>img {
+    width: 25px;
+    height: 25px;
+}
+
+.hebrewImageDiv {
+    width: 100%;
+}
+
+.hebrewImage {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+}
+
+.hebrewMain h6 {
+    font-weight: 600;
+}
+
+#hebrewSearch {
+    width: 98%;
+    padding: 0px;
+    padding-left: 20px;
+}
+
+@media (max-width: 700px) {
+    .hebrewMain>div {
+        width: 100%;
+    }
+
+    #hebrewSearch {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 20px;
+        padding: 0px;
+    }
+
+    #hebrewSearch>input {
+        width: 100%;
+    }
+
+    #hebrewSearch>p {
+        flex-shrink: 0;
+        width: 100%;
+        margin: 0px;
+    }
+}

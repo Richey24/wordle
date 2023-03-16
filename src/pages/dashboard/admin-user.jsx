@@ -12,7 +12,7 @@ import {
   Chip,
   Tooltip,
   Progress,
-    Input,
+  Input,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import { DashboardNavbar } from "../../widgets/layout";
@@ -67,32 +67,35 @@ export function AdminUser() {
     setUsers(arr)
   }
 
-  const changeRole = async (e, user) => {
+  const changeRole = async (e, data) => {
     const token = sessionStorage.getItem("token");
     const role = e.target.value
+    if (data.superAdmin && !user.superAdmin) {
+      return
+    }
     switch (role) {
       case "user":
-        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: false, admin: false }, {
+        await axios.put(`${url}/user/update/${data._id}`, { superAdmin: false, admin: false }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         break;
       case "admin":
-        if (!user.paid) {
+        if (!data.paid) {
           return
         }
-        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: false, admin: true }, {
+        await axios.put(`${url}/user/update/${data._id}`, { superAdmin: false, admin: true }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         break;
       case "super admin":
-        if (!user.paid) {
+        if (!data.paid) {
           return
         }
-        await axios.put(`${url}/user/update/${user._id}`, { superAdmin: true, admin: true }, {
+        await axios.put(`${url}/user/update/${data._id}`, { superAdmin: true, admin: true }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -130,7 +133,7 @@ export function AdminUser() {
         <Card>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
 
-            
+
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>

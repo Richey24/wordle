@@ -7,13 +7,17 @@ import THeHeader from '../../components/TheHeader'
 import url from '../../url'
 
 const CancelSub = () => {
-    const { id } = useParams()
+    const { token } = useParams()
     const [show, setShow] = useState(false)
     const navigate = useNavigate()
 
     const cancelSubscription = async () => {
-        const res = await axios.post(`${url}/cancel/sub/${id}`)
-        console.log(res);
+        const res = await axios.post(`${url}/cancel/sub`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
         if (res.status === 200) {
             setShow(true)
             setTimeout(() => {
