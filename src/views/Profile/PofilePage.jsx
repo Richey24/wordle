@@ -24,7 +24,7 @@ export default function ProfilePage() {
             })
             .catch(err => {
                 console.log(err);
-                navigate("/login")
+                // navigate("/login")
             })
     }
 
@@ -36,7 +36,7 @@ export default function ProfilePage() {
     const cancelSub = async () => {
         const body = {
             email: user.email,
-            token: token,
+            id: user._id,
             firstName: user.firstName
         }
         const res = await axios.post(`${url}/user/cancel/sub/mail`, body, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
@@ -122,13 +122,13 @@ export default function ProfilePage() {
                                         </div>
                                     </div>
                                     <div className="md:col-span-2 md:mt-0">
-                                        {can && <p style={{ color: "green", fontWeight: "600" }}>An email has been sent to you, check your mail to confirm the cancellation request.</p>}
+                                        {can && <p>An email has been sent to you, check your mail to confirm the cancellation request</p>}
                                         <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                                            {user.subscriptionID && !can && <p
+                                            <p
                                                 onClick={cancelSub}
                                                 className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                                                 style={{ cursor: "pointer", marginTop: "40px" }}
-                                            >Cancel Subscription</p>}
+                                            >Cancel Subscription</p>
                                             <button
                                                 type="submit"
                                                 className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

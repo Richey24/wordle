@@ -9,6 +9,7 @@ import { useState } from "react"
 import axios from "axios"
 import url from "../url"
 import empty from "../img/empty.png"
+import { DashboardNavbar } from "../widgets/layout"
 
 
 const QuestionList = () => {
@@ -103,6 +104,7 @@ const QuestionList = () => {
 
     return (
         <div className="swordDiv">
+            <DashboardNavbar username={user.username} />
             <h1>Questions list</h1>
             <div className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />

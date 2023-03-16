@@ -11,7 +11,7 @@ const Reset = () => {
     const [showErr, setShowErr] = useState(false)
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState("")
-    const { token } = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
 
     const resetPass = async (e) => {
@@ -34,12 +34,7 @@ const Reset = () => {
             setSpin(false)
             return
         }
-        const res = await axios.post(`${url}/user/reset/password`, userPass, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            validateStatus: () => true
-        })
+        const res = await axios.post(`${url}/user/reset/password/${id}`, userPass)
         switch (res.status) {
             case 400:
                 setErr("Fill all required filled and try again")
