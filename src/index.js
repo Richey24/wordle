@@ -61,6 +61,9 @@ import AddHebrew from './hebrew/AddHebrew';
 
 import { UserProfile } from './pages/account/user-profile';
 import Deck from './hebrew/Deck';
+import MainDeck from './hebrew/MainDeck';
+import MainHebrew from './hebrew/MainHebrew';
+import Alphabet from './hebrew/Alphabet';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -101,6 +104,9 @@ root.render(
           <Route path='/verify/:token' element={<VerifyUser />} />
           <Route path="/user-account" element={<ProfilePage />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/deck" element={<MainDeck />} />
+          <Route path="/hebrew/:deck" element={<MainHebrew />} />
+          <Route path="/alphabet" element={<Alphabet />} />
           <Route path='/admin' element={<AdminDashboard />}>
             <Route path="" element={<Home />} />
             <Route path="audit" element={<Audit />} />

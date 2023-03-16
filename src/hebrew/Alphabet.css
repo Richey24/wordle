@@ -1,0 +1,39 @@
+.alphabetDiv {
+    padding: 30px;
+}
+
+.mainAlphaDiv {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    height: 230px;
+}
+
+.mainAlphaDiv>div {
+    width: 20%;
+    height: 200px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.alphaHead {
+    text-align: center;
+}
+
+.congratDiv {
+    margin-top: -25%;
+}
+
+@media (max-width: 700px) {
+    .mainAlphaDiv>div {
+        height: 60px;
+    }
+}
