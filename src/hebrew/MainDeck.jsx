@@ -29,6 +29,9 @@ const MainDeck = () => {
                 },
                 validateStatus: () => true
             })
+            if (res.status === 401) {
+                navigate("/login")
+            }
             const rep = await res.data
             setUser(rep)
         } catch (error) {
@@ -41,8 +44,11 @@ const MainDeck = () => {
         getDeck()
     }, [])
 
-    const nav = () => {
-        navigate()
+    const nav = (i, color) => {
+        if (user?.deckLevel < i) {
+            return
+        }
+        navigate(`/hebrew/${i}`, { state: color })
     }
 
     return (
@@ -54,7 +60,7 @@ const MainDeck = () => {
                 </div>
                 {
                     decks.map((deck, i) => (
-                        <div onClick={nav} style={{ backgroundImage: `linear-gradient(120deg, ${deck?.color1} 0%, ${deck?.color2} 100%)` }} key={i}>
+                        <div onClick={() => nav(i + 1, `linear-gradient(120deg, ${deck?.color1} 0%, ${deck?.color2} 100%)`)} style={{ backgroundImage: `linear-gradient(120deg, ${deck?.color1} 0%, ${deck?.color2} 100%)` }} key={i}>
                             Deck {i + 1}
                             {user?.deckLevel < i + 1 && <img src={padlock} alt="" />}
                         </div>

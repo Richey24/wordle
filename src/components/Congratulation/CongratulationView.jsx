@@ -50,7 +50,7 @@ export default function CongratulationView(props) {
                         <div className={style.background}></div>
                         <div className={`${style.checkmark} ${style.draw}`}></div>
                     </div>
-                    <h1>Level Up!</h1>
+                    {!props.heb && <h1>Level Up!</h1>}
                     <h2>{props.message}</h2>
                     <button onClick={nav} className={style.submitBtn} type="submit" >Continue</button>
                 </div>
