@@ -55,7 +55,7 @@ export const routes = [
       {
         icon: <TableCellsIcon {...icon} />,
         name: "Hebrew Game",
-        path: "/hebrew",
+        path: "/deck",
         element: <Home />,
       },
       {

@@ -1,39 +1,25 @@
-import "./QuestionList.css"
+import axios from "axios"
+import { useEffect } from "react"
+import { useState } from "react"
+import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap"
+import { useNavigate, useParams } from "react-router-dom"
+import url from "../url"
 import edit from "../img/Edit.svg"
 import del from "../img/Delete.svg"
 import bigdel from "../img/bigdel.svg"
-import { useEffect } from "react"
-import { OverlayTrigger, Spinner, Tooltip } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-import axios from "axios"
-import url from "../url"
 import empty from "../img/empty.png"
+import "./Hebrew.css"
 
-
-const QuestionList = () => {
-    const navigate = useNavigate()
+const Hebrew = () => {
     const id = sessionStorage.getItem("id")
-    const [spin, setSpin] = useState(true)
+    const navigate = useNavigate()
+    const [user, setUser] = useState({})
+    const [spin, setSpin] = useState(false)
     const [lists, setLists] = useState([])
     const [fit, setFit] = useState([])
     const [delId, setDelId] = useState("")
-    const [user, setUser] = useState({})
     const token = sessionStorage.getItem("token")
-
-    const getItems = async () => {
-        const res = await axios.get(`${url}/quiz/get/all`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            },
-            validateStatus: () => true
-        })
-        const rep = await res.data
-        const newArr = rep.filter((re) => re.toBeDeleted !== true)
-        setFit(newArr)
-        setLists(newArr)
-        setSpin(false)
-    }
+    const { deck } = useParams()
 
     const getUser = async () => {
         const res = await axios.get(`${url}/user/get/${id}`, {
@@ -46,14 +32,26 @@ const QuestionList = () => {
         setUser(rep)
     }
 
+    const getItems = async () => {
+        const res = await axios.get(`${url}/hebrew/get/deck/${deck}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        const rep = await res.data
+        console.log(rep);
+        const newArr = rep.filter((re) => re.toBeDeleted !== true)
+        setFit(newArr)
+        setLists(newArr)
+        setSpin(false)
+    }
+
     useEffect(() => {
-        if (!id) {
-            // navigate("/admin/login")
-        }
+        // getUser()
         getItems()
-        getUser()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
 
     const showModal = (id, value) => {
         document.getElementById(id).classList.toggle("showDelModal")
@@ -62,19 +60,19 @@ const QuestionList = () => {
 
     const filterItem = (e) => {
         const value = e.target.value
-        const newArr = fit.filter((fi) => fi.question.toLowerCase().includes(value.toLowerCase()))
+        const newArr = fit.filter((fi) => fi.english.toLowerCase().includes(value.toLowerCase()))
         setLists(newArr)
     }
 
     const deleteStudy = async () => {
-        const res = await axios.put(`${url}/quiz/update/${delId._id}`, { toBeDeleted: true }, {
+        const res = await axios.put(`${url}/hebrew/update/${delId._id}`, { toBeDeleted: true }, {
             validateStatus: () => true,
             headers: {
                 Authorization: `Bearer ${token}`
             }
         })
         const date = new Date().toLocaleString()
-        const text = `${user.username} marked bible trivial question ${delId.question} to be deleted on ${date}`
+        const text = `${user.username} marked hebrew word ${delId.paleoHebrewText} to be deleted on ${date}`
         await axios.post(`${url}/audit/add`, { audit: text }, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -100,44 +98,39 @@ const QuestionList = () => {
         )
     }
 
-
     return (
         <div className="swordDiv">
-            <h1>Questions list</h1>
-            <div className="swordSearch">
+            <h1>Deck {deck} List</h1>
+            <div id="hebrewSearch" className="swordSearch">
                 <input onChange={filterItem} placeholder="Type to search" type="text" />
-                <p onClick={() => navigate("/question/add")}>Add new question</p>
+                <p onClick={() => navigate(`/admin/add/hebrew/${deck}`)}>Add new word</p>
             </div>
             {
                 lists.length < 1 ? (
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", marginTop: "20px" }}>
                         <img src={empty} alt="" />
-                        <p className="empty">You have no question yet, create one</p>
+                        <p className="empty">You have not create any hebrew word, create one</p>
                     </div>
                 ) : (
-                    <div className="swordMain">
+                    <div className="hebrewMain">
                         {
                             lists.reverse().map((list, i) => (
-                                <div style={{ height: "200px" }} key={i}>
-                                    <div className="swordBtn" id="swordBtn">
+                                <div key={i}>
+                                    <div className="hebrewBtn" id="hebrewBtn">
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="edit">Edit</Tooltip>}>
-                                            <img onClick={() => navigate("/question/add", { state: { list: list } })} style={{ marginRight: "20px" }} src={edit} alt="" />
+                                            <img onClick={() => navigate(`/admin/add/hebrew/${deck}`, { state: { list: list } })} style={{ marginRight: "20px" }} src={edit} alt="" />
                                         </OverlayTrigger>
                                         <OverlayTrigger placement="bottom" overlay={<Tooltip id="delete">Delete</Tooltip>}>
                                             <img onClick={() => showModal("delDiv", list)} src={del} alt="" />
                                         </OverlayTrigger>
                                     </div>
-                                    <div className="innerSword">
-                                        <h4>{list?.question}</h4>
+                                    <div className="hebrewImageDiv">
+                                        <img className="hebrewImage" src={`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${list.correctImage}`} alt="" />
+                                        <div style={{ marginTop: "20px" }}>
+                                            <h6>Hebrew word</h6>
+                                            <h6>English meaning</h6>
+                                        </div>
                                     </div>
-                                    <div className="verses">
-                                        {
-                                            list?.answer?.map((ans, i) => (
-                                                <p style={{ backgroundColor: ans?.correct ? "green" : "red", border: "none", color: "white" }} key={i}>{ans?.value}</p>
-                                            ))
-                                        }
-                                    </div>
-                                    <p style={{ marginTop: "15px" }} className="theNote">{list.learnMore}</p>
                                 </div>
                             ))
                         }
@@ -162,4 +155,4 @@ const QuestionList = () => {
     )
 }
 
-export default QuestionList
+export default Hebrew

@@ -1,0 +1,32 @@
+.mainDeck {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.innerDeck {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: flex-start;
+    column-gap: 73px;
+    row-gap: 20px;
+}
+
+.innerDeck>div {
+    width: 300px;
+    height: 500px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}

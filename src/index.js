@@ -56,10 +56,11 @@ import Privacy from './views/Privacy/Privacy';
 import { ThemeProvider } from "@material-tailwind/react";
 import { MaterialTailwindControllerProvider } from "./context"
 import CancelSub from './views/Profile/CancelSub';
-// import Hebrew from './hebrew/Hebrew';
-// import AddHebrew from './hebrew/AddHebrew';
+import Hebrew from './hebrew/Hebrew';
+import AddHebrew from './hebrew/AddHebrew';
 
 import { UserProfile } from './pages/account/user-profile';
+import Deck from './hebrew/Deck';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -73,7 +74,7 @@ root.render(
           <Route path='/register' element={<Register />} />
           <Route path='/select' element={<Difficult />} />
           <Route path='/hangman' element={<Hangman />} />
-          <Route path='/reset/:id' element={<Reset />} />
+          <Route path='/reset/:token' element={<Reset />} />
           <Route path='/word/leader' element={<Leader />} />
           <Route path='/bible/leader' element={<BibleLeader />} />
           <Route path='/hangman/leader' element={<HangLeader />} />
@@ -95,9 +96,9 @@ root.render(
           <Route path="/crossword" element={<Crossword />} />
           <Route path="/crossword/leader" element={<CrosswordLeader />} />
           <Route path='/subscription' element={<StripeContainer />} />
-          <Route path='/cancel/sub/:id' element={<CancelSub />} />
+          <Route path='/cancel/sub/:token' element={<CancelSub />} />
           <Route path='/verify' element={<Verify />} />
-          <Route path='/verify/:id' element={<VerifyUser />} />
+          <Route path='/verify/:token' element={<VerifyUser />} />
           <Route path="/user-account" element={<ProfilePage />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path='/admin' element={<AdminDashboard />}>
@@ -108,8 +109,9 @@ root.render(
             <Route path="trash" element={<ToBeDel />} />
             <Route path="leaderboard" element={<AdminLeaderboard />} />
             <Route path="activities" element={<Activity />} />
-            {/* <Route path="hebrew" element={<Hebrew />} /> */}
-            {/* <Route path="add/hebrew" element={<AddHebrew />} /> */}
+            <Route path="deck" element={<Deck />} />
+            <Route path="hebrew/:deck" element={<Hebrew />} />
+            <Route path="add/hebrew/:deck" element={<AddHebrew />} />
           </Route>
           {/* <Route path="/user-account" element={<AccountSettings />}>
               <Route path="" element={<UserProfile />} />
