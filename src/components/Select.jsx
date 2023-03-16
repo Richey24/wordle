@@ -36,14 +36,14 @@ const Select = () => {
         return new Promise((resolve, reject) => {
             const token = localStorage.getItem("token")
             axios.get(`${url}/api/gameplay-count/limit`, { headers: { Authorization: `Bearer ${token}` }, validateStatus: () => true })
-            .then(async (res) => {
-                resolve(res.data)
-            })
+                .then(async (res) => {
+                    resolve(res.data)
+                })
         })
 
     }
 
-  
+
 
     useEffect(() => {
 
@@ -143,6 +143,22 @@ const Select = () => {
         }
         navigate("/hangman")
     }
+    const navHeb = () => {
+        if (Object.keys(user).length === 0) {
+            navigate("/login")
+            return
+        }
+        // if (user.playedHang) {
+        //     if (!user.paid) {
+        //         setSubModal(true)
+        //         return
+        //     } else if (Date.now() > new Date(user.expiryDate).getTime()) {
+        //         setSubModal(true)
+        //         return
+        //     }
+        // }
+        navigate("/deck")
+    }
 
     const navTrivial = () => {
         if (Object.keys(user).length === 0) {
@@ -170,16 +186,16 @@ const Select = () => {
 
         let userPlayed = checkIfGamePlayed()
         userPlayed.then(response => {
-             
+
             let crossWordPlayed = response
 
             console.log(crossWordPlayed)
-            if (crossWordPlayed.paid === true || crossWordPlayed.gamePlay === false ) {
+            if (crossWordPlayed.paid === true || crossWordPlayed.gamePlay === false) {
                 navigate("/crossword")
                 return
-             }
-           
-             setSubModal(true)
+            }
+
+            setSubModal(true)
         })
     }
 
@@ -280,7 +296,7 @@ const Select = () => {
                         <img src={hang} alt="" />
                         <p>Hangman</p>
                     </div>
-                    <div onMouseEnter={() => playSound("hebrew")} onClick={() => setHeb(true)}>
+                    <div onMouseEnter={() => playSound("hebrew")} onClick={navHeb}>
                         <img src={bible} alt="" />
                         <p>Hebrew language game</p>
                     </div>
