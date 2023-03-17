@@ -18,7 +18,7 @@ body {
 
 .mainCard {
     margin: 30px auto 0;
-    width: 400px;
+    width: 300px;
     height: 400px;
     perspective: 1000px;
 }
@@ -58,6 +58,9 @@ body {
 .card__face--front h2 {
     color: #FFF;
     font-size: 32px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .card__face--back {
@@ -124,6 +127,9 @@ body {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 15px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .card__body p {
@@ -171,6 +177,7 @@ body {
     font-size: 24px;
     font-weight: 600;
     color: white;
+    flex-direction: column;
 }
 
 .mobileScore {
@@ -194,6 +201,10 @@ body {
         flex-wrap: wrap;
     }
 
+    .congratHeb {
+        margin-top: -35%;
+    }
+
     .hebrewFirst,
     .hebrewLast {
         display: flex;
@@ -210,6 +221,7 @@ body {
     .mobileScore {
         width: 80px;
         height: 80px;
+        font-size: 16px;
     }
 
     .mobileScore {
@@ -222,6 +234,15 @@ body {
     }
 
     .mainCard {
-        height: 400px;
+        height: 320px;
+        width: 230px;
+    }
+
+    .card__header {
+        height: 180px;
+    }
+
+    .pp {
+        width: 150px;
     }
 }
