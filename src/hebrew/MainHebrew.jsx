@@ -22,6 +22,7 @@ const MainHebrew = () => {
     const [images, setImages] = useState([])
     const [score, setScore] = useState(0)
     const [count, setCount] = useState(0)
+    const [main, setMain] = useState([])
     const navigate = useNavigate()
     const [subModal, setSubModal] = useState(false)
     const cancelButtonRef = useRef(null)
@@ -32,15 +33,23 @@ const MainHebrew = () => {
         const res = await axios.get(`${url}/hebrew/get/all`, {
             validateStatus: () => true
         })
-        const rep = await res.data
-        const newArr = rep.slice((deck - 1) * 25, deck * 25).filter((re) => re.toBeDeleted !== true)
-        if (newArr.length < 4) {
+        const rep = await res.data.filter((re) => re.toBeDeleted !== true)
+        setMain(rep)
+        const theArr = rep.slice((deck - 1) * 25, deck * 25)
+        if (theArr.length < 4) {
             navigate("/deck")
         } else {
+            let newArr = [];
+            while (newArr.length < rep.slice((deck - 1) * 25, deck * 25).length) {
+                let rand = Math.floor(Math.random() * theArr.length)
+                newArr.push(theArr[rand])
+                theArr.splice(rand, 1)
+            }
+
             let imgArr = [];
             while (imgArr.length < 3) {
-                let rand = Math.floor(Math.random() * newArr.length)
-                let randImg = newArr[rand].correctImage
+                let rand = Math.floor(Math.random() * rep.length)
+                let randImg = rep[rand].correctImage
                 if (!imgArr.includes(randImg) && randImg !== newArr[0].correctImage) {
                     imgArr.push(randImg)
                 }
@@ -128,8 +137,8 @@ const MainHebrew = () => {
         }, 1000);
         let imgArr = [];
         while (imgArr.length < 3) {
-            let rand = Math.floor(Math.random() * lists.length)
-            let randImg = lists[rand].correctImage
+            let rand = Math.floor(Math.random() * main.length)
+            let randImg = main[rand].correctImage
             if (!imgArr.includes(randImg) && randImg !== lists[num + 1].correctImage) {
                 imgArr.push(randImg)
             }

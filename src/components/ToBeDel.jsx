@@ -4,15 +4,14 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import url from "../url"
 import empty from "../img/empty.png"
-import THeHeader from "./TheHeader"
 import "./ToBeDel.css"
-import { DashboardNavbar } from "../widgets/layout"
 import { Spinner } from "react-bootstrap"
 
 const ToBeDel = () => {
     const [items, setItems] = useState([])
     const [questions, setQuestions] = useState([])
     const [user, setUser] = useState({})
+    const [words, setWords] = useState([])
     const [spin, setSpin] = useState(true)
     const id = sessionStorage.getItem("id")
     const token = sessionStorage.getItem("token")
@@ -32,12 +31,21 @@ const ToBeDel = () => {
             },
             validateStatus: () => true
         })
-        if (res.status !== 200 || res1.status !== 200) {
+        const res2 = await axios.get(`${url}/hebrew/get/all`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        const rep2 = await res2.data
+        const newArr1 = rep2.filter((re) => re.toBeDeleted === true)
+        if (res.status !== 200 || res1.status !== 200 || res2.status !== 200) {
             navigate("/admin/login")
         }
         const rep1 = await res1.data
         const newArr = rep1.filter((re) => re.toBeDeleted === true)
         setItems(rep)
+        setWords(newArr1)
         setQuestions(newArr)
         setSpin(false)
     }
@@ -106,9 +114,31 @@ const ToBeDel = () => {
             getItems()
         }
     }
+    const cancelWord = async (id) => {
+        const res = await axios.put(`${url}/hebrew/update/${id}`, { toBeDeleted: false }, {
+            validateStatus: () => true,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        if (res.status === 200) {
+            getItems()
+        }
+    }
 
     const delQuest = async (id) => {
         const res = await axios.delete(`${url}/quiz/delete/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            validateStatus: () => true
+        })
+        if (res.status === 200) {
+            getItems()
+        }
+    }
+    const delWord = async (id) => {
+        const res = await axios.delete(`${url}/hebrew/delete/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -133,10 +163,9 @@ const ToBeDel = () => {
         )
     }
 
-    if (items.length < 1 && questions.length < 1) {
+    if (items.length < 1 && questions.length < 1 && words.length < 1) {
         return (
             <div>
-                <DashboardNavbar username={user.username} />
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px", height: "90vh" }}>
                     <img style={{ width: "200px", height: "200px" }} src={empty} alt="" />
                     <h3 style={{ textAlign: "center" }}>No study to be deleted</h3>
@@ -147,7 +176,6 @@ const ToBeDel = () => {
 
     return (
         <div>
-            <DashboardNavbar username={user.username} />
             <div className="adminDel">
                 <h3>Studies and questions marked to be deleted</h3>
                 {
@@ -168,6 +196,17 @@ const ToBeDel = () => {
                             <div>
                                 <p onClick={() => delQuest(item?._id)}>Confirm delete</p>
                                 <p onClick={() => cancelQuest(item?._id)}>Cancel</p>
+                            </div>
+                        </div>
+                    ))
+                }
+                {
+                    words.map((item, i) => (
+                        <div key={i}>
+                            <p>{item?.paleoHebrewText} {item?.english}</p>
+                            <div>
+                                <p onClick={() => delWord(item?._id)}>Confirm delete</p>
+                                <p onClick={() => cancelWord(item?._id)}>Cancel</p>
                             </div>
                         </div>
                     ))
