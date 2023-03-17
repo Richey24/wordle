@@ -42,6 +42,7 @@ const MainDeck = () => {
     useEffect(() => {
         getUser()
         getDeck()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const nav = (i, color) => {

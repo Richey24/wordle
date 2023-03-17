@@ -72,7 +72,7 @@ const Alphabet = () => {
     return (
         <div>
             <THeHeader />
-            <h1 className='alphaHead'>Enter the word in the right order</h1>
+            <h1 className='alphaHead'>Arrange the alphabets in the correct order.</h1>
             <div className='alphabetDiv'>
                 <div className='mainAlphaDiv' id='mainAlphaDiv'>
                     {

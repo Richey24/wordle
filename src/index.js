@@ -64,6 +64,7 @@ import Deck from './hebrew/Deck';
 import MainDeck from './hebrew/MainDeck';
 import MainHebrew from './hebrew/MainHebrew';
 import Alphabet from './hebrew/Alphabet';
+import HebrewLeader from './hebrew/HebrewLeader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -106,6 +107,7 @@ root.render(
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/deck" element={<MainDeck />} />
           <Route path="/hebrew/:deck" element={<MainHebrew />} />
+          <Route path="/hebrew/leader" element={<HebrewLeader />} />
           <Route path="/alphabet" element={<Alphabet />} />
           <Route path='/admin' element={<AdminDashboard />}>
             <Route path="" element={<Home />} />

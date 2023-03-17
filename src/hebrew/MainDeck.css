@@ -30,3 +30,9 @@
     width: 200px;
     height: 200px;
 }
+
+@media (max-width: 700px) {
+    .mainDeckDiv>div {
+        width: 100%;
+    }
+}
