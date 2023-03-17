@@ -1,6 +1,6 @@
 import "./MainHebrew.css"
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import url from "../url";
 import CongratulationView from "../components/Congratulation/CongratulationView";
@@ -8,6 +8,8 @@ import FailedDiv from "../components/Congratulation/Failed";
 import THeHeader from "../components/TheHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faUserGraduate } from "@fortawesome/fontawesome-free-solid";
+import { Dialog, Transition } from "@headlessui/react";
+import { useRef } from "react";
 
 let interval = null
 const MainHebrew = () => {
@@ -21,6 +23,10 @@ const MainHebrew = () => {
     const [score, setScore] = useState(0)
     const [count, setCount] = useState(0)
     const navigate = useNavigate()
+    const [subModal, setSubModal] = useState(false)
+    const cancelButtonRef = useRef(null)
+    const id = localStorage.getItem("id")
+    const token = localStorage.getItem("token")
 
     const getItems = async () => {
         const res = await axios.get(`${url}/hebrew/get/all`, {
@@ -48,6 +54,9 @@ const MainHebrew = () => {
     }
 
     useEffect(() => {
+        if (!state) {
+            navigate("/deck")
+        }
         getItems()
         window.scrollTo(0, document.body.scrollHeight)
         const timer = document.getElementById("hebTime")
@@ -90,7 +99,19 @@ const MainHebrew = () => {
         clearInterval(interval)
     }
 
-    const nextCard = () => {
+    const nextCard = async () => {
+        if (num >= lists.length - 1) {
+            setWon(false)
+            setFailed(false)
+            setSubModal(true)
+            const body = { hebrewScore: score }
+            await axios.put(`${url}/user/update/${id}`, body, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            return
+        }
         const card = document.querySelector(".card__inner");
         card.classList.toggle('is-flipped');
         const timer = document.getElementById("hebTime")
@@ -121,6 +142,14 @@ const MainHebrew = () => {
         }, 1000)
         setWon(false)
         setFailed(false)
+    }
+
+    const checkWin = () => {
+        if (count >= lists.length) {
+            navigate("/deck")
+        } else {
+            navigate(0)
+        }
     }
 
     return (
@@ -182,6 +211,50 @@ const MainHebrew = () => {
                     <FontAwesomeIcon icon={faUserGraduate} className="text-white" />
                 </div>
             </div>
+
+            <Transition.Root show={subModal} as={Fragment}>
+                <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setSubModal}>
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0"
+                        enterTo="opacity-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0">
+                        <div className="fixed inset-0 bg-dark bg-opacity-75 transition-opacity" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 z-10 overflow-y-auto">
+                        <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+                            <Transition.Child
+                                as={Fragment}
+                                enter="ease-out duration-300"
+                                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                                leave="ease-in duration-200"
+                                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                            >
+                                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                            <div>
+                                                <p>You answered {count} of {lists.length} correctly</p>
+                                            </div>
+                                            <div className="mt-2">
+                                                <button onClick={checkWin} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
+                                                    {count >= lists.length ? "Next Deck" : "Try Again"}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Dialog.Panel>
+                            </Transition.Child>
+                        </div>
+                    </div>
+                </Dialog>
+            </Transition.Root>
         </div>
     )
 }
