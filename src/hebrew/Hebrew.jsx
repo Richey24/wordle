@@ -43,7 +43,7 @@ const Hebrew = () => {
             validateStatus: () => true
         })
         const rep = await res.data
-        const newArr = rep.slice((deck - 1) * 25, deck * 25).filter((re) => re.toBeDeleted !== true).reverse()
+        const newArr = rep.filter((re) => re.toBeDeleted !== true).slice((deck - 1) * 25, (deck * 25)).reverse()
         console.log(newArr);
         setFit(newArr)
         setLists(newArr)

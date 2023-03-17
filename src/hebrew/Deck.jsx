@@ -35,12 +35,23 @@ const Deck = () => {
         getDeck()
     }
 
+    const deleteLastDeck = async () => {
+        await axios.delete(`${url}/deck/delete/${decks.at(-1)._id}`)
+        getDeck()
+    }
+
     return (
         <div className="mainDeck">
-            <button
-                onClick={addDeck}
-                className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 fw-bold"
-            >Add Deck</button>
+            <div style={{ display: "flex", gap: "10px" }}>
+                <button
+                    onClick={addDeck}
+                    className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 fw-bold"
+                >Add Deck</button>
+                <button
+                    onClick={deleteLastDeck}
+                    className="inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 fw-bold"
+                >Delete Last Deck</button>
+            </div>
             <div className="innerDeck">
                 {
                     decks.map((ar, i) => (

@@ -46,9 +46,9 @@ export default function CongratulationView(props) {
             <div>
                 <Confetti width={width} height={height} />
                 <div style={{ textAlign: 'center' }}>
-                    <div className={style.checkmarkCircle} >
+                    <div className={style.checkmarkCircle}  >
                         <div className={style.background}></div>
-                        <div className={`${style.checkmark} ${style.draw}`}></div>
+                        <div className={`${style.checkmark} ${style.draw}`} ></div>
                     </div>
                     {!props.heb && <h1>Level Up!</h1>}
                     <h2>{props.message}</h2>

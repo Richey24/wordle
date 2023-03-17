@@ -12,7 +12,7 @@ export default function FailedDiv(props) {
     return <div>
         <div style={{ textAlign: 'center', zIndex: "3000", position: "relative" }}>
             <div class="grid place-items-center">
-                <img src={cancel} alt="Cancel Icon" width="150px" hieght="150px" />
+                <img src={cancel} alt="Cancel Icon" width="130px" hieght="130px" />
             </div>
             <h1>{props.title}</h1>
             <h2>{props.message}</h2>
