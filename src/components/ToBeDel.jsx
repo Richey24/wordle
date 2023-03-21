@@ -168,7 +168,7 @@ const ToBeDel = () => {
             <div>
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px", height: "90vh" }}>
                     <img style={{ width: "200px", height: "200px" }} src={empty} alt="" />
-                    <h3 style={{ textAlign: "center" }}>No study to be deleted</h3>
+                    <h3 style={{ textAlign: "center" }}>No study, word or question to be deleted</h3>
                 </div>
             </div>
         )
@@ -177,7 +177,7 @@ const ToBeDel = () => {
     return (
         <div>
             <div className="adminDel">
-                <h3>Studies and questions marked to be deleted</h3>
+                <h3>Studies, Words and Questions marked to be deleted</h3>
                 {
                     items.map((item, i) => (
                         <div key={i}>

@@ -154,7 +154,7 @@ const Hebrew = () => {
                     <img src={bigdel} alt="" />
                     <div>
                         <h5>Delete question</h5>
-                        <p>Are you sure you want to delete this question? This action cannot be undone.</p>
+                        <p>Are you sure you want to delete this word? This action cannot be undone.</p>
                     </div>
                 </div>
                 <div className="secondDel">

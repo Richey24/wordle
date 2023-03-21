@@ -72,7 +72,7 @@ const AddHebrew = () => {
                     <div className="addQuestBtn">
                         <button className="createQuest" type="submit">{spin ? (<Spinner animation="border" color="#3d1152" />
                         ) : list ? "Edit word" : "Create word"} </button>
-                        <button onClick={() => navigate("/admin/hebrew")}>Cancel</button>
+                        <button onClick={() => navigate(`/admin/hebrew/${deck}`)}>Cancel</button>
                     </div>
                     {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
                 </form>
