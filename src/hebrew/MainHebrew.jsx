@@ -22,6 +22,7 @@ const MainHebrew = () => {
     const [images, setImages] = useState([])
     const [score, setScore] = useState(0)
     const [count, setCount] = useState(0)
+    const [user, setUser] = useState({})
     const [main, setMain] = useState([])
     const navigate = useNavigate()
     const [subModal, setSubModal] = useState(false)
@@ -113,12 +114,14 @@ const MainHebrew = () => {
             setWon(false)
             setFailed(false)
             setSubModal(true)
-            const body = { hebrewScore: score }
-            await axios.put(`${url}/user/update/${id}`, body, {
+            const body = { hebrewScore: score, playedHebrew: true }
+            const res = await axios.put(`${url}/user/update/${id}`, body, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
+            const rep = await res.data
+            setUser(rep)
             return
         }
         const card = document.querySelector(".card__inner");
@@ -154,6 +157,15 @@ const MainHebrew = () => {
     }
 
     const checkWin = () => {
+        if (user.playedHebrew) {
+            if (!user.paid) {
+                navigate("/")
+                return
+            } else if (Date.now() > new Date(user.expiryDate).getTime()) {
+                navigate("/")
+                return
+            }
+        }
         if (count >= lists.length) {
             navigate("/deck")
         } else {
@@ -249,7 +261,7 @@ const MainHebrew = () => {
                                     <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                             <div>
-                                                <p>You answered {count} of {lists.length} correctly</p>
+                                                <p>{count >= lists.length ? `You answered ${count} of ${lists.length} correctly, you have unlock the next deck` : `You answered ${count} of ${lists.length} correctly, answer all questions correctly to move to the next deck`}</p>
                                             </div>
                                             <div className="mt-2">
                                                 <button onClick={checkWin} class="block w-full bg-purple-600 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded">
