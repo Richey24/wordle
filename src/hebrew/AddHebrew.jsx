@@ -10,6 +10,7 @@ import { useEffect } from "react"
 const AddHebrew = () => {
     const [spin, setSpin] = useState(false)
     const [err, setErr] = useState(false)
+    const [theErr, setTheErr] = useState("Something went wrong, try again")
     const { state } = useLocation()
     const [theImg, setTheImg] = useState("")
     const list = state?.list
@@ -20,13 +21,25 @@ const AddHebrew = () => {
         if (list) {
             setTheImg(`https://absa7kzimnaf.blob.core.windows.net/newcontainer/${list.correctImage}`)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const submitForm = async (e) => {
         setSpin(true)
+        setErr(false)
         e.preventDefault()
         const token = sessionStorage.getItem("token")
         const data = new FormData()
+        if (!list.correctImage && !e.target.correctImg.files[0]) {
+            setTheErr("An Image Is Required")
+            setErr(true)
+            return
+        }
+        if (e.target.paleoHebrewText.value === list.paleoHebrewText && e.target.english.value === list.english && !e.target.correctImg.files[0]) {
+            setTheErr("No Changes Was Made")
+            setErr(true)
+            return
+        }
         if (e.target.correctImg.files[0]) {
             data.append("hebrew", e.target.correctImg.files[0], "hebrew")
         }
@@ -52,9 +65,9 @@ const AddHebrew = () => {
             <div className="questMain">
                 <h2>{list ? "Edit word" : "Create a new word"}</h2>
                 <form onSubmit={submitForm} className="questForm">
-                    <label htmlFor="paleoHebrewText">Enter the paleoHebrewText</label>
+                    <label htmlFor="paleoHebrewText">Enter the Paleo-Hebrew Text</label>
                     <br />
-                    <input required defaultValue={list?.paleoHebrewText} type="text" name="paleoHebrewText" id="paleoHebrewText" placeholder="Enter the paleoHebrewText" />
+                    <input required defaultValue={list?.paleoHebrewText} type="text" name="paleoHebrewText" id="paleoHebrewText" placeholder="Enter the Paleo-Hebrew Text" />
                     <br />
                     <br />
                     <label htmlFor="paleoHebrewText">Enter the english word</label>
@@ -74,7 +87,7 @@ const AddHebrew = () => {
                         ) : list ? "Edit word" : "Create word"} </button>
                         <button onClick={() => navigate(`/admin/hebrew/${deck}`)}>Cancel</button>
                     </div>
-                    {err && <p style={{ color: "red" }}>Something went wrong, try again</p>}
+                    {err && <p style={{ color: "red" }}>{theErr}</p>}
                 </form>
             </div>
         </div>
