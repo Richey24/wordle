@@ -60,7 +60,7 @@ const Alphabet = () => {
 
     const nextWord = () => {
         if (num >= alphabets.length - 1) {
-            navigate(0)
+            navigate("/deck")
             return
         }
         setCheck(alphabets[num + 1])
